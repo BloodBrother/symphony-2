@@ -47,10 +47,10 @@ body {
 		order: 1;
 		flex-shrink: 0;
 		box-sizing: border-box;
-		position: relative; top: 0; left: 0; font-size: @text-current; padding: 0 @spacing-smallish; border-bottom: 1px solid @lighter-grey; height: @spacing-midlarge;
+		position: relative; top: 0; left: 0; font-size: @text-current; padding: 0 @spacing-smallish!important; border-bottom: 1px solid @lighter-grey; height: @spacing-midlarge;
 
 		a {
-			display: block; position: absolute; left: 0; top: 0; color: @accent; font-weight: 300; text-indent: -5000px; background-position: 0 0; background-size: auto 100%!important; width: 100%!important; height: 100%!important;
+			display: block; position: absolute; left: 0; top: 0; color: @accent; font-weight: 300; text-indent: -5000px; background-position: 0 0!important; background-size: auto 100%!important; width: 100%!important; height: 100%!important;
 		}
 	}
 
@@ -131,10 +131,10 @@ body {
 			/* Second Level */
 
 			ul {
-				display: none; margin: @spacing-smallest 0 0; padding: 0 @spacing-smallerish; border-left: 1px dotted @accent;
+				display: none; margin: @spacing-smallest 0 0; padding: 0 0 0 @spacing-smallerish; border-left: 1px dotted @accent;
 
 				a {
-					color: @dark-grey;
+					color: @dark-grey; font-size: @text-short; line-height: 2rem;
 				}
 
 				li.active a, a:hover {
@@ -239,9 +239,9 @@ body {
 		flex-shrink: 0;
 		margin: 0; padding: 0 @spacing-smallish;
 
-		a {
+		a, button {
 			.flex(~'row', ~'center', ~'flex-start');
-			color: @dark-grey; font-size: @text-shorter; text-transform: uppercase; line-height: @spacing-midlarge; margin: 0; padding: 0; white-space: nowrap;
+			color: @dark-grey; font-size: @text-shorter; text-transform: uppercase; line-height: @spacing-midlarge; margin: 0; padding: 0; background: none; white-space: nowrap;
 
 			svg {
 				margin-right: @spacing-smallest;
@@ -254,15 +254,23 @@ body {
 		}
 
 		button {
-			font-size: @text-shorter; font-weight: 300; text-transform: uppercase; padding: @spacing-smallest @spacing-smallerish; border-radius: @radius-current; background: @accent; cursor: pointer;
+			display: block; position: relative; padding-left: @spacing-smallish;
 
-			&:hover {
-				background: @darker-grey;
+			svg {
+				position: absolute; left: 0; top: 50%; margin-top: -@spacing-smallest;
 			}
 		}
 
 		li + li {
-			padding-left: @spacing-smallish;
+			margin-left: @spacing-smallish;
+		}
+
+		fieldset > div {
+			.flex(~'row', ~'center', ~'flex-start');
+
+			> a  + a {
+				margin-left: @spacing-smallish;
+			}
 		}
 	}
 }

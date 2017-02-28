@@ -354,8 +354,12 @@ button.delete:focus,
 	cursor: default;
 }*/
 
-.apply .select2-container {
-	.select2-selection--single .select2-selection__rendered {
+.apply {
+	label {
+		margin-bottom: 0!important;
+	}
+
+	.select2-container .select2-selection--single .select2-selection__rendered {
 		border-radius: @radius-current 0 0 @radius-current;
 		line-height: 2rem; border-right: none;
 	}

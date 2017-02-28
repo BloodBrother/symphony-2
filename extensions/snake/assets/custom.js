@@ -13,6 +13,7 @@
 		contextTabs: '#context .tabs li',
 		contextDrawers: '#context > .actions a.button.drawer',
 		contextActions: '#context > .actions a',
+		contextActionsButt: '#context > .actions button',
 		actionButtons: '.page-single #contents .actions .button-container, .single #contents .actions .button-container, body.entry_relationship.page-index #contents .actions .button-container',
 		contents: '#contents',
 		contentsForm: '#contents > form',
@@ -50,6 +51,8 @@
 		unlocked: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg"  width="22px" height="26.4px" viewBox="0 0 22 26.4"><path fill="currentColor" d="M11.1,21.7c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3S12.8,21.7,11.1,21.7z M11.1,17.7c-0.6,0-1,0.4-1,1s0.4,1,1,1s1-0.4,1-1S11.7,17.7,11.1,17.7z"/><path fill="currentColor" d="M19,26.4H3c-1.7,0-3-1.3-3-3v-9c0-1.7,1.3-3,3-3h16c1.7,0,3,1.3,3,3v9C22,25.1,20.7,26.4,19,26.4z M3,13.4c-0.6,0-1,0.4-1,1v9c0,0.6,0.4,1,1,1h16c0.6,0,1-0.4,1-1v-9c0-0.6-0.4-1-1-1H3z"/><path fill="currentColor" d="M18,11.9c-0.6,0-1-0.4-1-1V8.3C17,4.8,14.4,2,11,2c-0.1,0-0.2,0-0.2,0c-2,0.1-3.8,1.1-4.9,2.8C5.6,5.3,5,5.4,4.5,5.1C4.1,4.8,3.9,4.2,4.2,3.8C5.6,1.4,8.2,0,11,0c0.1,0,0.2,0,0.3,0C15.6,0.2,19,3.8,19,8.3v2.6C19,11.5,18.6,11.9,18,11.9z"/></svg>',
 		logout: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25px" height="25.5px" viewBox="0 0 25 25.5"><path fill="currentColor" d="M12.5,25.5C5.6,25.5,0,19.9,0,13C0,8.9,2,5,5.4,2.7c0.5-0.3,1.1-0.2,1.4,0.2C7.1,3.4,7,4,6.5,4.3C3.7,6.3,2,9.5,2,13c0,5.8,4.7,10.5,10.5,10.5S23,18.8,23,13c0-3.4-1.7-6.7-4.5-8.6C18,4,17.9,3.4,18.3,2.9c0.3-0.5,0.9-0.6,1.4-0.2C23,5,25,8.9,25,13C25,19.9,19.4,25.5,12.5,25.5z"/><path fill="currentColor" d="M12.5,14c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1s1,0.4,1,1v12C13.5,13.6,13.1,14,12.5,14z"/></svg>',
 		notification: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24.2px" height="26px" viewBox="0 0 24.2 26"><path fill="currentColor" d="M7.2,26c-3.3,0-5.9-1-6.6-2.7c-0.7-1.9-0.1-3,0.4-3.9c0.4-0.7,0.7-1.2,0.4-2.3C-0.4,10.2-1.1,6.5,3.5,2.7C3.9,2.4,3.9,2.3,4,1.9C4,1.5,4.2,0.6,5.4,0.2c1.3-0.5,1.9,0.1,2.3,0.4C7.9,0.8,8,0.9,8.5,0.9c5.9-0.1,7.8,3.2,10.9,9.6v0c0.5,1,1,1.2,1.8,1.5c0.9,0.4,2.1,0.8,2.8,2.7c0.3,0.8,0.2,1.7-0.3,2.7c-1.1,2.3-4.4,5.4-9.4,7.2C11.9,25.6,9.4,26,7.2,26z M6,2.1c0,0,0,0.1,0,0.1C5.9,2.7,5.8,3.5,4.8,4.3C1.4,7,1.4,9.2,3.3,16.6c0.5,1.9-0.1,3-0.6,3.8c-0.4,0.7-0.7,1.2-0.3,2.2c0.5,1.3,5.4,2.3,11.2,0.2c4.4-1.6,7.4-4.3,8.2-6.2c0.2-0.5,0.3-0.9,0.2-1.2c-0.4-1.1-0.9-1.2-1.6-1.5c-0.9-0.3-2-0.8-2.9-2.5c0,0,0,0,0,0c-3.3-6.9-4.7-8.6-9-8.5c-1.3,0-1.9-0.5-2.2-0.8c0,0-0.1-0.1-0.1-0.1c0,0-0.1,0-0.2,0C6,2.1,6,2.1,6,2.1z"/><path fill="currentColor" d="M2.4,20.1c-0.2,0-0.4-0.1-0.6-0.2c-0.4-0.3-0.5-1-0.2-1.4c1.6-2.1,4.5-4.1,8-5.5c4.5-1.8,9.1-2.2,11.6-0.9c0.5,0.2,0.7,0.8,0.5,1.3c-0.2,0.5-0.8,0.7-1.3,0.5c-1.7-0.8-5.4-0.8-10,1c-3.1,1.2-5.8,3-7.2,4.8C3,20,2.7,20.1,2.4,20.1z"/><path fill="currentColor" d="M11.3,20.7c-1.3,0-2.6-0.8-3.2-2c-0.2-0.5,0-1.1,0.5-1.3c0.5-0.2,1.1,0,1.3,0.5c0.3,0.7,1.2,1.1,2,0.7c0.4-0.2,0.6-0.4,0.8-0.8c0.1-0.3,0.1-0.7,0-1.1c-0.2-0.5,0-1.1,0.5-1.3c0.5-0.2,1.1,0,1.3,0.5c0.4,0.8,0.4,1.8,0.1,2.6c-0.3,0.9-1,1.5-1.9,1.9C12.3,20.6,11.8,20.7,11.3,20.7z"/></svg>',
+		list: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="12px" viewBox="0 0 22 12"><path fill="currentColor" d="M21,12H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h20c0.6,0,1,0.4,1,1S21.6,12,21,12z"/><path fill="currentColor" d="M21,7H1C0.4,7,0,6.6,0,6s0.4-1,1-1h20c0.6,0,1,0.4,1,1S21.6,7,21,7z"/><path fill="currentColor" d="M21,2H1C0.4,2,0,1.6,0,1s0.4-1,1-1h20c0.6,0,1,0.4,1,1S21.6,2,21,2z"/></svg>',
+		close: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="19.9px" height="19.9px" viewBox="0 0 19.9 19.9"><path fill="currentColor" d="M1,19.9c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4L18.2,0.3c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L1.7,19.6C1.5,19.8,1.3,19.9,1,19.9z"/><path fill="currentColor" d="M18.9,19.9c-0.3,0-0.5-0.1-0.7-0.3L0.3,1.7c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l17.9,17.9c0.4,0.4,0.4,1,0,1.4C19.4,19.8,19.2,19.9,18.9,19.9z"/></svg>',
 		help: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" viewBox="0 0 26 26"><circle fill="currentColor" cx="13" cy="20.1" r="1.3"/><path fill="currentColor" d="M14,17.1h-2v-3.2c0-0.6,0.4-1,1-1c1.7,0,3.1-1.3,3.1-3s-1.4-3-3.1-3c-1.7,0-3.1,1.3-3.1,3.3h-2c0-3,2.3-5.3,5.1-5.3c2.9,0,5.1,2.2,5.1,5c0,2.5-1.7,4.5-4.1,4.9V17.1z"/><path fill="currentColor" d="M13,26C5.8,26,0,20.2,0,13S5.8,0,13,0s13,5.8,13,13S20.2,26,13,26z M13,2C6.9,2,2,6.9,2,13s4.9,11,11,11s11-4.9,11-11S19.1,2,13,2z"/></svg>'
 	}
 
@@ -112,6 +115,13 @@
 		}
 
 		/* Init - Wrap Inputs and Buttons */
+
+		$('#context > .actions fieldset').wrapInner('<div></div>');
+
+		$('#context > .actions > button').each(function(){
+			var t = $(this);
+			t.wrap('<li class="button-container close"></li>');
+		});
 
 		$('input, button', o.actions).each(function(){
 			var t = $(this);
@@ -277,7 +287,7 @@
 			setTimeout(function(){
 				var f = t.parents('.frame').find('ol .instance:last-child');
 
-				$('.frame-header h4', f).append(s.chevron);
+				if(t.parents('.frame').hasClass('collapsible')) $('.frame-header h4', f).append(s.chevron);
 
 				$('select', f).select2();
 				$('.select2-container .select2-selection--single .select2-selection__arrow', f).html(s.chevron);
@@ -303,6 +313,7 @@
 			else if(url.indexOf('-associations') !== -1) t.prepend(s.associations);
 			else if(url.indexOf('#drawer-filtering') !== -1) t.prepend(s.filter);
 			else if(url.indexOf('#drawer-documenter') !== -1) t.prepend(s.help);
+			else if(url.indexOf('?list') !== -1) t.prepend(s.list);
 			// By Class
 			else if(t.hasClass('link-preview')) t.prepend(s.view);
 			// By Title
@@ -310,6 +321,7 @@
 				if(title.indexOf('View') !== -1) t.prepend(s.view);
 			}
 		});
+		$(o.contextActionsButt).prepend(s.close);
 		$(o.actionButtons).each(function(){
 			var t = $(this);
 			var title = t.attr('data-icon');
