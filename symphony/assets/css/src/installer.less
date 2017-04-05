@@ -2,42 +2,101 @@
  * Symphony Installer
  */
 
+/*-----------------------------------------------------------------------------
+ 	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
+
+@import "variables";
+
+/*-----------------------------------------------------------------------------
+	General
+-----------------------------------------------------------------------------*/
+
 body {
-	padding: 8rem 10rem 5rem 5rem;
-	cursor: default;
+	padding: 0!important;
 }
 
 form {
-	position: relative;
-	width: 45rem;
-	margin: 0 auto;
-	padding-left: 20rem;
+	box-sizing: border-box;
+	position: relative; margin: 0 auto; padding: @spacing-smallish; max-width: @max-width-small;
+
+	@media (min-width: @sm){
+		padding-left: @spacing-huge;
+	}
 }
 
-/* Sidebar */
+/*-----------------------------------------------------------------------------
+	Sidebar
+-----------------------------------------------------------------------------*/
 
 h1 {
-	position: fixed;
-	width: 15rem;
-	margin-left: -20rem;
-	padding: 0 0 1.8rem 0;
-	font-size: 1.25rem;
-	font-weight: normal;
-	text-align: right;
+	color: @accent; font-size: @text-current; font-weight: 300; margin-bottom: @spacing-smallish;
+
+	@media (min-width: @sm){
+		position: fixed; margin: @spacing-smallest 0 @spacing-smallish -@spacing-huge; width: @spacing-huge;
+	}
+
+	em {
+		display: block; color: @dark-grey; font-size: @text-shorter; font-style: normal; text-transform: uppercase; margin-top: @spacing-micro;
+	}
 }
 
-h1 em {
-	display: block;
-	margin-top: 0.5rem;
-	color: rgba(0, 0, 0, 0.4);
-	font-size: 1rem;
-	font-style: normal;
-	text-align: right;
+/*-----------------------------------------------------------------------------
+	Content
+-----------------------------------------------------------------------------*/
+
+h2 {
+	color: @accent; font-size: @text-bigger; font-weight: 300; margin: 0 0 @spacing-smallish;
 }
 
-h1 + ul {
+p {
+	line-height: 1.4em; margin-bottom: @spacing-smallish;
+}
+
+fieldset + h2,
+p + h2 {
+	padding-top: @spacing-small;
+}
+
+form > fieldset {
+	margin: @spacing-smallish 0;
+
+	> legend {
+		display: block; color: @accent; font-size: @text-bigger; padding: @spacing-small 0 @spacing-smallish; border-top: 1px solid @lighter-grey; width: 100%;
+	}
+
+	.frame {
+		margin-bottom: @spacing-smallish!important; padding-top: @spacing-smallish; background: @white;
+
+		legend {
+			position: absolute; left: @spacing-smallest; top: @spacing-smallest; color: @dark-grey; font-size: @text-shorter; text-transform: uppercase;
+
+			& + p {
+				color: @dark-grey; font-size: @text-short; margin-top: @spacing-micro;
+			}
+		}
+	}
+
+	& + h2 {
+		border-top: 1px solid @lighter-grey;
+	}
+}
+
+.submit {
+	text-align: right; margin-top: @spacing-smallish;
+
+	input[type="submit"] {
+		margin: 0;
+	}
+}
+
+/*-----------------------------------------------------------------------------
+	Misc
+-----------------------------------------------------------------------------*/
+
+/*h1 + ul {
 	position: fixed;
-	width: 15rem;
+	width: @spacing-huge;
 	margin: 5.5rem 0 0 -20rem;
 	padding: 0 0 1.8rem 0;
 	color: rgba(0, 0, 0, 0.4);
@@ -66,11 +125,11 @@ h1 + ul li.more a {
 
 h1 + ul li.more a:hover {
 	border-bottom: 0.1rem solid rgba(0, 0, 0, 0.3);
-}
+}*/
 
 /* Multiple errors */
 
-.invalid ul {
+/*.invalid ul {
 	position: static;
 	width: auto;
 	margin: 0 0 0 1.3rem;
@@ -85,52 +144,11 @@ h1 + ul li.more a:hover {
 
 .invalid li + li {
 	margin-top: 1rem;
-}
+}*/
 
 /* Content */
 
-h2 {
-	margin-right: 5rem;
-	margin-bottom: 1rem;
-}
-
-fieldset + h2,
-p + h2 {
-	margin-top: 5rem;
-}
-
-fieldset {
-	margin: 5rem 0 0;
-	padding: 1rem 0 0;
-}
-
-fieldset legend {
-	color: #222;
-	font-size: 127.28%;
-	font-weight: normal;
-}
-
-fieldset > .columns:last-child .column {
-	margin-bottom: 0;
-}
-
-fieldset fieldset {
-	margin: 0.5rem 0 0 !important;
-	padding-top: 3rem !important;
-}
-
-fieldset label + fieldset {
-	margin-top: 2rem !important;
-}
-
-fieldset fieldset legend {
-	position: absolute;
-	top: 1rem;
-	left: 1rem;
-	color: rgba(0, 0, 0, 0.4);
-	font-size: 1rem;
-}
-
+/*
 .option {
 	margin: 0 0 0 2rem;
 }
@@ -144,11 +162,6 @@ fieldset fieldset legend {
 .option + p {
 	margin: 0.5rem 3rem 0 2rem;
 	color: rgba(0, 0, 0, 0.4);
-}
-
-.submit {
-	padding-bottom: 5rem;
-	text-align: right;
 }
 
 dt {
@@ -177,11 +190,11 @@ ul li:before {
 	content: '\00b7';
 	float: left;
 	margin: 0 0 0 -1rem;
-}
+}*/
 
 /* Log */
 
-pre {
+/*pre {
 	margin-bottom: 1.5rem;
 	color: #474742;
 	font: inherit;
@@ -199,4 +212,4 @@ pre code {
 code {
 	font: 100%/1.5 Monaco, Consolas, 'Andale Mono', monospace;
 	tab-size: 4;
-}
+}*/

@@ -10,7 +10,7 @@
  /*-----------------------------------------------------------------------------
  	LESS — Variables Importing
  -----------------------------------------------------------------------------*/
- 
+
  @import "variables";
 
 /*--------------------------------------------------------------------------
@@ -19,12 +19,13 @@
 
 input,
 button,
-textarea {
+textarea,
+select {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	outline: none;
 }
 
-input,
+input:not([type="submit"]),
 textarea,
 select,
 .field-value-readonly {
@@ -33,16 +34,8 @@ select,
 	color: @darker-grey; font-family: inherit; font-size: @text-short; font-weight: 300; text-transform: none; line-height: 1em; padding: @spacing-smallest @spacing-smallerish; border: 1px solid @lighter-grey; background-color: @lightest-grey; width: 100%;
 }
 
-select[multiple] {
-	padding: @spacing-smallest;
-
-	option {
-		color: @darker-grey; padding: @spacing-micro;
-	}
-}
-
-input:active,
-input:focus,
+input:not([type="submit"]):active,
+input:not([type="submit"]):focus,
 textarea:active,
 textarea:focus,
 select[multiple]:active,
@@ -62,7 +55,7 @@ textarea {
 input[type='radio'],
 input[type='checkbox'] {
 	box-shadow: none;
-	display: inline; font-size: inherit; margin-top: 0; margin-right: 0.5rem; padding: inherit; border: none; width: auto; height: auto;	
+	display: inline; font-size: inherit; margin-top: 0; margin-right: 0.5rem; padding: inherit; border: none; width: auto; height: auto;
 }
 
 input[type=file] {
@@ -78,13 +71,21 @@ optgroup {
 	font-style: normal;
 }
 
-select.disabled {
-	display: none;
+select {
+	height: 0.4rem + @text-short + @spacing-smallest * 2;
+
+	.disabled {
+		display: none;
+	}
 }
 
 select[multiple] {
 	.transitioned(~'border');
-	display: block; height: @spacing-larger;
+	display: block; padding: @spacing-smallest; height: @spacing-larger;
+
+	option {
+		color: @darker-grey; padding: @spacing-micro;
+	}
 }
 
 /*--------------------------------------------------------------------------
@@ -110,7 +111,7 @@ select[multiple] {
 	}
 
 	> p {
-		color: @red; font-size: @text-short; font-weight: 500; margin-top: -@spacing-smallish + 0.5rem; padding: 0;
+		color: @red; font-size: @text-short; font-weight: 500; line-height: 1.4em; margin-top: -@spacing-smallish + 0.5rem; padding: 0;
 
 		br:first-child {
 			display: none;
@@ -165,10 +166,16 @@ button,
 .apply-button-right,
 .apply-label-left,
 .apply-label-right {
-	display: inline-block; color: @white; font-size: @text-shorter; line-height: @text-short; margin-left: 1rem; padding: @spacing-smallest @spacing-smallest; border: none; width: auto;
+	.transitioned(~'background');
+	border-radius: @radius-current;
+	display: inline-block; color: @white; font-size: @text-shorter; text-transform: uppercase; line-height: @text-short; margin-left: 1rem; padding: @spacing-smallest @spacing-smallest; border: none; background: @accent; width: auto;
+
+	&:hover {
+		background: @darker-grey;
+	}
 }
 
-.submit input {
+.submit input[type="submit"] {
 	margin-top: 1.5rem;
 }
 
@@ -258,7 +265,7 @@ legend {
 	display: block; float: right; margin: @spacing-smallest 0 0; padding: 0;
 
 	div {
-		box-sizing: border-box;	
+		box-sizing: border-box;
 		float: left; text-align: left;
 	}
 
@@ -431,7 +438,7 @@ fieldset.settings {
 
 	> legend {
 		line-height: 1.4em;
-		
+
 		@media (min-width: @md){
 			position: absolute; top: -0.1rem; left: 0; width: @spacing-huge - @spacing-smallish;
 		}
