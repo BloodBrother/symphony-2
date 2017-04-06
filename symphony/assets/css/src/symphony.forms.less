@@ -1,4 +1,6 @@
 /**
+ * Symphony Forms
+ *
  * This file contains unified styles for inputs, text areas, multiple selects
  * and buttons that are shared across the system. It does not contain general
  * label and fieldset definitions that differ in the different areas of Symphony.
@@ -6,12 +8,11 @@
  * @since Symphony 2.3
  */
 
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
 
- /*-----------------------------------------------------------------------------
- 	LESS — Variables Importing
- -----------------------------------------------------------------------------*/
-
- @import "variables";
+@import "variables";
 
 /*--------------------------------------------------------------------------
 	Basic Inputs Textareas and Selects
@@ -142,6 +143,10 @@ select[multiple] {
 		line-height: 1.4em;
 		margin: (-@spacing-smallish + 0.5rem) 0 @spacing-smallish;
 		padding: 0;
+
+		li + li {
+			margin-top: @spacing-micro;
+		}
 
 		br:first-child {
 			display: none;

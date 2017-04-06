@@ -99,8 +99,9 @@
 @easeInExpo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
 @easeInBack: cubic-bezier(0.6, -0.28, 0.735, 0.045);
 
-/* Mixins
----------------------------------------------*/
+/*-----------------------------------------------------------------------------
+	Mixins
+-----------------------------------------------------------------------------*/
 
 .transitioned(@transProperty: color, @transDuration: 0.45s, @transDelay: 0s) {
 	transition-duration: @transDuration;
@@ -109,10 +110,10 @@
 	transition-timing-function: 'ease-in-out';
 }
 
-.flex(@direction: row, @align: flex-start, @justify: space-between){ 
+.flex(@direction: row, @align: flex-start, @justify: space-between){
 	display: flex;
 	flex-direction: @direction;
 	align-items: @align;
 	justify-content: @justify;
-	
+
 }

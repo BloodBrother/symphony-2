@@ -1,20 +1,26 @@
- /*-----------------------------------------------------------------------------
- 	LESS — Variables Importing
- -----------------------------------------------------------------------------*/
- 
- @import "variables";
+ /**
+ * Symphony Filtering
+ */
 
- /*-----------------------------------------------------------------------------
- 	Filtering
- -----------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
+
+@import "variables";
+
+/*-----------------------------------------------------------------------------
+	Filtering
+-----------------------------------------------------------------------------*/
 
 .drawer-filtering .frame {
 	.flex(~'row', ~'center', ~'flex-end');
 	flex-wrap: wrap;
-	border: none; background: none;
+	border: none;
+	background: none;
 
 	.frame-header {
-		padding: 0; border: none;
+		padding: 0;
+		border: none;
 	}
 
 	ol {
@@ -26,7 +32,8 @@
 		margin-left: 0;
 
 		.content {
-			padding: @spacing-smallest 0 0; border: none;
+			padding: @spacing-smallest 0 0;
+			border: none;
 		}
 	}
 
@@ -34,7 +41,10 @@
 		margin: 0 0 0 -@spacing-smallish!important;
 
 		.column {
-			margin: 0!important; padding: 0 0 0 @spacing-smallish!important; border: none!important; width: 50%!important;
+			margin: 0!important;
+			padding: 0 0 0 @spacing-smallish!important;
+			border: none!important;
+			width: 50%!important;
 		}
 	}
 
@@ -43,7 +53,10 @@
 	}
 
 	.instance {
-		overflow: visible; margin-bottom: @spacing-smallish; padding: 0 0 @spacing-smallish!important; border-bottom: 1px solid @lighter-grey;
+		overflow: visible;
+		margin-bottom: @spacing-smallish;
+		padding: 0 0 @spacing-smallish!important;
+		border-bottom: 1px solid @lighter-grey;
 	}
 
 	&.duplicator {
@@ -56,16 +69,21 @@
 
 	.clear-filters {
 		order: 3;
-		margin-left: @spacing-smallest; cursor: pointer;
+		margin-left: @spacing-smallest;
+		cursor: pointer;
 	}
 
 	.apply-filters {
 		order: 2;
-		margin-left: @spacing-smallest; cursor: pointer;
+		margin-left: @spacing-smallest;
+		cursor: pointer;
 	}
 
 	.apply {
-		position: relative; right: auto; bottom: auto; margin-top: 0;
+		position: relative;
+		right: auto;
+		bottom: auto;
+		margin-top: 0;
 	}
 
 	&.empty {
@@ -73,7 +91,14 @@
 
 		ol::before {
 			content: attr(data-empty);
-			display: block; color: @darker-grey; font-size: @text-shorter; text-transform: uppercase; font-weight: 300; margin-bottom: @spacing-smallish; padding-bottom: @spacing-smallish; border-bottom: 1px solid @lighter-grey;
+			display: block;
+			color: @darker-grey;
+			font-size: @text-shorter;
+			text-transform: uppercase;
+			font-weight: 300;
+			margin-bottom: @spacing-smallish;
+			padding-bottom: @spacing-smallish;
+			border-bottom: 1px solid @lighter-grey;
 		}
 	}
 }

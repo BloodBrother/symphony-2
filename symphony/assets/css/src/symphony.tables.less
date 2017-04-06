@@ -1,21 +1,24 @@
 /**
- * Backend tables
+ * Symphony Tables
  */
 
- /*-----------------------------------------------------------------------------
- 	LESS — Variables Importing
- -----------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
 
- @import "variables";
+@import "variables";
 
- /*-----------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------
 	Tables
 -----------------------------------------------------------------------------*/
 
 table {
 	border-radius: @radius-current;
 	border-collapse: initial;
-	font-size: @text-short; text-align: left; border: 1px solid @lighter-grey; width: 100%;
+	font-size: @text-short;
+	text-align: left;
+	border: 1px solid @lighter-grey;
+	width: 100%;
 
 	label {
 		margin-bottom: 0!important;
@@ -37,11 +40,17 @@ table {
 
 	 		td {
 	 			box-sizing: border-box;
-	 			display: flex; border: none; width: 100%;
+	 			display: flex;
+	 			border: none;
+	 			width: 100%;
 
 			 	&:before {
 			 		content: attr(data-title);
-			 		display: block; font-size: @text-shorter; text-transform: uppercase; padding-right: @spacing-micro; white-space: nowrap;
+			 		display: block;
+			 		font-size: @text-shorter;
+			 		text-transform: uppercase;
+			 		padding-right: @spacing-micro;
+			 		white-space: nowrap;
 			 	}
 
 			 	&:not(:first-child) {
@@ -61,7 +70,14 @@ table {
 }
 
 th {
-	color: @dark-grey; font-size: @text-shorter; font-weight: 300; text-transform: uppercase; text-align: left; line-height: 1.4em; padding: @spacing-smallerish @spacing-smallish; background: transparent;
+	color: @dark-grey;
+	font-size: @text-shorter;
+	font-weight: 300;
+	text-transform: uppercase;
+	text-align: left;
+	line-height: 1.4em;
+	padding: @spacing-smallerish @spacing-smallish;
+	background: transparent;
 
 	a,
 	a:hover,
@@ -100,7 +116,13 @@ th {
 
 td {
 	.transitioned(~'color, background');
-	color: @dark-grey; font-weight: 300; text-align: left; line-height: 1.4em; padding: @spacing-smallerish @spacing-smallish!important; border-top: 1px solid @lighter-grey; vertical-align: middle;
+	color: @dark-grey;
+	font-weight: 300;
+	text-align: left;
+	line-height: 1.4em;
+	padding: @spacing-smallerish @spacing-smallish!important;
+	border-top: 1px solid @lighter-grey;
+	vertical-align: middle;
 
 	a {
 		color: @accent;
@@ -120,7 +142,8 @@ table.selectable input {
 }
 
 tr.selected td {
-	color: @white; background-color: @accent;
+	color: @white;
+	background-color: @accent;
 
 	a {
 		color: @white;

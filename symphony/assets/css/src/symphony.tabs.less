@@ -1,15 +1,16 @@
 /**
+ * Symphony Tabs
+ *
  * Tabs used to toggle content areas.
  *
  * @since Symphony 2.3
  */
 
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
 
- /*-----------------------------------------------------------------------------
- 	LESS — Variables Importing
- -----------------------------------------------------------------------------*/
-
- @import "variables";
+@import "variables";
 
 /*-----------------------------------------------------------------------------
 	Tabs
@@ -17,16 +18,27 @@
 
 ul.tabs {
 	.flex(~'row', ~'center', ~'flex-start');
-	position: relative; font-size: @text-short; text-transform: uppercase; margin: 0; padding: 0; z-index: 10; list-style-type: none;
-	
+	position: relative;
+	font-size: @text-short;
+	text-transform: uppercase;
+	margin: 0;
+	padding: 0;
+	z-index: 10;
+	list-style-type: none;
+
 	li {
 		box-sizing: border-box;
-		position: relative; color: @dark-grey; margin-bottom: -1px; border-bottom: 2px solid transparent; cursor: pointer; list-style-type: none;
+		position: relative;
+		color: @dark-grey;
+		margin-bottom: -1px;
+		border-bottom: 2px solid transparent;
+		cursor: pointer;
+		list-style-type: none;
 
 		.icon {
 			display: none!important;
 		}
-		
+
 		& + li {
 			margin-left: @spacing-smallest;
 		}
@@ -35,7 +47,9 @@ ul.tabs {
 	li:hover,
 	.selected,
 	.active {
-		color: @accent!important; border-bottom-color: @accent; z-index: 10;
+		color: @accent!important;
+		border-bottom-color: @accent;
+		z-index: 10;
 	}
 
 	li.invalid {
@@ -45,43 +59,8 @@ ul.tabs {
 	li.invalid:hover,
 	li.invalid.selected,
 	li.invalid.selected:hover {
-		color: @red!important; border-bottom-color: @red; z-index: 10;
+		color: @red!important;
+		border-bottom-color: @red;
+		z-index: 10;
 	}
 }
-
-/*-----------------------------------------------------------------------------
-	Misc
------------------------------------------------------------------------------*/
-
-/*ul.tabs a.destructor,
-ul.tabs .selected.invalid a.destructor {
-	text-shadow: 0.1rem 0.1rem #fff;
-	color: rgba(0, 0, 0, 0.15); line-height: 1; margin: 0 -0.4rem 0 0; padding: 0 0 0 0.5rem; border-bottom: none;
-}
-
-ul.tabs :hover a.destructor,
-ul.tabs .selected.invalid:hover a.destructor {
-	color: rgba(0, 0, 0, 0.2);
-}
-
-ul.tabs a.destructor:hover,
-ul.tabs .selected a.destructor:hover {
-	color: rgba(0, 0, 0, 0.5);
-}
-
-ul.tabs .invalid {
-	color: rgba(255, 255, 255, 0.7);
-	border-color: #b21;
-	background: #d42;
-	box-shadow: none;
-	text-shadow: 0.1rem 0.1rem 0.1rem rgba(187, 34, 17, 1);
-}
-
-ul.tabs .invalid:hover {
-	color: rgba(255, 255, 255, 0.9);
-}
-
-ul.tabs .invalid a.destructor {
-	color: #fb9;
-	text-shadow: none;
-}*/

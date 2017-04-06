@@ -20,7 +20,7 @@ form {
 	box-sizing: border-box;
 	position: relative;
 	margin: 0 auto;
-	padding: @spacing-smallish;
+	padding: @spacing-smallish @spacing-smallish @spacing-mid;
 	max-width: @max-width-small;
 
 	@media (min-width: @sm){
@@ -83,19 +83,18 @@ form > fieldset {
 		color: @accent;
 		font-size: @text-bigger;
 		padding: @spacing-small 0 @spacing-smallish;
-		border-top: 1px solid @lighter-grey;
 		width: 100%;
 	}
 
 	.frame {
 		margin-bottom: @spacing-smallish!important;
-		padding-top: @spacing-smallish;
+		padding: @spacing-smallish @spacing-smallerish @spacing-smallerish;
 		background: @white;
 
 		legend {
 			position: absolute;
-			left: @spacing-smallest;
-			top: @spacing-smallest;
+			left: @spacing-smallerish;
+			top: @spacing-smallerish;
 			color: @dark-grey;
 			font-size: @text-shorter;
 			text-transform: uppercase;
@@ -106,10 +105,6 @@ form > fieldset {
 				margin-top: @spacing-micro;
 			}
 		}
-	}
-
-	& + h2 {
-		border-top: 1px solid @lighter-grey;
 	}
 }
 

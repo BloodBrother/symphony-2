@@ -1,5 +1,5 @@
 /**
- * Style definition for the Symphony backend
+ * Symphony Admin Layout
  */
 
 /*-----------------------------------------------------------------------------
@@ -28,7 +28,14 @@
 	.transitioned(~'transform');
 	display: flex;
 	flex-direction: column;
-	position: fixed; left: 0; bottom: 0; top: 0; border-right: 1px solid @lighter-grey; background: @white; width: @spacing-huge; z-index: 101;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	top: 0;
+	border-right: 1px solid @lighter-grey;
+	background: @white;
+	width: @spacing-huge;
+	z-index: 101;
 
 	&.spaced-bottom {
 		@media (max-width: (@sm - 1)){
@@ -45,10 +52,26 @@
 		order: 1;
 		flex-shrink: 0;
 		box-sizing: border-box;
-		position: relative; top: 0; left: 0; font-size: @text-current; padding: 0 @spacing-smallish!important; border-bottom: 1px solid @lighter-grey; height: @spacing-midlarge!important;
+		position: relative;
+		top: 0;
+		left: 0;
+		font-size: @text-current;
+		padding: 0 @spacing-smallish!important;
+		border-bottom: 1px solid @lighter-grey;
+		height: @spacing-midlarge!important;
 
 		a {
-			display: block; position: absolute; left: 0; top: 0; color: @accent; font-weight: 300; text-indent: -5000px; background-position: 0 0!important; background-size: auto 100%!important; width: 100%!important; height: 100%!important;
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+			color: @accent;
+			font-weight: 300;
+			text-indent: -5000px;
+			background-position: 0 0!important;
+			background-size: auto 100%!important;
+			width: 100%!important;
+			height: 100%!important;
 		}
 	}
 
@@ -57,8 +80,17 @@
 		.flex(~'column', ~'center', ~'center');
 		transform: translateX(1px);
 		box-sizing: border-box;
-		position: absolute; right: 0; top: 0; color: @dark-grey; border-right: 1px solid @lighter-grey; border-bottom: 1px solid @lighter-grey; background: @white; width: @spacing-midlarge; height: @spacing-midlarge; z-index: 20;
-	
+		position: absolute;
+		right: 0;
+		top: 0;
+		color: @dark-grey;
+		border-right: 1px solid @lighter-grey;
+		border-bottom: 1px solid @lighter-grey;
+		background: @white;
+		width: @spacing-midlarge;
+		height: @spacing-midlarge;
+		z-index: 20;
+
 		&:hover {
 			color: @accent;
 		}
@@ -87,19 +119,29 @@
 	display: flex;
 	flex-direction: column;
 	-webkit-overflow-scrolling: touch;
-	overflow: auto; margin: 0 0 auto; width: 100%; list-style: none;
+	overflow: auto;
+	margin: 0 0 auto;
+	width: 100%;
+	list-style: none;
 
 	/* First Level */
 
 	> ul {
-		color: @dark-grey; margin: 0; padding: @spacing-smallish;
+		color: @dark-grey;
+		margin: 0;
+		padding: @spacing-smallish;
 
 		a {
 			display: inline-block;
 		}
 
 		> li {
-			display: block; position: relative; font-size: @text-current; font-weight: 300; line-height: 2rem; cursor: pointer;
+			display: block;
+			position: relative;
+			font-size: @text-current;
+			font-weight: 300;
+			line-height: 2rem;
+			cursor: pointer;
 
 			> span {
 				.flex(~'row', ~'center', ~'flex-start');
@@ -125,7 +167,10 @@
 			/* Second Level */
 
 			ul {
-				display: none; margin: @spacing-smallest 0 0; padding: 0 0 0 @spacing-smallerish; border-left: 1px dotted @accent;
+				display: none;
+				margin: @spacing-smallest 0 0;
+				padding: 0 0 0 @spacing-smallerish;
+				border-left: 1px dotted @accent;
 
 				a {
 					color: @dark-grey;
@@ -154,10 +199,15 @@
 /* Session */
 
 #session {
-	font-size: @text-short; font-weight: 300; text-align: center; line-height: 1.4em; margin: 0 0 @spacing-small!important;
+	font-size: @text-short;
+	font-weight: 300;
+	text-align: center;
+	line-height: 1.4em;
+	margin: 0 0 @spacing-small!important;
 
 	a {
-		color: @dark-grey; line-height: @spacing-smallerish;
+		color: @dark-grey;
+		line-height: @spacing-smallerish;
 
 		&:hover {
 			color: @darker-grey;
@@ -177,7 +227,14 @@
 
 #custom-toolbar {
 	.flex(~'row',~'center',~'center');
-	position: fixed; left: @spacing-huge; top: @spacing-midlarge; border: 1px solid @lighter-grey; border-left: none; border-top: none; background: @lightest-grey; z-index: 50;
+	position: fixed;
+	left: @spacing-huge;
+	top: @spacing-midlarge;
+	border: 1px solid @lighter-grey;
+	border-left: none;
+	border-top: none;
+	background: @lightest-grey;
+	z-index: 50;
 
 	@media (max-width: (@sm - 1)){
 		left: 0;
@@ -186,11 +243,14 @@
 	> div {
 		.flex(~'row',~'baseline',~'flex-start');
 		box-sizing: border-box;
-		color: @accent; line-height: @text-big; padding: @spacing-smallest @spacing-smallerish;
+		color: @accent;
+		line-height: @text-big;
+		padding: @spacing-smallest @spacing-smallerish;
 
 		a {
 			transition-duration: 0.15s;
-			color: currentColor; border-bottom: 1px solid transparent;
+			color: currentColor;
+			border-bottom: 1px solid transparent;
 
 			&:hover,
 			&.active {
@@ -209,7 +269,8 @@
 		}
 
 		&.current {
-			font-size: @text-current; margin: 0 @spacing-smallest;
+			font-size: @text-current;
+			margin: 0 @spacing-smallest;
 		}
 
 		&.big {
@@ -231,11 +292,19 @@ body.publish-tabs #custom-toolbar {
 #context {
 	.flex(~'row', ~'center', ~'space-between');
 	box-sizing: border-box;
-	position: fixed; left: @spacing-huge; right: 0; top: 0; border-bottom: 1px solid @lighter-grey; background: @white; height: @spacing-midlarge; z-index: 50;
+	position: fixed;
+	left: @spacing-huge;
+	right: 0;
+	top: 0;
+	border-bottom: 1px solid @lighter-grey;
+	background: @white;
+	height: @spacing-midlarge;
+	z-index: 50;
 
 	@media (max-width: (@sm - 1)){
 		justify-content: flex-end;
-		left: 0; padding-left: @spacing-midlarge;
+		left: 0;
+		padding-left: @spacing-midlarge;
 	}
 
 	&.spaced-right {
@@ -247,11 +316,27 @@ body.publish-tabs #custom-toolbar {
 	> .tabs {
 		order: 2;
 		box-sizing: border-box;
-		/*-webkit-overflow-scrolling: touch;*/
-		display: block; /*overflow: auto;*/ position: absolute; right: 0; top: 100%; margin-top: 1px; padding: 0 0 0 @spacing-smallish; border-bottom: 1px solid @lighter-grey; background: @white; width: @spacing-huger; height: @spacing-midlarge; white-space: nowrap;
+		display: block;
+		position: absolute;
+		right: 0;
+		top: 100%;
+		margin-top: 1px;
+		padding: 0 0 0 @spacing-smallish;
+		border-bottom: 1px solid @lighter-grey;
+		background: @white;
+		width: @spacing-huger;
+		height: @spacing-midlarge;
+		white-space: nowrap;
 
 		li {
-			display: inline-block; position: relative; font-size: @text-current; font-weight: 300; text-transform: none; line-height: @spacing-midlarge; margin-right: @spacing-smallish; height: @spacing-midlarge;
+			display: inline-block;
+			position: relative;
+			font-size: @text-current;
+			font-weight: 300;
+			text-transform: none;
+			line-height: @spacing-midlarge;
+			margin-right: @spacing-smallish;
+			height: @spacing-midlarge;
 
 			&:first-child {
 				display: none;
@@ -260,11 +345,18 @@ body.publish-tabs #custom-toolbar {
 
 		&:after {
 			content: "";
-			display: block; position: fixed; right: @spacing-huger; top: @spacing-midlarge; background: @lighter-grey; width: 1px; height: 100vh;
+			display: block;
+			position: fixed;
+			right: @spacing-huger;
+			top: @spacing-midlarge;
+			background: @lighter-grey;
+			width: 1px;
+			height: 100vh;
 		}
 
 		@media (max-width: (@md - 1)){
-			left: 0; width: auto;
+			left: 0;
+			width: auto;
 
 			li:first-child {
 				display: inline-block;
@@ -282,7 +374,9 @@ body.publish-tabs #custom-toolbar {
 		.flex(~'row', ~'center', ~'flex-end');
 		flex-grow: 1;
 		order: 3;
-		margin: 0; padding: 0 @spacing-smallish; max-width: 50%;
+		margin: 0;
+		padding: 0 @spacing-smallish;
+		max-width: 50%;
 
 		@media (max-width: (@xs - 1)){
 			max-width: calc(~'100% - @{spacing-midlarge}');
@@ -290,11 +384,19 @@ body.publish-tabs #custom-toolbar {
 
 		a, button {
 			.flex(~'row', ~'center', ~'flex-start');
-			color: @dark-grey; font-size: @text-shorter; text-transform: uppercase; line-height: @spacing-midlarge; margin: 0; padding: 0; background: none; white-space: nowrap;
+			color: @dark-grey;
+			font-size: @text-shorter;
+			text-transform: uppercase;
+			line-height: @spacing-midlarge;
+			margin: 0;
+			padding: 0;
+			background: none;
+			white-space: nowrap;
 
 			> svg {
 				flex-shrink: 0;
-				max-width: @spacing-smaller; max-height: @spacing-smaller;
+				max-width: @spacing-smaller;
+				max-height: @spacing-smaller;
 			}
 
 			> span {
@@ -303,7 +405,10 @@ body.publish-tabs #custom-toolbar {
 
 				> span {
 					text-overflow: ellipsis;
-					display: block; overflow: hidden; padding-left: @spacing-smallest; white-space: nowrap;
+					display: block;
+					overflow: hidden;
+					padding-left: @spacing-smallest;
+					white-space: nowrap;
 				}
 			}
 
@@ -314,10 +419,15 @@ body.publish-tabs #custom-toolbar {
 		}
 
 		button {
-			display: block; position: relative; padding-left: @spacing-smallish;
+			display: block;
+			position: relative;
+			padding-left: @spacing-smallish;
 
 			svg {
-				position: absolute; left: 0; top: 50%; margin-top: -@spacing-smallest;
+				position: absolute;
+				left: 0;
+				top: 50%;
+				margin-top: -@spacing-smallest;
 			}
 		}
 
@@ -351,7 +461,10 @@ body.publish-tabs #custom-toolbar {
 	.flex(~'row',~'baseline', ~'flex-start');
 	order: 1;
 	flex-grow: 1;
-	overflow: hidden; position: relative; padding: 0 @spacing-smallish; white-space: nowrap;
+	overflow: hidden;
+	position: relative;
+	padding: 0 @spacing-smallish;
+	white-space: nowrap;
 
 	@media (max-width: @xs) {
 		display: none;
@@ -361,10 +474,13 @@ body.publish-tabs #custom-toolbar {
 		flex-shrink: 0;
 
 		p {
-			margin: 0; padding-right: @spacing-smallish;
+			margin: 0;
+			padding-right: @spacing-smallish;
 
 			a {
-				color: @dark-grey; font-size: @text-short; font-weight: 300;
+				color: @dark-grey;
+				font-size: @text-short;
+				font-weight: 300;
 
 				svg {
 					padding-right: 15px;
@@ -383,14 +499,20 @@ body.publish-tabs #custom-toolbar {
 
 	h2 {
 		text-overflow: ellipsis;
-		overflow: hidden; color: @accent; font-size: @text-current; font-weight: 300;
+		overflow: hidden;
+		color: @accent;
+		font-size: @text-current;
+		font-weight: 300;
 	}
 
 	p.inactive {
-		display: inline-block; margin: 0;
+		display: inline-block;
+		margin: 0;
 
 		span {
-			color: @accent; font-size: @text-current; font-weight: 300;
+			color: @accent;
+			font-size: @text-current;
+			font-weight: 300;
 		}
 	}
 }
@@ -399,14 +521,32 @@ body.publish-tabs #custom-toolbar {
 
 .page-single #contents .actions {
 	.flex(~'column',~'flex-start',~'flex-start');
-	position: fixed; right: 0; top: 0; margin: 0; padding: 0; width: @spacing-larger; height: @spacing-midlarge; z-index: 110;
+	position: fixed;
+	right: 0;
+	top: 0;
+	margin: 0;
+	padding: 0;
+	width: @spacing-larger;
+	height: @spacing-midlarge;
+	z-index: 110;
 
 	input, button {
 		.transitioned(~'opacity, background');
 		border-radius: 0px;
 		box-sizing: border-box;
-		display: block; color: @white; font-size: @text-shorter; text-transform: uppercase; text-align: left; line-height: @spacing-midlarge; margin: 0!important; padding: 0 @spacing-small 0 4.5rem; border: none; background: @accent!important; width: 100%; cursor: pointer;
-	
+		display: block;
+		color: @white;
+		font-size: @text-shorter;
+		text-transform: uppercase;
+		text-align: left;
+		line-height: @spacing-midlarge;
+		margin: 0!important;
+		padding: 0 @spacing-small 0 4.5rem;
+		border: none;
+		background: @accent!important;
+		width: 100%;
+		cursor: pointer;
+
 		&[name="action[delete]"], &[name="action[delete]"]:hover {
 			background: @red!important;
 		}
@@ -417,12 +557,20 @@ body.publish-tabs #custom-toolbar {
 	}
 
 	.button-container {
-		overflow: hidden; position: relative;
+		overflow: hidden;
+		position: relative;
 
 		svg {
 			transform: translateY(-50%);
 			content: ">";
-			position: absolute; left: @spacing-smallerish; top: 50%; color: @white; font-weight: 300; max-width: @spacing-smaller; max-height: @spacing-smaller; pointer-events: none;
+			position: absolute;
+			left: @spacing-smallerish;
+			top: 50%;
+			color: @white;
+			font-weight: 300;
+			max-width: @spacing-smaller;
+			max-height: @spacing-smaller;
+			pointer-events: none;
 		}
 	}
 
@@ -437,16 +585,25 @@ body.publish-tabs #custom-toolbar {
 	}
 
 	> *:nth-child(n + 2):not(svg) {
-		float: none!important; opacity: 0; pointer-events: none;
+		float: none!important;
+		opacity: 0;
+		pointer-events: none;
 	}
 
 	&:hover > *:nth-child(n + 2):not(svg) {
-		opacity: 1; pointer-events: auto;
+		opacity: 1;
+		pointer-events: auto;
 	}
 
 	> svg {
 		transform: translateY(-50%);
-		display: block; position: absolute; right: @spacing-smallerish; top: 50%; color: @white; font-weight: 300; pointer-events: none;
+		display: block;
+		position: absolute;
+		right: @spacing-smallerish;
+		top: 50%;
+		color: @white;
+		font-weight: 300;
+		pointer-events: none;
 	}
 
 	#duplicate-entry {
@@ -464,14 +621,23 @@ html.touch {
 		.flex(~'row',~'center',~'flex-start');
 		box-sizing: border-box;
 		transform: translateY(-100%);
-		top: 100vh; left: calc(~'@{spacing-huge} + 0.1rem'); padding: 0 @spacing-smallerish; border-top: 1px solid @lighter-grey; background: @white; width: auto; height: @spacing-midlarge;
+		top: 100vh;
+		left: calc(~'@{spacing-huge} + 0.1rem');
+		padding: 0 @spacing-smallerish;
+		border-top: 1px solid @lighter-grey;
+		background: @white;
+		width: auto;
+		height: @spacing-midlarge;
 
 		@media (max-width: @sm) {
 			left: 0;
 		}
 
 		input, button {
-			line-height: 1.85; padding: @spacing-smallest @spacing-smallerish; border-radius: @radius-current; width: auto;
+			line-height: 1.85;
+			padding: @spacing-smallest @spacing-smallerish;
+			border-radius: @radius-current;
+			width: auto;
 		}
 
 		.button-container svg {
@@ -488,7 +654,9 @@ html.touch {
 
 		> *:not(svg) {
 			order: 2;
-			width: auto; opacity: 1!important; pointer-events: auto!important;
+			width: auto;
+			opacity: 1!important;
+			pointer-events: auto!important;
 
 			&[data-icon="action[delete]"] {
 				order: 1;
@@ -520,14 +688,23 @@ html:not(.touch) {
 			.flex(~'row',~'center',~'flex-start');
 			box-sizing: border-box;
 			transform: translateY(-100%);
-			top: 100vh; left: @spacing-huge; padding: 0 @spacing-smallerish; border-top: 1px solid @lighter-grey; background: @white; width: auto; height: @spacing-midlarge;
+			top: 100vh;
+			left: @spacing-huge;
+			padding: 0 @spacing-smallerish;
+			border-top: 1px solid @lighter-grey;
+			background: @white;
+			width: auto;
+			height: @spacing-midlarge;
 
 			@media (max-width: @sm) {
 				left: 0;
 			}
 
 			input, button {
-				line-height: @text-short; padding: @spacing-smallest @spacing-smallerish; border-radius: @radius-current; width: auto;
+				line-height: @text-short;
+				padding: @spacing-smallest @spacing-smallerish;
+				border-radius: @radius-current;
+				width: auto;
 			}
 
 			.button-container svg {
@@ -544,7 +721,9 @@ html:not(.touch) {
 
 			> *:not(svg) {
 				order: 2;
-				width: auto; opacity: 1!important; pointer-events: auto!important;
+				width: auto;
+				opacity: 1!important;
+				pointer-events: auto!important;
 
 				&[data-icon="action[delete]"] {
 					order: 1;
@@ -577,7 +756,9 @@ html:not(.touch) {
 
 #contents {
 	box-sizing: border-box;
-	position: relative; margin-top: @spacing-midlarge; padding: @spacing-mid @spacing-smallish @spacing-large;
+	position: relative;
+	margin-top: @spacing-midlarge;
+	padding: @spacing-mid @spacing-smallish @spacing-large;
 
 	&.spaced-top {
 		padding-top: calc(~'@{spacing-smallish} + @{spacing-midlarge}');
@@ -596,7 +777,9 @@ html:not(.touch) {
 
 		> form,
 		> p {
-			margin-right: 0!important; width: 100%; max-width: @max-width-big;
+			margin-right: 0!important;
+			width: 100%;
+			max-width: @max-width-big;
 		}
 	}
 }
@@ -616,7 +799,8 @@ ul.page {
 	.flex(~'row',~'center',~'center');
 	margin: -3.8rem 0 0;
 	padding: 0 @spacing-smallish;
-	color: @dark-grey; cursor: default;
+	color: @dark-grey;
+	cursor: default;
 
 	a {
 		color: @accent;
@@ -628,7 +812,14 @@ ul.page {
 
 	input {
 		border-radius: @radius-current;
-		color: @dark-grey; font-size: @text-short; text-align: center!important; line-height: 1em; padding: @spacing-smallest @spacing-smallerish; border: 1px solid @lighter-grey; box-shadow: none; outline: none;
+		color: @dark-grey;
+		font-size: @text-short;
+		text-align: center!important;
+		line-height: 1em;
+		padding: @spacing-smallest @spacing-smallerish;
+		border: 1px solid @lighter-grey;
+		box-shadow: none;
+		outline: none;
 	}
 
 	form.invalid input {
@@ -636,7 +827,8 @@ ul.page {
 	}
 
 	li {
-		font-size: @text-current; font-weight: 300;
+		font-size: @text-current;
+		font-weight: 300;
 
 		& + li {
 			margin-left: @spacing-smallerish;
@@ -663,7 +855,12 @@ ul.page {
 }
 
 #version {
-	color: @dark-grey; font-size: @text-shorter; font-weight: 300; text-transform: uppercase; margin-bottom: 0; padding: @spacing-smallerish 0;
+	color: @dark-grey;
+	font-size: @text-shorter;
+	font-weight: 300;
+	text-transform: uppercase;
+	margin-bottom: 0;
+	padding: @spacing-smallerish 0;
 }
 
 .actions #version {
