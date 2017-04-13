@@ -443,7 +443,7 @@ class AdministrationPage extends HTMLPage
         $this->Header = new XMLElement('header', null, array('id' => 'header'));
         $this->Context = new XMLElement('div', null, array('id' => 'context'));
         $this->Breadcrumbs = new XMLElement('div', null, array('id' => 'breadcrumbs'));
-        $this->Contents = new XMLElement('div', null, array('id' => 'contents', 'role' => 'main'));
+        $this->Contents = new XMLElement('div', null, array('id' => 'contents', 'class' => 'centered-content', 'role' => 'main'));
         $this->Form = Widget::Form(Administration::instance()->getCurrentPageURL(), 'post', null, null, array('role' => 'form'));
 
         /**
@@ -922,6 +922,9 @@ class AdministrationPage extends HTMLPage
 
                 $hasChildren = false;
                 $xChildren = new XMLElement('ul', null, array('role' => 'menu'));
+                if(isset($n['class']) && $n['class'] == 'active opened'){
+                    $xChildren->setAttribute('style', 'display: block;');
+                }
 
                 if (is_array($n['children']) && !empty($n['children'])) {
                     foreach ($n['children'] as $c) {
@@ -935,7 +938,12 @@ class AdministrationPage extends HTMLPage
                         if ($this->doesAuthorHaveAccess($child_item_limit)) {
                             $xChild = new XMLElement('li');
                             $xChild->setAttribute('role', 'menuitem');
+
+                            if (isset($c['class'])){
+                               $xChild->setAttribute('class', $c['class']);
+                            }
                             $linkChild = Widget::Anchor(General::sanitize($c['name']), SYMPHONY_URL . $c['link']);
+
                             if (isset($c['target'])) {
                                 $linkChild->setAttribute('target', $c['target']);
                             }
@@ -1362,12 +1370,14 @@ class AdministrationPage extends HTMLPage
     {
         foreach ($nav as $index => $contents) {
             if (is_array($contents['children']) && !empty($contents['children'])) {
-                foreach ($contents['children'] as $item) {
+                foreach ($contents['children'] as $indexC => $item) {
                     if ($pattern && preg_match($pageroot, $item['link'])) {
-                        $nav[$index]['class'] = 'active';
+                        $nav[$index]['class'] = 'active opened';
+                        $nav[$index]['children'][$indexC]['class'] = 'active';
                         return true;
                     } elseif ($item['link'] == $pageroot) {
-                        $nav[$index]['class'] = 'active';
+                        $nav[$index]['class'] = 'active opened';
+                        $nav[$index]['children'][$indexC]['class'] = 'active';
                         return true;
                     }
                 }

@@ -136,38 +136,15 @@
 		// Header Nav
 		_____________________________________________ */
 
-		/* Init - Setup mobile Nav Toggler */
-
-		/*$(o.header).append('<a href="" id="btn-toggle-header-mobile">'+s.burger+'</a>');
-
-		$(o.header).on('click', o.btnMobileNav, function(){
-			$(o.header).toggleClass('opened');
-
-			return false;
-		});*/
-
-		/* Init - Show Subnav if parent active and highlight Subnav page if the case */
-
-		$(o.navEl + '.active').has('ul').each(function(){
-			var t = $(this);
-			t.addClass('opened');
-			$('ul', t).show();
-
-			$('ul > li a', t).each(function(){
-				var t = $(this);
-				if(window.location.href.indexOf(t.attr('href')) !== -1) t.parent().addClass('active');
-			});
-		});
-
 		/* Toggle Subnav on parent click */
 
-		$(o.navEl).has('ul').on('click', '> span', function(){
+		$('li', Symphony.Elements.nav).has('ul').on('click', '> span', function(){
 			var t = $(this);
 
 			// Open
 			if(!t.parent().hasClass('opened')) {
-				$(o.navEl + '.opened ul').slideUp(250);
-				$(o.navEl + '.opened').removeClass('opened');
+				$('.opened ul', Symphony.Elements.nav).slideUp(250);
+				$('.opened', Symphony.Elements.nav).removeClass('opened');
 
 				t.parent().addClass('opened');
 				t.siblings('ul').slideDown(250);
