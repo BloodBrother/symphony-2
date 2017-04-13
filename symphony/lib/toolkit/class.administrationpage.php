@@ -912,7 +912,9 @@ class AdministrationPage extends HTMLPage
             $item_limit = isset($n['limit']) ? $n['limit'] : null;
 
             if ($this->doesAuthorHaveAccess($item_limit)) {
-                $xGroup = new XMLElement('li', General::sanitize($n['name']), array('role' => 'presentation'));
+                $xGroup = new XMLElement('li', null, array('role' => 'presentation'));
+                $xGroupLabel = new XMLElement('span', General::sanitize($n['name']));
+                $xGroup->appendChild($xGroupLabel);
 
                 if (isset($n['class']) && trim($n['name']) !== '') {
                     $xGroup->setAttribute('class', $n['class']);

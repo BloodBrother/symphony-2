@@ -88,6 +88,96 @@
 				$(window).on('load', replaceState);
 			}
 		}
+
+		// Elements
+		var win = $(window);
+		var o = {
+			header: '#header',
+			btnMobileNav: '#btn-toggle-header-mobile',
+			nav: '#nav',
+			navEl: '#nav li',
+			navElFirst: '#nav > ul > li > span',
+			actions: '.page-single #contents .actions, .single #contents .actions, body.entry_relationship.page-index #contents .actions',
+			context: '#context',
+			contextTabs: '#context .tabs li',
+			contextDrawers: '#context > .actions a.button.drawer',
+			contextActions: '#context > .actions a',
+			contextActionsButt: '#context > .actions button',
+			actionButtons: '.page-single #contents .actions .button-container, .single #contents .actions .button-container, body.entry_relationship.page-index #contents .actions .button-container',
+			contents: '#contents',
+			contentsForm: '#contents > form',
+			tabGroup: '.tab-group',
+			secTabGroup: '.secondary.column .tab-group',
+			priTabGroup: '.primary.column .tab-group',
+			columns: '.two.columns',
+			secColumn: '.secondary.column',
+			priColumn: '.primary.column',
+			multiTabsEl: '.field-multilingual ul.tabs li',
+			multiLabel: '.field-multilingual > .container > label',
+			editorEl: '.editor-toolbar a',
+			tableEl: 'table td',
+			dashboard: '#dashboard',
+			dashboardDrawerSelects: '#drawer-dashboard select:not(.disabled)',
+			dashboardDrawerSelectsArrows: '#drawer-dashboard .select2-container .select2-selection--single .select2-selection__arrow',
+			selectArrows: '.select2-container .select2-selection--single .select2-selection__arrow',
+			typeChangerEl: '#custom-toolbar .type-changer a',
+			focusOptionEl: '#custom-toolbar .focus-option a',
+			customToolbar: '#custom-toolbar',
+			dataSourceSource: '#ds-context'
+		};
+
+		/* ////////////////////////////////////////////////////////////////////////////
+		//
+		// Header and Context
+		//
+		/////////////////////////////////////////////////////////////////////////// */
+
+		/*
+		// Header Nav
+		_____________________________________________ */
+
+		/* Init - Setup mobile Nav Toggler */
+
+		/*$(o.header).append('<a href="" id="btn-toggle-header-mobile">'+s.burger+'</a>');
+
+		$(o.header).on('click', o.btnMobileNav, function(){
+			$(o.header).toggleClass('opened');
+
+			return false;
+		});*/
+
+		/* Init - Show Subnav if parent active and highlight Subnav page if the case */
+
+		$(o.navEl + '.active').has('ul').each(function(){
+			var t = $(this);
+			t.addClass('opened');
+			$('ul', t).show();
+
+			$('ul > li a', t).each(function(){
+				var t = $(this);
+				if(window.location.href.indexOf(t.attr('href')) !== -1) t.parent().addClass('active');
+			});
+		});
+
+		/* Toggle Subnav on parent click */
+
+		$(o.navEl).has('ul').on('click', '> span', function(){
+			var t = $(this);
+
+			// Open
+			if(!t.parent().hasClass('opened')) {
+				$(o.navEl + '.opened ul').slideUp(250);
+				$(o.navEl + '.opened').removeClass('opened');
+
+				t.parent().addClass('opened');
+				t.siblings('ul').slideDown(250);
+			}
+			// Close
+			else {
+				t.parent().removeClass('opened');
+				t.siblings('ul').slideUp(250);
+			}
+		});
 	});
 
 })(window.jQuery, window.Symphony);
