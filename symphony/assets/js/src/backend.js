@@ -126,18 +126,7 @@
 			dataSourceSource: '#ds-context'
 		};
 
-		/* ////////////////////////////////////////////////////////////////////////////
-		//
-		// Header and Context
-		//
-		/////////////////////////////////////////////////////////////////////////// */
-
-		/*
-		// Header Nav
-		_____________________________________________ */
-
-		/* Toggle Subnav on parent click */
-
+		// Header Nav - Toggle Subnav on parent click
 		$('li', Symphony.Elements.nav).has('ul').on('click', '> span', function(){
 			var t = $(this);
 
