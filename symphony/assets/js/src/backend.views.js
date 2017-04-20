@@ -20,7 +20,7 @@ Symphony.View.add('/:context*:', function() {
 	Symphony.Elements.wrapper.find('.filters-duplicator[data-interactive]').symphonyDuplicator();
 	Symphony.Elements.wrapper.find('.tags[data-interactive]').symphonyTags();
 	Symphony.Elements.wrapper.find('div.drawer').symphonyDrawer();
-	Symphony.Elements.header.symphonyNotify();
+	Symphony.Elements.wrapper.symphonyNotify();
 
 	// Fix for Webkit browsers to initially show the options. #2127
 	$('select[multiple=multiple]').scrollTop(0);
@@ -57,7 +57,7 @@ Symphony.View.add('/:context*:', function() {
 
 	// Notifier sizing
 	Symphony.Elements.window.on('resize.admin', function() {
-		Symphony.Elements.header.find('.notifier').trigger('resize.notify');
+		Symphony.Elements.wrapper.find('.notifier').trigger('resize.notify');
 	});
 
 	// Table sizing
@@ -499,7 +499,7 @@ Symphony.View.add('/blueprints/sections/:action:/:id:/:status:', function(action
 	duplicator.on('change.admin', '.instance select[name*="[pre_populate_source]"]', function() {
 		var selected = $(this).val(),
 			show = false;
-		
+
 		if(selected) {
 			selected = jQuery.grep(selected, function(value) {
 				return value != 'existing';
@@ -521,7 +521,7 @@ Symphony.View.add('/blueprints/sections/:action:/:id:/:status:', function(action
 			id = new Date().getTime();
 
 		// Offer undo option after removing a field
-		Symphony.Elements.header.find('div.notifier').trigger('attach.notify', [
+		Symphony.Elements.wrapper.find('div.notifier').trigger('attach.notify', [
 			Symphony.Language.get('The field “{$title}” ({$type}) has been removed.', {
 				title: title,
 				type: type
