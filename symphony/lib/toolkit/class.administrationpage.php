@@ -853,7 +853,7 @@ class AdministrationPage extends HTMLPage
         $this->Alert = array_reverse($this->Alert);
 
         foreach ($this->Alert as $alert) {
-            $this->Header->prependChild($alert->asXML());
+            $this->Wrapper->appendChild($alert->asXML());
         }
     }
 
@@ -917,8 +917,18 @@ class AdministrationPage extends HTMLPage
 
             if ($this->doesAuthorHaveAccess($item_limit)) {
                 $xGroup = new XMLElement('li', null, array('role' => 'presentation'));
-                if(is_array($n['children']) && !empty($n['children'])) $xGroupLabel = new XMLElement('span', General::sanitize($n['name']).Widget::SVGIcon('chevron'));
-                else $xGroupLabel = new XMLElement('span', General::sanitize($n['name']));
+                if (is_array($n['children']) && !empty($n['children'])){
+                    $xGroupLabel = new XMLElement(
+                        'span',
+                        General::sanitize($n['name']).Widget::SVGIcon('chevron')
+                    );
+                }
+                else {
+                    $xGroupLabel = new XMLElement(
+                        'span',
+                        General::sanitize($n['name'])
+                    );
+                }
 
                 $xGroup->appendChild($xGroupLabel);
 
