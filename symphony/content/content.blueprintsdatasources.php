@@ -260,7 +260,7 @@ class contentBlueprintsDatasources extends ResourcesPage
             }
         }
 
-        $label->appendChild(Widget::Select('fields[source]', $options));
+        $label->appendChild(Widget::Select('fields[source]', $options, array('id' => 'ds-context')));
         $group->appendChild($label);
 
         // Name
@@ -1002,23 +1002,20 @@ class contentBlueprintsDatasources extends ResourcesPage
 
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-        $divW = new XMLElement('div', Widget::SVGIcon('save'));
-        $divW->setAttribute('class', 'button-container');
-        $divW->appendChild(Widget::Input(
-            'action[save]',
-            ($isEditing ? __('Save Changes') : __('Create Data Source')),
-            'submit',
-            array('accesskey' => 's')
+        $div->appendChild(Widget::SVGIconContainer(
+            'save',
+            Widget::Input(
+                'action[save]',
+                ($isEditing ? __('Save Changes') : __('Create Data Source')),
+                'submit',
+                array('accesskey' => 's')
+            )
         ));
-        $div->appendChild($divW);
 
         if ($isEditing) {
-            $buttonW = new XMLElement('div', Widget::SVGIcon('delete'));
-            $buttonW->setAttribute('class', 'button-container');
             $button = new XMLElement('button', __('Delete'));
             $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this data source'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this data source?')));
-            $buttonW->appendChild($button);
-            $div->appendChild($buttonW);
+            $div->appendChild(Widget::SVGIconContainer('delete', $button));
         }
 
         $div->appendChild(Widget::SVGIcon('chevron'));
