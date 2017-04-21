@@ -46,7 +46,7 @@ class contentSystemPreferences extends AdministrationPage
             $group = new XMLElement('fieldset');
             $group->setAttribute('class', 'settings');
             $group->appendChild(new XMLElement('legend', __('System Language')));
-            $label = Widget::Label();
+            $label = Widget::Label(__('Language'));
 
             // Get language names
             asort($languages);

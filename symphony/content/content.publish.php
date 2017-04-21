@@ -527,7 +527,7 @@ class contentPublish extends AdministrationPage
 
         // Only show the Edit Section button if the Author is a developer. #938 ^BA
         if (Symphony::Author()->isDeveloper()) {
-            array_unshift(
+            array_push(
                 $subheading_buttons,
                 Widget::Anchor(
                     Widget::SVGIcon('edit') . '<span><span>' . __('Edit Section') . '</span></span>',
@@ -1222,7 +1222,7 @@ class contentPublish extends AdministrationPage
             }
 
             $this->Header->setAttribute('class', 'spaced-bottom');
-        $this->Context->setAttribute('class', 'spaced-right');
+            $this->Context->setAttribute('class', 'spaced-right');
             $div = new XMLElement('div');
             $div->setAttribute('class', 'actions');
             $div->appendChild(

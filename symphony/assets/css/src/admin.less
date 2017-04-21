@@ -48,30 +48,55 @@
 	}
 
 	h1 {
-		.flex(~'column', ~'flex-start', ~'center');
 		order: 1;
 		flex-shrink: 0;
-		box-sizing: border-box;
+		overflow: hidden;
 		position: relative;
 		top: 0;
 		left: 0;
 		font-size: @text-current;
-		padding: 0 @spacing-smallish!important;
+		padding: 0!important;
 		border-bottom: 1px solid @lighter-grey;
 		height: @spacing-midlarge!important;
 
 		a {
-			display: block;
+			.flex(~'row', ~'center', ~'flex-start');
+			box-sizing: border-box;
 			position: absolute;
 			left: 0;
 			top: 0;
-			color: @accent;
+			color: @white;
+			font-size: @text-bigger;
 			font-weight: 300;
-			text-indent: -5000px;
-			background-position: 0 0!important;
-			background-size: auto 100%!important;
+			padding: 0 @spacing-smallish!important;
 			width: 100%!important;
 			height: 100%!important;
+
+			@media (max-width: (@sm - 1)){
+				font-size: @text-big;
+			}
+
+			svg {
+				margin-right: @spacing-smallerish;
+			}
+		}
+
+		&:before {
+			content: '';
+			border-radius: 100%;
+			transform: translate(-@spacing-smallish, @spacing-midlarge);
+			display: block;
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			background: @accent;
+			width: 34rem;
+			height: 34rem;
+
+			@media (max-width: (@sm - 1)){
+				border-radius: 0px;
+				transform: none;
+			}
 		}
 	}
 
@@ -394,7 +419,6 @@ body.publish-tabs #custom-toolbar {
 		flex-grow: 1;
 		order: 3;
 		margin: 0;
-		padding: 0 @spacing-smallish;
 		max-width: 50%;
 
 		@media (max-width: (@xs - 1)){
@@ -402,13 +426,14 @@ body.publish-tabs #custom-toolbar {
 		}
 
 		a, button {
+			border-radius: 0px;
 			.flex(~'row', ~'center', ~'flex-start');
 			color: @dark-grey;
 			font-size: @text-shorter;
 			text-transform: uppercase;
 			line-height: @spacing-midlarge;
 			margin: 0;
-			padding: 0;
+			padding: 0 @spacing-smallerish;
 			background: none;
 			white-space: nowrap;
 
@@ -454,9 +479,21 @@ body.publish-tabs #custom-toolbar {
 			flex-shrink: 1;
 			margin-left: 0!important;
 
-			& + li a,
-			& + li button {
-				padding-left: @spacing-smallish;
+			&:last-child a,
+			&:last-child button {
+				padding-right: @spacing-smallish;
+
+				&.create {
+					box-sizing: border-box;
+					color: @white;
+					margin-left: @spacing-smallerish;
+					background: @accent;
+					width: @spacing-larger;
+
+					&:hover {
+						background: @darker-grey;
+					}
+				}
 			}
 
 			.edit-mode {
@@ -590,6 +627,10 @@ body.publish-tabs #custom-toolbar {
 			max-width: @spacing-smaller;
 			max-height: @spacing-smaller;
 			pointer-events: none;
+		}
+
+		&:first-child + svg {
+			display: none;
 		}
 	}
 
