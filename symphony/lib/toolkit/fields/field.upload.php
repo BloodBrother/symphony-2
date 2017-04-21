@@ -300,7 +300,19 @@ class FieldUpload extends Field implements ExportableField, ImportableField
                 $flagWithError = __('The file uploaded is no longer available. Please check that it exists, and is readable.');
             }
 
-            $span->appendChild(new XMLElement('span', Widget::Anchor(preg_replace("![^a-z0-9]+!i", "$0&#8203;", $filename), URL . $filename)));
+            $span->appendChild(
+                new XMLElement(
+                    'span',
+                    Widget::Anchor(
+                        preg_replace("![^a-z0-9]+!i","$0&#8203;", $filename),
+                        URL . $filename,
+                        null,
+                        null,
+                        null,
+                        array('target' => '_blank')
+                    )
+                )
+            );
         } else {
             $filename = null;
         }
@@ -634,16 +646,18 @@ class FieldUpload extends Field implements ExportableField, ImportableField
         if ($link) {
             $link->setValue(basename($file));
             $link->setAttribute('data-path', $this->get('destination'));
+            $link->setAttribute('target', '_blank');
 
             return $link->generate();
         } else {
             $link = Widget::Anchor(basename($file), URL . $this->get('destination') . '/' . $file);
             $link->setAttribute('data-path', $this->get('destination'));
+            $link->setAttribute('target', '_blank');
 
             return $link->generate();
         }
     }
-    
+
     public function prepareTextValue($data, $entry_id = null)
     {
         if (isset($data['file'])) {

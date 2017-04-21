@@ -326,6 +326,8 @@ class AdministrationPage extends HTMLPage
      *  to the interface. Accepts 'prepend' or 'append' values, which will
      *  add the button before or after existing buttons. Defaults to `prepend`.
      *  If any other value is passed, no button will be added.
+     * @param string $icon
+     *  An SVGIcon to put in the button
      * @throws InvalidArgumentException
      */
     public function insertDrawer(XMLElement $drawer, $position = 'horizontal', $button = 'append', $icon = '')
