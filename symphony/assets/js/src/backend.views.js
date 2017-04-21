@@ -33,23 +33,6 @@ Symphony.View.add('/:context*:', function() {
 		Symphony.Interface.Suggestions.init($(this), 'input[type="text"]');
 	});
 
-	// Navigation sizing
-	Symphony.Elements.window.on('resize.admin nav.admin', function() {
-		var content = Symphony.Elements.nav.find('ul.content'),
-			structure = Symphony.Elements.nav.find('ul.structure'),
-			width = content.width() + structure.width() + 20;
-
-		// Compact mode
-		if(width > window.innerWidth) {
-			Symphony.Elements.nav.removeClass('wide');
-		}
-
-		// Wide mode
-		else {
-			Symphony.Elements.nav.addClass('wide');
-		}
-	}).trigger('nav.admin');
-
 	// Accessible navigation
 	Symphony.Elements.nav.on('focus.admin blur.admin', 'a', function() {
 		$(this).parents('li').eq(1).toggleClass('current');
@@ -59,19 +42,6 @@ Symphony.View.add('/:context*:', function() {
 	Symphony.Elements.window.on('resize.admin', function() {
 		Symphony.Elements.wrapper.find('.notifier').trigger('resize.notify');
 	});
-
-	// Table sizing
-	Symphony.Elements.window.on('resize.admin table.admin', function() {
-		var table = Symphony.Elements.contents.find('table:first');
-
-		// Fix table size, if width exceeds the visibile viewport area.
-		if(table.width() > Symphony.Elements.html.width()){
-			table.addClass('fixed');
-		}
-		else {
-			table.removeClass('fixed');
-		}
-	}).trigger('table.admin');
 
 	// Orderable tables
 	var oldSorting = null,

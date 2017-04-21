@@ -19,15 +19,12 @@ table {
 	text-align: left;
 	border: 1px solid @lighter-grey;
 	width: 100%;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	table-layout: fixed;
 
 	label {
 		margin-bottom: 0!important;
-	}
-
-	&.fixed {
-		overflow-wrap: break-word;
-		word-wrap: break-word;
-		table-layout: fixed;
 	}
 
 	@media (max-width: (@sm - 1)){
@@ -70,6 +67,8 @@ table {
 }
 
 th {
+	overflow: hidden;
+	text-overflow: ellipsis;
 	color: @dark-grey;
 	font-size: @text-shorter;
 	font-weight: 300;
@@ -78,6 +77,17 @@ th {
 	line-height: 1.4em;
 	padding: @spacing-smallerish @spacing-smallish;
 	background: transparent;
+	white-space: nowrap;
+
+	a {
+		.flex(~'row',~'center',~'flex-start');
+
+		span {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
 
 	a,
 	a:hover,
