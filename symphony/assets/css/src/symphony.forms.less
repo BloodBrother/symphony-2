@@ -61,6 +61,7 @@ textarea[readonly="readonly"] {
 
 textarea {
 	line-height: 1.8rem;
+	resize: vertical;
 }
 
 input[type='radio'],
@@ -91,6 +92,10 @@ input[size] {
 optgroup {
 	font-weight: bold;
 	font-style: normal;
+}
+
+input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
+	height: 0.4rem + @text-short + @spacing-smallest * 2;
 }
 
 select {
@@ -213,7 +218,7 @@ button,
 	color: @white;
 	font-size: @text-shorter;
 	text-transform: uppercase;
-	line-height: @text-short;
+	line-height: 1.6rem;
 	margin-left: 1rem;
 	padding: @spacing-smallest @spacing-smallest;
 	border: none;
@@ -323,7 +328,7 @@ legend {
 		font-style: normal;
 		font-weight: 300;
 		text-transform: uppercase;
-		line-height: 1em;
+		line-height: 1.6em;
 		margin-bottom: @spacing-smallest;
 		padding: @spacing-micro @spacing-smallest;
 		background: @accent;
@@ -372,10 +377,9 @@ legend {
 		font-size: @text-shorter;
 		font-weight: 300;
 		text-transform: uppercase;
-		line-height: @text-short;
+		line-height: 1.6rem;
 		margin: 0;
 		padding: @spacing-smallest @spacing-smallerish;
-		border: 2px solid @accent;
 		background: @accent;
 	}
 
