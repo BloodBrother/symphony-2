@@ -136,25 +136,60 @@ class contentSystemExtensions extends AdministrationPage
                 $tdLinks = array();
 
                 if ($about['github'] != '') {
-                    $tdLinks['github'] = Widget::Anchor(__('GitHub'), General::validateURL($about['github']))->generate();
+                    $tdLinks['github'] = Widget::Anchor(
+                        __('GitHub'),
+                        General::validateURL($about['github']),
+                        null,
+                        null,
+                        null,
+                        array('target' => '_blank')
+                    )->generate();
                 }
 
                 if ($about['discuss'] != '') {
-                    $tdLinks['discuss'] = Widget::Anchor(__('Discuss'), General::validateURL($about['discuss']))->generate();
+                    $tdLinks['discuss'] = Widget::Anchor(
+                        __('Discuss'),
+                        General::validateURL($about['discuss']),
+                        null,
+                        null,
+                        null,
+                        array('target' => '_blank')
+                    )->generate();
                     // Update links to point to our 'new' domain, RE: #1995
                     $tdLinks['discuss'] = str_replace('symphony-cms.com', 'getsymphony.com', $tdLinks['discuss']);
                 }
 
                 if ($about['homepage'] != '') {
-                    $tdLinks['homepage'] = Widget::Anchor(__('Homepage'), General::validateURL($about['homepage']))->generate();
+                    $tdLinks['homepage'] = Widget::Anchor(
+                        __('Homepage'),
+                        General::validateURL($about['homepage']),
+                        null,
+                        null,
+                        null,
+                        array('target' => '_blank')
+                    )->generate();
                 }
 
                 if ($about['wiki'] != '') {
-                    $tdLinks['wiki'] = Widget::Anchor(__('Wiki'), General::validateURL($about['wiki']))->generate();
+                    $tdLinks['wiki'] = Widget::Anchor(
+                        __('Wiki'),
+                        General::validateURL($about['wiki']),
+                        null,
+                        null,
+                        null,
+                        array('target' => '_blank')
+                    )->generate();
                 }
 
                 if ($about['issues'] != '') {
-                    $tdLinks['issues'] = Widget::Anchor(__('Issues'), General::validateURL($about['issues']))->generate();
+                    $tdLinks['issues'] = Widget::Anchor(
+                        __('Issues'),
+                        General::validateURL($about['issues']),
+                        null,
+                        null,
+                        null,
+                        array('target' => '_blank')
+                    )->generate();
                 }
 
                 $td4 = Widget::TableData($tdLinks);
@@ -169,11 +204,32 @@ class contentSystemExtensions extends AdministrationPage
 
                 foreach ($about['author'] as $author) {
                     if (isset($author['website'])) {
-                        $tdAuthors[] = Widget::Anchor($author['name'], General::validateURL($author['website']))->generate();
+                        $tdAuthors[] = Widget::Anchor(
+                            $author['name'],
+                            General::validateURL($author['website']),
+                            null,
+                            null,
+                            null,
+                            array('target' => '_blank')
+                        )->generate();
                     } elseif (isset($author['github'])) {
-                        $tdAuthors[] = Widget::Anchor($author['name'], General::validateURL('https://github.com/' . $author['github']))->generate();
+                        $tdAuthors[] = Widget::Anchor(
+                            $author['name'],
+                            General::validateURL('https://github.com/' . $author['github']),
+                            null,
+                            null,
+                            null,
+                            array('target' => '_blank')
+                        )->generate();
                     } elseif (isset($author['email'])) {
-                        $tdAuthors[] = Widget::Anchor($author['name'], 'mailto:' . $author['email'])->generate();
+                        $tdAuthors[] = Widget::Anchor(
+                            $author['name'],
+                            'mailto:' . $author['email'],
+                            null,
+                            null,
+                            null,
+                            array('target' => '_blank')
+                        )->generate();
                     } else {
                         $tdAuthors[] = $author['name'];
                     }

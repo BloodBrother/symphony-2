@@ -634,6 +634,14 @@ fieldset.settings {
 		width: @spacing-huge - @spacing-smallish;
 		width: 17rem;
 
+		@media (max-width: (@md - 1)){
+			position: relative;
+			color: @accent;
+			font-size: @text-current;
+			margin: -@spacing-smallish 0 @spacing-smallish;
+			width: auto;
+		}
+
 		p {
 			margin: 0 0 @spacing-smaller;
 		}
