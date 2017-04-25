@@ -52,7 +52,7 @@
 			var itemSettings = $.extend({}, settings);
 			var item = $(this);
 			var updateItemSettings = function () {
-				itemSettings.top = itemSettings.container.offset().top;
+				itemSettings.top = itemSettings.container.offset().top - parseFloat(itemSettings.container.css('margin-top')) - Symphony.Elements.context.height() + parseFloat(item.css('margin-top'));
 				itemSettings.freespace = itemSettings.container.height();
 				itemSettings.bottom = itemSettings.top + itemSettings.freespace;
 				itemSettings.height = item.height();
