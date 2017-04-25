@@ -278,10 +278,17 @@
 				var item = $(this);
 				var heightMin = item.data('heightMin');
 				var heightMax = item.data('heightMax');
-				item.css({
-					'min-height': heightMin,
-					'max-height': heightMax
-				});
+				if(!item.hasClass('collapsed')){
+					item.css({
+						'min-height': heightMin,
+						'max-height': heightMax
+					});
+				} else {
+					item.css({
+						'min-height': heightMin,
+						'max-height': heightMin
+					});
+				}
 			});
 
 		/*---------------------------------------------------------------------
@@ -298,6 +305,16 @@
 
 			// Restore states
 			object.trigger('restore.collapsible');
+
+			// Update on Resize
+			Symphony.Elements.window.on('resize', function(){
+				object.find(settings.items).each(function() {
+					var item = $(this);
+					item.addClass('instance');
+					item.trigger('updatesize.collapsible');
+					item.trigger('setsize.collapsible');
+				});
+			});
 		});
 
 	/*-----------------------------------------------------------------------*/
