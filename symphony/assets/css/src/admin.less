@@ -226,14 +226,14 @@
 
 #session {
 	position: relative;
-	padding: 0 0 @spacing-smallish;
+	padding: 0 0 @spacing-smallerish;
 
 	ul {
 		font-size: @text-short;
 		font-weight: 300;
 		text-align: center;
 		line-height: 1.4em;
-		margin: 0 0 @spacing-smallest;
+		margin: 0;
 
 		a {
 			color: @dark-grey;
@@ -264,7 +264,7 @@
 	text-transform: uppercase;
 	text-align: center;
 	margin-bottom: 0;
-	padding: @spacing-smallest 0 0;
+	padding: @spacing-smallerish 0 0;
 }
 
 /* Custom Toolbar */
@@ -420,7 +420,7 @@ body.publish-tabs #custom-toolbar {
 		.flex(~'row', ~'center', ~'flex-end');
 		flex-grow: 1;
 		order: 3;
-		margin: 0;
+		margin: 0 @spacing-smallerish 0 0;
 		max-width: 50%;
 
 		@media (max-width: (@xs - 1)){
@@ -479,21 +479,25 @@ body.publish-tabs #custom-toolbar {
 
 		li {
 			flex-shrink: 1;
-			margin-left: 0!important;
 
-			&:last-child a,
-			&:last-child button {
-				padding-right: @spacing-smallish;
+			&.featured {
+				order: 99;
+				margin-right: -@spacing-smallerish;
 
-				&.create {
-					box-sizing: border-box;
-					color: @white;
-					margin-left: @spacing-smallerish;
-					background: @accent;
-					width: @spacing-larger;
+				a,
+				button {
+					padding-right: @spacing-smallish;
 
-					&:hover {
-						background: @darker-grey;
+					&.create {
+						box-sizing: border-box;
+						color: @white;
+						margin-left: @spacing-smallerish;
+						background: @accent;
+						width: @spacing-larger;
+
+						&:hover {
+							background: @darker-grey;
+						}
 					}
 				}
 			}

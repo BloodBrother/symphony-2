@@ -273,6 +273,9 @@ class AdministrationPage extends HTMLPage
         }
 
         $li = new XMLElement('li', $action);
+        if ($action->getAttribute('class') === 'create button') {
+            $li->setAttribute('class', 'featured');
+        }
 
         if ($append) {
             $ul->appendChild($li);
