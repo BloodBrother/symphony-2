@@ -37,6 +37,13 @@ class AdministrationPage extends HTMLPage
     public $Header = null;
 
     /**
+     * A `<div>` that contains the session info of a Symphony backend page, which
+     * typically contains the Username and Version..
+     * @var XMLElement
+     */
+    public $Session = null;
+
+    /**
      * A `<div>` that contains the breadcrumbs, the page title and some contextual
      * actions (e.g. "Create new").
      * @since Symphony 2.3
@@ -442,6 +449,7 @@ class AdministrationPage extends HTMLPage
         // Initialise page containers
         $this->Wrapper = new XMLElement('div', null, array('id' => 'wrapper'));
         $this->Header = new XMLElement('header', null, array('id' => 'header'));
+        $this->Session = new XMLElement('div', null, array('id' => 'session'));
         $this->Context = new XMLElement('div', null, array('id' => 'context'));
         $this->Breadcrumbs = new XMLElement('div', null, array('id' => 'breadcrumbs'));
         $this->Contents = new XMLElement('div', null, array('id' => 'contents', 'class' => 'centered-content', 'role' => 'main'));
@@ -513,10 +521,12 @@ class AdministrationPage extends HTMLPage
                 'id' => 'version'
             )
         );
-        $this->Header->appendChild($version);
 
         $this->appendUserLinks();
         $this->appendNavigation();
+
+        $this->Session->appendChild($version);
+        $this->Header->appendChild($this->Session);
 
         // Add Breadcrumbs
         $this->Context->prependChild($this->Breadcrumbs);
@@ -1403,6 +1413,11 @@ class AdministrationPage extends HTMLPage
      */
     private static function __findActiveNavigationGroup(array &$nav, $pageroot, $pattern = false)
     {
+        // Take Anti Brute Force in Consideration
+        if(isset($_GET['list']) && $_GET['list'] !== ''){
+            $pageroot .= '?list='.$_GET['list'];
+        }
+
         foreach ($nav as $index => &$contents) {
             if (is_array($contents['children']) && !empty($contents['children'])) {
                 foreach ($contents['children'] as $indexC => &$item) {
@@ -1431,7 +1446,7 @@ class AdministrationPage extends HTMLPage
      */
     public function appendUserLinks()
     {
-        $ul = new XMLElement('ul', null, array('id' => 'session'));
+        $ul = new XMLElement('ul', null);
 
         $li = new XMLElement('li');
         $li->appendChild(
@@ -1446,7 +1461,7 @@ class AdministrationPage extends HTMLPage
         $li->appendChild(Widget::Anchor(__('Log out'), SYMPHONY_URL . '/logout/', null, null, null, array('accesskey' => 'l')));
         $ul->appendChild($li);
 
-        $this->Header->appendChild($ul);
+        $this->Session->appendChild($ul);
     }
 
     /**

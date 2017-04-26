@@ -225,26 +225,31 @@
 /* Session */
 
 #session {
-	font-size: @text-short;
-	font-weight: 300;
-	text-align: center;
-	line-height: 1.4em;
-	margin: 0 0 @spacing-small!important;
+	position: relative;
+	padding: 0 0 @spacing-smallish;
 
-	a {
-		color: @dark-grey;
-		line-height: @spacing-smallerish;
+	ul {
+		font-size: @text-short;
+		font-weight: 300;
+		text-align: center;
+		line-height: 1.4em;
+		margin: 0 0 @spacing-smallest;
 
-		&:hover {
-			color: @darker-grey;
+		a {
+			color: @dark-grey;
+			line-height: @spacing-smallerish;
+
+			&:hover {
+				color: @darker-grey;
+			}
 		}
-	}
 
-	li:first-child a {
-		color: @accent;
+		li:first-child a {
+			color: @accent;
 
-		&:hover {
-			color: @darker-grey;
+			&:hover {
+				color: @darker-grey;
+			}
 		}
 	}
 }
@@ -252,17 +257,14 @@
 /* Version */
 
 #version {
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	position: relative;
 	color: @grey;
 	font-size: @text-shorter;
 	font-weight: 300;
 	text-transform: uppercase;
 	text-align: center;
 	margin-bottom: 0;
-	padding: @spacing-smallest 0;
+	padding: @spacing-smallest 0 0;
 }
 
 /* Custom Toolbar */
