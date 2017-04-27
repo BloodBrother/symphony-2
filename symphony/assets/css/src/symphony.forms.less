@@ -490,7 +490,7 @@ ul.tags {
 
 	i {
 		position: absolute;
-		top: 100%;
+		top: calc(~'100% - @{spacing-smallish}');
 		right: 0;
 		font-size: @text-shorter;
 		font-weight: 300;
@@ -564,7 +564,8 @@ fieldset {
 	input[type=submit],
 	button,
 	.button {
-		margin-right: 1rem;
+		margin-right: @spacing-smallest;
+		margin-bottom: @spacing-smallest;
 		margin-left: 0;
 	}
 }

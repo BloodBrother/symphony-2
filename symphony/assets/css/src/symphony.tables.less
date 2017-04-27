@@ -203,7 +203,17 @@ tr[class*=status-] a:first-of-type::after {
 	color: @grey;
 }
 
-/*table.busy td {
+/*
+
+tr.status-notice td:first-child {
+	color: @blue;
+}
+
+tr.status-ok td:first-child {
+	color: #90c648;
+}
+
+table.busy td {
 	border-top: 1px solid @lighter-grey;
 	border-bottom: 1px solid @lighter-grey;
 	background-color: @white;
