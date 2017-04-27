@@ -750,10 +750,10 @@ class contentPublish extends AdministrationPage
                                 'inactive field-' . $column->get('type') . ' field-' . $column->get('id'),
                                 null,
                                 null,
-                                array('data-title' => $columns[$position - 1]['label'])
+                                array('data-title' => $column->get('label'))
                             );
                         } else {
-                            $tableData[] = Widget::TableData($value, 'field-' . $column->get('type') . ' field-' . $column->get('id'), null, null, array('data-title' => $columns[$position - 1]['label']));
+                            $tableData[] = Widget::TableData($value, 'field-' . $column->get('type') . ' field-' . $column->get('id'), null, null, array('data-title' => $column->get('label')));
                         }
 
                         unset($field);
