@@ -464,11 +464,11 @@ body.publish-tabs #custom-toolbar {
 		button {
 			display: block;
 			position: relative;
-			padding-left: @spacing-smallish;
+			padding-left: @spacing-smallerish + @spacing-smaller;
 
 			svg {
 				position: absolute;
-				left: 0;
+				left: @spacing-smallerish;
 				top: 50%;
 				margin-top: -@spacing-smallest;
 			}
@@ -744,6 +744,19 @@ body.page-single #contents .actions {
 	}
 }
 
+body.index #contents .actions {
+	position: relative;
+
+	&:after {
+		content: '';
+		clear: both;
+		display: block;
+		position: relative;
+		width: 100%;
+		height: 1px;
+	}
+}
+
 /*--------------------------------------------------------------------------
 	Contents
 --------------------------------------------------------------------------*/
@@ -796,7 +809,7 @@ body#extension-documenter-edit #contents.centered-content {
 
 ul.page {
 	.flex(~'row',~'center',~'center');
-	margin: -3.8rem 0 0;
+	margin: @spacing-smallish 0 0;
 	padding: 0 @spacing-smallish;
 	color: @dark-grey;
 	cursor: default;

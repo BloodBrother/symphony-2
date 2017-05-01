@@ -949,7 +949,8 @@ class AdministrationPage extends HTMLPage
 
             if ($this->doesAuthorHaveAccess($item_limit)) {
                 $xGroup = new XMLElement('li', null, array('role' => 'presentation'));
-                if (is_array($n['children']) && !empty($n['children'])){
+
+                if (is_array($n['children']) && count($n['children']) > 1){
                     $xGroupLabel = new XMLElement(
                         'span',
                         General::sanitize($n['name']).Widget::SVGIcon('chevron')
