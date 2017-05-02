@@ -422,8 +422,8 @@ class contentSystemAuthors extends AdministrationPage
         $fieldset = new XMLElement('fieldset', null, array('class' => 'two columns', 'id' => 'password'));
         $legend = new XMLElement('legend', __('Password'));
         $help = new XMLElement('i', __('Leave password fields blank to keep the current password'));
+        $legend->appendChild($help);
         $fieldset->appendChild($legend);
-        $fieldset->appendChild($help);
 
         /*
             Password reset rules:
