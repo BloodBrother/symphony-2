@@ -292,15 +292,39 @@ label:last-child {
 }
 
 label > i,
-p.label > i {
-	position: absolute;
+p.label > i,
+#password legend i {
+	/*position: absolute;
 	top: 100%;
 	right: 0;
 	color: @dark-grey;
 	font-size: @text-shorter;
 	font-weight: 300;
 	text-transform: none;
-	margin-top: 2px;
+	margin-top: 2px;*/
+	display: inline-block;
+	color: @grey;
+	font-size: @text-shorter;
+	font-weight: 300;
+	text-transform: none;
+	padding-left: @spacing-micro;
+
+	&:before {
+		content: '(';
+	}
+
+	&:after {
+		content: ')';
+	}
+}
+
+.field-checkbox:not(.instance) label,
+.field-uniquecheckbox:not(.instance) label {
+	.flex(~'row', ~'center', ~'flex-start');
+
+	> i {
+		order: 99;
+	}
 }
 
 label.inline-help > i {
@@ -491,14 +515,14 @@ ul.tags {
 		padding: 0!important;
 	}
 
-	i {
+	/*i {
 		position: absolute;
 		top: calc(~'100% - @{spacing-smallish}');
 		right: 0;
 		font-size: @text-shorter;
 		font-weight: 300;
 		margin-top: @spacing-nano;
-	}
+	}*/
 
 	.column {
 		float: left;
