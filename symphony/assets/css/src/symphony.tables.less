@@ -213,85 +213,17 @@ tr.ordering a {
 }
 
 /*-----------------------------------------------------------------------------
-	Misc
+	Status
 -----------------------------------------------------------------------------*/
 
-tr[class*=status-] a:first-of-type::after {
-	.transitioned(~'color');
-	content: attr(data-status);
-	color: @grey;
+tr.status-ok:not(.selected) td:first-child {
+	color: @accent;
 }
 
-/*
-
-tr.status-notice td:first-child {
-	color: @blue;
+tr.status-notice:not(.selected) td:first-child {
+	color: @yellow;
 }
 
-tr.status-ok td:first-child {
-	color: #90c648;
+tr.status-error:not(.selected) td:first-child {
+	color: @red;
 }
-
-table.busy td {
-	border-top: 1px solid @lighter-grey;
-	border-bottom: 1px solid @lighter-grey;
-	background-color: @white;
-}
-
-table.busy tr:nth-child(odd) td {
-	border-top: 1px solid @lighter-grey;
-	border-bottom: 1px solid @lighter-grey;
-	background-color: @lightest-grey;
-}
-
-table.busy a {
-	color: @blue;
-}
-
-table + fieldset {
-	margin-top: @spacing-mid !important;
-}
-
-td img {
-	vertical-align: middle;
-}*/
-
-/*tr[class*=status-] {
-	border-left-width: 0.8rem;
-	border-left-style: solid;
-}
-
-tr.status-notice {
-	border-left-color: #f9ba4b;
-}
-
-tr.status-ok {
-	border-left-color: #90c648;
-}
-
-tr.status-error {
-	border-left-color: #c4301e;
-}
-
-tr[class*=status-].selected {
-	border-left-color: #4967a1;
-}
-
-tr[class*=status-] td:first-of-type {
-	padding-left: 1.5rem;
-}*/
-
-/*tr[class*=status-]:nth-child(even) a:first-of-type::after,
-tr[class*=status-]:nth-child(even):hover a:first-of-type::after {
-	border-bottom-color: @white;
-}
-
-tr[class*=status-]:hover a:first-of-type::after {
-	color: @grey;
-}
-
-tr.selected {
-	&[class*=status-]:hover a:first-of-type::after {
-		color: @white;
-	}
-}*/
