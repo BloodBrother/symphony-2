@@ -2146,7 +2146,7 @@ class contentPublish extends AdministrationPage
         }
 
         $drawer = Widget::Drawer('section-associations', __('Show Associations'), $content);
-        $this->insertDrawer($drawer, $drawer_position, 'prepend');
+        $this->insertDrawer($drawer, $drawer_position, 'prepend', Widget::SVGIcon('associations'));
     }
 
     /**
