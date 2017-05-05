@@ -421,8 +421,7 @@ class contentSystemAuthors extends AdministrationPage
         // Password
         $fieldset = new XMLElement('fieldset', null, array('class' => 'two columns', 'id' => 'password'));
         $legend = new XMLElement('legend', __('Password'));
-        $help = new XMLElement('i', __('Leave password fields blank to keep the current password'));
-        $legend->appendChild($help);
+        $help = new XMLElement('p', __('Leave password fields blank to keep the current password'), array('class' => 'help'));
         $fieldset->appendChild($legend);
 
         /*
@@ -459,6 +458,7 @@ class contentSystemAuthors extends AdministrationPage
         // Confirm password
         $label = Widget::Label(null, null, 'column');
         $label->appendChild(Widget::Input('fields[password-confirmation]', null, 'password', array('placeholder' => __('Confirm Password'), 'autocomplete' => 'off')));
+        $label->appendChild($help);
         $fieldset->appendChild((isset($this->_errors['password-confirmation']) ? Widget::Error($label, $this->_errors['password']) : $label));
 
         $group->appendChild($fieldset);

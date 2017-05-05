@@ -294,15 +294,7 @@ label:last-child {
 label > i,
 p.label > i,
 #password legend i {
-	/*position: absolute;
-	top: 100%;
-	right: 0;
-	color: @dark-grey;
-	font-size: @text-shorter;
-	font-weight: 300;
-	text-transform: none;
-	margin-top: 2px;*/
-	display: inline-block;
+	display: inline;
 	color: @grey;
 	font-size: @text-shorter;
 	font-weight: 300;
@@ -628,6 +620,18 @@ fieldset.settings {
 		}
 	}
 
+	span.frame {
+		margin: 0;
+
+		& + span.frame {
+			margin-top: @spacing-smallest;
+		}
+
+		& + p.help {
+			margin-top: @spacing-micro;
+		}
+	}
+
 	> p a {
 		color: @accent;
 
@@ -641,7 +645,7 @@ fieldset.settings {
 	}
 
 	label + p.help {
-		margin: -2.5rem 0 2rem;
+		margin: -(@spacing-smallish - 0.5rem) 0 @spacing-smallish;
 	}
 
 	p.help {
