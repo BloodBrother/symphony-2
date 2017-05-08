@@ -147,11 +147,21 @@
 		});
 
 		// Header Nav - Mobile Toggler
-		$(Symphony.Elements.headerMobileToggler).on('click', function(){
-			$(Symphony.Elements.header).toggleClass('opened');
+		Symphony.Elements.headerMobileToggler.on('click', function(){
+			Symphony.Elements.header.toggleClass('opened');
 
 			return false;
 		});
+	});
+
+	$(window).load(function(){
+
+		// Cache main elements
+		Symphony.Elements.contextActions = $('#context .actions > li');
+
+		// Context Actions - LI Max-Width
+		Symphony.Elements.contextActions.css({'max-width': (100 / Symphony.Elements.contextActions.length) + '%'});
+
 	});
 
 })(window.jQuery, window.Symphony);
