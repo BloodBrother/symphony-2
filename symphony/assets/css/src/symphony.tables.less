@@ -45,6 +45,7 @@ table {
 			 		content: attr(data-title);
 			 		display: block;
 			 		font-size: @text-shorter;
+			 		font-weight: bold;
 			 		text-transform: uppercase;
 			 		padding-right: @spacing-micro;
 			 		white-space: nowrap;
@@ -226,4 +227,8 @@ tr.status-notice:not(.selected) td:first-child {
 
 tr.status-error:not(.selected) td:first-child {
 	color: @red;
+}
+
+tr.inactive:not(.selected) td:first-child {
+	color: @grey;
 }
