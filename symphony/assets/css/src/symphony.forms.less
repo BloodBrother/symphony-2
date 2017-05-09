@@ -120,12 +120,16 @@ select:not([multiple]) {
 select[multiple] {
 	.transitioned(~'border');
 	display: block;
-	padding: @spacing-smallest;
+	padding: 0;
 	height: @spacing-larger;
 
 	option {
 		color: @darker-grey;
-		padding: @spacing-micro;
+		padding: @spacing-micro @spacing-smallerish;
+
+		&:checked {
+			background: @accent;
+		}
 	}
 }
 
