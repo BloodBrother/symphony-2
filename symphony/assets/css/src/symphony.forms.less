@@ -89,11 +89,6 @@ input[size] {
 	width: auto;
 }
 
-optgroup {
-	font-weight: bold;
-	font-style: normal;
-}
-
 input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
 	line-height: 0.4rem + @text-short + @spacing-smallest * 2;
 	padding: 0 @spacing-smallerish;
@@ -130,6 +125,17 @@ select[multiple] {
 		&:checked {
 			background: @accent;
 		}
+	}
+}
+
+optgroup {
+	font-weight: bold;
+	font-style: normal;
+	padding: @spacing-smallest @spacing-smallerish;
+
+	option {
+		margin-left: -@spacing-smallerish;
+		margin-right: -@spacing-smallerish;
 	}
 }
 
