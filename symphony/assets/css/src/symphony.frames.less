@@ -23,70 +23,60 @@
 	padding: @spacing-smallerish;
 	border: 1px solid @lighter-grey;
 	background: @lightest-grey;
-}
 
-.duplicator {
-	margin-bottom: 8.2rem;
-
-	.apply {
-		position: absolute;
-		right: 0;
-		bottom: -5.2rem;
-	}
-}
-
-.frame h1 {
-	padding: @spacing-smallest;
-	color: @white;
-	font-size: inherit;
-	font-weight: normal;
-	line-height: inherit;
-	border-radius: @radius-current @radius-current 0 0;
-	background: @darker-grey;
-}
-
-.frame.empty {
-	min-height: 3.6rem;
-}
-
-.frame .tags {
-	margin: -@spacing-smallish 0 @spacing-smallerish;
-}
-
-.frame .content {
-	padding-top: @spacing-smallerish;
-
-	.help {
-		margin-top: @spacing-smallest!important;
-	}
-}
-
-.frame {
-	iframe {
-		display: block;
-		margin: 0 auto;
-		max-width: 100%;
-	}
-}
-
-.frame > button {
-	font-size: @text-shorter;
-	font-weight: 300;
-	text-transform: uppercase;
-	line-height: 1.6rem;
-	margin: 0;
-	padding: @spacing-smallest @spacing-smallerish;
-	background: @accent;
-	border-radius: @radius-current;
-	cursor: pointer;
-
-	&:not(:disabled):hover {
-		border-color: @darker-grey;
+	h1 {
+		padding: @spacing-smallest;
+		color: @white;
+		font-size: inherit;
+		font-weight: normal;
+		line-height: inherit;
+		border-radius: @radius-current @radius-current 0 0;
 		background: @darker-grey;
 	}
 
-	&:disabled {
-		cursor: default;
+	.tags {
+		margin: -@spacing-smallish 0 @spacing-smallerish;
+	}
+
+	iframe {
+		display: block;
+		margin: 0 auto;
+		width: 368px;
+		max-width: 100%;
+		height: 206px;
+	}
+
+	> button {
+		font-size: @text-shorter;
+		font-weight: 300;
+		text-transform: uppercase;
+		line-height: 1.6rem;
+		margin: 0;
+		padding: @spacing-smallest @spacing-smallerish;
+		background: @accent;
+		border-radius: @radius-current;
+		cursor: pointer;
+
+		&:not(:disabled):hover {
+			border-color: @darker-grey;
+			background: @darker-grey;
+		}
+
+		&:disabled {
+			cursor: default;
+		}
+	}
+
+	.content {
+		padding-top: @spacing-smallerish;
+
+		.help {
+			margin-top: @spacing-smallest!important;
+		}
+	}
+
+	&.empty {
+		min-height: 3.6rem;
 	}
 }
 
@@ -151,6 +141,16 @@ fieldset.frame,
 /*--------------------------------------------------------------------------
 	Controls
 --------------------------------------------------------------------------*/
+
+.duplicator {
+	margin-bottom: 8.2rem;
+
+	.apply {
+		position: absolute;
+		right: 0;
+		bottom: -5.2rem;
+	}
+}
 
 .frame .destructor,
 .frame .debug {

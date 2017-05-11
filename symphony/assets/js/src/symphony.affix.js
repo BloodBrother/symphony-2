@@ -99,6 +99,9 @@
 				var settings = item.data('affix-settings');
 				var cssClass = 'js-affix-scroll';
 				var top = '';
+
+				item.trigger('updatesettings.affix');
+
 				if (scrollTop < settings.top) {
 					cssClass = 'js-affix-top';
 				} else if (scrollTop > settings.bottom) {
