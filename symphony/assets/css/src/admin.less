@@ -475,12 +475,14 @@ body.page-single #contents .actions {
 		font-size: @text-shorter;
 		text-transform: uppercase;
 		text-align: left;
-		line-height: @spacing-midlarge;
+		line-height: 1.2em;
 		margin: 0!important;
-		padding: 0 @spacing-small 0 4.5rem;
+		padding: 0 @spacing-smallish 0 4.5rem;
 		border: none;
 		background: @accent!important;
 		width: 100%;
+		height: @spacing-midlarge;
+		white-space: normal;
 		cursor: pointer;
 
 		&[name="action[delete]"], &[name="action[delete]"]:hover {
@@ -565,6 +567,7 @@ body.page-single #contents .actions {
 			padding: @spacing-smallest @spacing-smallerish;
 			border-radius: @radius-current;
 			width: auto;
+			height: auto;
 		}
 
 		.svg-icon-container svg {
