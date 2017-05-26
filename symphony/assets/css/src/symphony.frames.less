@@ -34,6 +34,14 @@
 		background: @darker-grey;
 	}
 
+	a {
+		color: @accent;
+
+		&:hover {
+			color: currentColor;
+		}
+	}
+
 	.tags {
 		margin: -@spacing-smallish 0 @spacing-smallerish;
 	}
@@ -48,7 +56,6 @@
 
 	> button {
 		font-size: @text-shorter;
-		font-weight: 300;
 		text-transform: uppercase;
 		line-height: 1.6rem;
 		margin: 0;
@@ -95,20 +102,18 @@
 	h4 {
 		.flex(~'row', ~'center', ~'flex-start');
 		font-size: @text-short;
-		font-weight: 300;
 
 		* {
 			.transitioned(~'color');
 		}
 
 		strong {
-			font-weight: 300;
+			font-weight: 400;
 		}
 
 		span, & + span {
 			color: @dark-grey;
 			font-size: @text-short;
-			font-weight: 300;
 			padding-left: @spacing-smallest;
 		}
 
@@ -160,7 +165,6 @@ fieldset.frame,
 .frame .debug {
 	color: @light-grey;
 	font-size: @text-short!important;
-	font-weight: 300;
 	margin: 0 0 0 @spacing-smallerish;
 }
 
@@ -180,7 +184,7 @@ fieldset.frame,
 
 .frame .disabled {
 	/*color: @light-grey;*/
-	opacity: 0.25;
+	opacity: 0.5;
 	cursor: not-allowed;
 }
 
@@ -357,13 +361,11 @@ fieldset.settings .collapsible {
 		.action-link {
 			color: @dark-grey;
 			font-size: @text-short;
-			font-weight: 300;
 		}
 
 		button {
 			border-radius: @radius-current;
 			font-size: @text-shorter;
-			font-weight: 300;
 			text-transform: uppercase;
 			padding: @spacing-smallest @spacing-smallerish;
 			background: @accent;

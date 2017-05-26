@@ -68,7 +68,6 @@
 			top: 0;
 			color: @white;
 			font-size: @text-bigger;
-			font-weight: 300;
 			padding: 0 @spacing-smallish!important;
 			width: 100%!important;
 			height: 100%!important;
@@ -162,7 +161,6 @@
 			display: block;
 			position: relative;
 			font-size: @text-current;
-			font-weight: 300;
 			line-height: 2rem;
 			cursor: pointer;
 
@@ -227,7 +225,6 @@
 
 	ul {
 		font-size: @text-short;
-		font-weight: 300;
 		text-align: center;
 		line-height: 1.4em;
 		margin: 0;
@@ -257,7 +254,6 @@
 	position: relative;
 	color: @grey;
 	font-size: @text-shorter;
-	font-weight: 300;
 	text-transform: uppercase;
 	text-align: center;
 	margin-bottom: 0;
@@ -299,7 +295,7 @@
 		flex-grow: 1;
 		order: 3;
 		margin: 0 @spacing-smallerish 0 0;
-		max-width: 50%;
+		max-width: 90%;
 
 		@media (max-width: (@xs - 1)){
 			max-width: calc(~'100% - @{spacing-midlarge}');
@@ -319,8 +315,8 @@
 
 			> svg {
 				flex-shrink: 0;
-				max-width: @spacing-smaller;
-				max-height: @spacing-smaller;
+				max-width: 2.6rem;
+				max-height: 2.6rem;
 			}
 
 			> span {
@@ -396,7 +392,6 @@
 #breadcrumbs {
 	.flex(~'row',~'baseline', ~'flex-start');
 	order: 1;
-	flex-grow: 1;
 	overflow: hidden;
 	position: relative;
 	padding: 0 @spacing-smallish;
@@ -416,7 +411,6 @@
 			a {
 				color: @dark-grey;
 				font-size: @text-short;
-				font-weight: 300;
 
 				svg {
 					padding-right: 15px;
@@ -438,7 +432,6 @@
 		overflow: hidden;
 		color: @accent;
 		font-size: @text-current;
-		font-weight: 300;
 	}
 
 	p.inactive {
@@ -448,7 +441,6 @@
 		span {
 			color: @accent;
 			font-size: @text-current;
-			font-weight: 300;
 		}
 	}
 }
@@ -477,7 +469,7 @@ body.page-single #contents .actions {
 		text-align: left;
 		line-height: 1.2em;
 		margin: 0!important;
-		padding: 0 @spacing-smallish 0 4.5rem;
+		padding: 0 @spacing-smallish 0 5.2rem;
 		border: none;
 		background: @accent!important;
 		width: 100%;
@@ -504,9 +496,8 @@ body.page-single #contents .actions {
 			left: @spacing-smallerish;
 			top: 2rem;
 			color: @white;
-			font-weight: 300;
-			max-width: @spacing-smaller;
-			max-height: @spacing-smaller;
+			max-width: 2.6rem;
+			max-height: 2.6rem;
 			pointer-events: none;
 		}
 
@@ -542,7 +533,6 @@ body.page-single #contents .actions {
 		right: @spacing-smallerish;
 		top: 50%;
 		color: @white;
-		font-weight: 300;
 		pointer-events: none;
 	}
 
@@ -680,7 +670,6 @@ ul.page {
 
 	li {
 		font-size: @text-current;
-		font-weight: 300;
 
 		& + li {
 			margin-left: @spacing-smallerish;

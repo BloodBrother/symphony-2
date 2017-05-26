@@ -74,13 +74,23 @@ th {
 	text-overflow: ellipsis;
 	color: @dark-grey;
 	font-size: @text-shorter;
-	font-weight: 300;
+	font-weight: 400;
 	text-transform: uppercase;
 	text-align: left;
 	line-height: 1.4em;
-	padding: @spacing-smallerish @spacing-smallish;
+	padding: @spacing-smallerish;
 	background: transparent;
 	white-space: nowrap;
+
+	@media (min-width: @sm){
+		&:first-child {
+			padding-left: @spacing-smallish;
+		}
+
+		&:last-child {
+			padding-right: @spacing-smallish;
+		}
+	}
 
 	a {
 		.flex(~'row',~'center',~'flex-start');
@@ -130,12 +140,21 @@ th {
 td {
 	.transitioned(~'color, background');
 	color: @dark-grey;
-	font-weight: 300;
 	text-align: left;
 	line-height: 1.4em;
-	padding: @spacing-smallerish @spacing-smallish!important;
+	padding: @spacing-smallerish!important;
 	border-top: 1px solid @lighter-grey;
 	vertical-align: middle;
+
+	@media (min-width: @sm){
+		&:first-child {
+			padding-left: @spacing-smallish!important;
+		}
+
+		&:last-child {
+			padding-right: @spacing-smallish!important;
+		}
+	}
 
 	a {
 		color: @accent;
