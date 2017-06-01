@@ -132,6 +132,7 @@ class contentSystemExtensions extends AdministrationPage
 
                 if (in_array(Extension::EXTENSION_PHP_NOT_COMPATIBLE, $about['status'])) {
                     $tdMessage = $about['required_php'];
+                    $trStatus = 'status-error';
                 } else {
                     $tdMessage = __('Compatible');
                 }
