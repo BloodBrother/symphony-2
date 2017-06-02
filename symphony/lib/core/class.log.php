@@ -193,7 +193,7 @@ class Log
      * @param boolean $append
      *  If set to true, the given `$message` will be append to the previous log
      *  message found in the `$_log` array
-     * @return mixed
+     * @return boolean|null
      *  If `$writeToLog` is passed, this function will return boolean, otherwise
      *  void
      */
@@ -236,11 +236,16 @@ class Log
     }
 
     /**
-     * Given an Exception, this function will add it to the internal `$_log`
+     * Given an Throwable, this function will add it to the internal `$_log`
      * so that it can be written to the Log.
      *
      * @since Symphony 2.3.2
-     * @param Exception $exception
+     *
+     * @since Symphony 2.7.0
+     *  This function works with both Exceptions and Throwable
+     *  Supporting both PHP 5.6 and 7 forces use to not qualify the $e parameter
+     *
+     * @param Throwable $exception
      * @param boolean $writeToLog
      *  If set to true, this message will be immediately written to the log. By default
      *  this is set to false, which means that it will only be added to the array ready
@@ -251,11 +256,11 @@ class Log
      * @param boolean $append
      *  If set to true, the given `$message` will be append to the previous log
      *  message found in the `$_log` array
-     * @return mixed
+     * @return boolean|null
      *  If `$writeToLog` is passed, this function will return boolean, otherwise
      *  void
      */
-    public function pushExceptionToLog(Exception $exception, $writeToLog = false, $addbreak = true, $append = false)
+    public function pushExceptionToLog($exception, $writeToLog = false, $addbreak = true, $append = false)
     {
         $message = sprintf(
             '%s %s - %s on line %d of %s',

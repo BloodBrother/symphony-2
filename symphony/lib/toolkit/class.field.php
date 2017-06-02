@@ -1191,17 +1191,27 @@ class Field
                 'help' => __('Find values that are an exact match for the given string.')
             ),
             array(
+                'filter' => 'sql: NOT NULL',
+                'title' => 'is not empty',
+                'help' => __('Find entries with a non-empty value.')
+            ),
+            array(
+                'filter' => 'sql: NULL',
+                'title' => 'is empty',
+                'help' => __('Find entries with an empty value.')
+            ),
+            array(
                 'title' => 'contains',
                 'filter' => 'regexp: ',
                 'help' => __('Find values that match the given <a href="%s">MySQL regular expressions</a>.', array(
-                    'http://dev.mysql.com/doc/mysql/en/Regexp.html'
+                    'https://dev.mysql.com/doc/mysql/en/regexp.html'
                 ))
             ),
             array(
                 'title' => 'does not contain',
                 'filter' => 'not-regexp: ',
                 'help' => __('Find values that do not match the given <a href="%s">MySQL regular expressions</a>.', array(
-                    'http://dev.mysql.com/doc/mysql/en/Regexp.html'
+                    'https://dev.mysql.com/doc/mysql/en/regexp.html'
                 ))
             ),
         );
@@ -1330,7 +1340,7 @@ class Field
      * flavours differs at times.
      *
      * @since Symphony 2.3
-     * @link http://dev.mysql.com/doc/refman/5.5/en/regexp.html
+     * @link https://dev.mysql.com/doc/refman/en/regexp.html
      * @param string $filter
      *  The full filter, eg. `regexp: ^[a-d]`
      * @param array $columns
@@ -1382,6 +1392,77 @@ class Field
     }
 
     /**
+     * Test whether the input string is a NULL/NOT NULL SQL clause, by searching
+     * for the prefix of `sql:` in the given `$string`, followed by `(NOT )? NULL`
+     *
+     * @since Symphony 2.7.0
+     * @param string $string
+     *  The string to test.
+     * @return boolean
+     *  True if the string is prefixed with `sql:`, false otherwise.
+     */
+    protected static function isFilterSQL($string)
+    {
+        if (preg_match('/^sql:\s*(NOT )?NULL$/i', $string)) {
+            return true;
+        }
+    }
+
+    /**
+     * Builds a basic NULL/NOT NULL SQL statement given a `$filter`.
+     *  This function supports `sql: NULL` or `sql: NOT NULL`.
+     *
+     * @since Symphony 2.7.0
+     * @link https://dev.mysql.com/doc/refman/en/regexp.html
+     * @param string $filter
+     *  The full filter, eg. `sql: NULL`
+     * @param array $columns
+     *  The array of columns that need the given `$filter` applied to. The conditions
+     *  will be added using `OR`.
+     * @param string $joins
+     *  A string containing any table joins for the current SQL fragment. By default
+     *  Datasources will always join to the `tbl_entries` table, which has an alias of
+     *  `e`. This parameter is passed by reference.
+     * @param string $where
+     *  A string containing the WHERE conditions for the current SQL fragment. This
+     *  is passed by reference and is expected to be used to add additional conditions
+     *  specific to this field
+     */
+    public function buildFilterSQL($filter, array $columns, &$joins, &$where)
+    {
+        $this->_key++;
+        $field_id = $this->get('id');
+        $filter = $this->cleanValue($filter);
+        $pattern = '';
+
+        if (preg_match('/^sql:\s*NOT NULL$/i', $filter)) {
+            $pattern = 'NOT NULL';
+        } else if (preg_match('/^sql:\s*NULL$/i', $filter)) {
+            $pattern = 'NULL';
+        } else {
+            // No match, return
+            return;
+        }
+
+        $joins .= "
+            LEFT JOIN
+                `tbl_entries_data_{$field_id}` AS t{$field_id}_{$this->_key}
+                ON (e.id = t{$field_id}_{$this->_key}.entry_id)
+        ";
+
+        $where .= "AND ( ";
+
+        foreach ($columns as $key => $col) {
+            $modifier = ($key === 0) ? '' : 'OR';
+
+            $where .= "
+                {$modifier} t{$field_id}_{$this->_key}.{$col} IS {$pattern}
+            ";
+        }
+        $where .= ")";
+    }
+
+    /**
      * Construct the SQL statement fragments to use to retrieve the data of this
      * field when utilized as a data source.
      *
@@ -1414,9 +1495,13 @@ class Field
         if (self::isFilterRegex($data[0])) {
             $this->buildRegexSQL($data[0], array('value'), $joins, $where);
 
+            // SQL filtering: allows for NULL/NOT NULL statements
+        } else if (self::isFilterSQL($data[0])) {
+            $this->buildFilterSQL($data[0], array('value'), $joins, $where);
+
             // AND operation, iterates over `$data` and uses a new JOIN for
             // every item.
-        } elseif ($andOperation) {
+        } else if ($andOperation) {
             foreach ($data as $value) {
                 $this->_key++;
                 $value = $this->cleanValue($value);
@@ -1431,7 +1516,7 @@ class Field
             }
 
             // Default logic, this will use a single JOIN statement and collapse
-            // `$data` into a string to be used inconjuction with IN
+            // `$data` into a string to be used in conjunction with IN
         } else {
             foreach ($data as &$value) {
                 $value = $this->cleanValue($value);
@@ -1476,6 +1561,34 @@ class Field
             $joins .= "LEFT OUTER JOIN `tbl_entries_data_".$this->get('id')."` AS `ed` ON (`e`.`id` = `ed`.`entry_id`) ";
             $sort = sprintf('ORDER BY `ed`.`value` %s', $order);
         }
+    }
+
+    /**
+     * Build the needed SQL clause command to make `buildSortingSQL()` work on
+     * MySQL 5.7 in strict mode, which requires all columns in the ORDER BY
+     * clause to be included in the SELECT's projection.
+     *
+     * If no new projection is needed (like if the order is made via a sub-query),
+     * simpy return null.
+     *
+     * @since Symphony 2.7.0
+     * @see Field::buildSortingSQL()
+     * @param string $sort
+     *  the existing sort component of the sql query, after it has been passed
+     *  to `buildSortingSQL()`
+     * @param string $order (optional)
+     *  an optional sorting direction. this defaults to ascending. Should be the
+     *  same value that was passed to `buildSortingSQL()`
+     * @return string
+     *  an optional select clause to append to the generated SQL query.
+     *  This is needed when sorting on a column that is not part of the projection.
+     */
+    public function buildSortingSelectSQL($sort, $order = 'ASC')
+    {
+        if (in_array(strtolower($order), array('random', 'rand'))) {
+            return null;
+        }
+        return '`ed`.`value`';
     }
 
     /**
@@ -1584,7 +1697,9 @@ class Field
             return FieldManager::edit($id, $fields);
         } elseif ($id = FieldManager::add($fields)) {
             $this->set('id', $id);
-            $this->createTable();
+            if ($this->requiresTable()) {
+                $this->createTable();
+            }
             return true;
         }
 
@@ -1598,6 +1713,7 @@ class Field
      * additional columns to store the specific data created by the field.
      *
      * @throws DatabaseException
+     * @see Field::requiresTable()
      * @return boolean
      */
     public function createTable()
@@ -1612,6 +1728,26 @@ class Field
               KEY `value` (`value`)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
         );
+    }
+
+    /**
+     * Tells Symphony that this field needs a table in order to store
+     * data for each of its entries. Used when adding/deleting this field in a section
+     * or entries are edited/added, data as a performance optimization.
+     * It defaults to true, which force table creation.
+     *
+     * Developers are encouraged to update their null create table implementation
+     * with this method.
+     *
+     * @since Symphony 2.7.0
+     * @see Field::createTable()
+     * @throws DatabaseException
+     * @return boolean
+     *  true if Symphony should call `createTable()`
+     */
+    public function requiresTable()
+    {
+        return true;
     }
 
     /**

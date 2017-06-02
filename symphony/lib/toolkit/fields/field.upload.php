@@ -57,17 +57,27 @@ class FieldUpload extends Field implements ExportableField, ImportableField
                 'help' => __('Find files that are an exact match for the given string.')
             ),
             array(
+                'filter' => 'sql: NOT NULL',
+                'title' => 'is not empty',
+                'help' => __('Find entries where a file has been saved.')
+            ),
+            array(
+                'filter' => 'sql: NULL',
+                'title' => 'is empty',
+                'help' => __('Find entries where no file has been saved.')
+            ),
+            array(
                 'title' => 'contains',
                 'filter' => 'regexp: ',
                 'help' => __('Find files that match the given <a href="%s">MySQL regular expressions</a>.', array(
-                    'http://dev.mysql.com/doc/mysql/en/Regexp.html'
+                    'https://dev.mysql.com/doc/mysql/en/regexp.html'
                 ))
             ),
             array(
                 'title' => 'does not contain',
                 'filter' => 'not-regexp: ',
                 'help' => __('Find files that do not match the given <a href="%s">MySQL regular expressions</a>.', array(
-                    'http://dev.mysql.com/doc/mysql/en/Regexp.html'
+                    'https://dev.mysql.com/doc/mysql/en/regexp.html'
                 ))
             ),
             array(
@@ -428,11 +438,7 @@ class FieldUpload extends Field implements ExportableField, ImportableField
 
             // Grab the existing entry data to preserve the MIME type and size information
             if (isset($entry_id)) {
-                $row = Symphony::Database()->fetchRow(0, sprintf(
-                    "SELECT `file`, `mimetype`, `size`, `meta` FROM `tbl_entries_data_%d` WHERE `entry_id` = %d",
-                    $this->get('id'),
-                    $entry_id
-                ));
+                $row = $this->getCurrentValues($entry_id);
 
                 if (empty($row) === false) {
                     $result = $row;
@@ -468,14 +474,7 @@ class FieldUpload extends Field implements ExportableField, ImportableField
 
         // Check to see if the entry already has a file associated with it:
         if (is_null($entry_id) === false) {
-            $row = Symphony::Database()->fetchRow(0, sprintf(
-                "SELECT *
-                FROM `tbl_entries_data_%s`
-                WHERE `entry_id` = %d
-                LIMIT 1",
-                $this->get('id'),
-                $entry_id
-            ));
+            $row = $this->getCurrentValues($entry_id);
 
             $existing_file = isset($row['file']) ? $this->getFilePath($row['file']) : null;
 
@@ -507,7 +506,6 @@ class FieldUpload extends Field implements ExportableField, ImportableField
         if (file_exists($abs_path . '/' . $data['name'])) {
             $extension = General::getExtension($data['name']);
             $new_file = substr($abs_path . '/' . $data['name'], 0, -1 - strlen($extension));
-            $renamed_file = $new_file;
             $count = 1;
 
             do {
@@ -560,6 +558,19 @@ class FieldUpload extends Field implements ExportableField, ImportableField
             'mimetype' =>   $data['type'],
             'meta' =>       serialize(static::getMetaInfo($file, $data['type']))
         );
+    }
+
+    protected function getCurrentValues($entry_id)
+    {
+        return Symphony::Database()->fetchRow(0, sprintf(
+            "SELECT `file`, `mimetype`, `size`, `meta`
+                FROM `tbl_entries_data_%d`
+                WHERE `entry_id` = %d
+                LIMIT 1
+            ",
+            $this->get('id'),
+            $entry_id
+        ));
     }
 
     /*-------------------------------------------------------------------------
@@ -727,7 +738,7 @@ class FieldUpload extends Field implements ExportableField, ImportableField
         if (preg_match('/^mimetype:/', $data[0])) {
             $data[0] = str_replace('mimetype:', '', $data[0]);
             $column = 'mimetype';
-        } elseif (preg_match('/^size:/', $data[0])) {
+        } else if (preg_match('/^size:/', $data[0])) {
             $data[0] = str_replace('size:', '', $data[0]);
             $column = 'size';
         } else {
@@ -736,7 +747,9 @@ class FieldUpload extends Field implements ExportableField, ImportableField
 
         if (self::isFilterRegex($data[0])) {
             $this->buildRegexSQL($data[0], array($column), $joins, $where);
-        } elseif ($andOperation) {
+        } else if (self::isFilterSQL($data[0])) {
+            $this->buildFilterSQL($data[0], array($column), $joins, $where);
+        } else if ($andOperation) {
             foreach ($data as $value) {
                 $this->_key++;
                 $value = $this->cleanValue($value);
@@ -793,6 +806,11 @@ class FieldUpload extends Field implements ExportableField, ImportableField
                 $order
             );
         }
+    }
+
+    public function buildSortingSelectSQL($sort, $order = 'ASC')
+    {
+        return null;
     }
 
     /*-------------------------------------------------------------------------

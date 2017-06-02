@@ -16,8 +16,10 @@ class EntryManager
 {
     /**
      * The Field ID that will be used to sort when fetching Entries, defaults
-     * to null, which implies the Entry ID (id column in `tbl_entries`)
-     * @var integer
+     * to null, which implies the Entry ID (id column in `tbl_entries`).
+     * To order by core fields, use one of
+     * 'system:creation-date', 'system:modification-date', 'system:id'.
+     * @var integer|string
      */
     protected static $_fetchSortField = null;
 
@@ -92,102 +94,52 @@ class EntryManager
     }
 
     /**
-     * Given an Entry object, iterate over all of the fields in that object
-     * an insert them into their relevant entry tables.
+     * Executes the SQL queries need to save a field's data for the specified
+     * entry id.
      *
-     * @param Entry $entry
-     *  An Entry object to insert into the database
-     * @throws DatabaseException
-     * @return boolean
+     * It first locks the table for writes, it then deletes existing data and then
+     * it inserts a new row for the data. Errors are discarded and the lock is
+     * released, if it was acquired.
+     *
+     * @param int $entry_id
+     *  The entry id to save the data for
+     * @param int $field_id
+     *  The field id to save the data for
+     * @param array $field
+     *  The field data to save
      */
-    public static function add(Entry $entry)
+    protected static function saveFieldData($entry_id, $field_id, $field)
     {
-        $fields = $entry->get();
-        Symphony::Database()->insert($fields, 'tbl_entries');
-
-        if (!$entry_id = Symphony::Database()->getInsertID()) {
-            return false;
+        // Check that we have a field id
+        if (empty($field_id)) {
+            return;
         }
 
-        foreach ($entry->getData() as $field_id => $field) {
-            if (!is_array($field) || empty($field)) {
-                continue;
+        // Check if we have field data
+        if (!is_array($field) || empty($field)) {
+            return;
+        }
+
+        $did_lock = false;
+        try {
+
+            // Check if table exists
+            $table_name = 'tbl_entries_data_' . General::intval($field_id);
+            if (!Symphony::Database()->tableExists($table_name)) {
+                return;
             }
 
-            Symphony::Database()->delete('tbl_entries_data_' . $field_id, sprintf("
+            // Lock the table for write
+            $did_lock = Symphony::Database()->query("LOCK TABLES `$table_name` WRITE");
+
+            // Delete old data
+            Symphony::Database()->delete($table_name, sprintf("
                 `entry_id` = %d", $entry_id
             ));
 
+            // Insert new data
             $data = array(
                 'entry_id' => $entry_id
-            );
-
-            $fields = array();
-
-            foreach ($field as $key => $value) {
-                if (is_array($value)) {
-                    foreach ($value as $ii => $v) {
-                        $fields[$ii][$key] = $v;
-                    }
-                } else {
-                    $fields[max(0, count($fields) - 1)][$key] = $value;
-                }
-            }
-
-            $fieldCount = count($fields);
-            for ($ii = 0; $ii < $fieldCount; $ii++) {
-                $fields[$ii] = array_merge($data, $fields[$ii]);
-            }
-
-            Symphony::Database()->insert($fields, 'tbl_entries_data_' . $field_id);
-        }
-
-        $entry->set('id', $entry_id);
-
-        return true;
-    }
-
-    /**
-     * Update an existing Entry object given an Entry object
-     *
-     * @param Entry $entry
-     *  An Entry object
-     * @throws DatabaseException
-     * @return boolean
-     */
-    public static function edit(Entry $entry)
-    {
-        // Update modification date.
-        Symphony::Database()->update(
-            array(
-                'modification_date' => $entry->get('modification_date'),
-                'modification_date_gmt' => $entry->get('modification_date_gmt')
-            ),
-            'tbl_entries',
-            sprintf(' `id` = %d', $entry->get('id'))
-        );
-
-        // Iterate over all data for this entry, deleting existing data first
-        // then inserting a new row for the data
-        foreach ($entry->getData() as $field_id => $field) {
-            if (empty($field_id)) {
-                continue;
-            }
-
-            try {
-                Symphony::Database()->delete('tbl_entries_data_' . $field_id, sprintf("
-                    `entry_id` = %d", $entry->get('id')
-                ));
-            } catch (Exception $e) {
-                // Discard?
-            }
-
-            if (!is_array($field) || empty($field)) {
-                continue;
-            }
-
-            $data = array(
-                'entry_id' => $entry->get('id')
             );
 
             $fields = array();
@@ -206,7 +158,71 @@ class EntryManager
                 $fields[$index] = array_merge($data, $field_data);
             }
 
-            Symphony::Database()->insert($fields, 'tbl_entries_data_' . $field_id);
+            Symphony::Database()->insert($fields, $table_name);
+        } catch (Exception $ex) {
+            Symphony::Log()->pushExceptionToLog($ex, true);
+        }
+
+        if ($did_lock) {
+            Symphony::Database()->query('UNLOCK TABLES');
+        }
+    }
+
+    /**
+     * Given an Entry object, iterate over all of the fields in that object
+     * an insert them into their relevant entry tables.
+     *
+     * @see EntryManager::saveFieldData()
+     * @param Entry $entry
+     *  An Entry object to insert into the database
+     * @throws DatabaseException
+     * @return boolean
+     */
+    public static function add(Entry $entry)
+    {
+        $fields = $entry->get();
+        Symphony::Database()->insert($fields, 'tbl_entries');
+
+        if (!$entry_id = Symphony::Database()->getInsertID()) {
+            return false;
+        }
+
+        // Iterate over all data for this entry
+        foreach ($entry->getData() as $field_id => $field) {
+            // Write data
+            static::saveFieldData($entry_id, $field_id, $field);
+        }
+
+        $entry->set('id', $entry_id);
+
+        return true;
+    }
+
+    /**
+     * Update an existing Entry object given an Entry object
+     *
+     * @see EntryManager::saveFieldData()
+     * @param Entry $entry
+     *  An Entry object
+     * @throws DatabaseException
+     * @return boolean
+     */
+    public static function edit(Entry $entry)
+    {
+        // Update modification date.
+        Symphony::Database()->update(
+            array(
+                'modification_date' => $entry->get('modification_date'),
+                'modification_date_gmt' => $entry->get('modification_date_gmt')
+            ),
+            'tbl_entries',
+            sprintf(' `id` = %d', $entry->get('id'))
+        );
+
+        // Iterate over all data for this entry
+        foreach ($entry->getData() as $field_id => $field) {
+            // Write data
+            static::saveFieldData($entry->get('id'), $field_id, $field);
         }
 
         return true;
@@ -325,7 +341,11 @@ class EntryManager
      * This function will return an array of Entry objects given an ID or an array of ID's.
      * Do not provide `$entry_id` as an array if not specifying the `$section_id`. This function
      * is commonly passed custom SQL statements through the `$where` and `$join` parameters
-     * that is generated by the fields of this section
+     * that is generated by the fields of this section.
+     *
+     * @since Symphony 2.7.0 it will also call a new method on fields,
+     * `buildSortingSelectSQL()`, to make sure fields can add ordering columns in
+     * the SELECT clause. This is required on MySQL 5.7+ strict mode.
      *
      * @param integer|array $entry_id
      *  An array of Entry ID's or an Entry ID to return
@@ -358,6 +378,7 @@ class EntryManager
     public static function fetch($entry_id = null, $section_id = null, $limit = null, $start = null, $where = null, $joins = null, $group = false, $buildentries = true, $element_names = null, $enable_sort = true)
     {
         $sort = null;
+        $sortSelectClause = null;
 
         if (!$entry_id && !$section_id) {
             return false;
@@ -397,12 +418,14 @@ class EntryManager
         } elseif (self::$_fetchSortField && $field = FieldManager::fetch(self::$_fetchSortField)) {
             if ($field->isSortable()) {
                 $field->buildSortingSQL($joins, $where, $sort, self::$_fetchSortDirection);
+                $sortSelectClause = $field->buildSortingSelectSQL($sort, self::$_fetchSortDirection);
             }
 
         // Handle if the section has a default sorting field
         } elseif ($section->getSortingField() && $field = FieldManager::fetch($section->getSortingField())) {
             if ($field->isSortable()) {
                 $field->buildSortingSQL($joins, $where, $sort, $section->getSortingOrder());
+                $sortSelectClause = $field->buildSortingSelectSQL($sort, $section->getSortingOrder());
             }
 
         // No sort specified, so just sort on system id
@@ -422,6 +445,7 @@ class EntryManager
             SELECT %s`e`.`id`, `e`.section_id, `e`.`author_id`,
                 `e`.`creation_date` AS `creation_date`,
                 `e`.`modification_date` AS `modification_date`
+                %s
             FROM `tbl_entries` AS `e`
             %s
             WHERE 1
@@ -432,6 +456,7 @@ class EntryManager
             %s
             ",
             $group ? 'DISTINCT ' : '',
+            $sortSelectClause ? ', ' . $sortSelectClause : '',
             $joins,
             $entry_id ? "AND `e`.`id` IN ('".implode("', '", $entry_id)."') " : '',
             $section_id ? sprintf("AND `e`.`section_id` = %d", $section_id) : '',

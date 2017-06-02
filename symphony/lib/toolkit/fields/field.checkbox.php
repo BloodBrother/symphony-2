@@ -425,6 +425,11 @@ class FieldCheckbox extends Field implements ExportableField, ImportableField
         }
     }
 
+    public function buildSortingSelectSQL($sort, $order = 'ASC')
+    {
+        return null;
+    }
+
     /*-------------------------------------------------------------------------
         Grouping:
     -------------------------------------------------------------------------*/

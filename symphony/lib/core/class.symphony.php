@@ -78,9 +78,11 @@ abstract class Symphony implements Singleton
      * The Symphony constructor initialises the class variables of Symphony. At present
      * constructor has a couple of responsibilities:
      * - Start a profiler instance
-     * - If magic quotes are enabled, clean `$_SERVER`, `$_COOKIE`, `$_GET` and `$_POST` arrays 
+     * - If magic quotes are enabled, clean `$_SERVER`, `$_COOKIE`, `$_GET`, `$_POST` and the `$_REQUEST` arrays.
      * - Initialise the correct Language for the currently logged in Author.
      * - Start the session and adjust the error handling if the user is logged in
+     *
+     * The `$_REQUEST` array has been added in 2.7.0
      */
     protected function __construct()
     {
@@ -91,6 +93,7 @@ abstract class Symphony implements Singleton
             General::cleanArray($_COOKIE);
             General::cleanArray($_GET);
             General::cleanArray($_POST);
+            General::cleanArray($_REQUEST);
         }
 
         // Initialize language management
@@ -259,10 +262,7 @@ abstract class Symphony implements Singleton
      */
     public static function initialiseCookie()
     {
-        $cookie_path = @parse_url(URL, PHP_URL_PATH);
-        $cookie_path = '/' . trim($cookie_path, '/');
-
-        define_safe('__SYM_COOKIE_PATH__', $cookie_path);
+        define_safe('__SYM_COOKIE_PATH__', DIRROOT === '' ? '/' : DIRROOT);
         define_safe('__SYM_COOKIE_PREFIX_', self::Configuration()->get('cookie_prefix', 'symphony'));
         define_safe('__SYM_COOKIE_PREFIX__', self::Configuration()->get('cookie_prefix', 'symphony'));
 
@@ -652,13 +652,18 @@ abstract class Symphony implements Singleton
     }
 
     /**
-     * Setter accepts a previous Exception. Useful for determining the context
-     * of a current exception (ie. detecting recursion).
+     * Setter accepts a previous Throwable. Useful for determining the context
+     * of a current Throwable (ie. detecting recursion).
      *
      * @since Symphony 2.3.2
-     * @param Exception $ex
+     *
+     * @since Symphony 2.7.0
+     *  This function works with both Exception and Throwable
+     *  Supporting both PHP 5.6 and 7 forces use to not qualify the $e parameter
+     *
+     * @param Throwable $ex
      */
-    public static function setException(Exception $ex)
+    public static function setException($ex)
     {
         self::$exception = $ex;
     }
@@ -667,7 +672,7 @@ abstract class Symphony implements Singleton
      * Accessor for `self::$exception`.
      *
      * @since Symphony 2.3.2
-     * @return Exception|null
+     * @return Throwable|null
      */
     public static function getException()
     {
@@ -737,13 +742,18 @@ class SymphonyErrorPageHandler extends GenericExceptionHandler
      * template for this exception otherwise it reverts to using the default
      * `usererror.generic.php`
      *
-     * @param Exception $e
-     *  The Exception object
+     * @param Throwable $e
+     *  The Throwable object
      * @return string
      *  An HTML string
      */
-    public static function render(Exception $e)
+    public static function render($e)
     {
+        // Validate the type, resolve to a 404 if not valid
+        if (!static::isValidThrowable($e)) {
+            $e = new FrontendPageNotFoundException();
+        }
+
         if ($e->getTemplate() === false) {
             Page::renderStatusCode($e->getHttpStatusCode());
 
@@ -886,7 +896,7 @@ class SymphonyErrorPage extends Exception
      * is not found, `false` is returned
      *
      * @since Symphony 2.3
-     * @return mixed
+     * @return string|false
      *  String, which is the path to the template if the template is found,
      *  false otherwise
      */
@@ -927,13 +937,18 @@ class DatabaseExceptionHandler extends GenericExceptionHandler
      * The render function will take a `DatabaseException` and output a
      * HTML page.
      *
-     * @param Exception $e
-     *  The Exception object
+     * @param Throwable $e
+     *  The Throwable object
      * @return string
      *  An HTML string
      */
-    public static function render(Exception $e)
+    public static function render($e)
     {
+        // Validate the type, resolve to a 404 if not valid
+        if (!static::isValidThrowable($e)) {
+            $e = new FrontendPageNotFoundException();
+        }
+
         $trace = $queries = null;
 
         foreach ($e->getTrace() as $t) {

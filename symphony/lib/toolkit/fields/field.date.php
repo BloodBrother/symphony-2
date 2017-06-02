@@ -72,17 +72,27 @@ class FieldDate extends Field implements ExportableField, ImportableField
                 'help' => __('Find values that are an exact match for the given string.')
             ),
             array(
+                'filter' => 'sql: NOT NULL',
+                'title' => 'is not empty',
+                'help' => __('Find entries where any value is selected.')
+            ),
+            array(
+                'filter' => 'sql: NULL',
+                'title' => 'is empty',
+                'help' => __('Find entries where no value is selected.')
+            ),
+            array(
                 'title' => 'contains',
                 'filter' => 'regexp: ',
                 'help' => __('Find values that match the given <a href="%s">MySQL regular expressions</a>.', array(
-                    'http://dev.mysql.com/doc/mysql/en/Regexp.html'
+                    'https://dev.mysql.com/doc/mysql/en/regexp.html'
                 ))
             ),
             array(
                 'title' => 'does not contain',
                 'filter' => 'not-regexp: ',
                 'help' => __('Find values that do not match the given <a href="%s">MySQL regular expressions</a>.', array(
-                    'http://dev.mysql.com/doc/mysql/en/Regexp.html'
+                    'https://dev.mysql.com/doc/mysql/en/regexp.html'
                 ))
             ),
             array(
@@ -260,7 +270,7 @@ class FieldDate extends Field implements ExportableField, ImportableField
 
             // Switch between earlier than and later than logic
             // The earlier/later range is defined by MySQL's support. RE: #1560
-            // @link http://dev.mysql.com/doc/refman/5.0/en/datetime.html
+            // @link https://dev.mysql.com/doc/refman/en/datetime.html
             switch ($match[2]) {
                 case 'later':
                     $string = $later . ' to ' . self::$max_date;
@@ -449,8 +459,8 @@ class FieldDate extends Field implements ExportableField, ImportableField
         $value = null;
 
         // New entry
-        if ((is_null($data) || empty($data)) && is_null($flagWithError) && !is_null($this->get('pre_populate')) && $this->get('pre_populate') !== 'no') {
-            $prepopulate = ($this->get('pre_populate') === 'yes') ? 'now' : $this->get('pre_populate');
+        if (empty($data) && is_null($flagWithError) && !is_null($this->get('pre_populate'))) {
+            $prepopulate = $this->get('pre_populate');
 
             $date = self::parseDate($prepopulate);
             $date = $date['start'];
@@ -700,6 +710,8 @@ class FieldDate extends Field implements ExportableField, ImportableField
     {
         if (self::isFilterRegex($data[0])) {
             $this->buildRegexSQL($data[0], array('value'), $joins, $where);
+        } else if (self::isFilterSQL($data[0])) {
+            $this->buildFilterSQL($data[0], array('value'), $joins, $where);
         } else {
             $parsed = array();
 
@@ -746,6 +758,11 @@ class FieldDate extends Field implements ExportableField, ImportableField
                 $order
             );
         }
+    }
+
+    public function buildSortingSelectSQL($sort, $order = 'ASC')
+    {
+        return null;
     }
 
     /*-------------------------------------------------------------------------

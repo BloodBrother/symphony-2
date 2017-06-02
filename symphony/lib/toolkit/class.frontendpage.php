@@ -232,6 +232,9 @@ class FrontendPage extends XSLTPage
             // headers if desired. RE: #2480
             $this->addHeaderToPage('X-Frame-Options', 'SAMEORIGIN');
             $this->addHeaderToPage('Access-Control-Allow-Origin', URL);
+            // Add more http security headers, RE: #2248
+            $this->addHeaderToPage('X-Content-Type-Options', 'nosniff');
+            $this->addHeaderToPage('X-XSS-Protection', '1; mode=block');
 
             /**
              * This is just prior to the page headers being rendered, and is suitable for changing them
@@ -270,7 +273,7 @@ class FrontendPage extends XSLTPage
             if (is_null($devkit) && !$output) {
                 $errstr = null;
 
-                while (list($key, $val) = $this->Proc->getError()) {
+                while (list(, $val) = $this->Proc->getError()) {
                     $errstr .= 'Line: ' . $val['line'] . ' - ' . $val['message'] . PHP_EOL;
                 }
 
@@ -344,7 +347,7 @@ class FrontendPage extends XSLTPage
         $this->_pageData = $page;
         $path = explode('/', $page['path']);
         $root_page = is_array($path) ? array_shift($path) : $path;
-        $current_path = explode(dirname($_SERVER['SCRIPT_NAME']), $_SERVER['REQUEST_URI'], 2);
+        $current_path = explode(dirname(server_safe('SCRIPT_NAME')), server_safe('REQUEST_URI'), 2);
         $current_path = '/' . ltrim(end($current_path), '/');
         $split_path = explode('?', $current_path, 3);
         $current_path = rtrim(current($split_path), '/');
@@ -365,8 +368,8 @@ class FrontendPage extends XSLTPage
             'website-name' => Symphony::Configuration()->get('sitename', 'general'),
             'page-title' => $page['title'],
             'root' => URL,
-            'root-dir' => '/' . DIRROOT,
             'workspace' => URL . '/workspace',
+            'workspace-path' => DIRROOT . '/workspace',
             'http-host' => HTTP_HOST,
             'root-page' => ($root_page ? $root_page : $page['handle']),
             'current-page' => $page['handle'],
@@ -803,7 +806,7 @@ class FrontendPage extends XSLTPage
 
             return (key($handles) == 0) ? -1 : 1;
         }
-        return(($a->priority() > $b->priority()) ? -1 : 1);
+        return $a->priority() > $b->priority() ? -1 : 1;
     }
 
     /**

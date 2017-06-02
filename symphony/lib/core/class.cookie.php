@@ -109,7 +109,7 @@ class Cookie
         $this->_domain = $domain;
         $this->_httpOnly = $httpOnly;
 
-        if (defined(__SECURE__)) {
+        if (defined('__SECURE__')) {
             $this->_secure = __SECURE__;
         }
 
@@ -119,8 +119,8 @@ class Cookie
     /**
      * Initialises a new Session instance using this cookie's params
      *
-     * @throws Exception
-     * @return Session
+     * @throws Throwable
+     * @return string|boolean
      */
     private function __init()
     {
@@ -135,6 +135,7 @@ class Cookie
         }
 
         // Class FrontendPage uses $_COOKIE directly (inside it's __buildPage() function), so try to emulate it.
+        // @deprecated will be removed in Symphony 3.0.0
         $_COOKIE[$this->_index] = &$_SESSION[$this->_index];
 
         return $this->_session;

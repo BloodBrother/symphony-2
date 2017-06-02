@@ -69,9 +69,10 @@ class contentBlueprintsEvents extends ResourcesPage
         }
 
         $isEditing = ($readonly ? true : false);
-        $fields = array("name"=>null, "filters"=>null);
-        $about = array("name"=>null);
+        $fields = array('name' => null, 'filters' => null);
+        $about = array('name' => null);
         $providers = Symphony::ExtensionManager()->getProvidersOf(iProvider::EVENT);
+        $canonical_link = null;
 
         if (isset($_POST['fields'])) {
             $fields = $_POST['fields'];
@@ -83,14 +84,14 @@ class contentBlueprintsEvents extends ResourcesPage
             $isEditing = true;
             $handle = $this->_context[1];
             $existing = EventManager::create($handle);
-            $about = $existing->about();
+            $about = General::array_map_recursive('stripslashes', $existing->about());
 
             if ($this->_context[0] == 'edit' && !$existing->allowEditorToParse()) {
                 redirect(SYMPHONY_URL . '/blueprints/events/info/' . $handle . '/');
             }
 
             $fields['name'] = $about['name'];
-            $fields['source'] = $existing->getSource();
+            $fields['source'] = stripslashes($existing->getSource());
             $provided = false;
 
             if (!empty($providers)) {
@@ -105,9 +106,11 @@ class contentBlueprintsEvents extends ResourcesPage
 
             if (!$provided) {
                 if (isset($existing->eParamFILTERS)) {
-                    $fields['filters'] = $existing->eParamFILTERS;
+                    $fields['filters'] = array_map('stripslashes', $existing->eParamFILTERS);
                 }
             }
+
+            $canonical_link = '/blueprints/events/' . $this->_context[0] . '/' . $handle . '/';
         }
 
         // Handle name on edited changes, or from reading an edited datasource
@@ -119,6 +122,12 @@ class contentBlueprintsEvents extends ResourcesPage
 
         $this->setPageType('form');
         $this->setTitle(__(($isEditing ? '%1$s &ndash; %2$s &ndash; %3$s' : '%2$s &ndash; %3$s'), array($name, __('Events'), __('Symphony'))));
+        if ($canonical_link) {
+            $this->addElementToHead(new XMLElement('link', null, array(
+                'rel' => 'canonical',
+                'href' => SYMPHONY_URL . $canonical_link,
+            )));
+        }
         $this->appendSubheading(($isEditing ? $about['name'] : __('Untitled')));
         $this->insertBreadcrumbs(array(
             Widget::Anchor(__('Events'), SYMPHONY_URL . '/blueprints/events/'),
@@ -401,6 +410,8 @@ class contentBlueprintsEvents extends ResourcesPage
 
         if (trim($fields['name']) == '') {
             $this->_errors['name'] = __('This is a required field');
+        } else if (strpos($fields['name'], '\\') !== false) {
+            $this->_errors['name'] = __('This field contains invalid characters') . ' (\\)';
         }
 
         if (trim($fields['source']) == '') {
@@ -530,7 +541,7 @@ class contentBlueprintsEvents extends ResourcesPage
 
             $eventShell = str_replace('<!-- ROOT ELEMENT -->', $rootelement, $eventShell);
             $eventShell = str_replace('<!-- CLASS NAME -->', $classname, $eventShell);
-            $eventShell = str_replace('<!-- SOURCE -->', $source, $eventShell);
+            $eventShell = str_replace('<!-- SOURCE -->', addslashes($source), $eventShell);
 
             // Remove left over placeholders
             $eventShell = preg_replace(array('/<!--[\w ]++-->/'), '', $eventShell);
@@ -580,7 +591,7 @@ class contentBlueprintsEvents extends ResourcesPage
             }
 
             // Write the file
-            if (!is_writable(dirname($file)) || !General::writeFile($file, $eventShell, Symphony::Configuration()->get('write_mode', 'file'))) {
+            if (!General::writeFile($file, $eventShell, Symphony::Configuration()->get('write_mode', 'file'))) {
                 $this->pageAlert(
                     __('Failed to write Event to disk.')
                     . ' ' . __('Please check permissions on %s.', array('<code>/workspace/events</code>')),
@@ -658,8 +669,8 @@ class contentBlueprintsEvents extends ResourcesPage
         if (!is_array($elements) || empty($elements)) {
             return;
         }
-
-        $shell = str_replace('<!-- FILTERS -->', "'" . implode("'," . PHP_EOL . "\t\t\t\t'", $elements) . "'", $shell);
+        $elements = array_map('addslashes', $elements);
+        $shell = str_replace('<!-- FILTERS -->', "'" . implode("'," . PHP_EOL . "        '", $elements) . "'", $shell);
     }
 
     public function __injectAboutInformation(&$shell, $details)
@@ -669,7 +680,11 @@ class contentBlueprintsEvents extends ResourcesPage
         }
 
         foreach ($details as $key => $val) {
-            $shell = str_replace('<!-- ' . strtoupper($key) . ' -->', addslashes($val), $shell);
+            if (!is_string($key) || !is_string($val)) {
+                continue;
+            }
+
+            $shell = str_replace('<!-- ' . strtoupper(addslashes($key)) . ' -->', addslashes($val), $shell);
         }
     }
 }

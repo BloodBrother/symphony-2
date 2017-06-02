@@ -223,7 +223,7 @@ class contentPublish extends AdministrationPage
         $label = Widget::Label();
         $label->setAttribute('class', 'column primary');
 
-        $input = Widget::Input($data['type'], $data['query'], 'text', array(
+        $input = Widget::Input($data['type'], General::sanitize($data['query']), 'text', array(
             'placeholder' => __('Type and hit enter to apply filter…'),
             'autocomplete' => 'off'
         ));
@@ -244,12 +244,27 @@ class contentPublish extends AdministrationPage
 
         // Custom field comparisons
         foreach ($data['operators'] as $operator) {
+
             $filter = trim($operator['filter']);
 
+            // Check selected state
+            $selected = false;
+
+            // Selected state : Comparison mode "between" (x to y)
+            if ($operator['title'] === 'between' && preg_match('/^(-?(?:\d+(?:\.\d+)?|\.\d+)) to (-?(?:\d+(?:\.\d+)?|\.\d+))$/i', $data['filter'] )) {
+                $selected = true;
+            // Selected state : Other comparison modes (except "is")
+            } else if ((!empty($filter) && strpos($data['filter'], $filter) === 0)) {
+                $selected = true;
+            }
+
             $comparisons[] = array(
-                $filter,
-                (!empty($filter) && strpos($data['filter'], $filter) === 0),
-                __($operator['title'])
+                $operator['filter'],
+                $selected,
+                __($operator['title']),
+                null,
+                null,
+                array('data-comparison' => $operator['title'])
             );
         }
 
@@ -280,7 +295,7 @@ class contentPublish extends AdministrationPage
 
         $li = new XMLElement('li', __('Comparison mode') . ': ' . $operator['help'], array(
             'class' => 'help',
-            'data-comparison' => trim($operator['filter'])
+            'data-comparison' => $operator['title']
         ));
 
         $wrapper->appendChild($li);
@@ -294,7 +309,7 @@ class contentPublish extends AdministrationPage
             $filter = trim($operator['filter']);
 
             if (!empty($filter) && strpos($data['filter'], $filter) === 0) {
-                $query = substr($data['filter'], strlen($filter));
+                $query = substr($data['filter'], strlen($operator['filter']));
             }
         }
 
@@ -364,7 +379,7 @@ class contentPublish extends AdministrationPage
         $section = SectionManager::fetch($section_id);
 
         $this->setPageType('table');
-        $this->setTitle(__('%1$s &ndash; %2$s', array($section->get('name'), __('Symphony'))));
+        $this->setTitle(__('%1$s &ndash; %2$s', array(General::sanitize($section->get('name')), __('Symphony'))));
 
         $filters = array();
         $filter_querystring = $prepopulate_querystring = $where = $joins = null;
@@ -454,7 +469,7 @@ class contentPublish extends AdministrationPage
             array_unshift($subheading_buttons, Widget::Anchor(__('Edit Section'), SYMPHONY_URL . '/blueprints/sections/edit/' . $section_id . '/', __('Edit Section Configuration'), 'button'));
         }
 
-        $this->appendSubheading($section->get('name'), $subheading_buttons);
+        $this->appendSubheading(General::sanitize($section->get('name')), $subheading_buttons);
 
         /**
          * Allows adjustments to be made to the SQL where and joins statements
@@ -472,10 +487,17 @@ class contentPublish extends AdministrationPage
          */
         Symphony::ExtensionManager()->notifyMembers('AdjustPublishFiltering', '/publish/', array('section-id' => $section_id, 'where' => &$where, 'joins' => &$joins));
 
+        // get visible columns
+        $visible_columns = $section->fetchVisibleColumns();
+        // extract the needed schema
+        $element_names = array_values(array_map(function ($field) {
+            return $field->get('element_name');
+        }, $visible_columns));
+
         // Check that the filtered query fails that the filter is dropped and an
         // error is logged. #841 ^BA
         try {
-            $entries = EntryManager::fetchByPage($current_page, $section_id, Symphony::Configuration()->get('pagination_maximum_rows', 'symphony'), $where, $joins, true);
+            $entries = EntryManager::fetchByPage($current_page, $section_id, Symphony::Configuration()->get('pagination_maximum_rows', 'symphony'), $where, $joins, true, false, true, $element_names);
         } catch (DatabaseException $ex) {
             $this->pageAlert(__('An error occurred while retrieving filtered entries. Showing all entries instead.'), Alert::ERROR);
             $filter_querystring = null;
@@ -489,7 +511,7 @@ class contentPublish extends AdministrationPage
                 E_NOTICE,
                 true
             );
-            $entries = EntryManager::fetchByPage($current_page, $section_id, Symphony::Configuration()->get('pagination_maximum_rows', 'symphony'));
+            $entries = EntryManager::fetchByPage($current_page, $section_id, Symphony::Configuration()->get('pagination_maximum_rows', 'symphony'), null, null, true, false, true, $element_names);
         }
 
         // Flag filtering
@@ -501,7 +523,6 @@ class contentPublish extends AdministrationPage
         $this->Breadcrumbs->appendChild($filter_stats);
 
         // Build table
-        $visible_columns = $section->fetchVisibleColumns();
         $columns = array();
 
         if (is_array($visible_columns) && !empty($visible_columns)) {
@@ -869,7 +890,7 @@ class contentPublish extends AdministrationPage
                      */
                     Symphony::ExtensionManager()->notifyMembers('EntryPostDelete', '/publish/', array('entry_id' => $checked));
 
-                    redirect($_SERVER['REQUEST_URI']);
+                    redirect(server_safe('REQUEST_URI'));
                     break;
                 default:
                     list($option, $field_id, $value) = explode('-', $_POST['with-selected'], 3);
@@ -920,7 +941,7 @@ class contentPublish extends AdministrationPage
                             ));
                         }
 
-                        redirect($_SERVER['REQUEST_URI']);
+                        redirect(server_safe('REQUEST_URI'));
                     }
             }
         }
@@ -939,7 +960,7 @@ class contentPublish extends AdministrationPage
         $section = SectionManager::fetch($section_id);
 
         $this->setPageType('form');
-        $this->setTitle(__('%1$s &ndash; %2$s', array($section->get('name'), __('Symphony'))));
+        $this->setTitle(__('%1$s &ndash; %2$s', array(General::sanitize($section->get('name')), __('Symphony'))));
 
         // Ensure errored entries still maintain any prepopulated values [#2211]
         $this->Form->setAttribute('action', $this->Form->getAttribute('action') . $this->getPrepopulateString());
@@ -965,7 +986,7 @@ class contentPublish extends AdministrationPage
 
         // Build filtered breadcrumb [#1378}
         $this->insertBreadcrumbs(array(
-            Widget::Anchor($section->get('name'), SYMPHONY_URL . '/publish/' . $this->_context['section_handle'] . '/' . $this->getFilterString()),
+            Widget::Anchor(General::sanitize($section->get('name')), SYMPHONY_URL . '/publish/' . $this->_context['section_handle'] . '/' . $this->getFilterString()),
         ));
 
         $this->Form->appendChild(Widget::Input('MAX_FILE_SIZE', Symphony::Configuration()->get('max_upload_size', 'admin'), 'hidden'));
@@ -1047,7 +1068,7 @@ class contentPublish extends AdministrationPage
 
     public function __actionNew()
     {
-        if (array_key_exists('save', $_POST['action']) || array_key_exists("done", $_POST['action'])) {
+        if (is_array($_POST['action']) && (array_key_exists('save', $_POST['action']) || array_key_exists('done', $_POST['action']))) {
             $section_id = SectionManager::fetchIDFromHandle($this->_context['section_handle']);
 
             if (!$section = SectionManager::fetch($section_id)) {
@@ -1157,6 +1178,7 @@ class contentPublish extends AdministrationPage
         $base = '/publish/'.$this->_context['section_handle'] . '/';
         $new_link = $base . 'new/';
         $filter_link = $base;
+        $canonical_link = $base . 'edit/' . $entry_id . '/';
 
         EntryManager::setFetchSorting('id', 'DESC');
 
@@ -1214,6 +1236,7 @@ class contentPublish extends AdministrationPage
         if (isset($_REQUEST['prepopulate'])) {
             $new_link .= $this->getPrepopulateString();
             $filter_link .= $this->getFilterString();
+            $canonical_link .= $this->getPrepopulateString();
         }
 
         if (isset($this->_context['flag'])) {
@@ -1276,7 +1299,11 @@ class contentPublish extends AdministrationPage
 
         $this->setPageType('form');
         $this->Form->setAttribute('enctype', 'multipart/form-data');
-        $this->setTitle(__('%1$s &ndash; %2$s &ndash; %3$s', array($title, $section->get('name'), __('Symphony'))));
+        $this->setTitle(__('%1$s &ndash; %2$s &ndash; %3$s', array($title, General::sanitize($section->get('name')), __('Symphony'))));
+        $this->addElementToHead(new XMLElement('link', null, array(
+            'rel' => 'canonical',
+            'href' => SYMPHONY_URL . $canonical_link,
+        )));
 
         $sidebar_fields = $section->fetchFields(null, 'sidebar');
         $main_fields = $section->fetchFields(null, 'main');
@@ -1295,7 +1322,7 @@ class contentPublish extends AdministrationPage
         }
 
         $this->insertBreadcrumbs(array(
-            Widget::Anchor($section->get('name'), SYMPHONY_URL . (isset($filter_link) ? $filter_link : $base)),
+            Widget::Anchor(General::sanitize($section->get('name')), SYMPHONY_URL . (isset($filter_link) ? $filter_link : $base)),
         ));
 
         $this->Form->appendChild(Widget::Input('MAX_FILE_SIZE', Symphony::Configuration()->get('max_upload_size', 'admin'), 'hidden'));
@@ -1352,7 +1379,7 @@ class contentPublish extends AdministrationPage
     {
         $entry_id = intval($this->_context['entry_id']);
 
-        if (@array_key_exists('save', $_POST['action']) || @array_key_exists("done", $_POST['action'])) {
+        if (is_array($_POST['action']) && (array_key_exists('save', $_POST['action']) || array_key_exists("done", $_POST['action']))) {
             if (!$ret = EntryManager::fetch($entry_id)) {
                 Administration::instance()->throwCustomError(
                     __('The Entry, %s, could not be found.', array($entry_id)),
@@ -1417,7 +1444,7 @@ class contentPublish extends AdministrationPage
                     ));
                 }
             }
-        } elseif (@array_key_exists('delete', $_POST['action']) && is_numeric($entry_id)) {
+        } elseif (is_array($_POST['action']) && array_key_exists('delete', $_POST['action']) && is_numeric($entry_id)) {
             /**
              * Prior to deletion of entries. An array of Entry ID's is provided which
              * can be manipulated. This delegate was renamed from `Delete` to `EntryPreDelete`
@@ -1580,10 +1607,33 @@ class contentPublish extends AdministrationPage
             $content = new XMLElement('div', null, array('class' => 'content'));
             $content->setSelfClosingTag(false);
 
+            // backup global sorting
+            $sorting = EntryManager::getFetchSorting();
+
             // Process Parent Associations
             if (!is_null($parent_associations) && !empty($parent_associations)) {
+                $title = new XMLElement('h2', __('Linked to'), array('class' => 'association-title'));
+                $content->appendChild($title);
+
                 foreach ($parent_associations as $as) {
+                    if (empty($as['parent_section_field_id'])) {
+                        continue;
+                    }
                     if ($field = FieldManager::fetch($as['parent_section_field_id'])) {
+
+                        // Get the related section
+                        $parent_section = SectionManager::fetch($as['child_parent_id'])[0];
+
+                        if (!($parent_section instanceof Section)) {
+                            continue;
+                        }
+
+                        // set global sorting for associated section
+                        EntryManager::setFetchSorting(
+                            $parent_section->getSortingField(),
+                            $parent_section->getSortingOrder()
+                        );
+
                         if (isset($_GET['prepopulate'])) {
                             $prepopulate_field = key($_GET['prepopulate']);
                         }
@@ -1610,7 +1660,7 @@ class contentPublish extends AdministrationPage
                         if ($has_entries) {
                             $element = new XMLElement('section', null, array('class' => 'association parent'));
                             $header = new XMLElement('header');
-                            $header->appendChild(new XMLElement('p', __('Linked to %s in', array('<a class="association-section" href="' . SYMPHONY_URL . '/publish/' . $as['handle'] . '/">' . $as['name'] . '</a>'))));
+                            $header->appendChild(new XMLElement('p', '<a class="association-section" href="' . SYMPHONY_URL . '/publish/' . $as['handle'] . '/">' . $as['name'] . '</a>'));
                             $element->appendChild($header);
 
                             $ul = new XMLElement('ul', null, array(
@@ -1635,6 +1685,9 @@ class contentPublish extends AdministrationPage
 
             // Process Child Associations
             if (!is_null($child_associations) && !empty($child_associations)) {
+                $title = new XMLElement('h2', __('Links in'), array('class' => 'association-title'));
+                $content->appendChild($title);
+
                 foreach ($child_associations as $as) {
                     // Get the related section
                     $child_section = SectionManager::fetch($as['child_section_id']);
@@ -1643,13 +1696,23 @@ class contentPublish extends AdministrationPage
                         continue;
                     }
 
+                    // set global sorting for associated section
+                    EntryManager::setFetchSorting(
+                        $child_section->getSortingField(),
+                        $child_section->getSortingOrder()
+                    );
+
                     // Get the visible field instance (using the sorting field, this is more flexible than visibleColumns())
                     // Get the link field instance
                     $visible_field   = current($child_section->fetchVisibleColumns());
                     $relation_field  = FieldManager::fetch($as['child_section_field_id']);
 
                     // Get entries, using $schema for performance reasons.
-                    $entry_ids = $relation_field->findRelatedEntries($entry_id, $as['parent_section_field_id']);
+                    if (!is_null($parent_section_field_id)) {
+                        $entry_ids = $relation_field->findRelatedEntries($entry_id, $as['parent_section_field_id']);
+                    } else {
+                        $entry_ids = $relation_field->findRelatedEntries($entry_id, $as['child_section_field_id']);
+                    }
                     $schema = $visible_field ? array($visible_field->get('element_name')) : array();
                     $where = sprintf(' AND `e`.`id` IN (%s)', implode(', ', $entry_ids));
 
@@ -1670,14 +1733,14 @@ class contentPublish extends AdministrationPage
                     ));
 
                     // Create new entries
-                    $create = new XMLElement('a', __('Create New'), array(
+                    $create = new XMLElement('a', '+', array(
                         'class' => 'button association-new',
                         'href' => SYMPHONY_URL . '/publish/' . $as['handle'] . '/new/' . $prepopulate
                     ));
 
                     // Display existing entries
                     if ($has_entries) {
-                        $header->appendChild(new XMLElement('p', __('Links in %s', array($a->generate()))));
+                        $header->appendChild(new XMLElement('p', $a->generate()));
 
                         $ul = new XMLElement('ul', null, array(
                             'class' => 'association-links',
@@ -1728,6 +1791,12 @@ class contentPublish extends AdministrationPage
                     $content->appendChild($element);
                 }
             }
+
+            // reset global sorting
+            EntryManager::setFetchSorting(
+                $sorting->field,
+                $sorting->direction
+            );
         }
 
         $drawer = Widget::Drawer('section-associations', __('Show Associations'), $content);
@@ -1745,9 +1814,11 @@ class contentPublish extends AdministrationPage
     {
         $prepopulate_querystring = '';
 
-        if (isset($_REQUEST['prepopulate'])) {
+        if (isset($_REQUEST['prepopulate']) && is_array($_REQUEST['prepopulate'])) {
             foreach ($_REQUEST['prepopulate'] as $field_id => $value) {
-                $prepopulate_querystring .= sprintf("prepopulate[%s]=%s&", $field_id, rawurldecode($value));
+                // Properly decode and re-encode value for output
+                $value = rawurlencode(rawurldecode($value));
+                $prepopulate_querystring .= sprintf("prepopulate[%s]=%s&", $field_id, $value);
             }
             $prepopulate_querystring = trim($prepopulate_querystring, '&');
         }
@@ -1772,10 +1843,12 @@ class contentPublish extends AdministrationPage
     {
         $filter_querystring = '';
 
-        if (isset($_REQUEST['prepopulate'])) {
+        if (isset($_REQUEST['prepopulate']) && is_array($_REQUEST['prepopulate'])) {
             foreach ($_REQUEST['prepopulate'] as $field_id => $value) {
                 $handle = FieldManager::fetchHandleFromID($field_id);
-                $filter_querystring .= sprintf("filter[%s]=%s&", $handle, rawurldecode($value));
+                // Properly decode and re-encode value for output
+                $value = rawurlencode(rawurldecode($value));
+                $filter_querystring .= sprintf('filter[%s]=%s&', $handle, $value);
             }
             $filter_querystring = trim($filter_querystring, '&');
         }

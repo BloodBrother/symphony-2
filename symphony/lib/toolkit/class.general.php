@@ -104,7 +104,7 @@ class General
      * @param boolean $isFile (optional)
      *  if this is true, the method will attempt to read from a file, `$data`
      *  instead.
-     * @param mixed $xsltProcessor (optional)
+     * @param XsltProcess $xsltProcessor (optional)
      *  if set, the validation will be done using this XSLT processor rather
      *  than the built in XML parser. the default is null.
      * @param string $encoding (optional)
@@ -405,6 +405,30 @@ class General
     }
 
     /**
+     * Finds position of the first occurrence of a string in a string.
+     * This function will attempt to use PHP's `mbstring` functions if they are available.
+     * This function also forces utf-8 encoding for mbstring.
+     *
+     * @since Symphony 2.7.0
+     * @param string $haystack
+     *  the string to look into
+     * @param string $needle
+     *  the string to look for
+     * @param int $offset
+     *  the search offset. If it is not specified, 0 is used.
+     *  A negative offset counts from the end of the string.
+     * @return int
+     *  the numeric position of the first occurrence of needle in the haystack
+     */
+    public static function strpos($haystack, $needle, $offset = 0)
+    {
+        if (function_exists('mb_strpos')) {
+            return mb_strpos($haystack, $needle, $offset, 'utf-8');
+        }
+        return strpos($haystack, $needle, $offset);
+    }
+
+    /**
      * Creates a sub string.
      * This function will attempt to use PHP's `mbstring` functions if they are available.
      * This function also forces utf-8 encoding.
@@ -414,15 +438,18 @@ class General
      *  the string to operate on
      * @param int $start
      *  the starting offset
-     * @param int $start
+     * @param int $length
      *  the length of the substring
      * @return string
      *  the resulting substring
      */
-    public static function substr($str, $start, $length)
+    public static function substr($str, $start, $length = null)
     {
         if (function_exists('mb_substr')) {
             return mb_substr($str, $start, $length, 'utf-8');
+        }
+        if ($length === null) {
+            return substr($str, $start);
         }
         return substr($str, $start, $length);
     }
@@ -441,7 +468,7 @@ class General
      */
     public static function substrmin($str, $val)
     {
-        return(self::substr($str, 0, min(self::strlen($str), $val)));
+        return self::substr($str, 0, min(self::strlen($str), $val));
     }
 
     /**
@@ -458,7 +485,7 @@ class General
      */
     public static function substrmax($str, $val)
     {
-        return(self::substr($str, 0, max(self::strlen($str), $val)));
+        return self::substr($str, 0, max(self::strlen($str), $val));
     }
 
     /**
@@ -501,7 +528,7 @@ class General
      *
      * @param string $path
      *  the path containing the directories to create.
-     * @param integer $mode (optional)
+     * @param string|integer $mode (optional)
      *  the permissions (in octal) of the directories to create. Defaults to 0755
      * @param boolean $silent (optional)
      *  true if an exception should be raised if an error occurs, false
@@ -893,14 +920,15 @@ class General
      * with the input content. This function will ignore errors in opening,
      * writing, closing and changing the permissions of the resulting file.
      * If opening or writing the file fail then this will return false.
-     * This method calls `clearstatcache()` in order to make sure we do not
-     * hit the cache when checking for permissions.
+     * This method calls `General::checkFileWritable()` which properly checks
+     * for permissions.
      *
+     * @uses General::checkFileWritable()
      * @param string $file
      *  the path of the file to write.
      * @param mixed $data
      *  the data to write to the file.
-     * @param integer|null $perm (optional)
+     * @param integer|string $perm (optional)
      *  the permissions as an octal number to set set on the resulting file.
      *  this defaults to 0644 (if omitted or set to null)
      * @param string $mode (optional)
@@ -914,9 +942,7 @@ class General
      */
     public static function writeFile($file, $data, $perm = 0644, $mode = 'w', $trim = false)
     {
-        clearstatcache();
-
-        if (static::checkFile($file) === false) {
+        if (static::checkFileWritable($file) === false) {
             return false;
         }
 
@@ -939,7 +965,7 @@ class General
                 $perm = 0644;
             }
 
-            chmod($file, intval($perm, 8));
+            @chmod($file, intval($perm, 8));
         } catch (Exception $ex) {
             // If we can't chmod the file, this is probably because our host is
             // running PHP with a different user to that of the file. Although we
@@ -955,8 +981,9 @@ class General
     }
 
     /**
-     * Checks that the file and it's folder are readable and writable.
+     * Checks that the file and its folder are readable and writable.
      *
+     * @deprecated @since Symphony 2.7.0
      * @since Symphony 2.6.3
      * @return boolean
      */
@@ -976,9 +1003,74 @@ class General
     }
 
     /**
+     * Checks that the file is readable.
+     * It first checks to see if the $file path exists
+     * and if it does, checks that it is readable.
+     *
+     * @uses clearstatcache()
+     * @since Symphony 2.7.0
+     * @param string $file
+     *  The path of the file
+     * @return boolean
+     */
+    public static function checkFileReadable($file)
+    {
+        clearstatcache();
+        // Reading a file requires that is exists and can be read
+        return @file_exists($file) && @is_readable($file);
+    }
+
+    /**
+     * Checks that the file is writable.
+     * It first checks to see if the $file path exists
+     * and if it does, checks that is it writable. If the file
+     * does not exits, it checks that the directory exists and if it does,
+     * checks that it is writable.
+     *
+     * @uses clearstatcache()
+     * @since Symphony 2.7.0
+     * @param string $file
+     *  The path of the file
+     * @return boolean
+     */
+    public static function checkFileWritable($file)
+    {
+        clearstatcache();
+        if (@file_exists($file)) {
+            // Writing to an existing file does not require write
+            // permissions on the directory.
+            return @is_writable($file);
+        }
+        $dir = dirname($file);
+        // Creating a file requires write permissions on the directory.
+        return @file_exists($dir) && @is_writable($dir);
+    }
+
+    /**
+     * Checks that the file is deletable.
+     * It first checks to see if the $file path exists
+     * and if it does, checks that is it writable.
+     *
+     * @uses clearstatcache()
+     * @since Symphony 2.7.0
+     * @param string $file
+     *  The path of the file
+     * @return boolean
+     */
+    public static function checkFileDeletable($file)
+    {
+        clearstatcache();
+        $dir = dirname($file);
+        // Deleting a file requires write permissions on the directory.
+        // It does not require write permissions on the file
+        return @file_exists($dir) && @is_writable($dir);
+    }
+
+    /**
      * Delete a file at a given path, silently ignoring errors depending
      * on the value of the input variable $silent.
      *
+     * @uses General::checkFileDeletable()
      * @param string $file
      *  the path of the file to delete
      * @param boolean $silent (optional)
@@ -993,10 +1085,13 @@ class General
     public static function deleteFile($file, $silent = true)
     {
         try {
+            if (static::checkFileDeletable($file) === false) {
+                throw new Exception(__('Denied by permission'));
+            }
             return unlink($file);
         } catch (Exception $ex) {
             if ($silent === false) {
-                throw new Exception(__('Unable to remove file - %s', array($file)));
+                throw new Exception(__('Unable to remove file - %s', array($file)), 0, $ex);
             }
 
             return false;
@@ -1274,21 +1369,13 @@ class General
     }
 
     /**
-     * Truncate a string to a given length. Newlines are replaced with `<br />`
-     * html elements and html tags are removed from the string. If the resulting
-     * string contains only spaces then null is returned. If the resulting string
-     * is less than the input length then it is returned. If the option to
-     * truncate the string to a space character is provided then the string is
-     * truncated to the character prior to the last space in the string. Words
-     * (contiguous non-' ' characters) are then removed from the end of the string
-     * until the length of resulting string is within the input bound. Initial
-     * and trailing spaces are removed. Provided the user requested an
-     * ellipsis suffix and the resulting string is shorter than the input string
-     * then the ellipses are appended to the result which is then returned.
+     * Truncate a string to a given length, respecting word boundaries. The returned
+     * string will always be less than `$maxChars`. Newlines, HTML elements and
+     * leading or trailing spaces are removed from the string.
      *
      * @param string $string
      *  the string to truncate.
-     * @param integer maxChars (optional)
+     * @param integer $maxChars (optional)
      *  the maximum length of the string to truncate the input string to. this
      *  defaults to 200 characters.
      * @param boolean $appendHellip (optional)
@@ -1314,22 +1401,15 @@ class General
             return $string;
         }
 
-        $string = trim(substr($string, 0, $maxChars));
+        // Find the last space before the the maxChars limit is hit.
+        $last_word_break = strrpos($string, ' ', $maxChars - $original_length);
+        $result = substr($string, 0, $last_word_break);
 
-        $array = explode(' ', $string);
-        $length = 0;
-
-        while (!empty($array) && $length > $maxChars) {
-            $length += strlen(array_pop($array)) + 1;
-        }
-
-        $result = implode(' ', $array);
-
-        if ($appendHellip && strlen($result) < $original_length) {
+        if ($appendHellip) {
             $result .= "&#8230;";
         }
 
-        return($result);
+        return $result;
     }
 
     /**
@@ -1337,26 +1417,36 @@ class General
      * set its permissions to the input permissions. This will ignore errors
      * in the `is_uploaded_file()`, `move_uploaded_file()` and `chmod()` functions.
      *
+     * @uses General::checkFileWritable()
      * @param string $dest_path
      *  the file path to which the source file is to be moved.
-     * @param string #dest_name
+     * @param string $dest_name
      *  the file name within the file path to which the source file is to be moved.
      * @param string $tmp_name
      *  the full path name of the source file to move.
-     * @param integer $perm (optional)
-     *  the permissions to apply to the moved file. this defaults to 0777.
+     * @param integer|string $perm (optional)
+     *  the permissions to apply to the moved file. this defaults to 0644 @since
+     *  Symphony 2.7.0. It was 0777 in 2.6.x and less.
      * @return boolean
      *  true if the file was moved and its permissions set as required. false otherwise.
      */
-    public static function uploadFile($dest_path, $dest_name, $tmp_name, $perm = 0777)
+    public static function uploadFile($dest_path, $dest_name, $tmp_name, $perm = 0644)
     {
         // Upload the file
         if (@is_uploaded_file($tmp_name)) {
             $dest_path = rtrim($dest_path, '/') . '/';
+            $dest = $dest_path . $dest_name;
 
+            // Check that destination is writable
+            if (!static::checkFileWritable($dest)) {
+                return false;
+            }
             // Try place the file in the correction location
-            if (@move_uploaded_file($tmp_name, $dest_path . $dest_name)) {
-                chmod($dest_path . $dest_name, intval($perm, 8));
+            if (@move_uploaded_file($tmp_name, $dest)) {
+                if (is_null($perm)) {
+                    $perm = 0644;
+                }
+                @chmod($dest, intval($perm, 8));
                 return true;
             }
         }
@@ -1408,6 +1498,9 @@ class General
         );
 
         $last = strtolower($file_size[strlen($file_size)-1]);
+
+        $file_size = (int) $file_size;
+
         switch ($last) {
             case 'g':
                 $file_size *= 1024;

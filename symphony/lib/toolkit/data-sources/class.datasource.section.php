@@ -387,40 +387,49 @@ class SectionDatasource extends Datasource
 
             // Support system:id as well as the old 'id'. #1691
             if ($field_id === 'system:id' || $field_id === 'id') {
-                $c = 'IN';
-
-                if (stripos($value[0], 'not:') === 0) {
-                    $value[0] = preg_replace('/^not:\s*/', null, $value[0]);
-                    $c = 'NOT IN';
+                if ($filter_type == Datasource::FILTER_AND) {
+                    $value = array_map(function ($val) {
+                        return explode(',', $val);
+                    }, $value);
+                } else {
+                    $value = array($value);
                 }
 
-                // Cast all ID's to integers. (RE: #2191)
-                $value = array_map(function ($val) {
-                    $val = General::intval($val);
-
-                    // General::intval can return -1, so reset that to 0
-                    // so there are no side effects for the following
-                    // array_sum and array_filter calls. RE: #2475
-                    if ($val === -1) {
-                        $val = 0;
+                foreach ($value as $v) {
+                    $c = 'IN';
+                    if (stripos($v[0], 'not:') === 0) {
+                        $v[0] = preg_replace('/^not:\s*/', null, $v[0]);
+                        $c = 'NOT IN';
                     }
 
-                    return $val;
-                }, $value);
-                $count = array_sum($value);
-                $value = array_filter($value);
+                    // Cast all ID's to integers. (RE: #2191)
+                    $v = array_map(function ($val) {
+                        $val = General::intval($val);
 
-                // If the ID was cast to 0, then we need to filter on 'id' = 0,
-                // which will of course return no results, but without it the
-                // Datasource will return ALL results, which is not the
-                // desired behaviour. RE: #1619
-                if ($count === 0) {
-                    $value[] = 0;
-                }
+                        // General::intval can return -1, so reset that to 0
+                        // so there are no side effects for the following
+                        // array_sum and array_filter calls. RE: #2475
+                        if ($val === -1) {
+                            $val = 0;
+                        }
 
-                // If there are no ID's, no need to filter. RE: #1567
-                if (!empty($value)) {
-                    $where .= " AND `e`.id " . $c . " (".implode(", ", $value).") ";
+                        return $val;
+                    }, $v);
+                    $count = array_sum($v);
+                    $v = array_filter($v);
+
+                    // If the ID was cast to 0, then we need to filter on 'id' = 0,
+                    // which will of course return no results, but without it the
+                    // Datasource will return ALL results, which is not the
+                    // desired behaviour. RE: #1619
+                    if ($count === 0) {
+                        $v[] = 0;
+                    }
+
+                    // If there are no ID's, no need to filter. RE: #1567
+                    if (!empty($v)) {
+                        $where .= " AND `e`.id " . $c . " (".implode(", ", $v).") ";
+                    }
                 }
             } elseif ($field_id === 'system:creation-date' || $field_id === 'system:modification-date' || $field_id === 'system:date') {
                 $date_joins = '';
@@ -562,6 +571,8 @@ class SectionDatasource extends Datasource
             'filters' => $this->dsParamFILTERS
         ));
 
+        $entries_per_page = ($this->dsParamPAGINATERESULTS === 'yes' && isset($this->dsParamLIMIT) && $this->dsParamLIMIT >= 0 ? $this->dsParamLIMIT : $entries['total-entries']);
+
         if (($entries['total-entries'] <= 0 || $include_pagination_element === true) && (!is_array($entries['records']) || empty($entries['records'])) || $this->dsParamSTARTPAGE == '0') {
             if ($this->dsParamREDIRECTONEMPTY === 'yes') {
                 throw new FrontendPageNotFoundException;
@@ -572,7 +583,7 @@ class SectionDatasource extends Datasource
             $result->prependChild($sectioninfo);
 
             if ($include_pagination_element) {
-                $pagination_element = General::buildPaginationElement();
+                $pagination_element = General::buildPaginationElement(0, 0, $entries_per_page);
 
                 if ($pagination_element instanceof XMLElement && $result instanceof XMLElement) {
                     $result->prependChild($pagination_element);
@@ -583,12 +594,10 @@ class SectionDatasource extends Datasource
                 $result->appendChild($sectioninfo);
 
                 if ($include_pagination_element) {
-                    $t = ($this->dsParamPAGINATERESULTS === 'yes' && isset($this->dsParamLIMIT) && $this->dsParamLIMIT >= 0 ? $this->dsParamLIMIT : $entries['total-entries']);
-
                     $pagination_element = General::buildPaginationElement(
                         $entries['total-entries'],
                         $entries['total-pages'],
-                        $t,
+                        $entries_per_page,
                         ($this->dsParamPAGINATERESULTS === 'yes' && $this->dsParamSTARTPAGE > 0 ? $this->dsParamSTARTPAGE : 1)
                     );
 

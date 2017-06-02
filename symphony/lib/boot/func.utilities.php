@@ -57,7 +57,7 @@ function getcwd_safe()
  *
  * @param string $name
  *  The name of the constant to set
- * @param string $value
+ * @param string|integer|boolean $value
  *  The value of the desired constant
  */
 function define_safe($name, $value)
@@ -65,6 +65,26 @@ function define_safe($name, $value)
     if (!defined($name)) {
         define($name, $value);
     }
+}
+
+/**
+ * Retrieve a value from the $_SERVER array. Makes sure the key exists.
+ * Returns null otherwise.
+ *
+ * This function is an extension point. We could check other storage for
+ * specific values or enforce some security restrictions.
+ *
+ * @param string $name
+ *  The name of the value to retrieve
+ * @return mixed
+ *  The value, is it exists
+ */
+function server_safe($name)
+{
+    if (isset($_SERVER[$name])) {
+        return $_SERVER[$name];
+    }
+    return null;
 }
 
 /**
@@ -112,6 +132,8 @@ function ini_size_to_bytes($val)
 {
     $val = trim($val);
     $last = strtolower($val[strlen($val)-1]);
+
+    $val = (int) $val;
 
     switch ($last) {
         case 'g':
@@ -191,7 +213,7 @@ function cleanup_session_cookies()
 function is_session_empty()
 {
     $session_is_empty = true;
-    if (is_array($_SESSION)) {
+    if (isset($_SESSION) && is_array($_SESSION)) {
         foreach ($_SESSION as $contents) {
             if (!empty($contents)) {
                 $session_is_empty = false;
@@ -231,7 +253,7 @@ function symphony_launcher($mode)
     $output = $renderer->display(getCurrentPage());
 
     // #1808
-    if (isset($_SERVER['HTTP_MOD_REWRITE'])) {
+    if (server_safe('HTTP_MOD_REWRITE') != null) {
         $output = file_get_contents(GenericExceptionHandler::getTemplate('fatalerror.rewrite'));
         $output = str_replace('{ASSETS_URL}', ASSETS_URL, $output);
         $output = str_replace('{SYMPHONY_URL}', SYMPHONY_URL, $output);

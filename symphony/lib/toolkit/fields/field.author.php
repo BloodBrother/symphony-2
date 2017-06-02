@@ -464,7 +464,9 @@ class FieldAuthor extends Field implements ExportableField
                     ) {$regex} '{$pattern}'
                 )
             ";
-        } elseif ($andOperation) {
+        } else if (self::isFilterSQL($data[0])) {
+            $this->buildFilterSQL($data[0], array('username', 'first_name', 'last_name'), $joins, $where);
+        } else if ($andOperation) {
             foreach ($data as $value) {
                 $this->_key++;
                 $value = $this->cleanValue($value);
@@ -548,6 +550,14 @@ class FieldAuthor extends Field implements ExportableField
             ";
             $sort = sprintf('ORDER BY `a`.`first_name` %1$s, `a`.`last_name` %1$s', $order);
         }
+    }
+
+    public function buildSortingSelectSQL($sort, $order = 'ASC')
+    {
+        if (in_array(strtolower($order), array('random', 'rand'))) {
+            return null;
+        }
+        return '`a`.`first_name`, `a`.`last_name`';
     }
 
     /*-------------------------------------------------------------------------

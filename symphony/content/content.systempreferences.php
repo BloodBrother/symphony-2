@@ -20,13 +20,16 @@ class contentSystemPreferences extends AdministrationPage
     {
         $this->setPageType('form');
         $this->setTitle(__('%1$s &ndash; %2$s', array(__('Preferences'), __('Symphony'))));
-
+        $this->addElementToHead(new XMLElement('link', null, array(
+            'rel' => 'canonical',
+            'href' => SYMPHONY_URL . '/system/preferences/',
+        )));
         $this->appendSubheading(__('Preferences'));
 
         $bIsWritable = true;
         $formHasErrors = (is_array($this->_errors) && !empty($this->_errors));
 
-        if (General::checkFile(CONFIG) === false) {
+        if (General::checkFileWritable(CONFIG) === false) {
             $this->pageAlert(__('The Symphony configuration file, %s, or folder is not writable. You will not be able to save changes to preferences.', array('<code>/manifest/config.php</code>')), Alert::ERROR);
             $bIsWritable = false;
         } elseif ($formHasErrors) {
@@ -64,8 +67,7 @@ class contentSystemPreferences extends AdministrationPage
         }
 
         // Get available EmailGateways
-        $email_gateway_manager = new EmailGatewayManager;
-        $email_gateways = $email_gateway_manager->listAll();
+        $email_gateways = EmailGatewayManager::listAll();
 
         if (count($email_gateways) >= 1) {
             $group = new XMLElement('fieldset', null, array('class' => 'settings condensed'));
@@ -75,8 +77,8 @@ class contentSystemPreferences extends AdministrationPage
             // Get gateway names
             ksort($email_gateways);
 
-            $default_gateway = $email_gateway_manager->getDefaultGateway();
-            $selected_is_installed = $email_gateway_manager->__getClassPath($default_gateway);
+            $default_gateway = EmailGatewayManager::getDefaultGateway();
+            $selected_is_installed = EmailGatewayManager::__getClassPath($default_gateway);
 
             $options = array();
 
@@ -92,7 +94,7 @@ class contentSystemPreferences extends AdministrationPage
         }
 
         foreach ($email_gateways as $gateway) {
-            $gateway_settings = $email_gateway_manager->create($gateway['handle'])->getPreferencesPane();
+            $gateway_settings = EmailGatewayManager::create($gateway['handle'])->getPreferencesPane();
 
             if (is_a($gateway_settings, 'XMLElement')) {
                 $this->Form->appendChild($gateway_settings);
@@ -180,7 +182,7 @@ class contentSystemPreferences extends AdministrationPage
     public function action()
     {
         // Do not proceed if the config file cannot be changed
-        if (General::checkFile(CONFIG) === false) {
+        if (General::checkFileWritable(CONFIG) === false) {
             redirect(SYMPHONY_URL . '/system/preferences/');
         }
 

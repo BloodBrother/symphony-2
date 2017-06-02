@@ -330,10 +330,12 @@ class AdministrationPage extends HTMLPage
      * backend page such as the default stylesheets and scripts, the navigation and
      * the footer. Any alerts are also appended by this function. `view()` is called to
      * build the actual content of the page. The `InitialiseAdminPageHead` delegate
-     * allows extensions to add elements to the `<head>`.
+     * allows extensions to add elements to the `<head>`. The `CanAccessPage` delegate
+     * allows extensions to restrict access to pages.
      *
      * @see view()
      * @uses InitialiseAdminPageHead
+     * @uses CanAccessPage
      * @param array $context
      *  An associative array describing this pages context. This
      *  can include the section handle, the current entry_id, the page
@@ -441,6 +443,14 @@ class AdministrationPage extends HTMLPage
             $this->addHeaderToPage('X-Frame-Options', 'SAMEORIGIN');
         }
 
+        if (!array_key_exists('x-content-type-options', $this->headers())) {
+            $this->addHeaderToPage('X-Content-Type-Options', 'nosniff');
+        }
+
+        if (!array_key_exists('x-xss-protection', $this->headers())) {
+            $this->addHeaderToPage('X-XSS-Protection', '1; mode=block');
+        }
+
         if (!array_key_exists('access-control-allow-origin', $this->headers())) {
             $this->addHeaderToPage('Access-Control-Allow-Origin', URL);
         }
@@ -473,6 +483,12 @@ class AdministrationPage extends HTMLPage
      * This check uses the `ASSETS . /xml/navigation.xml` file to determine
      * if the current page (or the current page namespace) can be viewed
      * by the currently logged in Author.
+     *
+     * @since Symphony 2.7.0
+     * It fires a delegate, CanAccessPage, to allow extensions to restrict access
+     * to the current page
+     *
+     * @uses CanAccessPage
      *
      * @link http://github.com/symphonycms/symphony-2/blob/master/symphony/assets/xml/navigation.xml
      * @return boolean
@@ -511,7 +527,42 @@ class AdministrationPage extends HTMLPage
             }
         }
 
-        return $this->doesAuthorHaveAccess($page_limit);
+        $hasAccess = $this->doesAuthorHaveAccess($page_limit);
+
+        if ($hasAccess) {
+            $page_context = $this->getContext();
+            /**
+             * Immediately after the core access rules allowed access to this page
+             * (i.e. not called if the core rules denied it).
+             * Extension developers must only further restrict access to it.
+             * Extension developers must also take care of checking the current value
+             * of the allowed parameter in order to prevent conflicts with other extensions.
+             * `$context['allowed'] = $context['allowed'] && customLogic();`
+             *
+             * @delegate CanAccessPage
+             * @since Symphony 2.7.0
+             * @see doesAuthorHaveAccess()
+             * @param string $context
+             *  '/backend/'
+             * @param bool $allowed
+             *  A flag to further restrict access to the page, passed by reference
+             * @param string $page_limit
+             *  The computed page limit for the current page
+             * @param string $page_url
+             *  The computed page url for the current page
+             */
+            Symphony::ExtensionManager()->notifyMembers('CanAccessPage', '/backend/', array(
+                'allowed' => &$hasAccess,
+                'page_limit' => $page_limit,
+                'page_url' => $page,
+                'section' => array(
+                    'id' => !isset($page_context['section_handle']) ? 0 : SectionManager::fetchIDFromHandle($page_context['section_handle']),
+                    'handle' => $page_context['section_handle']
+                ),
+            ));
+        }
+
+        return $hasAccess;
     }
 
     /**
@@ -628,11 +679,18 @@ class AdministrationPage extends HTMLPage
 
                 // Add prefixes to all context values by making the
                 // class be {key}-{value}. #1397 ^BA
-            } elseif (!is_numeric($key) && isset($value)) {
-                $value = str_replace('_', '-', $key) . '-'. $value;
+            } else if (!is_numeric($key) && isset($value)) {
+                // Skip arrays
+                if (is_array($value)) {
+                    $value = null;
+                } else {
+                    $value = str_replace('_', '-', $key) . '-'. $value;
+                }
             }
 
-            $body_class .= trim($value) . ' ';
+            if ($value !== null) {
+                $body_class .= trim($value) . ' ';
+            }
         }
 
         $classes = array_merge(explode(' ', trim($body_class)), explode(' ', trim($this->_body_class)));
@@ -788,7 +846,9 @@ class AdministrationPage extends HTMLPage
          * @param array $nav
          *  An associative array of the current navigation, passed by reference
          */
-        Symphony::ExtensionManager()->notifyMembers('NavigationPreRender', '/backend/', array('navigation' => &$nav));
+        Symphony::ExtensionManager()->notifyMembers('NavigationPreRender', '/backend/', array(
+            'navigation' => &$nav,
+        ));
 
         $navElement = new XMLElement('nav', null, array('id' => 'nav', 'role' => 'navigation'));
         $contentNav = new XMLElement('ul', null, array('class' => 'content', 'role' => 'menubar'));
@@ -799,8 +859,10 @@ class AdministrationPage extends HTMLPage
                 continue;
             }
 
-            if ($this->doesAuthorHaveAccess($n['limit'])) {
-                $xGroup = new XMLElement('li', $n['name'], array('role' => 'presentation'));
+            $item_limit = isset($n['limit']) ? $n['limit'] : null;
+
+            if ($this->doesAuthorHaveAccess($item_limit)) {
+                $xGroup = new XMLElement('li', General::sanitize($n['name']), array('role' => 'presentation'));
 
                 if (isset($n['class']) && trim($n['name']) !== '') {
                     $xGroup->setAttribute('class', $n['class']);
@@ -816,10 +878,12 @@ class AdministrationPage extends HTMLPage
                             continue;
                         }
 
-                        if ($this->doesAuthorHaveAccess($c['limit'])) {
+                        $child_item_limit = isset($c['limit']) ? $c['limit'] : null;
+
+                        if ($this->doesAuthorHaveAccess($child_item_limit)) {
                             $xChild = new XMLElement('li');
                             $xChild->setAttribute('role', 'menuitem');
-                            $linkChild = Widget::Anchor($c['name'], SYMPHONY_URL . $c['link']);
+                            $linkChild = Widget::Anchor(General::sanitize($c['name']), SYMPHONY_URL . $c['link']);
                             if (isset($c['target'])) {
                                 $linkChild->setAttribute('target', $c['target']);
                             }
@@ -853,6 +917,10 @@ class AdministrationPage extends HTMLPage
      * Returns the `$_navigation` variable of this Page. If it is empty,
      * it will be built by `__buildNavigation`
      *
+     * When it calls `__buildNavigation`, it fires a delegate, NavigationPostBuild,
+     * to allow extensions to manipulate the navigation.
+     *
+     * @uses NavigationPostBuild
      * @see __buildNavigation()
      * @return array
      */
@@ -955,13 +1023,49 @@ class AdministrationPage extends HTMLPage
                     );
                 }
 
-                $nav[$group_index]['children'][] = array(
-                    'link' => '/publish/' . $s->get('handle') . '/',
-                    'name' => $s->get('name'),
-                    'type' => 'section',
-                    'section' => array('id' => $s->get('id'), 'handle' => $s->get('handle')),
-                    'visible' => ($s->get('hidden') == 'no' ? 'yes' : 'no')
-                );
+                $hasAccess = true;
+                /**
+                 * Immediately after the core access rules allowed access to this page
+                 * (i.e. not called if the core rules denied it).
+                 * Extension developers must only further restrict access to it.
+                 * Extension developers must also take care of checking the current value
+                 * of the allowed parameter in order to prevent conflicts with other extensions.
+                 * `$context['allowed'] = $context['allowed'] && customLogic();`
+                 *
+                 * @delegate CanAccessPage
+                 * @since Symphony 2.7.0
+                 * @see doesAuthorHaveAccess()
+                 * @param string $context
+                 *  '/backend/'
+                 * @param bool $allowed
+                 *  A flag to further restrict access to the page, passed by reference
+                 * @param string $page_limit
+                 *  The computed page limit for the current page
+                 * @param string $page_url
+                 *  The computed page url for the current page
+                 */
+                Symphony::ExtensionManager()->notifyMembers('CanAccessPage', '/backend/', array(
+                    'allowed' => &$hasAccess,
+                    'page_limit' => $c['limit'],
+                    'page_url' => $c['link'],
+                    'section' => array(
+                        'id' => $s->get('id'),
+                        'handle' => $s->get('handle')
+                    ),
+                ));
+
+                if ($hasAccess) {
+                    $nav[$group_index]['children'][] = array(
+                        'link' => '/publish/' . $s->get('handle') . '/',
+                        'name' => $s->get('name'),
+                        'type' => 'section',
+                        'section' => array(
+                            'id' => $s->get('id'),
+                            'handle' => $s->get('handle')
+                        ),
+                        'visible' => ($s->get('hidden') == 'no' ? 'yes' : 'no')
+                    );
+                }
             }
         }
     }
@@ -1096,6 +1200,10 @@ class AdministrationPage extends HTMLPage
      * navigation. Additionally, this function will set the active group of the navigation
      * by checking the current page against the array of links.
      *
+     * It fires a delegate, NavigationPostBuild, to allow extensions to manipulate
+     * the navigation.
+     *
+     * @uses NavigationPostBuild
      * @link https://github.com/symphonycms/symphony-2/blob/master/symphony/assets/xml/navigation.xml
      * @link https://github.com/symphonycms/symphony-2/blob/master/symphony/lib/toolkit/class.extension.php
      */
@@ -1120,6 +1228,25 @@ class AdministrationPage extends HTMLPage
 
         ksort($nav);
         $this->_navigation = $nav;
+
+        /**
+         * Immediately after the navigation array as been built. Provided with the
+         * navigation array. Manipulating it will alter the navigation for all pages.
+         * Developers can also alter the 'limit' property of each page to allow more
+         * or less access to them.
+         * Preventing a user from accessing the page affects both the navigation and the
+         * page access rights: user will get a 403 Forbidden error if not authorized.
+         *
+         * @delegate NavigationPostBuild
+         * @since Symphony 2.7.0
+         * @param string $context
+         *  '/backend/'
+         * @param array $nav
+         *  An associative array of the current navigation, passed by reference
+         */
+        Symphony::ExtensionManager()->notifyMembers('NavigationPostBuild', '/backend/', array(
+            'navigation' => &$this->_navigation,
+        ));
     }
 
     /**

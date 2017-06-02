@@ -24,9 +24,12 @@ Symphony.View.add('/:context*:', function() {
 	// Fix for Webkit browsers to initially show the options. #2127
 	$('select[multiple=multiple]').scrollTop(0);
 
-	// Initialise tag lists inside duplicators
+	// Initialise plugins inside duplicators
 	Symphony.Elements.contents.find('.duplicator').on('constructshow.duplicator', '.instance', function() {
+		// Enable tag lists inside duplicators
 		$(this).find('.tags[data-interactive]').symphonyTags();
+		// Enable parameter suggestions
+		Symphony.Interface.Suggestions.init($(this), 'input[type="text"]');
 	});
 
 	// Navigation sizing
@@ -84,22 +87,25 @@ Symphony.View.add('/:context*:', function() {
 			handles: 'td'
 		})
 		.on('orderstart.orderable', function() {
-
 			// Store current sort order
-			oldSorting = $(this).find('input').map(function(e) { return this.name + '=' + (e + 1); }).get().join('&');
+			oldSorting = orderable.find('input').map(function(e) { return this.name + '=' + (e + 1); }).get().join('&');
 		})
 		.on('orderstop.orderable', function() {
 			var newSorting = orderable.find('input').map(function(e) { return this.name + '=' + (e + 1); }).get().join('&');
 
 			// Store sort order, if changed
-			orderable.addClass('busy');
 			if(oldSorting !== null && newSorting !== oldSorting) {
+				// Update UI
+				orderable.addClass('busy');
 
 				// Update items
 				orderable.trigger('orderupdate.admin');
 
+				// Update old value
+				oldSorting = newSorting;
+
 				// Add XSRF token
-				newSorting = newSorting + '&' + Symphony.Utilities.getXSRF(true);
+				newSorting += '&' + Symphony.Utilities.getXSRF(true);
 
 				// Send request
 				$.ajax({
@@ -113,9 +119,6 @@ Symphony.View.add('/:context*:', function() {
 						orderable.removeClass('busy').find('tr').removeClass('selected');
 					}
 				});
-			}
-			else {
-				orderable.removeClass('busy');
 			}
 		});
 
@@ -681,7 +684,7 @@ Symphony.View.add('/blueprints/datasources/:action:/:id:/:status:/:*:', function
 	});
 
 	// Enable parameter suggestions
-	Symphony.Elements.contents.find('.filters-duplicator, .ds-param').each(function() {
+	Symphony.Elements.contents.find('.ds-param').each(function() {
 		Symphony.Interface.Suggestions.init(this, 'input[type="text"]');
 	});
 

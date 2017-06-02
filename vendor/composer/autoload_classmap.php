@@ -97,6 +97,7 @@ return array(
     'TextFormatter' => $baseDir . '/symphony/lib/toolkit/class.textformatter.php',
     'TextPage' => $baseDir . '/symphony/lib/toolkit/class.textpage.php',
     'TextformatterManager' => $baseDir . '/symphony/lib/toolkit/class.textformattermanager.php',
+    'Throwable' => $baseDir . '/symphony/lib/core/class.throwable.php',
     'Updater' => $baseDir . '/install/lib/class.updater.php',
     'UpdaterPage' => $baseDir . '/install/lib/class.updaterpage.php',
     'Widget' => $baseDir . '/symphony/lib/toolkit/class.widget.php',
@@ -158,4 +159,5 @@ return array(
     'migration_265' => $baseDir . '/install/migrations/2.6.5.php',
     'migration_266' => $baseDir . '/install/migrations/2.6.6.php',
     'migration_267' => $baseDir . '/install/migrations/2.6.7.php',
+    'migration_270' => $baseDir . '/install/migrations/2.7.0.php',
 );
