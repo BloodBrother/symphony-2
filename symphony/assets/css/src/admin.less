@@ -327,6 +327,10 @@
 				.transitioned(~'width');
 				overflow: hidden;
 
+				@media (max-width: (@xs - 1)){
+					display: none;
+				}
+
 				> span {
 					text-overflow: ellipsis;
 					display: block;
@@ -544,6 +548,7 @@ body.page-single #contents .actions {
 		.flex(~'row',~'center',~'flex-start');
 		box-sizing: border-box;
 		transform: translateY(-100%);
+		overflow: auto;
 		top: 100vh;
 		left: @spacing-huge;
 		padding: 0 @spacing-smallerish;

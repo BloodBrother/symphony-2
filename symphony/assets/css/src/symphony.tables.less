@@ -27,6 +27,20 @@ table {
 		margin-bottom: 0!important;
 	}
 
+	@media (min-width: @sm) and (max-width: (@xl - 1)){
+		td:nth-child(n + 6),
+		th:nth-child(n + 6) {
+			display: none;
+		}
+	}
+
+	@media (min-width: @xl) and (max-width: (@xxl - 1)){
+		td:nth-child(n + 8),
+		th:nth-child(n + 8) {
+			display: none;
+		}
+	}
+
 	@media (max-width: (@sm - 1)){
 	 	thead {
 	 		display: none;
