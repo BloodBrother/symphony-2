@@ -327,10 +327,6 @@
 				.transitioned(~'width');
 				overflow: hidden;
 
-				@media (max-width: (@xs - 1)){
-					display: none;
-				}
-
 				> span {
 					text-overflow: ellipsis;
 					display: block;
@@ -365,6 +361,7 @@
 			&.featured {
 				order: 99;
 				margin-right: -@spacing-smallerish;
+				max-width: 100%!important;
 
 				a,
 				button {
@@ -377,10 +374,21 @@
 						background: @accent;
 						width: @spacing-larger;
 
+						@media (max-width: (@xs - 1)){
+							width: auto;
+						}
+
 						&:hover {
 							background: @darker-grey;
 						}
 					}
+				}
+			}
+
+			&:not(.featured) a > span,
+			&:not(.featured) button > span {
+				@media (max-width: (@xs - 1)){
+					display: none;
 				}
 			}
 		}

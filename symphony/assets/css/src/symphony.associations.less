@@ -17,12 +17,19 @@
 	Vertical drawers
 -----------------------------------------------------------------------------*/
 
+.association-title {
+	color: @accent;
+	padding: @spacing-smallish @spacing-smallish 0;
+}
+
+* + .association-title {
+	margin-top: @spacing-smallish;
+	border-top: 1px solid @lighter-grey;
+}
+
 .association {
 	color: @dark-grey;
-	font-size: @text-short;
-	padding: @spacing-smallerish @spacing-smallish;
-	border-bottom: 1px solid @lighter-grey;
-	min-height: 3rem;
+	padding: @spacing-smallish @spacing-smallish 0;
 
 	a {
 		color: @accent;
@@ -32,22 +39,35 @@
 		}
 	}
 
+	header {
+		.flex(~'row', ~'baseline', ~'space-between');
+	}
+
 	header p {
-		color: @dark-grey;
+		flex-grow: 1;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: @darker-grey;
+		font-size: @text-current;
+		line-height: 20px;
+		margin-bottom: 0;
+		white-space: nowrap;
 	}
 
 	.association-section {
 		color: @black;
+		font-weight: 700;
 	}
 
 	.association-new {
+		flex-shrink: 0;
 		border-radius: @radius-current;
 		display: inline-block;
 		color: @white;
 		font-size: @text-shorter;
 		text-transform: uppercase;
-		margin: 0;
-		padding: @spacing-smallest @spacing-smallerish;
+		margin: 0 0 0 @spacing-smallerish;
+		padding: @spacing-micro @spacing-smallest;
 		background: @accent;
 
 		&:hover {
@@ -59,40 +79,31 @@
 
 .association-links {
 	margin: 0;
-	padding: @spacing-smallest 0 0;
+	padding: @spacing-nano 0 0;
 
 	li {
 		display: block;
 		box-sizing: border-box;
-		line-height: 2;
 		white-space: nowrap;
 
 		& + li {
-			margin-top: @spacing-micro;
+			border-top: 1px solid @lightest-grey;
 		}
 	}
 
 	a {
 		display: block;
 		overflow: hidden;
-		width: 26rem;
-		line-height: 1.325;
+		width: 100%;
+		line-height: 3rem;
 		text-overflow: ellipsis;
 		color: @accent;
+		font-size: @text-short;
+		white-space: nowrap;
 
 		&:hover {
 			color: @darker-grey;
 		}
-
-		&:before {
-			content: '\2192 ';
-			margin-right: @spacing-micro;
-		}
-	}
-
-	&.parent li a:before {
-		content: '\2190 ';
-		margin-right: @spacing-micro;
 	}
 }
 
