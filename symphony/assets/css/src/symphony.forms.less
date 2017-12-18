@@ -37,7 +37,7 @@ select,
 	font-size: @text-short;
 	text-transform: none;
 	line-height: 1em;
-	padding: @spacing-smallest @spacing-smallerish;
+	padding: @spacing-smallest;
 	border: 1px solid @lighter-grey;
 	background-color: @lightest-grey;
 	width: 100%;
@@ -114,13 +114,13 @@ input[size] {
 
 input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
 	line-height: 0.4rem + @text-short + @spacing-smallest * 2;
-	padding: 0 @spacing-smallerish;
+	padding: 0 @spacing-smallest;
 	height: 0.4rem + @text-short + @spacing-smallest * 2;
 }
 
 select {
 	line-height: 0.4rem + @text-short + @spacing-smallest * 2;
-	padding: 0 @spacing-smallerish;
+	padding: 0 @spacing-smallest;
 	height: 0.4rem + @text-short + @spacing-smallest * 2;
 
 	.disabled {
@@ -143,7 +143,7 @@ select[multiple] {
 
 	option {
 		color: @darker-grey;
-		padding: @spacing-micro @spacing-smallerish;
+		padding: @spacing-micro @spacing-smallest;
 
 		&:checked {
 			background: @accent;
@@ -154,11 +154,11 @@ select[multiple] {
 optgroup {
 	font-weight: bold;
 	font-style: normal;
-	padding: @spacing-smallest @spacing-smallerish;
+	padding: @spacing-smallest;
 
 	option {
-		margin-left: -@spacing-smallerish;
-		margin-right: -@spacing-smallerish;
+		margin-left: -@spacing-smallest;
+		margin-right: -@spacing-smallest;
 	}
 }
 
@@ -329,7 +329,7 @@ p.label > i:not(:empty),
 #password legend i:not(:empty) {
 	display: inline;
 	color: @grey;
-	font-size: @text-shorter;
+	font-size: @text-shortest;
 	text-transform: none;
 	padding-left: @spacing-micro;
 

@@ -30,16 +30,16 @@
 	flex-direction: column;
 	position: fixed;
 	left: 0;
-	bottom: 0;
 	top: 0;
 	border-right: 1px solid @lighter-grey;
 	background: @white;
 	width: @spacing-huge;
+	height: 100vh;
 	z-index: 101;
 
 	&.spaced-bottom {
 		@media (max-width: (@sm - 1)){
-			bottom: @spacing-midlarge;
+			height: calc(~'100vh - @{spacing-midlarge}');
 		}
 	}
 
