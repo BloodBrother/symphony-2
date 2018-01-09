@@ -950,7 +950,7 @@ class AdministrationPage extends HTMLPage
             if ($this->doesAuthorHaveAccess($item_limit)) {
                 $xGroup = new XMLElement('li', null, array('role' => 'presentation'));
 
-                if (is_array($n['children']) && count($n['children']) > 1){
+                if (is_array($n['children']) && !empty($n['children'])){
                     $xGroupLabel = new XMLElement(
                         'span',
                         General::sanitize($n['name']).Widget::SVGIcon('chevron')
@@ -1512,7 +1512,7 @@ class AdministrationPage extends HTMLPage
             __('View the updated entry')
         );
         $actions = $overwritelink->generate() . ' ' . $ignorelink->generate();
-        
+
         $this->pageAlert("$msg $actions", Alert::ERROR);
     }
 }
