@@ -513,10 +513,6 @@ class AdministrationPage extends HTMLPage
         );
         $this->Header->appendChild($h1);
 
-        $mobileNavToggler = new XMLElement('a', Widget::SVGIcon('burger'));
-        $mobileNavToggler->setAttribute('id', 'btn-toggle-header-mobile');
-        $this->Header->appendChild($mobileNavToggler);
-
         $version = new XMLElement(
             'p',
             'Symphony ' . Symphony::Configuration()->get('version', 'symphony'),
@@ -691,6 +687,10 @@ class AdministrationPage extends HTMLPage
     public function generate($page = null)
     {
         $this->Wrapper->appendChild($this->Header);
+
+        $mobileNavToggler = new XMLElement('a', Widget::SVGIcon('burger'));
+        $mobileNavToggler->setAttribute('id', 'btn-toggle-header-mobile');
+        $this->Wrapper->appendChild($mobileNavToggler);
 
         // Add horizontal drawers (inside #context)
         if (isset($this->Drawer['horizontal'])) {
