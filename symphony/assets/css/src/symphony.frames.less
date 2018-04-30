@@ -10,19 +10,25 @@
  	LESS — Variables Importing
  -----------------------------------------------------------------------------*/
  @import "variables";
- 
+
 
 .frame {
 	box-sizing: border-box;
 	border-radius: @radius-current;
-	position: relative; margin: 0; padding: @spacing-smallerish; border: 1px solid @lighter-grey; background: @lightest-grey;
+	position: relative;
+	margin: 0;
+	padding: @spacing-smallerish;
+	border: 1px solid @lighter-grey;
+	background: @lightest-grey;
 }
 
 .duplicator {
 	margin-bottom: 8.2rem;
 
 	.apply {
-		position: absolute; right: 0; bottom: -5.2rem;
+		position: absolute;
+		right: 0;
+		bottom: -5.2rem;
 	}
 }
 
@@ -40,12 +46,6 @@
 	min-height: 3.6rem;
 }
 
-.frame ol,
-.frame ul {
-	margin: 0;
-	padding: 0;
-}
-
 .frame .tags {
 	margin: -@spacing-smallish 0 @spacing-smallerish;
 }
@@ -60,15 +60,27 @@
 
 .frame {
 	iframe {
-		display: block; margin: 0 auto; max-width: 100%;
+		display: block;
+		margin: 0 auto;
+		max-width: 100%;
 	}
 }
 
 .frame > button {
-	font-size: @text-shorter; font-weight: 300; text-transform: uppercase; line-height: @text-short; margin: 0; padding: @spacing-smallest @spacing-smallerish; border: 2px solid @accent; background: @accent; border-radius: @radius-current; cursor: pointer;
+	font-size: @text-shorter;
+	font-weight: 300;
+	text-transform: uppercase;
+	line-height: @text-short;
+	margin: 0;
+	padding: @spacing-smallest @spacing-smallerish;
+	border: 2px solid @accent;
+	background: @accent;
+	border-radius: @radius-current;
+	cursor: pointer;
 
 	&:not(:disabled):hover {
-		border-color: @darker-grey; background: @darker-grey;
+		border-color: @darker-grey;
+		background: @darker-grey;
 	}
 
 	&:disabled {
@@ -80,11 +92,14 @@
 
 .frame-header {
 	.flex(~'row', ~'center', ~'flex-start');
-	position: relative; padding: @spacing-smallest @spacing-smallerish; border-top: 1px solid @lighter-grey;
+	position: relative;
+	padding: @spacing-smallest @spacing-smallerish;
+	border-top: 1px solid @lighter-grey;
 
 	h4 {
 		.flex(~'row', ~'center', ~'flex-start');
-		font-size: @text-short; font-weight: 300;
+		font-size: @text-short;
+		font-weight: 300;
 
 		* {
 			.transitioned(~'color');
@@ -95,7 +110,10 @@
 		}
 
 		span, & + span {
-			color: @dark-grey; font-size: @text-short; font-weight: 300; padding-left: @spacing-smallest;
+			color: @dark-grey;
+			font-size: @text-short;
+			font-weight: 300;
+			padding-left: @spacing-smallest;
 		}
 
 		svg {
@@ -134,7 +152,10 @@ fieldset.frame,
 
 .frame .destructor,
 .frame .debug {
-	color: @light-grey; font-size: @text-short!important; font-weight: 300; margin: 0 0 0 @spacing-smallerish;
+	color: @light-grey;
+	font-size: @text-short!important;
+	font-weight: 300;
+	margin: 0 0 0 @spacing-smallerish;
 }
 
 .frame .destructor {
@@ -228,14 +249,19 @@ fieldset.settings .collapsible {
 
 .constructable > * > li,
 .collapsible > * > li {
-	overflow: hidden; margin-left: -@spacing-smallerish; padding: 0 @spacing-smallerish!important; width: 100%;
+	overflow: hidden;
+	margin-left: -@spacing-smallerish;
+	padding: 0 @spacing-smallerish!important;
+	width: 100%;
 
 	&:first-child .frame-header {
 		border: none;
 	}
 
 	.content {
-		padding: @spacing-smallerish; border-top: 1px solid @lighter-grey; background: @white;
+		padding: @spacing-smallerish;
+		border-top: 1px solid @lighter-grey;
+		background: @white;
 	}
 }
 
@@ -290,7 +316,9 @@ fieldset.settings .collapsible {
 #login {
 	.flex(~'column', ~'center', ~'center');
 	box-sizing: border-box;
-	padding: @spacing-smallish; width: 100%; min-height: 100vh;
+	padding: @spacing-smallish;
+	width: 100%;
+	min-height: 100vh;
 
 	fieldset {
 		padding: @spacing-smallerish;
@@ -305,10 +333,15 @@ fieldset.settings .collapsible {
 	}
 
 	.frame {
-		overflow: hidden; padding: 0; background: @white; width: @spacing-huger; max-width: 100%;
+		overflow: hidden;
+		padding: 0;
+		background: @white;
+		width: @spacing-huger;
+		max-width: 100%;
 
 		h1 {
-			padding: @spacing-smallest @spacing-smallerish; background: @accent;
+			padding: @spacing-smallest @spacing-smallerish;
+			background: @accent;
 		}
 	}
 
@@ -317,12 +350,18 @@ fieldset.settings .collapsible {
 		padding: 0 @spacing-smallerish @spacing-smallerish;
 
 		.action-link {
-			color: @dark-grey; font-size: @text-short; font-weight: 300;
+			color: @dark-grey;
+			font-size: @text-short;
+			font-weight: 300;
 		}
 
 		button {
 			border-radius: @radius-current;
-			font-size: @text-shorter; font-weight: 300; text-transform: uppercase; padding: @spacing-smallest @spacing-smallerish; background: @accent;
+			font-size: @text-shorter;
+			font-weight: 300;
+			text-transform: uppercase;
+			padding: @spacing-smallest @spacing-smallerish;
+			background: @accent;
 		}
 	}
 }
@@ -336,7 +375,8 @@ fieldset.settings .collapsible {
 		background-color: @red!important;
 
 		* {
-			color: @white!important; 
+			color: @white!important;
+
 		}
 	}
 }
@@ -349,22 +389,44 @@ fieldset.settings .collapsible {
 	padding: @spacing-large @spacing-mid;
 
 	h1 {
-		color: @darker-grey; font-size: @text-short; font-weight: 300; margin: 0; padding: @spacing-smallerish @spacing-smallish; border-bottom: 1px solid @lighter-grey; background: @lightest-grey;
+		color: @darker-grey;
+		font-size: @text-short;
+		font-weight: 300;
+		margin: 0;
+		padding: @spacing-smallerish @spacing-smallish;
+		border-bottom: 1px solid @lighter-grey;
+		background: @lightest-grey;
 	}
 
 	p {
-		line-height: 1.4em; margin: 0; padding: @spacing-smallerish @spacing-smallish;
+		line-height: 1.4em;
+		margin: 0;
+		padding: @spacing-smallerish @spacing-smallish;
 	}
 
 	.frame-header {
-		color: @darker-grey; font-size: @text-shorter; font-weight: 300; text-transform: uppercase; padding: @spacing-smallerish @spacing-smallish; border-bottom: 1px solid @lighter-grey; background: @lightest-grey;
+		color: @darker-grey;
+		font-size: @text-shorter;
+		font-weight: 300;
+		text-transform: uppercase;
+		padding: @spacing-smallerish @spacing-smallish;
+		border-bottom: 1px solid @lighter-grey;
+		background: @lightest-grey;
 	}
 
 	.frame {
-		display: block; overflow: hidden; margin: 0 auto; padding: 0; background: @white; min-width: 50rem; max-width: 80rem;
+		display: block;
+		overflow: hidden;
+		margin: 0 auto;
+		padding: 0;
+		background: @white;
+		min-width: 50rem;
+		max-width: 80rem;
 
 		h1 em {
-			color: @accent; font-family: inherit; font-style: normal;
+			color: @accent;
+			font-family: inherit;
+			font-style: normal;
 		}
 
 		pre {
@@ -373,11 +435,16 @@ fieldset.settings .collapsible {
 
 		pre,
 		ul ul {
-			overflow: auto; padding: @spacing-smallerish 0 @spacing-smallish; background: @white;
+			overflow: auto;
+			padding: @spacing-smallerish 0 @spacing-smallish;
+			background: @white;
 		}
 
 		ul ul li {
-			line-height: 1.4em; padding: @spacing-micro @spacing-smallish; border-top: 1px solid @lighter-grey; white-space: nowrap;
+			line-height: 1.4em;
+			padding: @spacing-micro @spacing-smallish;
+			border-top: 1px solid @lighter-grey;
+			white-space: nowrap;
 
 			&.full {
 				white-space: normal;
@@ -398,7 +465,10 @@ fieldset.settings .collapsible {
 
 		strong,
 		em {
-			color: rgba(0, 0, 0, 0.5); font: 100%/1.5 Monaco, Consolas, 'Andale Mono', monospace; font-style: normal; padding-right: @spacing-micro;
+			color: rgba(0, 0, 0, 0.5);
+			font: 100%/1.5 Monaco, Consolas, 'Andale Mono', monospace;
+			font-style: normal;
+			padding-right: @spacing-micro;
 		}
 
 		.actions {
@@ -406,7 +476,8 @@ fieldset.settings .collapsible {
 		}
 
 		.content {
-			padding-bottom: 0; background: @lightest-grey;
+			padding-bottom: 0;
+			background: @lightest-grey;
 
 			&:last-of-type ul {
 				border-radius: 0 0 0.4rem 0.4rem;
@@ -414,10 +485,16 @@ fieldset.settings .collapsible {
 		}
 
 		.error {
-			color: @red; background-color: @lightest-grey;
+			color: @red;
+			background-color: @lightest-grey;
 
 			strong {
-				display: inline-block; color: @white; line-height: 1.8; margin: -0.2rem 0 -0.1rem; padding: 0.2rem 0 0.1rem; background: rgba(167, 31, 45, 0.7);
+				display: inline-block;
+				color: @white;
+				line-height: 1.8;
+				margin: -0.2rem 0 -0.1rem;
+				padding: 0.2rem 0 0.1rem;
+				background: rgba(167, 31, 45, 0.7);
 			}
 		}
 	}

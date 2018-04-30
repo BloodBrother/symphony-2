@@ -53,34 +53,6 @@ class InstallerPage extends HTMLPage
 
         $this->Form->appendChild($title);
 
-        if (isset($this->params['show-languages']) && $this->params['show-languages']) {
-            $languages = new XMLElement('ul');
-
-            foreach (Lang::getAvailableLanguages(false) as $code => $lang) {
-                $languages->appendChild(new XMLElement(
-                    'li',
-                    Widget::Anchor(
-                        $lang,
-                        '?lang=' . $code
-                    ),
-                    ($_REQUEST['lang'] == $code || ($_REQUEST['lang'] == null && $code == 'en'))
-                        ? ['class' => 'selected']
-                        : []
-                ));
-            }
-
-            $languages->appendChild(new XMLElement(
-                'li',
-                Widget::Anchor(
-                    __('Symphony is also available in other languages'),
-                    'http://getsymphony.com/download/extensions/translations/'
-                ),
-                array('class' => 'more')
-            ));
-
-            $this->Form->appendChild($languages);
-        }
-
         $this->Body->appendChild($this->Form);
 
         $function = 'view' . str_replace('-', '', ucfirst($this->template));

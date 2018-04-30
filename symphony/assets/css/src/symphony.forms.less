@@ -31,7 +31,16 @@ select,
 .field-value-readonly {
 	box-sizing: border-box;
 	border-radius: @radius-current;
-	color: @darker-grey; font-family: inherit; font-size: @text-short; font-weight: 300; text-transform: none; line-height: 1em; padding: @spacing-smallest @spacing-smallerish; border: 1px solid @lighter-grey; background-color: @lightest-grey; width: 100%;
+	color: @darker-grey;
+	font-family: inherit;
+	font-size: @text-short;
+	font-weight: 300;
+	text-transform: none;
+	line-height: 1em;
+	padding: @spacing-smallest @spacing-smallerish;
+	border: 1px solid @lighter-grey;
+	background-color: @lightest-grey;
+	width: 100%;
 }
 
 input:not([type="submit"]):active,
@@ -40,7 +49,8 @@ textarea:active,
 textarea:focus,
 select[multiple]:active,
 select[multiple]:focus {
-	border-color: @accent; outline: none;
+	border-color: @accent;
+	outline: none;
 }
 
 input[readonly="readonly"],
@@ -55,11 +65,22 @@ textarea {
 input[type='radio'],
 input[type='checkbox'] {
 	box-shadow: none;
-	display: inline; font-size: inherit; margin-top: 0; margin-right: 0.5rem; padding: inherit; border: none; width: auto; height: auto;
+	display: inline;
+	font-size: inherit;
+	margin-top: 0;
+	margin-right: 0.5rem;
+	padding: inherit;
+	border: none;
+	width: auto;
+	height: auto;
 }
 
 input[type=file] {
-	margin: 0; padding: 0; border: none; background: transparent; height: auto;
+	margin: 0;
+	padding: 0;
+	border: none;
+	background: transparent;
+	height: auto;
 }
 
 input[size] {
@@ -81,10 +102,13 @@ select {
 
 select[multiple] {
 	.transitioned(~'border');
-	display: block; padding: @spacing-smallest; height: @spacing-larger;
+	display: block;
+	padding: @spacing-smallest;
+	height: @spacing-larger;
 
 	option {
-		color: @darker-grey; padding: @spacing-micro;
+		color: @darker-grey;
+		padding: @spacing-micro;
 	}
 }
 
@@ -110,8 +134,14 @@ select[multiple] {
 		color: @red;
 	}
 
-	> p {
-		color: @red; font-size: @text-short; font-weight: 500; line-height: 1.4em; margin-top: -@spacing-smallish + 0.5rem; padding: 0;
+	> p,
+	> ul {
+		color: @red;
+		font-size: @text-short;
+		font-weight: 500;
+		line-height: 1.4em;
+		margin: (-@spacing-smallish + 0.5rem) 0 @spacing-smallish;
+		padding: 0;
 
 		br:first-child {
 			display: none;
@@ -128,7 +158,13 @@ select[multiple] {
 }
 
 .field-value-readonly {
-	display: block; color: @darker-grey; padding-left: 0; border: none; background: none; min-height: 2.2rem; opacity: 1;
+	display: block;
+	color: @darker-grey;
+	padding-left: 0;
+	border: none;
+	background: none;
+	min-height: 2.2rem;
+	opacity: 1;
 }
 
 textarea[disabled=disabled],
@@ -168,14 +204,23 @@ button,
 .apply-label-right {
 	.transitioned(~'background');
 	border-radius: @radius-current;
-	display: inline-block; color: @white; font-size: @text-shorter; text-transform: uppercase; line-height: @text-short; margin-left: 1rem; padding: @spacing-smallest @spacing-smallest; border: none; background: @accent; width: auto;
+	display: inline-block;
+	color: @white;
+	font-size: @text-shorter;
+	text-transform: uppercase;
+	line-height: @text-short;
+	margin-left: 1rem;
+	padding: @spacing-smallest @spacing-smallest;
+	border: none;
+	background: @accent;
+	width: auto;
 
 	&:hover {
 		background: @darker-grey;
 	}
 }
 
-.submit input[type="submit"] {
+.submit input {
 	margin-top: 1.5rem;
 }
 
@@ -185,7 +230,13 @@ button,
 
 label,
 #password legend {
-	display: block; position: relative; color: @dark-grey; font-size: @text-shorter; font-weight: 300; text-transform: uppercase; line-height: 1.4em;
+	display: block;
+	position: relative;
+	color: @dark-grey;
+	font-size: @text-shorter;
+	font-weight: 300;
+	text-transform: uppercase;
+	line-height: 1.4em;
 }
 
 label {
@@ -199,7 +250,8 @@ label {
 	}
 
 	a {
-		color: currentColor; border-bottom: 1px solid currentColor;
+		color: currentColor;
+		border-bottom: 1px solid currentColor;
 
 		&:hover {
 			border-color: transparent;
@@ -218,7 +270,14 @@ label:last-child {
 
 label > i,
 p.label > i {
-	position: absolute; top: 100%; right: 0; color: @dark-grey; font-size: @text-shorter; font-weight: 300; text-transform: none; margin-top: 2px;
+	position: absolute;
+	top: 100%;
+	right: 0;
+	color: @dark-grey;
+	font-size: @text-shorter;
+	font-weight: 300;
+	text-transform: none;
+	margin-top: 2px;
 }
 
 label.inline-help > i {
@@ -226,7 +285,9 @@ label.inline-help > i {
 }
 
 legend {
-	color: @dark-grey; font-size: @text-short; font-weight: 300;
+	color: @dark-grey;
+	font-size: @text-short;
+	font-weight: 300;
 }
 
 /*--------------------------------------------------------------------------
@@ -235,21 +296,33 @@ legend {
 
 .file {
 	input {
-		color: @dark-grey; font-size: @text-short; font-weight: 300;
+		color: @dark-grey;
+		font-size: @text-short;
+		font-weight: 300;
 	}
 
 	.frame {
 		.flex(~'column-reverse', ~'center', ~'center');
 
 		input {
-			padding: 0; border: none;
+			padding: 0;
+			border: none;
 		}
 	}
 
 	em {
 		.transitioned(~'color, background');
 		border-radius: @radius-current;
-		color: @white; font-size: @text-shorter; font-style: normal; font-weight: 300; text-transform: uppercase; line-height: 1em; margin-bottom: @spacing-smallest; padding: @spacing-micro @spacing-smallest; background: @accent; cursor: pointer;
+		color: @white;
+		font-size: @text-shorter;
+		font-style: normal;
+		font-weight: 300;
+		text-transform: uppercase;
+		line-height: 1em;
+		margin-bottom: @spacing-smallest;
+		padding: @spacing-micro @spacing-smallest;
+		background: @accent;
+		cursor: pointer;
 
 		&:hover {
 			background: @darker-grey;
@@ -262,11 +335,15 @@ legend {
 --------------------------------------------------------------------------*/
 
 .apply {
-	display: block; float: right; margin: @spacing-smallest 0 0; padding: 0;
+	display: block;
+	float: right;
+	margin: @spacing-smallest 0 0;
+	padding: 0;
 
 	div {
 		box-sizing: border-box;
-		float: left; text-align: left;
+		float: left;
+		text-align: left;
 	}
 
 	label {
@@ -279,7 +356,16 @@ legend {
 	.apply-label-right,
 	.apply-label-left {
 		border-radius: 0 @radius-current @radius-current 0;
-		float: right; color: @white!important; font-size: @text-shorter; font-weight: 300; text-transform: uppercase; line-height: @text-short; margin: 0; padding: @spacing-smallest @spacing-smallerish; border: 2px solid @accent; background: @accent;
+		float: right;
+		color: @white!important;
+		font-size: @text-shorter;
+		font-weight: 300;
+		text-transform: uppercase;
+		line-height: @text-short;
+		margin: 0;
+		padding: @spacing-smallest @spacing-smallerish;
+		border: 2px solid @accent;
+		background: @accent;
 	}
 
 	button,
@@ -288,7 +374,8 @@ legend {
 		cursor: pointer;
 
 		&:hover {
-			border-color: @darker-grey; background: @darker-grey;
+			border-color: @darker-grey;
+			background: @darker-grey;
 		}
 	}
 
@@ -309,7 +396,10 @@ legend {
 		button,
 		button:hover,
 		&:hover button {
-			color: @dark-grey; border-color: @grey; background: @grey; cursor: default;
+			color: @dark-grey;
+			border-color: @grey;
+			background: @grey;
+			cursor: default;
 		}
 	}
 }
@@ -328,12 +418,22 @@ legend {
 --------------------------------------------------------------------------*/
 
 ul.tags {
-	color: @grey; font-size: @text-short; font-weight: 300; margin: -2.5rem 0 0 0; padding: 0; list-style: none;
+	color: @grey;
+	font-size: @text-short;
+	font-weight: 300;
+	margin: -2.5rem 0 0 0;
+	padding: 0;
+	list-style: none;
 
 	li,
 	li:first-of-type,
 	li:last-of-type {
-		display: inline; float: none; font-size: @text-short; padding: 0 @spacing-micro 0 0; border: none; cursor: pointer;
+		display: inline;
+		float: none;
+		font-size: @text-short;
+		padding: 0 @spacing-micro 0 0;
+		border: none;
+		cursor: pointer;
 	}
 
 	li:hover {
@@ -341,10 +441,12 @@ ul.tags {
 	}
 
 	li.more {
-		color: @accent; border-bottom: 1px solid currentColor;
+		color: @accent;
+		border-bottom: 1px solid currentColor;
 
 		&:hover {
-			color: @darker-grey; border-bottom-color: currentColor;
+			color: @darker-grey;
+			border-bottom-color: currentColor;
 		}
 	}
 }
@@ -357,11 +459,17 @@ ul.tags {
 	display: block;
 
 	legend {
-		margin-left: @spacing-smallish!important; padding: 0!important;
+		margin-left: @spacing-smallish!important;
+		padding: 0!important;
 	}
 
 	i {
-		position: absolute; top: 100%; right: 0; font-size: @text-shorter; font-weight: 300; margin-top: @spacing-nano;
+		position: absolute;
+		top: 100%;
+		right: 0;
+		font-size: @text-shorter;
+		font-weight: 300;
+		margin-top: @spacing-nano;
 	}
 
 	.column {
@@ -370,7 +478,8 @@ ul.tags {
 
 	&:after {
 		content: "";
-		display: block; clear: both;
+		display: block;
+		clear: both;
 	}
 }
 
@@ -384,7 +493,8 @@ div.password {
 
 .field {
 	box-sizing: border-box;
-	margin-bottom: @spacing-smallish; min-height: @spacing-small;
+	margin-bottom: @spacing-smallish;
+	min-height: @spacing-small;
 
 	&.field-multilingual div.container label {
 		margin-bottom: @spacing-smallest;
@@ -407,11 +517,19 @@ fieldset {
 	position: relative;
 
 	h3 {
-		color: @accent; font-size: @text-big; font-weight: 300; padding-bottom: @spacing-smallerish;
+		color: @accent;
+		font-size: @text-big;
+		font-weight: 300;
+		padding-bottom: @spacing-smallerish;
 	}
 
 	input[type=submit] {
-		color: @white; font-size: @text-shorter; text-transform: uppercase; padding: @spacing-smallest @spacing-smallerish; background: @accent; cursor: pointer;
+		color: @white;
+		font-size: @text-shorter;
+		text-transform: uppercase;
+		padding: @spacing-smallest @spacing-smallerish;
+		background: @accent;
+		cursor: pointer;
 
 		&:hover {
 			background: @darker-grey;
@@ -421,7 +539,8 @@ fieldset {
 	input[type=submit],
 	button,
 	.button {
-		margin-right: 1rem; margin-left: 0;
+		margin-right: 1rem;
+		margin-left: 0;
 	}
 }
 
@@ -430,7 +549,9 @@ fieldset {
 --------------------------------------------------------------------------*/
 
 fieldset.settings {
-	position: relative; margin-bottom: @spacing-smallish; padding: 0;
+	position: relative;
+	margin-bottom: @spacing-smallish;
+	padding: 0;
 
 	@media (min-width: @md){
 		padding-left: @spacing-huge;
@@ -440,10 +561,16 @@ fieldset.settings {
 		line-height: 1.4em;
 
 		@media (min-width: @md){
-			position: absolute; top: -0.1rem; left: 0; width: @spacing-huge - @spacing-smallish;
+			position: absolute;
+			top: -0.1rem;
+			left: 0;
+			width: @spacing-huge - @spacing-smallish;
 		}
 		@media (max-width: (@md - 1)){
-			color: @accent; font-size: @text-bigger; font-weight: 300; padding: @spacing-smallest 0 @spacing-smallish;
+			color: @accent;
+			font-size: @text-bigger;
+			font-weight: 300;
+			padding: @spacing-smallest 0 @spacing-smallish;
 		}
 	}
 
@@ -481,7 +608,11 @@ fieldset.settings {
 	}
 
 	> legend + .help {
-		position: absolute; line-height: 1.8em; margin: 2.5rem 0 0 -@spacing-huge; width: @spacing-huge - @spacing-smallish; width: 17rem;
+		position: absolute;
+		line-height: 1.8em;
+		margin: 2.5rem 0 0 -@spacing-huge;
+		width: @spacing-huge - @spacing-smallish;
+		width: 17rem;
 
 		p {
 			margin: 0 0 @spacing-smaller;
@@ -503,7 +634,10 @@ fieldset.settings {
 			margin-top: @spacing-smallish;
 
 			> legend {
-				display: block; padding-top: @spacing-smallish;  border-top: 1px solid @lighter-grey; width: 100%;
+				display: block;
+				padding-top: @spacing-smallish;
+				 border-top: 1px solid @lighter-grey;
+				 width: 100%;
 			}
 		}
 	}
