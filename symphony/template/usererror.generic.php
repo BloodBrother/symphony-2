@@ -20,7 +20,7 @@ if (isset($e->getAdditional()->header)) {
 $Page->setTitle(__('%1$s &ndash; %2$s', array(__('Symphony'), $e->getHeading())));
 $Page->Body->setAttribute('id', 'error');
 
-$div = new XMLElement('div', null, array('class' => 'frame'));
+$div = new XMLElement('div', null, array('class' => 'frame error'));
 $div->appendChild(new XMLElement('h1', $e->getHeading()));
 $div->appendChild(
     ($e->getMessageObject() instanceof XMLElement ? $e->getMessageObject() : new XMLElement('p', trim($e->getMessage())))

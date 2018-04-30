@@ -14,121 +14,85 @@
 	Error messages
 --------------------------------------------------------------------------*/
 
-#error {
-	padding: @spacing-large @spacing-mid;
+body#error {
+	.flex(~'column', ~'center', ~'center');
+	box-sizing: border-box;
+	padding: @spacing-smallish;
+	width: 100%;
+	min-height: 100vh;
+}
+
+.frame.error {
+	overflow: hidden;
+	margin: @spacing-smallish auto;
+	padding: 0;
+	background: @white;
+	width: @max-width-small;
+	max-width: 100%;
 
 	h1 {
-		color: @darker-grey;
-		font-size: @text-short;
-		font-weight: 300;
-		margin: 0;
-		padding: @spacing-smallerish @spacing-smallish;
-		border-bottom: 1px solid @lighter-grey;
-		background: @lightest-grey;
+		padding: @spacing-smallest @spacing-smallerish;
+		background: @accent;
 	}
 
-	p {
-		line-height: 1.4em;
-		margin: 0;
-		padding: @spacing-smallerish @spacing-smallish;
+	li strong {
+		padding-right: @spacing-smallest;
+	}
+
+	.error.full {
+		color: @red;
+	}
+
+	a {
+		color: @accent;
+
+		&:hover {
+			color: currentColor;
+		}
+	}
+
+	> ul > li > ul {
+		border-top: 1px solid @lighter-grey;
+
+		li {
+			color: @dark-grey;
+			font-size: @text-short;
+			margin: 0;
+			padding: @spacing-micro @spacing-smallerish;
+
+			& + li {
+				border-top: 1px solid @lighter-grey;
+			}
+		}
 	}
 
 	.frame-header {
-		color: @darker-grey;
-		font-size: @text-shorter;
-		font-weight: 300;
-		text-transform: uppercase;
-		padding: @spacing-smallerish @spacing-smallish;
-		border-bottom: 1px solid @lighter-grey;
-		background: @lightest-grey;
+		color: @white; background: @accent;
 	}
 
-	.frame {
-		display: block;
-		overflow: hidden;
-		margin: 0 auto;
+	.content {
 		padding: 0;
-		background: @white;
-		min-width: 50rem;
-		max-width: 80rem;
 
-		h1 em {
-			color: @accent;
-			font-family: inherit;
-			font-style: normal;
-		}
-
-		pre {
-			font: 100%/1.5 Monaco, Consolas, 'Andale Mono', monospace;
-		}
-
-		pre,
-		ul ul {
-			overflow: auto;
-			padding: @spacing-smallerish 0 @spacing-smallish;
-			background: @white;
-		}
-
-		ul ul li {
-			line-height: 1.4em;
-			padding: @spacing-micro @spacing-smallish;
-			border-top: 1px solid @lighter-grey;
-			white-space: nowrap;
-
-			&.full {
-				white-space: normal;
-			}
-		}
-
-		ul ul:first-of-type li:first-of-type {
-			border-top: none;
-		}
-
-		code {
-			white-space: pre;
-		}
-	
-		code a {
+		li {
+			color: @dark-grey;
+			font-size: @text-short;
 			margin: 0;
-		}
+			padding: @spacing-micro @spacing-smallerish;
 
-		strong,
-		em {
-			color: rgba(0, 0, 0, 0.5);
-			font: 100%/1.5 Monaco, Consolas, 'Andale Mono', monospace;
-			font-style: normal;
-			padding-right: @spacing-micro;
-		}
-
-		.actions {
-			padding: @spacing-smallest;
-		}
-
-		.content {
-			padding-bottom: 0;
-			background: @lightest-grey;
-
-			&:last-of-type ul {
-				border-radius: 0 0 0.4rem 0.4rem;
-			}
-		}
-
-		.error {
-			color: @red;
-			background-color: @lightest-grey;
-
-			strong {
-				display: inline-block;
-				color: @white;
-				line-height: 1.8;
-				margin: -0.2rem 0 -0.1rem;
-				padding: 0.2rem 0 0.1rem;
-				background: rgba(167, 31, 45, 0.7);
+			& + li {
+				border-top: 1px solid @lighter-grey;
 			}
 		}
 	}
 
-	.content ul {
+	p {
+		color: @dark-grey;
+		font-size: @text-short;
+		margin: 0;
+		padding: @spacing-smallerish;
+	}
+
+	ol, ul {
 		margin: 0;
 	}
 }

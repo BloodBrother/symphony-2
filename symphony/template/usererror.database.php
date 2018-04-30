@@ -20,7 +20,7 @@ if (isset($e->getAdditional()->header)) {
 $Page->setTitle(__('%1$s &ndash; %2$s', array(__('Symphony'), __('Database Error'))));
 $Page->Body->setAttribute('id', 'error');
 
-$div = new XMLElement('div', null, array('class' => 'frame'));
+$div = new XMLElement('div', null, array('class' => 'frame error'));
 $div->appendChild(new XMLElement('h1', __('Symphony Database Error')));
 $div->appendChild(new XMLElement('p', $e->getAdditional()->message));
 $div->appendChild(new XMLElement('p', '<code>'.$e->getAdditional()->error->getDatabaseErrorCode().': '.$e->getAdditional()->error->getDatabaseErrorMessage().'</code>'));

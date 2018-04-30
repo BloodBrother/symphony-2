@@ -16,7 +16,7 @@ $Page->addHeaderToPage('Symphony-Error-Type', 'xslt');
 $Page->setTitle(__('%1$s &ndash; %2$s', array(__('Symphony'), __('XSLT Processing Error'))));
 $Page->Body->setAttribute('id', 'error');
 
-$div = new XMLElement('div', null, array('class' => 'frame'));
+$div = new XMLElement('div', null, array('class' => 'frame error'));
 $ul = new XMLElement('ul');
 $li = new XMLElement('li');
 $li->appendChild(new XMLElement('h1', __('XSLT Processing Error')));

@@ -30,6 +30,11 @@
 		margin: 0 0 @spacing-smallish;
 		padding: 0 0 0 @spacing-smallish;
 
+		&.primary {
+			margin: 0 auto;
+			max-width: @max-width-small;
+		}
+
 		&.primary,
 		&.secondary {
 			width: 100%;
@@ -54,9 +59,7 @@
 		}
 
 		&.primary {
-			margin: 0 auto;
 			width: calc(~'100% - @{spacing-huger}');
-			max-width: @max-width-small;
 
 			@media (max-width: (@md - 1)){
 				width: 100%;
