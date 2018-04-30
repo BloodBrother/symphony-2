@@ -29,7 +29,7 @@ module.exports = function (grunt) {
                         'symphony/assets/css/src/symphony.forms.less',
                         'symphony/assets/css/src/symphony.tables.less',
                         'symphony/assets/css/src/symphony.frames.less',
-                        'symphony/assets/css/src/symphony.tabs.less',
+                        'symphony/assets/css/src/symphony.errors.less',
                         'symphony/assets/css/src/symphony.drawers.less',
                         'symphony/assets/css/src/symphony.associations.less',
                         'symphony/assets/css/src/symphony.notices.less',

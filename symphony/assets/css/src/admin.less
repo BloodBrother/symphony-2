@@ -292,63 +292,6 @@
 		}
 	}
 
-	/* Tabs */
-
-	> .tabs {
-		order: 2;
-		box-sizing: border-box;
-		display: block;
-		position: absolute;
-		right: 0;
-		top: 100%;
-		margin-top: 1px;
-		padding: 0 0 0 @spacing-smallish;
-		border-bottom: 1px solid @lighter-grey;
-		background: @white;
-		width: @spacing-huger;
-		height: @spacing-midlarge;
-		white-space: nowrap;
-
-		li {
-			display: inline-block;
-			position: relative;
-			font-size: @text-current;
-			font-weight: 300;
-			text-transform: none;
-			line-height: @spacing-midlarge;
-			margin-right: @spacing-smallish;
-			height: @spacing-midlarge;
-
-			&:first-child {
-				display: none;
-			}
-		}
-
-		&:after {
-			content: "";
-			display: block;
-			position: fixed;
-			right: @spacing-huger;
-			top: @spacing-midlarge;
-			background: @lighter-grey;
-			width: 1px;
-			height: 100vh;
-		}
-
-		@media (max-width: (@md - 1)){
-			left: 0;
-			width: auto;
-
-			li:first-child {
-				display: inline-block;
-			}
-
-			&:after {
-				display: none;
-			}
-		}
-	}
-
 	/* Actions */
 
 	> .actions {
