@@ -15,7 +15,14 @@ class contentBlueprintsDatasources extends ResourcesPage
         parent::__viewIndex(ResourceManager::RESOURCE_TYPE_DS);
 
         $this->setTitle(__('%1$s &ndash; %2$s', array(__('Data Sources'), __('Symphony'))));
-        $this->appendSubheading(__('Data Sources'), Widget::Anchor(__('Create New'), Administration::instance()->getCurrentPageURL().'new/', __('Create a new data source'), 'create button', null, array('accesskey' => 'c')));
+        $this->appendSubheading(__('Data Sources'), Widget::Anchor(
+            Widget::SVGIcon('add') . '<span><span>' . __('Create New') . '</span></span>',
+            Administration::instance()->getCurrentPageURL().'new/',
+            __('Create a new data source'),
+            'create button',
+            null,
+            array('accesskey' => 'c')
+        ));
     }
 
     // Both the Edit and New pages need the same form
@@ -185,6 +192,8 @@ class contentBlueprintsDatasources extends ResourcesPage
             $name = $fields['name'];
         }
 
+        $this->Context->setAttribute('class', 'spaced-right');
+
         $this->setPageType('form');
         $this->setTitle(
             __(
@@ -205,13 +214,12 @@ class contentBlueprintsDatasources extends ResourcesPage
             Widget::Anchor(__('Data Sources'), SYMPHONY_URL . '/blueprints/datasources/'),
         ));
 
-        // Sources
-        $sources = new XMLElement('div', null, array('class' => 'apply actions'));
-        $div = new XMLElement('div');
-        $label = Widget::Label(__('Source'), null, 'apply-label-left');
-        $sources->appendChild($label);
-        $sources->appendChild($div);
-
+        // Source
+        $fieldset = new XMLElement('fieldset');
+        $fieldset->setAttribute('class', 'settings');
+        $fieldset->appendChild(new XMLElement('legend', __('Essentials')));
+        $label = Widget::Label(__('Source'));
+        $group = new XMLElement('div');
         $sections = (new SectionManager)->select()->execute()->rows();
 
         $field_groups = array();
@@ -252,20 +260,10 @@ class contentBlueprintsDatasources extends ResourcesPage
             }
         }
 
-        $div->appendChild(Widget::Select('source', $options, array('id' => 'ds-context')));
-        $this->Context->prependChild($sources);
-
-        $this->Form->appendChild(
-            Widget::Input('fields[source]', null, 'hidden', array('id' => 'ds-source'))
-        );
+        $label->appendChild(Widget::Select('fields[source]', $options));
+        $group->appendChild($label);
 
         // Name
-        $fieldset = new XMLElement('fieldset');
-        $fieldset->setAttribute('class', 'settings');
-        $fieldset->appendChild(new XMLElement('legend', __('Essentials')));
-
-        $group = new XMLElement('div');
-
         $label = Widget::Label(__('Name'));
         $label->appendChild(Widget::Input('fields[name]', General::sanitize($fields['name'])));
 
@@ -1004,13 +1002,26 @@ class contentBlueprintsDatasources extends ResourcesPage
 
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-        $div->appendChild(Widget::Input('action[save]', ($isEditing ? __('Save Changes') : __('Create Data Source')), 'submit', array('accesskey' => 's')));
+        $divW = new XMLElement('div', Widget::SVGIcon('save'));
+        $divW->setAttribute('class', 'button-container');
+        $divW->appendChild(Widget::Input(
+            'action[save]',
+            ($isEditing ? __('Save Changes') : __('Create Data Source')),
+            'submit',
+            array('accesskey' => 's')
+        ));
+        $div->appendChild($divW);
 
         if ($isEditing) {
+            $buttonW = new XMLElement('div', Widget::SVGIcon('delete'));
+            $buttonW->setAttribute('class', 'button-container');
             $button = new XMLElement('button', __('Delete'));
             $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this data source'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this data source?')));
-            $div->appendChild($button);
+            $buttonW->appendChild($button);
+            $div->appendChild($buttonW);
         }
+
+        $div->appendChild(Widget::SVGIcon('chevron'));
 
         $this->Form->appendChild($div);
     }
