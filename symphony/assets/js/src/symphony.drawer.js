@@ -18,8 +18,7 @@
 	 * @param {String} [options.speed='fast'] Animation speed
 	 *
 	 * @example
-
-			$('.drawer').symphonyDrawer();
+	 *      $('.drawer').symphonyDrawer();
 	 */
 	$.fn.symphonyDrawer = function(options) {
 		var objects = this,
@@ -80,23 +79,8 @@
 				});
 			}
 			else if (position === 'vertical-right') {
-				drawer.css({
-					width: 0,
-					height: height,
-					display: 'block'
-				})
-				.animate({
-					width: settings.verticalWidth
-				}, {
-					duration: speed,
-					step: function(now){
-						form.css('margin-right', now + 1); // +1px left border
-					},
-					complete: function() {
-						form.css('margin-right', settings.verticalWidth + 1); // +1px right border
-						drawer.trigger('expandstop.drawer');
-					}
-				});
+				drawer.addClass('opened')
+					.trigger('expandstop.drawer');
 			}
 			else if (position === 'horizontal') {
 				drawer.animate({
@@ -161,22 +145,8 @@
 				});
 			}
 			else if (position === 'vertical-right') {
-				drawer.animate({
-					width: 0
-				}, {
-					duration: speed,
-					step: function(now){
-						if (!stay) {
-							form.css('margin-right', now);
-						}
-					},
-					complete: function() {
-						drawer.css({
-							display: 'none'
-						})
-						.trigger('collapsestop.drawer');
-					}
-				});
+				drawer.removeClass('opened')
+					.trigger('collapsestop.drawer');
 			}
 			else if (position === 'horizontal') {
 				drawer.animate({
