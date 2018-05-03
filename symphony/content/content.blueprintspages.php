@@ -154,22 +154,27 @@ class contentBlueprintsPages extends AdministrationPage
                 $col_title->appendChild(Widget::Input('items['.$page['id'].']', 'on', 'checkbox', array(
                     'id' => 'page-' . $page['id']
                 )));
+                $col_title->setAttribute('data-title', __('Name'));
 
                 $col_template = Widget::TableData($page_template . '.xsl');
+                $col_template->setAttribute('data-title', __('Template'));
 
                 $col_url = Widget::TableData(Widget::Anchor($page_url, $page_url));
+                $col_url->setAttribute('data-title', __('URL'));
 
                 if ($page['params']) {
                     $col_params = Widget::TableData(trim(General::sanitize($page['params']), '/'));
                 } else {
                     $col_params = Widget::TableData(__('None'), 'inactive');
                 }
+                $col_params->setAttribute('data-title', __('Parameters'));
 
                 if (!empty($page['type'])) {
                     $col_types = Widget::TableData(implode(', ', array_map(['General', 'sanitize'], $page['type'])));
                 } else {
                     $col_types = Widget::TableData(__('None'), 'inactive');
                 }
+                $col_types->setAttribute('data-title', __('Type'));
 
                 if (in_array($page['id'], $this->_hilights)) {
                     $class[] = 'failed';

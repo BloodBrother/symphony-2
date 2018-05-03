@@ -82,9 +82,13 @@ class contentBlueprintsSections extends AdministrationPage
                 $td1->appendChild(Widget::Input('items['.$s->get('id').']', $s->get('modification_date'), 'checkbox', array(
                     'id' => 'section-' . $s->get('id')
                 )));
+                $td1->setAttribute('data-title', __('Name'));
 
                 $td2 = Widget::TableData(Widget::Anchor((string)$entry_count, SYMPHONY_URL . '/publish/' . $s->get('handle') . '/'));
+                $td2->setAttribute('data-title', __('Entries'));
+
                 $td3 = Widget::TableData(General::sanitize($s->get('navigation_group')));
+                $td3->setAttribute('data-title', __('Navigation Group'));
 
                 // Create row
                 $tr = Widget::TableRow(array($td1, $td2, $td3));

@@ -721,9 +721,15 @@ class contentPublish extends AdministrationPage
                         }
 
                         if ($value == __('None')) {
-                            $tableData[] = Widget::TableData($value, 'inactive field-' . $column->get('type') . ' field-' . $column->get('id'));
+                            $tableData[] = Widget::TableData(
+                                $value,
+                                'inactive field-' . $column->get('type') . ' field-' . $column->get('id'),
+                                null,
+                                null,
+                                array('data-title' => $columns[$position - 1]['label'])
+                            );
                         } else {
-                            $tableData[] = Widget::TableData($value, 'field-' . $column->get('type') . ' field-' . $column->get('id'));
+                            $tableData[] = Widget::TableData($value, 'field-' . $column->get('type') . ' field-' . $column->get('id'), null, null, array('data-title' => $columns[$position - 1]['label']));
                         }
 
                         unset($field);

@@ -147,6 +147,7 @@ class contentSystemAuthors extends AdministrationPage
                 } else {
                     $td1 = Widget::TableData($a->getFullName(), 'inactive');
                 }
+                $td1->setAttribute('data-title', $columns[0]['label']);
 
                 // Can this Author be edited by the current Author?
                 if (Symphony::Author()->isDeveloper() || Symphony::Author()->isManager()) {
@@ -161,6 +162,7 @@ class contentSystemAuthors extends AdministrationPage
                 }
 
                 $td2 = Widget::TableData(Widget::Anchor($a->get('email'), 'mailto:'.$a->get('email'), __('Email this author')));
+                $td2->setAttribute('data-title', $columns[1]['label']);
 
                 if (!is_null($a->get('last_seen'))) {
                     $td3 = Widget::TableData(
@@ -169,6 +171,7 @@ class contentSystemAuthors extends AdministrationPage
                 } else {
                     $td3 = Widget::TableData(__('Unknown'), 'inactive');
                 }
+                $td3->setAttribute('data-title', $columns[2]['label']);
 
                 if ($a->isDeveloper()) {
                     $type = 'Developer';
@@ -179,10 +182,12 @@ class contentSystemAuthors extends AdministrationPage
                 }
 
                 $td4 = Widget::TableData(__($type));
+                $td4->setAttribute('data-title', $columns[3]['label']);
 
                 $languages = Lang::getAvailableLanguages();
 
                 $td5 = Widget::TableData($a->get("language") == null ? __("System Default") : $languages[$a->get("language")]);
+                $td5->setAttribute('data-title', $columns[4]['label']);
 
                 $tableData = array();
                 // Add a row to the body array, assigning each cell to the row

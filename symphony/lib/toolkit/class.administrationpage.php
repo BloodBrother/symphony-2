@@ -492,6 +492,10 @@ class AdministrationPage extends HTMLPage
         $h1->appendChild(Widget::Anchor(Symphony::Configuration()->get('sitename', 'general'), rtrim(URL, '/') . '/'));
         $this->Header->appendChild($h1);
 
+        $mobileNavToggler = new XMLElement('a', Widget::SVGIcon('burger'));
+        $mobileNavToggler->setAttribute('id', 'btn-toggle-header-mobile');
+        $this->Header->appendChild($mobileNavToggler);
+
         $this->appendUserLinks();
         $this->appendNavigation();
 
@@ -913,7 +917,9 @@ class AdministrationPage extends HTMLPage
 
             if ($this->doesAuthorHaveAccess($item_limit)) {
                 $xGroup = new XMLElement('li', null, array('role' => 'presentation'));
-                $xGroupLabel = new XMLElement('span', General::sanitize($n['name']));
+                if(is_array($n['children']) && !empty($n['children'])) $xGroupLabel = new XMLElement('span', General::sanitize($n['name']).Widget::SVGIcon('chevron'));
+                else $xGroupLabel = new XMLElement('span', General::sanitize($n['name']));
+
                 $xGroup->appendChild($xGroupLabel);
 
                 if (isset($n['class']) && trim($n['name']) !== '') {

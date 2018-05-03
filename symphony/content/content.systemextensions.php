@@ -83,6 +83,7 @@ class contentSystemExtensions extends AdministrationPage
                 $td1->appendChild(Widget::Input('items['.$name.']', 'on', 'checkbox', array(
                     'id' => 'extension-' . $name
                 )));
+                $td1->setAttribute('data-title', $columns[0]['label']);
 
                 // Version
                 $installed_version = Symphony::ExtensionManager()->fetchInstalledVersion($name);
@@ -94,6 +95,7 @@ class contentSystemExtensions extends AdministrationPage
                 } else {
                     $td2 = Widget::TableData($installed_version);
                 }
+                $td2->setAttribute('data-title', $columns[1]['label']);
 
                 // Status
                 $trClasses = array();
@@ -128,6 +130,7 @@ class contentSystemExtensions extends AdministrationPage
 
                 $trClasses[] = $trStatus;
                 $td3 = Widget::TableData($tdMessage);
+                $td3->setAttribute('data-title', $columns[2]['label']);
 
                 // Links
                 $tdLinks = array();
@@ -155,6 +158,7 @@ class contentSystemExtensions extends AdministrationPage
                 }
 
                 $td4 = Widget::TableData($tdLinks);
+                $td4->setAttribute('data-title', $columns[3]['label']);
 
                 // Authors
                 $tdAuthors = array();
@@ -176,6 +180,7 @@ class contentSystemExtensions extends AdministrationPage
                 }
 
                 $td5 = Widget::TableData($tdAuthors);
+                $td5->setAttribute('data-title', $columns[4]['label']);
 
                 // Create the table row
                 $tr = Widget::TableRow(array($td1, $td2, $td3, $td4, $td5), implode(' ', $trClasses));

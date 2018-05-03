@@ -226,6 +226,7 @@ abstract class ResourcesPage extends AdministrationPage
                 $name->appendChild(Widget::Input('items['.$r['handle'].']', 'on', 'checkbox', array(
                     'id' => 'resource-' . $r['handle']
                 )));
+                $name->setAttribute('data-title', $columns[0]['label']);
 
                 // Resource type/source
                 if (isset($r['source'], $r['source']['id'])) {
@@ -244,6 +245,7 @@ abstract class ResourcesPage extends AdministrationPage
                 } else {
                     $section = Widget::TableData(__('Unknown'), 'inactive');
                 }
+                $section->setAttribute('data-title', $columns[1]['label']);
 
                 // Attached pages
                 $pages = ResourceManager::getAttachedPages($resource_type, $r['handle']);
@@ -266,6 +268,7 @@ abstract class ResourcesPage extends AdministrationPage
                 } else {
                     $pagelinks = Widget::TableData($pages, 'pages');
                 }
+                $pagelinks->setAttribute('data-title', $columns[2]['label']);
 
                 // Authors
                 $author = $r['author']['name'];
@@ -279,6 +282,8 @@ abstract class ResourcesPage extends AdministrationPage
                 }
 
                 $author = Widget::TableData($author);
+                $author->setAttribute('data-title', $columns[3]['label']);
+
                 $tableData = [$name, $section, $pagelinks, $author];
 
                 /**
