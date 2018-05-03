@@ -289,6 +289,8 @@ class FieldUpload extends Field implements ExportableField, ImportableField
 
         if ($this->get('required') !== 'yes') {
             $label->appendChild(new XMLElement('i', __('Optional')));
+        } else {
+            $label->appendChild(new XMLElement('i', null));
         }
 
         $span = new XMLElement('span', null, array('class' => 'frame'));

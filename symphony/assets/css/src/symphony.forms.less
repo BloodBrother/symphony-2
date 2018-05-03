@@ -324,9 +324,9 @@ label:last-child {
 	margin-bottom: 0;
 }
 
-label > i,
-p.label > i,
-#password legend i {
+label > i:not(:empty),
+p.label > i:not(:empty),
+#password legend i:not(:empty) {
 	display: inline;
 	color: @grey;
 	font-size: @text-shorter;
