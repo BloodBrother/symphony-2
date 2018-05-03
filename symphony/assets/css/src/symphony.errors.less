@@ -35,8 +35,14 @@ body#error {
 		background: @accent;
 	}
 
-	li strong {
+	li strong,
+	li em {
+		font-weight: 700;
 		padding-right: @spacing-smallest;
+	}
+
+	.error {
+		color: @red;
 	}
 
 	.error.full {
@@ -68,6 +74,11 @@ body#error {
 
 	.frame-header {
 		color: @white; background: @accent;
+
+		label {
+			color: @white;
+			margin-bottom: 0!important;
+		}
 	}
 
 	.content {
@@ -83,6 +94,10 @@ body#error {
 				border-top: 1px solid @lighter-grey;
 			}
 		}
+	}
+
+	code {
+		white-space: pre;
 	}
 
 	p {
