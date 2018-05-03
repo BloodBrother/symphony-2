@@ -83,7 +83,7 @@
 					}
 
 					// Remove empty tags
-					else if(tags[index] == '') {
+					else if(tags[index] === '') {
 						tags.splice(index, 1);
 					}
 				}

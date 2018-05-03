@@ -246,7 +246,7 @@
 				if(settings.save_state === true && Symphony.Support.localStorage === true && window.localStorage[storage]) {
 					$.each(window.localStorage[storage].split(','), function(index, value) {
 						var collapsed = object.find(settings.items).eq(value);
-						if(collapsed.has('.invalid').length == 0) {
+						if(collapsed.has('.invalid').length === 0) {
 							collapseItem(collapsed, 0);
 						}
 					});

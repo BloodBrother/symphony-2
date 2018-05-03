@@ -98,7 +98,7 @@
 				// Show instance
 				instance
 					.trigger('constructshow.duplicator');
-					
+
 				// Update collapsible sizes
 				instance.trigger('updatesize.collapsible');
 				instance.trigger('setsize.collapsible');
@@ -132,7 +132,7 @@
 					instance.remove();
 
 					// Check if duplicator is empty
-					if(duplicator.find('.instance').length == 0) {
+					if(duplicator.find('.instance').length === 0) {
 						duplicator.addClass('empty');
 					}
 
@@ -188,7 +188,7 @@
 					selector.find('option').prop('selected', false).filter(':not(:disabled):first').prop('selected', true);
 
 					// All selected
-					if(selector.find('option:not(:disabled)').length == 0) {
+					if(selector.find('option:not(:disabled)').length === 0) {
 						selector.attr('disabled', 'disabled');
 					}
 				}
@@ -278,7 +278,7 @@
 			}
 
 			// Select default
-			if(settings.preselect != false) {
+			if(settings.preselect !== false) {
 				selector.find('option[value="' + settings.preselect + '"]').prop('selected', true);
 			}
 
@@ -288,10 +288,10 @@
 
 				// Single unique template
 				if(templates.is('.unique')) {
-					if(instances.length == 0) {
+					if(instances.length === 0) {
 						constructor.trigger('click.duplicator', [0]);
 					}
-					
+
 					apply.hide();
 				}
 			}

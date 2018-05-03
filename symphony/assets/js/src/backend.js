@@ -63,7 +63,7 @@
 		var route = Symphony.Context.get('route');
 		if (path && route) {
 			var contextId = (path + route).split('/').filter(function(part) {
-				return (part != 'edit' && part != 'new' && part != 'created' && part != 'saved' && part != '');
+				return (part != 'edit' && part != 'new' && part != 'created' && part != 'saved' && part !== '');
 			}).join('.');
 			Symphony.Context.add('context-id', contextId);
 		}
@@ -89,43 +89,6 @@
 				$(window).on('load', replaceState);
 			}
 		}
-
-		// Elements
-		var win = $(window);
-		var o = {
-			header: '#header',
-			btnMobileNav: '#btn-toggle-header-mobile',
-			nav: '#nav',
-			navEl: '#nav li',
-			navElFirst: '#nav > ul > li > span',
-			actions: '.page-single #contents .actions, .single #contents .actions, body.entry_relationship.page-index #contents .actions',
-			context: '#context',
-			contextTabs: '#context .tabs li',
-			contextDrawers: '#context > .actions a.button.drawer',
-			contextActions: '#context > .actions a',
-			contextActionsButt: '#context > .actions button',
-			actionButtons: '.page-single #contents .actions .button-container, .single #contents .actions .button-container, body.entry_relationship.page-index #contents .actions .button-container',
-			contents: '#contents',
-			contentsForm: '#contents > form',
-			tabGroup: '.tab-group',
-			secTabGroup: '.secondary.column .tab-group',
-			priTabGroup: '.primary.column .tab-group',
-			columns: '.two.columns',
-			secColumn: '.secondary.column',
-			priColumn: '.primary.column',
-			multiTabsEl: '.field-multilingual ul.tabs li',
-			multiLabel: '.field-multilingual > .container > label',
-			editorEl: '.editor-toolbar a',
-			tableEl: 'table td',
-			dashboard: '#dashboard',
-			dashboardDrawerSelects: '#drawer-dashboard select:not(.disabled)',
-			dashboardDrawerSelectsArrows: '#drawer-dashboard .select2-container .select2-selection--single .select2-selection__arrow',
-			selectArrows: '.select2-container .select2-selection--single .select2-selection__arrow',
-			typeChangerEl: '#custom-toolbar .type-changer a',
-			focusOptionEl: '#custom-toolbar .focus-option a',
-			customToolbar: '#custom-toolbar',
-			dataSourceSource: '#ds-context'
-		};
 
 		// Header Nav - Toggle Subnav on parent click
 		$('li', Symphony.Elements.nav).has('ul').on('click', '> span', function(){

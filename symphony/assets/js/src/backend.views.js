@@ -547,7 +547,7 @@ Symphony.View.add('/blueprints/sections/:action:/:id:/:status:', function(action
 		if(Symphony.Support.localStorage === true && window.localStorage[storageId]) {
 			$.each(window.localStorage[storageId].split(','), function(index, value) {
 				var collapsed = duplicator.find('.instance').eq(value);
-				if(collapsed.has('.invalid').length == 0) {
+				if(collapsed.has('.invalid').length === 0) {
 					collapsed.trigger('collapse.collapsible', [0]);
 				}
 			});
@@ -746,7 +746,7 @@ Symphony.View.add('/blueprints/events/:action:/:name:/:status:/:*:', function() 
 
 	// Update documentation
 	Symphony.Elements.contents.on('update.admin', function updateEventDocumentation() {
-		if(name.val() == '') {
+		if(name.val() === '') {
 			$('#event-documentation').empty();
 		}
 		else {

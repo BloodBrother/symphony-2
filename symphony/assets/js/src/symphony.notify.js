@@ -119,7 +119,7 @@
 			}, 'normal', function removeItem() {
 
 				// No other items
-				if(item.siblings().length == 0) {
+				if(item.siblings().length === 0) {
 					notifier.trigger('resize.notify', [$('<div />')]);
 				}
 
