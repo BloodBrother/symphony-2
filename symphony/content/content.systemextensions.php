@@ -47,6 +47,10 @@ class contentSystemExtensions extends AdministrationPage
                 'sortable' => false,
             ),
             array(
+                'label' => __('PHP Compatibility'),
+                'sortable' => false,
+            ),
+            array(
                 'label' => __('Links'),
                 'sortable' => false,
                 'handle' => 'links'
@@ -132,6 +136,21 @@ class contentSystemExtensions extends AdministrationPage
                 $td3 = Widget::TableData($tdMessage);
                 $td3->setAttribute('data-title', $columns[2]['label']);
 
+                // PHP Compatibility
+                $trStatus = '';
+                $tdMessage = __('Status unavailable');
+
+                if (in_array(Extension::EXTENSION_PHP_NOT_COMPATIBLE, $about['status'])) {
+                    $tdMessage = $about['required_php'];
+                    $trStatus = 'status-error';
+                } else {
+                    $tdMessage = __('Compatible');
+                }
+
+                $trClasses[] = $trStatus;
+                $td4 = Widget::TableData($tdMessage);
+                $td4->setAttribute('data-title', $columns[3]['label']);
+
                 // Links
                 $tdLinks = array();
 
@@ -192,8 +211,8 @@ class contentSystemExtensions extends AdministrationPage
                     )->generate();
                 }
 
-                $td4 = Widget::TableData($tdLinks);
-                $td4->setAttribute('data-title', $columns[3]['label']);
+                $td5 = Widget::TableData($tdLinks);
+                $td5->setAttribute('data-title', $columns[4]['label']);
 
                 // Authors
                 $tdAuthors = array();
@@ -235,11 +254,11 @@ class contentSystemExtensions extends AdministrationPage
                     }
                 }
 
-                $td5 = Widget::TableData($tdAuthors);
-                $td5->setAttribute('data-title', $columns[4]['label']);
+                $td6 = Widget::TableData($tdAuthors);
+                $td6->setAttribute('data-title', $columns[5]['label']);
 
                 // Create the table row
-                $tr = Widget::TableRow(array($td1, $td2, $td3, $td4, $td5), implode(' ', $trClasses));
+                $tr = Widget::TableRow(array($td1, $td2, $td3, $td4, $td5, $td6), implode(' ', $trClasses));
 
                 // Add some attributes about the extension
                 $tr->setAttribute('data-handle', $name);

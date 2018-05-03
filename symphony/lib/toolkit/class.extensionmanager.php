@@ -1038,6 +1038,24 @@ class ExtensionManager implements FileResource
                     $about['status'][] = Extension::EXTENSION_NOT_COMPATIBLE;
                     $about['required_version'] = $required_max_version;
                 }
+
+                // Load in the 'php-min/php-max' version data for this release
+                // If it doens't exist, use default values: 5.3.x min, 5.6.x max
+                $required_min_php = $xpath->evaluate('string(@php-min)', $release) ? $xpath->evaluate('string(@php-min)', $release) : '5.3.x';
+                $required_max_php = $xpath->evaluate('string(@php-max)', $release) ? $xpath->evaluate('string(@php-max)', $release) : '5.6.x';
+
+                // Min PHP Version
+                if (!empty($required_min_php) &&
+                    \Composer\Semver\Comparator::lessThan(PHP_MIN, $required_min_php)) {
+                    $about['status'][] = Extension::EXTENSION_PHP_NOT_COMPATIBLE;
+                    $about['required_php'] = __('Not compatible, requires PHP %s', [PHP_MIN]);
+
+                // Max PHP Version
+                } elseif (!empty($required_max_php) &&
+                    \Composer\Semver\Comparator::greaterThan(PHP_MAX, $required_max_php)) {
+                    $about['status'][] = Extension::EXTENSION_PHP_NOT_COMPATIBLE;
+                    $about['required_php'] = __('Not compatible, Symphony requires %s', [PHP_MAX]);
+                }
             }
 
             // Add the <author> information

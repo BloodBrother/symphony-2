@@ -59,6 +59,13 @@ abstract class Extension implements ArrayAccess
     const EXTENSION_NOT_COMPATIBLE = 14;
 
     /**
+     * Status when the extension is not compatible with the current PHP version of
+     * Symphony
+     * @var integer
+     */
+    const EXTENSION_PHP_NOT_COMPATIBLE = 15;
+
+    /**
      * Holds an associative array of all the objects this extension provides
      * to Symphony where the key is one of the Provider constants, and the
      * value is the name of the class name.
