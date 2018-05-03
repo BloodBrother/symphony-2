@@ -39,15 +39,15 @@ class contentSystemExtensions extends AdministrationPage
                 'handle' => 'name'
             ),
             array(
-                'label' => __('Version'),
-                'sortable' => false,
-            ),
-            array(
                 'label' => __('Status'),
                 'sortable' => false,
             ),
             array(
                 'label' => __('PHP Compatibility'),
+                'sortable' => false,
+            ),
+            array(
+                'label' => __('Dependencies'),
                 'sortable' => false,
             ),
             array(
@@ -80,7 +80,8 @@ class contentSystemExtensions extends AdministrationPage
         } else {
             foreach ($extensions as $name => $about) {
                 // Name
-                $td1 = Widget::TableData($about['name']);
+                $installed_version = Symphony::ExtensionManager()->fetchInstalledVersion($name);
+                $td1 = Widget::TableData($about['name'] . ' <span style="opacity: 0.3;"> - ' . $installed_version . '</span>');
                 $td1->appendChild(Widget::Label(__('Select %s Extension', array($about['name'])), null, 'accessible', null, array(
                     'for' => 'extension-' . $name
                 )));
@@ -88,18 +89,6 @@ class contentSystemExtensions extends AdministrationPage
                     'id' => 'extension-' . $name
                 )));
                 $td1->setAttribute('data-title', $columns[0]['label']);
-
-                // Version
-                $installed_version = Symphony::ExtensionManager()->fetchInstalledVersion($name);
-
-                if (in_array(Extension::EXTENSION_NOT_INSTALLED, $about['status'])) {
-                    $td2 = Widget::TableData($about['version']);
-                } elseif (in_array(Extension::EXTENSION_REQUIRES_UPDATE, $about['status'])) {
-                    $td2 = Widget::TableData($installed_version . '<i> → ' . $about['version'] . '</i>');
-                } else {
-                    $td2 = Widget::TableData($installed_version);
-                }
-                $td2->setAttribute('data-title', $columns[1]['label']);
 
                 // Status
                 $trClasses = array();
@@ -114,6 +103,7 @@ class contentSystemExtensions extends AdministrationPage
 
                 if (in_array(Extension::EXTENSION_DISABLED, $about['status'])) {
                     $tdMessage = __('Disabled');
+                    $trClasses[] = 'inactive';
                     $trStatus = 'status-notice';
                 }
 
@@ -128,13 +118,13 @@ class contentSystemExtensions extends AdministrationPage
                 }
 
                 if (in_array(Extension::EXTENSION_NOT_COMPATIBLE, $about['status'])) {
-                    $tdMessage .= ', ' . __('requires Symphony %s', array($about['required_version']));
+                    $tdMessage .= ',<br/>' . __('requires Symphony %s', array($about['required_version']));
                     $trStatus = 'status-error';
                 }
 
                 $trClasses[] = $trStatus;
-                $td3 = Widget::TableData($tdMessage);
-                $td3->setAttribute('data-title', $columns[2]['label']);
+                $td2 = Widget::TableData($tdMessage);
+                $td2->setAttribute('data-title', $columns[1]['label']);
 
                 // PHP Compatibility
                 $trStatus = '';
@@ -142,13 +132,53 @@ class contentSystemExtensions extends AdministrationPage
 
                 if (in_array(Extension::EXTENSION_PHP_NOT_COMPATIBLE, $about['status'])) {
                     $tdMessage = $about['required_php'];
-                    $trStatus = 'status-error';
                 } else {
                     $tdMessage = __('Compatible');
                 }
 
                 $trClasses[] = $trStatus;
-                $td4 = Widget::TableData($tdMessage);
+                $td3 = Widget::TableData($tdMessage);
+                $td3->setAttribute('data-title', $columns[2]['label']);
+
+                // Dependencies
+                $dependencies = $about['dependencies'];
+                $dependencies_msg = __('No dependencies');
+
+                if(is_array($dependencies) && !empty($dependencies)) {
+                    foreach ($dependencies as $key => $dependency) {
+                        $classname = $dependency['classname'];
+                        $required_version = $dependency['version'];
+                        $ext_data = $extensions[$classname];
+                        $name = $ext_data['name'];
+                        $version = $ext_data['version'];
+                        $status = $ext_data['status'];
+
+                        $required_version = preg_replace(array('/\.x/', '/\.0$/'), '', $required_version);
+                        $version = preg_replace(array('/\.x/', '/\.0$/'), '', $version);
+
+                        if($status == NULL || in_array(Extension::EXTENSION_NOT_INSTALLED, $status)) {
+                            $current_status = ' (' . __('Not installed') . ')';
+                        } else if(in_array(Extension::EXTENSION_DISABLED, $status)) {
+                            $current_status = ' (' . __('Disabled') . ')';
+                        } else if ($version < $required_version) {
+                            $current_status = ' (' . __('Requires update') . ')';
+                        } else {
+                            $current_status = '';
+                        }
+
+                        if($name == NULL) {
+                            $name = $classname;
+                        }
+
+                        if($key == 0) {
+                            $dependencies_msg = $name . ' ' . $required_version . $current_status;
+                        } else {
+                            $dependencies_msg .= ',<br/>' . $name . ' ' . $required_version . $current_status;
+                        }
+                    }
+                }
+
+                $td4 = Widget::TableData($dependencies_msg);
                 $td4->setAttribute('data-title', $columns[3]['label']);
 
                 // Links

@@ -1005,6 +1005,17 @@ class ExtensionManager implements FileResource
                 'status' => array()
             );
 
+            // find dependencies
+            $dependencies = $xpath->query('//ext:dependency', $extension);
+            $about['dependencies'] = array();
+
+            foreach ($dependencies as $dependency) {
+                $about['dependencies'][] = array(
+                    'classname' => $xpath->evaluate('string(.)', $dependency),
+                    'version' => $xpath->evaluate('string(@version)', $dependency)
+                );
+            }
+
             // find the latest <release> (largest version number)
             $latest_release_version = '0.0.0';
             foreach ($xpath->query('//ext:release', $extension) as $release) {
