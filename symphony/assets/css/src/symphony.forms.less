@@ -95,10 +95,14 @@ optgroup {
 }
 
 input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
+	line-height: 0.4rem + @text-short + @spacing-smallest * 2;
+	padding: 0 @spacing-smallerish;
 	height: 0.4rem + @text-short + @spacing-smallest * 2;
 }
 
 select {
+	line-height: 0.4rem + @text-short + @spacing-smallest * 2;
+	padding: 0 @spacing-smallerish;
 	height: 0.4rem + @text-short + @spacing-smallest * 2;
 
 	.disabled {

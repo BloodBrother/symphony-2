@@ -369,6 +369,38 @@ fieldset.settings .collapsible {
 	}
 }
 
+/*--------------------------------------------------------------------------
+	Error
+--------------------------------------------------------------------------*/
+
+#error {
+	.flex(~'column', ~'center', ~'center');
+	box-sizing: border-box;
+	padding: @spacing-smallish;
+	width: 100%;
+	min-height: 100vh;
+
+	.frame {
+		overflow: hidden;
+		padding: 0;
+		background: @white;
+		width: @spacing-huger;
+		max-width: 100%;
+
+		h1 {
+			padding: @spacing-smallest @spacing-smallerish;
+			background: @accent;
+		}
+
+		p {
+			color: @dark-grey;
+			font-size: @text-short;
+			margin: 0;
+			padding: @spacing-smallerish;
+		}
+	}
+}
+
 /*-----------------------------------------------------------------------------
 	Invalid states
 -----------------------------------------------------------------------------*/

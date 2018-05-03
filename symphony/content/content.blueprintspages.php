@@ -169,7 +169,16 @@ class contentBlueprintsPages extends AdministrationPage
                 $col_template = Widget::TableData($page_template . '.xsl');
                 $col_template->setAttribute('data-title', __('Template'));
 
-                $col_url = Widget::TableData(Widget::Anchor($page_url, $page_url));
+                $col_url = Widget::TableData(
+                    Widget::Anchor(
+                        $page_url,
+                        $page_url,
+                        null,
+                        null,
+                        null,
+                        array('target' => '_blank')
+                    )
+                );
                 $col_url->setAttribute('data-title', __('URL'));
 
                 if ($page['params']) {

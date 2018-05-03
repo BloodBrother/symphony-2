@@ -474,7 +474,7 @@ class contentSystemAuthors extends AdministrationPage
                 $tokenUrl = SYMPHONY_URL . '/login/' . $author->getAuthToken() . '/';
                 $label->setValue(__('%s Remote login with the token %s is enabled.', [
                      $input->generate(),
-                     '<a href="' . $tokenUrl . '">' . $author->getAuthToken() . '</a>',
+                     '<a target="_blank" href="' . $tokenUrl . '">' . $author->getAuthToken() . '</a>',
                 ]));
             } else {
                 $label->setValue(__('%s Remote login is currently disabled.', [
