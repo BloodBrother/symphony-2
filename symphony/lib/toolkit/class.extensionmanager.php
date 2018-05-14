@@ -1039,22 +1039,41 @@ class ExtensionManager implements FileResource
                     $about['required_version'] = $required_max_version;
                 }
 
+                // Load in the 'php-min/php-max' version data for this install
+                $current_max_php = Symphony::Configuration()->get('php-max', 'symphony');
+                $current_min_php = Symphony::Configuration()->get('php-min', 'symphony');
+
+                // If it doens't exist, use symphony values: PHP_MIN and PHP_MAX
+                if (!$current_max_php) {
+                    $current_max_php = PHP_MAX;
+                }
+                if (!$current_min_php) {
+                    $current_min_php = PHP_MIN;
+                }
+
                 // Load in the 'php-min/php-max' version data for this release
-                // If it doens't exist, use default values: 5.3.x min, 5.6.x max
-                $required_min_php = $xpath->evaluate('string(@php-min)', $release) ? $xpath->evaluate('string(@php-min)', $release) : '5.3.x';
-                $required_max_php = $xpath->evaluate('string(@php-max)', $release) ? $xpath->evaluate('string(@php-max)', $release) : '5.6.x';
+                $required_max_php = $xpath->evaluate('string(@php-max)', $release);
+                $required_min_php = $xpath->evaluate('string(@php-min)', $release);
+
+                // If it doens't exist, use symphony values
+                if (!$required_max_php) {
+                    $required_max_php = $current_max_php;
+                }
+                if (!$required_min_php) {
+                    $required_min_php = $current_min_php;
+                }
+
+                $phpVc = new VersionComparator(phpversion());
 
                 // Min PHP Version
-                if (!empty($required_min_php) &&
-                    \Composer\Semver\Comparator::lessThan(PHP_MIN, $required_min_php)) {
+                if ($phpVc->lessThan($required_min_php)) {
                     $about['status'][] = Extension::EXTENSION_PHP_NOT_COMPATIBLE;
-                    $about['required_php'] = __('Not compatible, requires PHP %s', [PHP_MIN]);
+                    $about['required_php'] = __('Not compatible, requires at least PHP %s', [$current_min_php]);
 
                 // Max PHP Version
-                } elseif (!empty($required_max_php) &&
-                    \Composer\Semver\Comparator::greaterThan(PHP_MAX, $required_max_php)) {
+                } elseif ($phpVc->greaterThan($required_max_php)) {
                     $about['status'][] = Extension::EXTENSION_PHP_NOT_COMPATIBLE;
-                    $about['required_php'] = __('Not compatible, Symphony requires %s', [PHP_MAX]);
+                    $about['required_php'] = __('Not compatible, requires at most PHP %s', [$current_max_php]);
                 }
             }
 

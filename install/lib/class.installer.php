@@ -195,11 +195,25 @@ class Installer extends Administration
         $errors = [];
         $phpVc = new VersionComparator(phpversion());
 
-        // Check for PHP 5.6+
-        if ($phpVc->lessThan('5.6')) {
+        // Check for PHP MIN
+        if ($phpVc->lessThan(PHP_MIN)) {
             $errors[] = [
                 'msg' => __('PHP Version is not correct'),
-                'details' => __('Symphony requires %1$s or greater to work, however version %2$s was detected.', ['<code><abbr title="PHP: Hypertext Pre-processor">PHP</abbr> 5.6</code>', '<code>' . phpversion() . '</code>'])
+                'details' => __(
+                    'Symphony requires %1$s or greater to work, however version %2$s was detected.', [
+                        '<code><abbr title="PHP: Hypertext Pre-processor">PHP</abbr> ' . PHP_MIN . '</code>',
+                        '<code>' . phpversion() . '</code>'
+                ]),
+            ];
+        // Check for PHP MAX
+        } elseif ($phpVc->greaterThan(PHP_MAX)) {
+            $errors[] = [
+                'msg' => __('PHP Version is not correct'),
+                'details' => __(
+                    'Symphony requires less than %1$s to work, however version %2$s was detected.', [
+                        '<code><abbr title="PHP: Hypertext Pre-processor">PHP</abbr> ' . PHP_MAX . '</code>',
+                        '<code>' . phpversion() . '</code>',
+                ]),
             ];
         }
 

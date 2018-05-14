@@ -346,3 +346,17 @@ define_safe('CDATA_BEGIN', '<![CDATA[');
  * @var string
  */
 define_safe('CDATA_END', ']]>');
+
+/**
+ * Defines a constant for the minimum required php version
+ * @since Symphony 4.0.0
+ * @var string
+ */
+define_safe('PHP_MIN', '7.0.x');
+
+/**
+ * Defines a constant for the maximum required php version
+ * @since Symphony 4.0.0
+ * @var string
+ */
+define_safe('PHP_MAX', '7.2.x');
