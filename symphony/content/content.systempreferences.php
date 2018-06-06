@@ -142,6 +142,11 @@ class contentSystemPreferences extends AdministrationPage
             $this->Form->appendChild($group);
         }
 
+        $version = new XMLElement('p', 'Symphony ' . Symphony::Configuration()->get('version', 'symphony'), array(
+            'id' => 'version'
+        ));
+        $this->Form->appendChild($version);
+
         /**
          * Add Extension custom preferences. Use the $wrapper reference to append objects.
          *
@@ -158,21 +163,27 @@ class contentSystemPreferences extends AdministrationPage
             'errors' => $this->_errors
         ));
 
+        $this->Context->setAttribute('class', 'spaced-right');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-
-        $version = new XMLElement('p', 'Symphony ' . Symphony::Configuration()->get('version', 'symphony'), array(
-            'id' => 'version'
-        ));
-        $div->appendChild($version);
-
         $attr = array('accesskey' => 's');
 
         if (!$bIsWritable) {
             $attr['disabled'] = 'disabled';
         }
 
-        $div->appendChild(Widget::Input('action[save]', __('Save Changes'), 'submit', $attr));
+        $div->appendChild(
+            Widget::SVGIconContainer(
+                'save',
+                Widget::Input(
+                    'action[save]',
+                    __('Save Changes'),
+                    'submit',
+                    $attr
+                )
+            )
+        );
+        $div->appendChild(Widget::SVGIcon('chevron'));
 
         $this->Form->appendChild($div);
     }

@@ -305,7 +305,6 @@ class AdministrationPage extends HTMLPage
 
         foreach ($values as $v) {
             $p->appendChild($v);
-            $p->appendChild(new XMLElement('span', '&#8250;', array('class' => 'sep')));
         }
     }
 

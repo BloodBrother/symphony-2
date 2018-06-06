@@ -40,7 +40,12 @@ class contentBlueprintsPages extends AdministrationPage
     {
         if ($page_id == 0) {
             return $this->insertBreadcrumbs(
-                array(Widget::Anchor(__('Pages'), SYMPHONY_URL . '/blueprints/pages/'))
+                array(
+                    Widget::Anchor(
+                        Widget::SVGIcon('arrow') . __('Pages'),
+                        SYMPHONY_URL . '/blueprints/pages/'
+                    )
+                )
             );
         }
 
@@ -75,7 +80,12 @@ class contentBlueprintsPages extends AdministrationPage
         }
 
         $this->insertBreadcrumbs(array_merge(
-            array(Widget::Anchor(__('Pages'), SYMPHONY_URL . '/blueprints/pages/')),
+            array(
+                Widget::Anchor(
+                    Widget::SVGIcon('arrow') . __('Pages'),
+                    SYMPHONY_URL . '/blueprints/pages/'
+                )
+            ),
             $pages
         ));
     }
@@ -583,6 +593,7 @@ class contentBlueprintsPages extends AdministrationPage
                 )
             );
         }
+        $div->appendChild(Widget::SVGIcon('chevron'));
 
         $this->Form->appendChild($div);
 

@@ -188,9 +188,14 @@ class contentBlueprintsSections extends AdministrationPage
         $this->setPageType('form');
         $this->setTitle(__('%1$s &ndash; %2$s', array(__('Sections'), __('Symphony'))));
         $this->appendSubheading(__('Untitled'));
-        $this->insertBreadcrumbs(array(
-            Widget::Anchor(__('Sections'), SYMPHONY_URL . '/blueprints/sections/'),
-        ));
+        $this->insertBreadcrumbs(
+            array(
+                Widget::Anchor(
+                    Widget::SVGIcon('arrow') . __('Sections'),
+                    SYMPHONY_URL . '/blueprints/sections/'
+                ),
+            )
+        );
 
         $types = array();
 
@@ -355,6 +360,7 @@ class contentBlueprintsSections extends AdministrationPage
                 )
             )
         );
+        $div->appendChild(Widget::SVGIcon('chevron'));
 
         $this->Form->appendChild($div);
     }
@@ -449,9 +455,14 @@ class contentBlueprintsSections extends AdministrationPage
                 'button'
             )
         );
-        $this->insertBreadcrumbs(array(
-            Widget::Anchor(__('Sections'), SYMPHONY_URL . '/blueprints/sections/'),
-        ));
+        $this->insertBreadcrumbs(
+            array(
+                Widget::Anchor(
+                    Widget::SVGIcon('arrow') . __('Sections'),
+                    SYMPHONY_URL . '/blueprints/sections/'
+                ),
+            )
+        );
 
         $fieldset = new XMLElement('fieldset');
         $fieldset->setAttribute('class', 'settings');
@@ -598,6 +609,7 @@ class contentBlueprintsSections extends AdministrationPage
                 $button
             )
         );
+        $div->appendChild(Widget::SVGIcon('chevron'));
 
         $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
         $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));

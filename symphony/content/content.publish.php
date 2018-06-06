@@ -515,12 +515,27 @@ class contentPublish extends AdministrationPage
         $this->createFilteringInterface();
 
         $subheading_buttons = array(
-            Widget::Anchor(__('Create New'), Administration::instance()->getCurrentPageURL().'new/'.($prepopulate_querystring ? '?' . $prepopulate_querystring : ''), __('Create a new entry'), 'create button', null, array('accesskey' => 'c'))
+            Widget::Anchor(
+                Widget::SVGIcon('add') . '<span><span>' . __('Create New') . '</span></span>',
+                Administration::instance()->getCurrentPageURL().'new/'.($prepopulate_querystring ? '?' . $prepopulate_querystring : ''),
+                __('Create a new entry'),
+                'create button',
+                null,
+                array('accesskey' => 'c')
+            )
         );
 
         // Only show the Edit Section button if the Author is a developer. #938 ^BA
         if (Symphony::Author()->isDeveloper()) {
-            array_unshift($subheading_buttons, Widget::Anchor(__('Edit Section'), SYMPHONY_URL . '/blueprints/sections/edit/' . $section_id . '/', __('Edit Section Configuration'), 'button'));
+            array_unshift(
+                $subheading_buttons,
+                Widget::Anchor(
+                    Widget::SVGIcon('edit') . '<span><span>' . __('Edit Section') . '</span></span>',
+                    SYMPHONY_URL . '/blueprints/sections/edit/' . $section_id . '/',
+                    __('Edit Section Configuration'),
+                    'button'
+                )
+            );
         }
 
         $this->appendSubheading(General::sanitize($section->get('name')), $subheading_buttons);
@@ -1114,8 +1129,14 @@ class contentPublish extends AdministrationPage
 
         // Only show the Edit Section button if the Author is a developer. #938 ^BA
         if (Symphony::Author()->isDeveloper()) {
-            $this->appendSubheading(__('Untitled'),
-                Widget::Anchor(__('Edit Section'), SYMPHONY_URL . '/blueprints/sections/edit/' . $section_id . '/', __('Edit Section Configuration'), 'button')
+            $this->appendSubheading(
+                __('Untitled'),
+                Widget::Anchor(
+                    Widget::SVGIcon('edit') . '<span><span>' . __('Edit Section') . '</span></span>',
+                    SYMPHONY_URL . '/blueprints/sections/edit/' . $section_id . '/',
+                    __('Edit Section Configuration'),
+                    'button'
+                )
             );
         } else {
             $this->appendSubheading(__('Untitled'));
@@ -1123,7 +1144,10 @@ class contentPublish extends AdministrationPage
 
         // Build filtered breadcrumb [#1378}
         $this->insertBreadcrumbs(array(
-            Widget::Anchor(General::sanitize($section->get('name')), SYMPHONY_URL . '/publish/' . $this->_context['section_handle'] . '/' . $this->getFilterString()),
+            Widget::Anchor(
+                Widget::SVGIcon('arrow') . General::sanitize($section->get('name')),
+                SYMPHONY_URL . '/publish/' . $this->_context['section_handle'] . '/' . $this->getFilterString()
+            ),
         ));
 
         $this->Form->appendChild(Widget::Input('MAX_FILE_SIZE', Symphony::Configuration()->get('max_upload_size', 'admin'), 'hidden'));
@@ -1197,10 +1221,22 @@ class contentPublish extends AdministrationPage
                 $this->Form->appendChild($sidebar);
             }
 
+            $this->Context->setAttribute('class', 'spaced-right');
             $div = new XMLElement('div');
             $div->setAttribute('class', 'actions');
-            $div->appendChild(Widget::Input('action[save]', __('Create Entry'), 'submit', array('accesskey' => 's')));
+            $div->appendChild(
+                Widget::SVGIconContainer(
+                    'save',
+                    Widget::Input(
+                        'action[save]',
+                        __('Create Entry'),
+                        'submit',
+                        array('accesskey' => 's')
+                    )
+                )
+            );
 
+            $div->appendChild(Widget::SVGIcon('chevron'));
             $this->Form->appendChild($div);
 
             // Create a Drawer for Associated Sections
@@ -1496,13 +1532,24 @@ class contentPublish extends AdministrationPage
 
         // Only show the Edit Section button if the Author is a developer. #938 ^BA
         if (Symphony::Author()->isDeveloper()) {
-            $this->appendSubheading($title, Widget::Anchor(__('Edit Section'), SYMPHONY_URL . '/blueprints/sections/edit/' . $section_id . '/', __('Edit Section Configuration'), 'button'));
+            $this->appendSubheading(
+                $title,
+                Widget::Anchor(
+                    Widget::SVGIcon('edit') . '<span><span>' . __('Edit Section') . '</span></span>',
+                    SYMPHONY_URL . '/blueprints/sections/edit/' . $section_id . '/',
+                    __('Edit Section Configuration'),
+                    'button'
+                )
+            );
         } else {
             $this->appendSubheading($title);
         }
 
         $this->insertBreadcrumbs(array(
-            Widget::Anchor(General::sanitize($section->get('name')), SYMPHONY_URL . (isset($filter_link) ? $filter_link : $base)),
+            Widget::Anchor(
+                Widget::SVGIcon('arrow') . General::sanitize($section->get('name')),
+                SYMPHONY_URL . (isset($filter_link) ? $filter_link : $base)
+            ),
         ));
 
         $this->Form->appendChild(Widget::Input('MAX_FILE_SIZE', Symphony::Configuration()->get('max_upload_size', 'admin'), 'hidden'));
@@ -1540,13 +1587,30 @@ class contentPublish extends AdministrationPage
                 $this->Form->appendChild($sidebar);
             }
 
+            $this->Context->setAttribute('class', 'spaced-right');
             $div = new XMLElement('div');
             $div->setAttribute('class', 'actions');
-            $div->appendChild(Widget::Input('action[save]', __('Save Changes'), 'submit', array('accesskey' => 's')));
+            $div->appendChild(
+                Widget::SVGIconContainer(
+                    'save',
+                    Widget::Input(
+                        'action[save]',
+                        __('Save Changes'),
+                        'submit',
+                        array('accesskey' => 's')
+                    )
+                )
+            );
 
             $button = new XMLElement('button', __('Delete'));
             $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this entry'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this entry?')));
-            $div->appendChild($button);
+            $div->appendChild(
+                Widget::SVGIconContainer(
+                    'delete',
+                    $button
+                )
+            );
+            $div->appendChild(Widget::SVGIcon('chevron'));
 
             $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
             $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));

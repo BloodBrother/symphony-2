@@ -63,7 +63,17 @@ class contentSystemAuthors extends AdministrationPage
         $this->setTitle(__('%1$s &ndash; %2$s', array(__('Authors'), __('Symphony'))));
 
         if (Symphony::Author()->isDeveloper() || Symphony::Author()->isManager()) {
-            $this->appendSubheading(__('Authors'), Widget::Anchor(__('Create New'), Administration::instance()->getCurrentPageURL().'new/', __('Create a new author'), 'create button', null, array('accesskey' => 'c')));
+            $this->appendSubheading(
+                __('Authors'),
+                Widget::Anchor(
+                    Widget::SVGIcon('add') . '<span><span>' . __('Create New') . '</span></span>',
+                    Administration::instance()->getCurrentPageURL().'new/',
+                    __('Create a new author'),
+                    'create button',
+                    null,
+                    array('accesskey' => 'c')
+                )
+            );
         } else {
             $this->appendSubheading(__('Authors'));
         }
@@ -584,16 +594,33 @@ class contentSystemAuthors extends AdministrationPage
         }
 
         // Actions
+        $this->Context->setAttribute('class', 'spaced-right');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
 
-        $div->appendChild(Widget::Input('action[save]', ($this->_context['action'] == 'edit' ? __('Save Changes') : __('Create Author')), 'submit', array('accesskey' => 's')));
+        $div->appendChild(
+            Widget::SVGIconContainer(
+                'save',
+                Widget::Input(
+                    'action[save]',
+                    ($this->_context['action'] == 'edit' ? __('Save Changes') : __('Create Author')),
+                    'submit',
+                    array('accesskey' => 's')
+                )
+            )
+        );
 
         if ($isEditing && !$isOwner && !$author->isPrimaryAccount() && $canEdit) {
             $button = new XMLElement('button', __('Delete'));
             $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this author'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this author?')));
-            $div->appendChild($button);
+            $div->appendChild(
+                Widget::SVGIconContainer(
+                    'delete',
+                    $button
+                )
+            );
         }
+        $div->appendChild(Widget::SVGIcon('chevron'));
 
         $this->Form->appendChild($div);
 
