@@ -575,7 +575,7 @@ body.publish-tabs #custom-toolbar {
 
 /* Actions - Page */
 
-.page-single #contents .actions {
+body.page-single #contents .actions {
 	.flex(~'column',~'flex-start',~'flex-start');
 	position: fixed;
 	right: 0;
@@ -767,9 +767,12 @@ body.publish-tabs #custom-toolbar {
 }
 
 body.page-index #contents.centered-content {
+	display: block;
+
 	> form,
 	> p {
-		max-width: 100%;
+		width: auto;
+		max-width: 200%;
 	}
 }
 

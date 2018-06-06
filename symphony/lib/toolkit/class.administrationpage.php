@@ -490,7 +490,7 @@ class AdministrationPage extends HTMLPage
         $h1 = new XMLElement('h1');
         $h1->appendChild(
             Widget::Anchor(
-                Widget::SVGIcon('view') . '<span><span>' . Symphony::Configuration()->get('sitename', 'general') . '</span></span>',
+                '<span><span>' . Symphony::Configuration()->get('sitename', 'general') . '</span></span>',
                 rtrim(URL, '/') . '/'
             )
         );
