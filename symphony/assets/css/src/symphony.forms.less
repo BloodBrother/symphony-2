@@ -349,6 +349,7 @@ legend {
 		box-sizing: border-box;
 		float: left;
 		text-align: left;
+		margin-right:@spacing-micro;
 	}
 
 	label {
@@ -360,7 +361,8 @@ legend {
 	.apply-button-left,
 	.apply-label-right,
 	.apply-label-left {
-		border-radius: 0 @radius-current @radius-current 0;
+		.transitioned(~'border,background');
+		border-radius: @radius-current;
 		float: right;
 		color: @white!important;
 		font-size: @text-shorter;
@@ -386,13 +388,11 @@ legend {
 
 	.apply-button-left,
 	.apply-label-left {
-		border-radius: @radius-current 0 0 @radius-current;
 		float: left;
 	}
 
-	.apply-label-left + div select {
-		border-radius: 0 @radius-current @radius-current 0;
-		border-left: 0;
+	.apply-label-left + div {
+		margin-left: @spacing-micro; margin-right: 0;
 	}
 
 	&.inactive {

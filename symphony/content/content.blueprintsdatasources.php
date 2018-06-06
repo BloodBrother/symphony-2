@@ -1006,6 +1006,7 @@ class contentBlueprintsDatasources extends ResourcesPage
             }
         }
 
+        $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Context->setAttribute('class', 'spaced-right');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');

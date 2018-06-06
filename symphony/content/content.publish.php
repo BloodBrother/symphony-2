@@ -1221,7 +1221,8 @@ class contentPublish extends AdministrationPage
                 $this->Form->appendChild($sidebar);
             }
 
-            $this->Context->setAttribute('class', 'spaced-right');
+            $this->Header->setAttribute('class', 'spaced-bottom');
+        $this->Context->setAttribute('class', 'spaced-right');
             $div = new XMLElement('div');
             $div->setAttribute('class', 'actions');
             $div->appendChild(
@@ -1587,7 +1588,8 @@ class contentPublish extends AdministrationPage
                 $this->Form->appendChild($sidebar);
             }
 
-            $this->Context->setAttribute('class', 'spaced-right');
+            $this->Header->setAttribute('class', 'spaced-bottom');
+        $this->Context->setAttribute('class', 'spaced-right');
             $div = new XMLElement('div');
             $div->setAttribute('class', 'actions');
             $div->appendChild(

@@ -142,11 +142,6 @@ class contentSystemPreferences extends AdministrationPage
             $this->Form->appendChild($group);
         }
 
-        $version = new XMLElement('p', 'Symphony ' . Symphony::Configuration()->get('version', 'symphony'), array(
-            'id' => 'version'
-        ));
-        $this->Form->appendChild($version);
-
         /**
          * Add Extension custom preferences. Use the $wrapper reference to append objects.
          *
@@ -163,6 +158,7 @@ class contentSystemPreferences extends AdministrationPage
             'errors' => $this->_errors
         ));
 
+        $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Context->setAttribute('class', 'spaced-right');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');

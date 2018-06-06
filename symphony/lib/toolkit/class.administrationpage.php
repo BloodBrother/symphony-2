@@ -495,6 +495,15 @@ class AdministrationPage extends HTMLPage
         $mobileNavToggler->setAttribute('id', 'btn-toggle-header-mobile');
         $this->Header->appendChild($mobileNavToggler);
 
+        $version = new XMLElement(
+            'p',
+            'Symphony ' . Symphony::Configuration()->get('version', 'symphony'),
+            array(
+                'id' => 'version'
+            )
+        );
+        $this->Header->appendChild($version);
+
         $this->appendUserLinks();
         $this->appendNavigation();
 
@@ -1383,16 +1392,16 @@ class AdministrationPage extends HTMLPage
      */
     private static function __findActiveNavigationGroup(array &$nav, $pageroot, $pattern = false)
     {
-        foreach ($nav as $index => $contents) {
+        foreach ($nav as $index => &$contents) {
             if (is_array($contents['children']) && !empty($contents['children'])) {
-                foreach ($contents['children'] as $indexC => $item) {
-                    if ($pattern && preg_match($pageroot, $item['link'])) {
-                        $nav[$index]['class'] = 'active opened';
-                        $nav[$index]['children'][$indexC]['class'] = 'active';
-                        return true;
-                    } elseif ($item['link'] == $pageroot) {
-                        $nav[$index]['class'] = 'active opened';
-                        $nav[$index]['children'][$indexC]['class'] = 'active';
+                foreach ($contents['children'] as $indexC => &$item) {
+                    if ($item['visible'] !== 'yes') {
+                        continue;
+                    }
+                    if ((!$pattern && $item['link'] == $pageroot) ||
+                        ($pattern && preg_match($pageroot, $item['link']))) {
+                        $contents['class'] = 'active opened';
+                        $item['class'] = 'active';
                         return true;
                     }
                 }

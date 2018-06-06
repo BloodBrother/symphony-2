@@ -242,12 +242,6 @@ class contentSystemAuthors extends AdministrationPage
         );
 
         $this->Form->appendChild($table);
-
-        $version = new XMLElement('p', 'Symphony ' . Symphony::Configuration()->get('version', 'symphony'), array(
-            'id' => 'version'
-        ));
-
-        $this->Form->appendChild($version);
     }
 
     // Both the Edit and New pages need the same form
@@ -350,7 +344,10 @@ class contentSystemAuthors extends AdministrationPage
         }
         $this->appendSubheading(($this->_context['action'] === 'new' ? __('Untitled') : $author->getFullName()));
         $this->insertBreadcrumbs(array(
-            Widget::Anchor(__('Authors'), SYMPHONY_URL . '/system/authors/'),
+            Widget::Anchor(
+                Widget::SVGIcon('arrow') . __('Authors'),
+                SYMPHONY_URL . '/system/authors/'
+            ),
         ));
 
         // Essentials
@@ -594,6 +591,7 @@ class contentSystemAuthors extends AdministrationPage
         }
 
         // Actions
+        $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Context->setAttribute('class', 'spaced-right');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
