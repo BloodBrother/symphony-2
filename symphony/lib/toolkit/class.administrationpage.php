@@ -455,7 +455,7 @@ class AdministrationPage extends HTMLPage
         $this->Session = new XMLElement('div', null, array('id' => 'session'));
         $this->Context = new XMLElement('div', null, array('id' => 'context'));
         $this->Breadcrumbs = new XMLElement('div', null, array('id' => 'breadcrumbs'));
-        $this->Contents = new XMLElement('div', null, array('id' => 'contents', 'class' => 'centered-content', 'role' => 'main'));
+        $this->Contents = new XMLElement('div', null, array('id' => 'contents', 'role' => 'main'));
         $this->Form = Widget::Form(Administration::instance()->getCurrentPageURL(), 'post', null, null, array('role' => 'form'));
 
         /**
@@ -1417,11 +1417,6 @@ class AdministrationPage extends HTMLPage
      */
     private static function __findActiveNavigationGroup(array &$nav, $pageroot, $pattern = false)
     {
-        // Take Anti Brute Force in Consideration
-        if(isset($_GET['list']) && $_GET['list'] !== ''){
-            $pageroot .= '?list='.$_GET['list'];
-        }
-
         foreach ($nav as $index => &$contents) {
             if (is_array($contents['children']) && !empty($contents['children'])) {
                 foreach ($contents['children'] as $indexC => &$item) {
