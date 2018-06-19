@@ -307,7 +307,7 @@
 			object.trigger('restore.collapsible');
 
 			// Update on Resize
-			Symphony.Elements.window.on('resize', function(){
+			Symphony.Elements.window.on('resize', function() {
 				object.find(settings.items).each(function() {
 					var item = $(this);
 					item.addClass('instance');
