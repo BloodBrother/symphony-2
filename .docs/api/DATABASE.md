@@ -225,9 +225,9 @@ Symphony::Database()->set('variable')->value('value')->execute()->success();
 ### `transaction()` -> `DatabaseTransaction`
 ```php
 Symphony::Database()
-    ->transaction(function (\Database $db){
-        $db->insert(...);
-        $db->update(...);
+    ->transaction(function (Database $db) {
+        $db->insert(...)->execute()->success();
+        $db->update(...)->execute()->success();
     })
     ->execute()
     ->success();
