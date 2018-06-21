@@ -24,6 +24,7 @@ body#error {
 
 .frame.error {
 	overflow: hidden;
+	line-height: 1.5em;
 	margin: @spacing-smallish auto;
 	padding: 0;
 	background: @white;
@@ -59,16 +60,13 @@ body#error {
 
 	> ul > li > ul {
 		border-top: 1px solid @lighter-grey;
+		padding: @spacing-micro 0;
 
 		li {
 			color: @dark-grey;
 			font-size: @text-short;
 			margin: 0;
-			padding: @spacing-micro @spacing-smallerish;
-
-			& + li {
-				border-top: 1px solid @lighter-grey;
-			}
+			padding: 0 @spacing-smallerish;
 		}
 	}
 
@@ -104,7 +102,7 @@ body#error {
 		color: @dark-grey;
 		font-size: @text-short;
 		margin: 0;
-		padding: @spacing-smallerish;
+		padding: @spacing-micro @spacing-smallerish;
 	}
 
 	ol, ul {
