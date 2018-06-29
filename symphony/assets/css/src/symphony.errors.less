@@ -82,15 +82,15 @@ body#error {
 	.content {
 		padding: 0;
 
+		ul {
+			padding: @spacing-micro 0;
+		}
+
 		li {
 			color: @dark-grey;
 			font-size: @text-short;
 			margin: 0;
-			padding: @spacing-micro @spacing-smallerish;
-
-			& + li {
-				border-top: 1px solid @lighter-grey;
-			}
+			padding: 0 @spacing-smallerish;
 		}
 	}
 
