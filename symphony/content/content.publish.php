@@ -107,9 +107,18 @@ class contentPublish extends AdministrationPage
 
         if ($filter !== 'no' && $count > 1) {
             $this->createFilteringDrawer($section);
-            $drawer = Widget::Drawer('filtering-' . $section_id, __('Filter Entries'), $this->filteringForm);
+            $drawer = Widget::Drawer(
+                'filtering-' . $section_id,
+                __('Filter Entries'),
+                $this->filteringForm
+            );
             $drawer->addClass('drawer-filtering');
-            $this->insertDrawer($drawer);
+            $this->insertDrawer(
+                $drawer,
+                'horizontal',
+                'prepend',
+                Widget::SVGIcon('filter')
+            );
         }
     }
 
@@ -527,7 +536,7 @@ class contentPublish extends AdministrationPage
 
         // Only show the Edit Section button if the Author is a developer. #938 ^BA
         if (Symphony::Author()->isDeveloper()) {
-            array_push(
+            array_unshift(
                 $subheading_buttons,
                 Widget::Anchor(
                     Widget::SVGIcon('edit') . '<span><span>' . __('Edit Section') . '</span></span>',
