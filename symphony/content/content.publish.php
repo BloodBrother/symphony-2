@@ -1935,8 +1935,8 @@ class contentPublish extends AdministrationPage
                         $schema = [$field->get('element_name')];
                         $entries = [];
                         $pagination = null;
-                        if ((!empty($entry_ids) || (isset($_GET['prepopulate']) &&
-                            $field->get('id') === $prepopulate_field))) {
+                        if (!empty($entry_ids) || (isset($_GET['prepopulate']) &&
+                            $field->get('id') === $prepopulate_field)) {
                             $pagination = (new EntryManager)
                                 ->select($schema)
                                 ->distinct()
