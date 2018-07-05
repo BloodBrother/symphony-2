@@ -60,6 +60,7 @@
 		left: 0;
 		font-size: @text-current;
 		padding: 0!important;
+		background: @accent;
 		height: @spacing-midlarge!important;
 
 		a {
@@ -76,24 +77,6 @@
 
 			@media (max-width: (@sm - 1)){
 				font-size: @text-big;
-			}
-		}
-
-		&:before {
-			content: '';
-			border-radius: 100%;
-			transform: translate(-@spacing-smallish, @spacing-midlarge);
-			display: block;
-			position: absolute;
-			right: 0;
-			bottom: 0;
-			background: @accent;
-			width: 34rem;
-			height: 34rem;
-
-			@media (max-width: (@sm - 1)){
-				border-radius: 0px;
-				transform: none;
 			}
 		}
 	}
