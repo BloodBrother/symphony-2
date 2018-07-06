@@ -1450,17 +1450,16 @@ class AdministrationPage extends HTMLPage
      */
     public function appendUserLinks()
     {
-        $ul = new XMLElement('ul', null);
-
-        $li = new XMLElement('li');
-        $li->appendChild(
+        $div = new XMLElement('div');
+        $div->appendChild(
             Widget::Anchor(
                 Symphony::Author()->getFullName(),
                 SYMPHONY_URL . '/system/authors/edit/' . Symphony::Author()->get('id') . '/'
             )
         );
-        $ul->appendChild($li);
+        $this->Session->appendChild($div);
 
+        $ul = new XMLElement('ul', null);
         $li = new XMLElement('li');
         $li->appendChild(Widget::Anchor(__('Log out'), SYMPHONY_URL . '/logout/', null, null, null, array('accesskey' => 'l')));
         $ul->appendChild($li);
