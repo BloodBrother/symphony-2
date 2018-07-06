@@ -148,11 +148,13 @@
 			cursor: pointer;
 
 			> span {
-				.flex(~'row', ~'center', ~'flex-start');
+				position: relative;
 
 				svg {
 					.transitioned(~'transform',~'0.15s');
-					padding: 0 @spacing-smallest;
+					position: absolute;
+					left: -@spacing-smallerish;
+					top: @spacing-micro;
 				}
 			}
 
