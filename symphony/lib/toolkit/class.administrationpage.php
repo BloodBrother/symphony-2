@@ -524,8 +524,8 @@ class AdministrationPage extends HTMLPage
         $this->appendUserLinks();
         $this->appendNavigation();
 
-        $this->Session->appendChild($version);
         $this->Header->appendChild($this->Session);
+        $this->Header->appendChild($version);
 
         // Add Breadcrumbs
         $this->Context->prependChild($this->Breadcrumbs);

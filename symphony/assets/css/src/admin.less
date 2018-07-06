@@ -60,6 +60,7 @@
 		left: 0;
 		font-size: @text-current;
 		font-weight: 300;
+		margin: @spacing-smallish 0 0;
 		padding: 0!important;
 		height: @spacing-midlarge!important;
 
@@ -214,12 +215,14 @@
 /* Session */
 
 #session {
+	.flex(~'row', ~'center', ~'flex-start');
+	border-radius: @radius-current;
 	position: relative;
-	padding: 0 0 @spacing-smallerish;
+	margin: 0 @spacing-smallish;
+	background: @lightest-grey;
 
 	ul {
 		font-size: @text-short;
-		text-align: center;
 		line-height: 1.4em;
 		margin: 0;
 
@@ -249,9 +252,9 @@
 	color: @grey;
 	font-size: @text-shorter;
 	text-transform: uppercase;
-	text-align: center;
+	line-height: 1.4em;
 	margin-bottom: 0;
-	padding: @spacing-smallerish 0 0;
+	padding: @spacing-smallerish @spacing-smallish;
 }
 
 /*---------------------------------------
