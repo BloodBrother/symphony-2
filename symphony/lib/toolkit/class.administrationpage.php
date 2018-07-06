@@ -1016,7 +1016,12 @@ class AdministrationPage extends HTMLPage
             }
         }
 
+        $contentNavTitle = new XMLElement('span', __('Content'), array());
+        $structureNavTitle = new XMLElement('span', __('Structure'), array());
+
+        $navElement->appendChild($contentNavTitle);
         $navElement->appendChild($contentNav);
+        $navElement->appendChild($structureNavTitle);
         $navElement->appendChild($structureNav);
         $this->Header->appendChild($navElement);
         Symphony::Profiler()->sample('Navigation Built', PROFILE_LAP);

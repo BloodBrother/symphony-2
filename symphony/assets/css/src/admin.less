@@ -59,6 +59,7 @@
 		top: 0;
 		left: 0;
 		font-size: @text-current;
+		font-weight: 300;
 		padding: 0!important;
 		background: @accent;
 		height: @spacing-midlarge!important;
@@ -124,17 +125,28 @@
 #nav {
 	order: 2;
 	flex-grow: 1;
-	margin: 0 0 @spacing-smallish;
-	border-bottom: 1px solid @lighter-grey;
+	margin: 0;
+	padding: @spacing-smallish;
 	width: 100%;
 	list-style: none;
+
+	/* Titles */
+
+	> span {
+		display: block;
+		color: @light-grey;
+		font-size: @text-shorter;
+		text-transform: uppercase;
+		line-height: 1.4em;
+		margin-bottom: @spacing-smallest;
+	}
 
 	/* First Level */
 
 	> ul {
 		color: @dark-grey;
 		margin: 0;
-		padding: @spacing-smallish;
+		padding: 0;
 
 		a {
 			display: inline-block;
@@ -144,6 +156,7 @@
 			display: block;
 			position: relative;
 			font-size: @text-current;
+			font-weight: 300;
 			line-height: 2rem;
 			cursor: pointer;
 
@@ -155,6 +168,7 @@
 					position: absolute;
 					left: -@spacing-smallerish;
 					top: @spacing-micro;
+					color: @light-grey;
 				}
 			}
 
@@ -192,12 +206,8 @@
 			}
 		}
 
-		&:first-child {
-			flex-grow: 1;
-		}
-
-		& + ul {
-			border-top: 1px solid @lighter-grey;
+		& + span {
+			padding-top: @spacing-smallish;
 		}
 	}
 }
