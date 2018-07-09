@@ -1457,11 +1457,12 @@ class AdministrationPage extends HTMLPage
                 SYMPHONY_URL . '/system/authors/edit/' . Symphony::Author()->get('id') . '/'
             )
         );
+        $div->appendChild(Widget::SVGIcon('chevron'));
         $this->Session->appendChild($div);
 
         $ul = new XMLElement('ul', null);
         $li = new XMLElement('li');
-        $li->appendChild(Widget::Anchor(__('Log out'), SYMPHONY_URL . '/logout/', null, null, null, array('accesskey' => 'l')));
+        $li->appendChild(Widget::Anchor(__('Log out') . Widget::SVGIcon('logout'), SYMPHONY_URL . '/logout/', null, null, null, array('accesskey' => 'l')));
         $ul->appendChild($li);
 
         $this->Session->appendChild($ul);

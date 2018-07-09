@@ -124,6 +124,7 @@
 
 #nav {
 	order: 2;
+	flex-shrink: 0;
 	flex-grow: 1;
 	margin: 0;
 	padding: @spacing-smallish;
@@ -216,54 +217,80 @@
 
 #session {
 	.flex(~'row', ~'center', ~'flex-start');
+	flex-shrink: 0;
 	border-radius: @radius-current;
 	position: relative;
 	margin: 0 @spacing-smallish;
-	background: @lightest-grey;
+	padding: @spacing-micro 0 0;
 
 	> div {
-		margin-left: @spacing-smallest;
+		.flex(~'row', ~'center', ~'space-between');
+		box-sizing: border-box;
+		flex-grow: 1;
+		padding: @spacing-micro @spacing-smallest;
+		background: @lightest-grey;
+		min-height: @spacing-small;
 
 		a {
+			.transitioned(~'color');
 			color: @dark-grey;
 			font-size: @text-short;
+
+			&:hover {
+				color: @accent;
+			}
 		}
 	}
 
 	> ul {
+		.transitioned(~'opacity');
 		border-radius: @radius-current;
 		position: absolute;
 		left: 0;
 		right: 0;
 		bottom: 100%;
+		color: @dark-grey;
 		font-size: @text-short;
 		line-height: 1.4em;
-		margin: 0 0 @spacing-micro;
-		border: 1px solid @lightest-grey;
+		margin: 0;
+		border: 1px solid @lighter-grey;
 		background: @white;
+		opacity: 0;
+		pointer-events: none;
 
-		a {
-			color: @dark-grey;
-			line-height: @spacing-smallerish;
+		> li {
+			> a {
+				.transitioned(~'color');
+				.flex(~'row', ~'center', ~'space-between');
+				color: currentColor;
+				padding: @spacing-smallest @spacing-smallerish;
 
-			&:hover {
-				color: @darker-grey;
+				svg {
+					width: @spacing-smallerish;
+					height: @spacing-smallerish;
+				}
+
+				&:hover {
+					color: @accent;
+				}
+			}
+
+			& + li {
+				border-top: 1px solid @lighter-grey;
 			}
 		}
+	}
 
-		li:first-child a {
-			color: @accent;
-
-			&:hover {
-				color: @darker-grey;
-			}
-		}
+	&:hover > ul {
+		opacity: 1;
+		pointer-events: all;
 	}
 }
 
 /* Version */
 
 #version {
+	flex-shrink: 0;
 	position: relative;
 	color: @grey;
 	font-size: @text-shorter;
