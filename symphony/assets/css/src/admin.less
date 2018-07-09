@@ -217,28 +217,32 @@
 #session {
 	.flex(~'row', ~'center', ~'flex-start');
 	flex-shrink: 0;
-	border-radius: @radius-current;
 	position: relative;
 	margin: 0 @spacing-smallish;
-	background: @lightest-grey;
 	cursor: pointer;
 
 	> div {
+		.transitioned(~'color, background');
 		.flex(~'row', ~'center', ~'space-between');
 		flex-grow: 1;
 		box-sizing: border-box;
+		border-radius: @radius-current;
 		padding: @spacing-micro @spacing-smallest;
 		min-height: @spacing-small;
+		background: @lightest-grey;
 
 		> span {
-			.transitioned(~'color');
-			color: @dark-grey;
 			font-size: @text-short;
 		}
 
 		> svg {
 			.transitioned(~'transform');
 			transform: rotateZ(180deg);
+		}
+
+		&:hover {
+			color: @white;
+			background: @accent;
 		}
 	}
 
