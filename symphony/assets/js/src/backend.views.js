@@ -25,6 +25,11 @@ Symphony.View.add('/:context*:', function() {
 	// Fix for Webkit browsers to initially show the options. #2127
 	$('select[multiple=multiple]').scrollTop(0);
 
+	// Initialize Session Panel
+	Symphony.Elements.session.find('.js-session-panel-toggler').on('click', function() {
+		Symphony.Elements.session.toggleClass('is-panel-opened');
+	});
+
 	// Initialise plugins inside duplicators
 	Symphony.Elements.contents.find('.duplicator').on('constructshow.duplicator', '.instance', function() {
 		// Enable tag lists inside duplicators

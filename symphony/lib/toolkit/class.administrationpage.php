@@ -1450,17 +1450,18 @@ class AdministrationPage extends HTMLPage
      */
     public function appendUserLinks()
     {
-        $div = new XMLElement('div');
-        $div->appendChild(
-            Widget::Anchor(
-                Symphony::Author()->getFullName(),
-                SYMPHONY_URL . '/system/authors/edit/' . Symphony::Author()->get('id') . '/'
-            )
-        );
+        $div = new XMLElement('div', null, array('class' => 'js-session-panel-toggler'));
+        $span = new XMLElement('span', Symphony::Author()->getFullName(), array());
+        $div->appendChild($span);
         $div->appendChild(Widget::SVGIcon('chevron'));
         $this->Session->appendChild($div);
 
-        $ul = new XMLElement('ul', null);
+        $ul = new XMLElement('ul', null, array('class' => 'js-session-panel'));
+
+        $li = new XMLElement('li');
+        $li->appendChild(Widget::Anchor(__('Profile'), SYMPHONY_URL . '/system/authors/edit/' . Symphony::Author()->get('id') . '/', null, null, null, array('accesskey' => 'l')));
+        $ul->appendChild($li);
+
         $li = new XMLElement('li');
         $li->appendChild(Widget::Anchor(__('Log out') . Widget::SVGIcon('logout'), SYMPHONY_URL . '/logout/', null, null, null, array('accesskey' => 'l')));
         $ul->appendChild($li);

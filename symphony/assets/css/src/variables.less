@@ -107,7 +107,7 @@
 	Mixins
 -----------------------------------------------------------------------------*/
 
-.transitioned(@transProperty: color, @transDuration: 0.45s, @transDelay: 0s) {
+.transitioned(@transProperty: color, @transDuration: @duration-shorter, @transDelay: 0s) {
 	transition-duration: @transDuration;
 	transition-property: @transProperty;
 	transition-delay: @transDelay;
