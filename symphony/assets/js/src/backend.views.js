@@ -30,6 +30,12 @@ Symphony.View.add('/:context*:', function() {
 		Symphony.Elements.session.toggleClass('is-panel-opened');
 	});
 
+	Symphony.Elements.window.on('click', function (e) {
+		if ($(e.target).closest(Symphony.Elements.session).length < 1) {
+			Symphony.Elements.session.removeClass('is-panel-opened');
+		}
+	});
+
 	// Initialise plugins inside duplicators
 	Symphony.Elements.contents.find('.duplicator').on('constructshow.duplicator', '.instance', function() {
 		// Enable tag lists inside duplicators
