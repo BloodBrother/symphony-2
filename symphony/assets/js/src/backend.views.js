@@ -580,32 +580,26 @@ Symphony.View.add('/blueprints/datasources/:action:/:id:/:status:/:*:', function
 	var context = $('#ds-context'),
 		source = $('#ds-source'),
 		name = Symphony.Elements.contents.find('input[name="fields[name]"]').attr('data-updated', 0),
-		nameChangeCount = 0,
 		params = Symphony.Elements.contents.find('select[name="fields[param][]"]'),
 		pagination = Symphony.Elements.contents.find('.pagination'),
 		paginationInput = pagination.find('input');
 
 	// Update data source handle
-	name.on('blur.admin input.admin', function updateDsHandle() {
-		var current = (nameChangeCount++),
-		value = name.val();
+	name.on('blur.admin', function updateDsHandle() {
+		var value = name.val();
 
-		setTimeout(function fetchDsHandle(nameChangeCount, current, value) {
-			if(nameChangeCount == current) {
-				$.ajax({
-					type: 'GET',
-					data: { 'string': value },
-					dataType: 'json',
-					url: Symphony.Context.get('symphony') + '/ajax/handle/',
-					success: function(result) {
-						if(nameChangeCount == current) {
-							name.data('handle', result.handle);
-							params.trigger('update.admin');
-						}
-					}
-				});
-			}
-		}, 500, nameChangeCount, current, value);
+		setTimeout(function fetchDsHandle(value) {
+			$.ajax({
+				type: 'GET',
+				data: { 'string': value },
+				dataType: 'json',
+				url: Symphony.Context.get('symphony') + '/ajax/handle/',
+				success: function(result) {
+					name.data('handle', result.handle);
+					params.trigger('update.admin');
+				}
+			});
+		}, 500, value);
 	})
 	// Enable the default value for Data Source name
 	.symphonyDefaultValue({
