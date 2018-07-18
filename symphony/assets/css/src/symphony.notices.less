@@ -22,9 +22,9 @@
 	right: 0;
 	color: @black;
 	font-size: @text-short;
-	background: @accent;
 	max-height: 4.5rem!important;
 	z-index: 110;
+	pointer-events: none;
 
 	@media (max-width: (@sm - 1)){
 		display: none!important;
@@ -57,6 +57,7 @@
 	margin: 0;
 	border: none;
 	padding: @spacing-smallest @spacing-smallish;
+	pointer-events: all;
 
 	a {
 		color: currentColor;
@@ -78,5 +79,11 @@
 
 	&.error {
 		background: @red;
+	}
+
+	&.dimmed {
+		.transitioned(~'opacity');
+		opacity: 0;
+		pointer-events: none;
 	}
 }
