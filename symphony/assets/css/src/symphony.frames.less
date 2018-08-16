@@ -133,6 +133,22 @@
 	> a:first-of-type {
 		margin-left: auto!important;
 	}
+
+	&.main:before,
+	&.sidebar:before {
+		content: '';
+		display: block;
+		width: .1rem;
+		height: 1rem;
+		margin: 0 @spacing-smallest 0 0;
+		border-right: .3rem solid @lighter-grey;
+		border-left: .6rem solid @light-grey;
+	}
+
+	&.sidebar:before {
+		border-right-color: @light-grey;
+		border-left-color: @lighter-grey;
+	}
 }
 
 /*--------------------------------------------------------------------------
