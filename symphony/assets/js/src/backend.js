@@ -49,6 +49,7 @@
 		Symphony.Elements.window = $(window);
 		Symphony.Elements.html = $('html').addClass('js-active');
 		Symphony.Elements.body = $('body');
+		Symphony.Elements.loading = $('#loading');
 		Symphony.Elements.wrapper = $('#wrapper');
 		Symphony.Elements.header = $('#header');
 		Symphony.Elements.headerMobileToggler = $('#btn-toggle-header-mobile');
@@ -70,6 +71,7 @@
 
 		// Render view
 		Symphony.View.render();
+		Symphony.Elements.loading.addClass('hidden');
 
 		// Update state to canonical url
 		if (window.history.replaceState) {

@@ -12,6 +12,22 @@
 	Structure
 --------------------------------------------------------------------------*/
 
+#loading {
+	.transitioned(~'opacity');
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: @white;
+	z-index: 99999999999;
+
+	&.hidden {
+		opacity: 0;
+		pointer-events: none;
+	}
+}
+
 #wrapper {
 	position: relative;
 }
