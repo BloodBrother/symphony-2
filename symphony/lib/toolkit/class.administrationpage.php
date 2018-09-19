@@ -711,6 +711,7 @@ class AdministrationPage extends HTMLPage
 
         $this->Wrapper->appendChild($this->Contents);
 
+        $this->Body->appendChild(new XMLElement('div', null, array('id' => 'loading')));
         $this->Body->appendChild($this->Wrapper);
 
         $this->appendBodyId();
