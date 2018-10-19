@@ -19,32 +19,35 @@ module.exports = function (grunt) {
                     ' * License <%= pkg.license %>\n */\n'
         },
 
-        concat: {
+        less: {
             dist: {
                 files: {
                     'symphony/assets/css/symphony.min.css': [
-                        'symphony/assets/css/src/symphony.css',
-                        'symphony/assets/css/src/symphony.affix.css',
-                        'symphony/assets/css/src/symphony.grids.css',
-                        'symphony/assets/css/src/symphony.forms.css',
-                        'symphony/assets/css/src/symphony.tables.css',
-                        'symphony/assets/css/src/symphony.frames.css',
-                        'symphony/assets/css/src/symphony.tabs.css',
-                        'symphony/assets/css/src/symphony.drawers.css',
-                        'symphony/assets/css/src/symphony.associations.css',
-                        'symphony/assets/css/src/symphony.notices.css',
-                        'symphony/assets/css/src/symphony.suggestions.css',
-                        'symphony/assets/css/src/symphony.calendar.css',
-                        'symphony/assets/css/src/symphony.filtering.css',
-                        'symphony/assets/css/src/admin.css'
+                        'symphony/assets/css/src/symphony.less',
+                        'symphony/assets/css/src/symphony.affix.less',
+                        'symphony/assets/css/src/symphony.grids.less',
+                        'symphony/assets/css/src/symphony.forms.less',
+                        'symphony/assets/css/src/symphony.tables.less',
+                        'symphony/assets/css/src/symphony.frames.less',
+                        'symphony/assets/css/src/symphony.tabs.less',
+                        'symphony/assets/css/src/symphony.drawers.less',
+                        'symphony/assets/css/src/symphony.associations.less',
+                        'symphony/assets/css/src/symphony.notices.less',
+                        'symphony/assets/css/src/symphony.suggestions.less',
+                        'symphony/assets/css/src/symphony.calendar.less',
+                        'symphony/assets/css/src/symphony.filtering.less',
+                        'symphony/assets/css/src/admin.less'
                     ],
                     'symphony/assets/css/installer.min.css': [
-                        'symphony/assets/css/src/symphony.css',
-                        'symphony/assets/css/src/symphony.grids.css',
-                        'symphony/assets/css/src/symphony.forms.css',
-                        'symphony/assets/css/src/symphony.frames.css',
-                        'symphony/assets/css/src/installer.css'
+                        'symphony/assets/css/src/symphony.less',
+                        'symphony/assets/css/src/symphony.grids.less',
+                        'symphony/assets/css/src/symphony.forms.less',
+                        'symphony/assets/css/src/symphony.frames.less',
+                        'symphony/assets/css/src/installer.less'
                     ],
+                    'symphony/assets/css/devkit.min.css': [
+                        'symphony/assets/css/src/devkit.less'
+                    ]
                 },
             },
         },
@@ -59,7 +62,7 @@ module.exports = function (grunt) {
                         'symphony/assets/css/installer.min.css'
                     ],
                     'symphony/assets/css/devkit.min.css': [
-                        'symphony/assets/css/src/devkit.css'
+                        'symphony/assets/css/devkit.min.css'
                     ]
                 }
             }
@@ -202,7 +205,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.loadNpmTasks('grunt-csso');
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -214,7 +217,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-git-rev-parse');
 
     grunt.registerTask('default', ['css', 'js']);
-    grunt.registerTask('css', ['git-rev-parse', 'concat', 'autoprefixer', 'csso']);
+    grunt.registerTask('css', ['git-rev-parse', 'less', 'autoprefixer', 'csso']);
     grunt.registerTask('php', ['phpcs', 'phpunit:unit']);
     grunt.registerTask('js', ['git-rev-parse', 'jshint', 'uglify']);
     grunt.registerTask('unit', ['jshint', 'phpunit:unit']);

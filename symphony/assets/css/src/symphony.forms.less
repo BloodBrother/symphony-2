@@ -1,0 +1,538 @@
+/**
+ * This file contains unified styles for inputs, text areas, multiple selects
+ * and buttons that are shared across the system. It does not contain general
+ * label and fieldset definitions that differ in the different areas of Symphony.
+ *
+ * @since Symphony 2.3
+ */
+
+
+ /*-----------------------------------------------------------------------------
+ 	LESS — Variables Importing
+ -----------------------------------------------------------------------------*/
+ 
+ @import "variables";
+
+/*--------------------------------------------------------------------------
+	Basic Inputs Textareas and Selects
+--------------------------------------------------------------------------*/
+
+input,
+button,
+textarea {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	outline: none;
+}
+
+input,
+textarea,
+select,
+.field-value-readonly {
+	box-sizing: border-box;
+	border-radius: @radius-current;
+	color: @darker-grey; font-family: inherit; font-size: @text-short; font-weight: 300; text-transform: none; line-height: 1em; padding: @spacing-smallest @spacing-smallerish; border: 1px solid @lighter-grey; background-color: @lightest-grey; width: 100%;
+}
+
+select[multiple] {
+	padding: @spacing-smallest;
+
+	option {
+		color: @darker-grey; padding: @spacing-micro;
+	}
+}
+
+input:active,
+input:focus,
+textarea:active,
+textarea:focus,
+select[multiple]:active,
+select[multiple]:focus {
+	border-color: @accent; outline: none;
+}
+
+input[readonly="readonly"],
+textarea[readonly="readonly"] {
+	border-color: @lighter-grey!important;
+}
+
+textarea {
+	line-height: 1.8rem;
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+	box-shadow: none;
+	display: inline; font-size: inherit; margin-top: 0; margin-right: 0.5rem; padding: inherit; border: none; width: auto; height: auto;	
+}
+
+input[type=file] {
+	margin: 0; padding: 0; border: none; background: transparent; height: auto;
+}
+
+input[size] {
+	width: auto;
+}
+
+optgroup {
+	font-weight: bold;
+	font-style: normal;
+}
+
+select.disabled {
+	display: none;
+}
+
+select[multiple] {
+	.transitioned(~'border');
+	display: block; height: @spacing-larger;
+}
+
+/*--------------------------------------------------------------------------
+	Input States
+--------------------------------------------------------------------------*/
+
+.invalid {
+	input,
+	select,
+	textarea,
+	.frame,
+	input:active,
+	input:focus,
+	select:active,
+	select:focus,
+	textarea:active,
+	textarea:focus {
+		border-color: @red!important;
+	}
+
+	label {
+		color: @red;
+	}
+
+	> p {
+		color: @red; font-size: @text-short; font-weight: 500; margin-top: -@spacing-smallish + 0.5rem; padding: 0;
+
+		br:first-child {
+			display: none;
+		}
+	}
+
+	.file + p {
+		margin-top: -@spacing-micro;
+	}
+
+	.container + p {
+		margin-top: @spacing-micro;
+	}
+}
+
+.field-value-readonly {
+	display: block; color: @darker-grey; padding-left: 0; border: none; background: none; min-height: 2.2rem; opacity: 1;
+}
+
+textarea[disabled=disabled],
+textarea[disabled=disabled]:hover,
+textarea[disabled=disabled]:active,
+textarea[disabled=disabled]:focus,
+textarea[readonly=readonly],
+textarea[readonly=readonly]:hover,
+textarea[readonly=readonly]:active,
+textarea[readonly=readonly]:focus,
+input[type=submit][disabled=disabled]:hover,
+input[type=submit][disabled=disabled]:active,
+input[type=submit][disabled=disabled]:focus,
+input[readonly=readonly],
+input[readonly=readonly]:hover,
+input[readonly=readonly]:active,
+input[readonly=readonly]:focus,
+button[disabled],
+button[disabled=disabled],
+button[disabled=disabled]:hover,
+button[disabled=disabled]:active,
+button[disabled=disabled]:focus {
+	opacity: 0.25;
+	cursor: not-allowed;
+}
+
+/*--------------------------------------------------------------------------
+	Buttons
+--------------------------------------------------------------------------*/
+
+input[type=submit],
+button,
+.button,
+.apply-button-left,
+.apply-button-right,
+.apply-label-left,
+.apply-label-right {
+	display: inline-block; color: @white; font-size: @text-shorter; line-height: @text-short; margin-left: 1rem; padding: @spacing-smallest @spacing-smallest; border: none; width: auto;
+}
+
+.submit input {
+	margin-top: 1.5rem;
+}
+
+/*--------------------------------------------------------------------------
+	Labels and Legends
+--------------------------------------------------------------------------*/
+
+label,
+#password legend {
+	display: block; position: relative; color: @dark-grey; font-size: @text-shorter; font-weight: 300; text-transform: uppercase; line-height: 1.4em;
+}
+
+label {
+	> input,
+	> textarea,
+	> select,
+	> .field-value-readonly,
+	> .frame,
+	> .color-chooser-container {
+		margin-top: @spacing-smallest;
+	}
+
+	a {
+		color: currentColor; border-bottom: 1px solid currentColor;
+
+		&:hover {
+			border-color: transparent;
+		}
+	}
+}
+
+label,
+label.column {
+	margin-bottom: @spacing-smallish!important;
+}
+
+label:last-child {
+	margin-bottom: 0;
+}
+
+label > i,
+p.label > i {
+	position: absolute; top: 100%; right: 0; color: @dark-grey; font-size: @text-shorter; font-weight: 300; text-transform: none; margin-top: 2px;
+}
+
+label.inline-help > i {
+	position: relative;
+}
+
+legend {
+	color: @dark-grey; font-size: @text-short; font-weight: 300;
+}
+
+/*--------------------------------------------------------------------------
+	File
+--------------------------------------------------------------------------*/
+
+.file {
+	input {
+		color: @dark-grey; font-size: @text-short; font-weight: 300;
+	}
+
+	.frame {
+		.flex(~'column-reverse', ~'center', ~'center');
+
+		input {
+			padding: 0; border: none;
+		}
+	}
+
+	em {
+		.transitioned(~'color, background');
+		border-radius: @radius-current;
+		color: @white; font-size: @text-shorter; font-style: normal; font-weight: 300; text-transform: uppercase; line-height: 1em; margin-bottom: @spacing-smallest; padding: @spacing-micro @spacing-smallest; background: @accent; cursor: pointer;
+
+		&:hover {
+			background: @darker-grey;
+		}
+	}
+}
+
+/*--------------------------------------------------------------------------
+	Apply
+--------------------------------------------------------------------------*/
+
+.apply {
+	display: block; float: right; margin: @spacing-smallest 0 0; padding: 0;
+
+	div {
+		box-sizing: border-box;	
+		float: left; text-align: left;
+	}
+
+	label {
+		margin-bottom: 0!important;
+	}
+
+	button,
+	.apply-button-right,
+	.apply-button-left,
+	.apply-label-right,
+	.apply-label-left {
+		border-radius: 0 @radius-current @radius-current 0;
+		float: right; color: @white!important; font-size: @text-shorter; font-weight: 300; text-transform: uppercase; line-height: @text-short; margin: 0; padding: @spacing-smallest @spacing-smallerish; border: 2px solid @accent; background: @accent;
+	}
+
+	button,
+	.apply-button-right,
+	.apply-button-left {
+		cursor: pointer;
+
+		&:hover {
+			border-color: @darker-grey; background: @darker-grey;
+		}
+	}
+
+	.apply-button-left,
+	.apply-label-left {
+		border-radius: @radius-current 0 0 @radius-current;
+		float: left;
+	}
+
+	.apply-label-left + div select {
+		border-radius: 0 @radius-current @radius-current 0;
+		border-left: 0;
+	}
+
+	&.inactive {
+		opacity: 0.25;
+
+		button,
+		button:hover,
+		&:hover button {
+			color: @dark-grey; border-color: @grey; background: @grey; cursor: default;
+		}
+	}
+}
+
+/*--------------------------------------------------------------------------
+	Required
+--------------------------------------------------------------------------*/
+
+.field.required label:before {
+	content: "* ";
+	color: @red;
+}
+
+/*--------------------------------------------------------------------------
+	Tags
+--------------------------------------------------------------------------*/
+
+ul.tags {
+	color: @grey; font-size: @text-short; font-weight: 300; margin: -2.5rem 0 0 0; padding: 0; list-style: none;
+
+	li,
+	li:first-of-type,
+	li:last-of-type {
+		display: inline; float: none; font-size: @text-short; padding: 0 @spacing-micro 0 0; border: none; cursor: pointer;
+	}
+
+	li:hover {
+		color: @darker-grey;
+	}
+
+	li.more {
+		color: @accent; border-bottom: 1px solid currentColor;
+
+		&:hover {
+			color: @darker-grey; border-bottom-color: currentColor;
+		}
+	}
+}
+
+/*--------------------------------------------------------------------------
+	Password
+--------------------------------------------------------------------------*/
+
+#password {
+	display: block;
+
+	legend {
+		margin-left: @spacing-smallish!important; padding: 0!important;
+	}
+
+	i {
+		position: absolute; top: 100%; right: 0; font-size: @text-shorter; font-weight: 300; margin-top: @spacing-nano;
+	}
+
+	.column {
+		float: left;
+	}
+
+	&:after {
+		content: "";
+		display: block; clear: both;
+	}
+}
+
+div.password {
+	display: none;
+}
+
+/*--------------------------------------------------------------------------
+	Fields and Fieldset
+--------------------------------------------------------------------------*/
+
+.field {
+	box-sizing: border-box;
+	margin-bottom: @spacing-smallish; min-height: @spacing-small;
+
+	&.field-multilingual div.container label {
+		margin-bottom: @spacing-smallest;
+	}
+}
+
+div.field-checkbox {
+	min-height: 1.6rem;
+
+	&:first-child {
+		margin-top: 2rem;
+	}
+
+	& + .field:not(.field-checkbox) {
+		margin-top: @spacing-smallish;
+	}
+}
+
+fieldset {
+	position: relative;
+
+	h3 {
+		color: @accent; font-size: @text-big; font-weight: 300; padding-bottom: @spacing-smallerish;
+	}
+
+	input[type=submit] {
+		color: @white; font-size: @text-shorter; text-transform: uppercase; padding: @spacing-smallest @spacing-smallerish; background: @accent; cursor: pointer;
+
+		&:hover {
+			background: @darker-grey;
+		}
+	}
+
+	input[type=submit],
+	button,
+	.button {
+		margin-right: 1rem; margin-left: 0;
+	}
+}
+
+/*--------------------------------------------------------------------------
+	Settings
+--------------------------------------------------------------------------*/
+
+fieldset.settings {
+	position: relative; margin-bottom: @spacing-smallish; padding: 0;
+
+	@media (min-width: @md){
+		padding-left: @spacing-huge;
+	}
+
+	> legend {
+		line-height: 1.4em;
+		
+		@media (min-width: @md){
+			position: absolute; top: -0.1rem; left: 0; width: @spacing-huge - @spacing-smallish;
+		}
+		@media (max-width: (@md - 1)){
+			color: @accent; font-size: @text-bigger; font-weight: 300; padding: @spacing-smallest 0 @spacing-smallish;
+		}
+	}
+
+	> p a {
+		color: @accent;
+
+		&:hover {
+			color: currentColor;
+		}
+	}
+
+	select {
+		width: 100%;
+	}
+
+	label + p.help {
+		margin: -2.5rem 0 2rem;
+	}
+
+	p.help {
+		margin: 0;
+
+		a {
+			border-bottom: 1px solid currentColor;
+
+			&:hover {
+				border-color: transparent;
+			}
+		}
+	}
+
+	input + p.help,
+	select + p.help {
+		margin-top: 1rem;
+	}
+
+	> legend + .help {
+		position: absolute; line-height: 1.8em; margin: 2.5rem 0 0 -@spacing-huge; width: @spacing-huge - @spacing-smallish; width: 17rem;
+
+		p {
+			margin: 0 0 @spacing-smaller;
+		}
+	}
+
+	li .label {
+		margin: 1rem 0 1.25rem;
+	}
+
+	> .columns.two .column {
+		margin-bottom: 0;
+	}
+
+	& + fieldset.settings {
+		margin-top: @spacing-midlarge;
+
+		@media (max-width: (@md - 1)){
+			margin-top: @spacing-smallish;
+
+			> legend {
+				display: block; padding-top: @spacing-smallish;  border-top: 1px solid @lighter-grey; width: 100%;
+			}
+		}
+	}
+}
+
+/*--------------------------------------------------------------------------
+	Misc
+--------------------------------------------------------------------------*/
+
+/*select {
+	display: block;
+	height: @field-height-current;
+}
+
+select[size] {
+	height: auto;
+	max-height: 10rem;
+}
+
+option {
+	margin: @spacing-micro * .25 0;
+	padding: @spacing-micro * .25;
+}
+
+input[type='reset'],
+input[type='button'],
+input[type='submit'] {
+	width: auto;
+	font-size: inherit;
+}
+
+button::-moz-focus-inner,
+input[type='reset']::-moz-focus-inner,
+input[type='button']::-moz-focus-inner,
+input[type='submit']::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type='file'] > input[type='button']::-moz-focus-inner {
+	border: none;
+}*/

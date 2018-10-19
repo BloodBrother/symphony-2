@@ -1,0 +1,86 @@
+/**
+ * Grids and columns
+ *
+ * @since: Symphony 2.3
+ */
+
+
+ /*-----------------------------------------------------------------------------
+ 	LESS — Variables Importing
+ -----------------------------------------------------------------------------*/
+ 
+ @import "variables";
+
+/*-----------------------------------------------------------------------------
+	General column definitions
+-----------------------------------------------------------------------------*/
+
+.columns {
+	.flex(~'row', ~'baseline', ~'flex-start');
+	flex-wrap: wrap;
+	margin-left: -@spacing-smallish;
+
+	legend {
+		margin: 0 0 0 -@spacing-smaller !important;
+		padding: 0 0.5rem 0 @spacing-smaller !important;
+	}
+
+	.column,
+	> .invalid {
+		box-sizing: border-box;
+		margin: 0 0 @spacing-smallish;
+		padding: 0 0 0 @spacing-smallish;
+
+		&.primary,
+		&.secondary {
+			width: 100%;
+		}
+
+		&.justified {
+			padding-top: 2.1rem;
+		}
+	}
+
+	> .invalid > .column {
+		padding-left: 0; width: 100%!important;
+	}
+
+	&.two .column,
+	&.two > .invalid {
+		width: 50%;
+
+		@media (max-width: (@xs - 1)){
+			width: 100%;
+
+			& + .column {
+				margin-top: @spacing-smallish;
+			}
+		}
+
+		&.primary {
+			margin: 0 auto; width: calc(~'100% - @{spacing-huger}'); max-width: @max-width-small;
+
+			@media (max-width: (@md - 1)){
+				width: 100%; max-width: 100%;
+			}
+		}
+
+		&.secondary {
+			padding-left: @spacing-mid; width: @spacing-huger;
+
+			@media (max-width: (@md - 1)){
+				margin-top: 5rem; margin-left: @spacing-smallish; padding-top: @spacing-smallish; padding-left: 0; border-top: 1px solid @lighter-grey; width: 100%;
+			}
+		}
+	}
+
+	&.three .column,
+	&.three > .invalid {
+		width: 33.33%;
+	}
+
+	&.four .column,
+	&.four > .invalid {
+		width: 25%;
+	}
+}

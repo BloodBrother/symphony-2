@@ -1,0 +1,235 @@
+/**
+ * Backend tables
+ */
+
+ /*-----------------------------------------------------------------------------
+ 	LESS — Variables Importing
+ -----------------------------------------------------------------------------*/
+
+ @import "variables";
+
+ /*-----------------------------------------------------------------------------
+	Tables
+-----------------------------------------------------------------------------*/
+
+table {
+	border-radius: @radius-current;
+	border-collapse: initial;
+	font-size: @text-short; text-align: left; border: 1px solid @lighter-grey; width: 100%;
+
+	label {
+		margin-bottom: 0!important;
+	}
+
+	&.fixed {
+		overflow-wrap: break-word;
+		word-wrap: break-word;
+		table-layout: fixed;
+	}
+
+	@media (max-width: (@sm - 1)){
+	 	thead {
+	 		display: none;
+	 	}
+
+	 	tr {
+	 		.flex(~'column', ~'flex-start', ~'flex-start');
+
+	 		td {
+	 			box-sizing: border-box;
+	 			display: flex; border: none; width: 100%;
+
+			 	&:before {
+			 		content: attr(data-title);
+			 		display: block; font-size: @text-shorter; text-transform: uppercase; padding-right: @spacing-micro; white-space: nowrap;
+			 	}
+
+			 	&:not(:first-child) {
+			 		padding-top: 0!important;
+			 	}
+
+			 	&:not(:last-child) {
+			 		padding-bottom: 0!important;
+			 	}
+	 		}
+
+	 		& + tr td:first-child {
+	 			border-top: 1px solid @lighter-grey;
+	 		}
+	 	}
+	}
+}
+
+th {
+	color: @dark-grey; font-size: @text-shorter; font-weight: 300; text-transform: uppercase; text-align: left; line-height: 1.4em; padding: @spacing-smallerish @spacing-smallish; background: transparent;
+
+	a,
+	a:hover,
+	a:hover:after {
+		color: @dark-grey;
+	}
+
+	a:after {
+		color: @grey;
+		font-size: .875em;
+	}
+
+	a:active,
+	a.active,
+	a.active:after {
+		color: @darker-grey;
+	}
+
+	a:after {
+		margin-left: @spacing-micro;
+		content: '';
+	}
+
+	a[href*="order=desc"]:after,
+	a.active[href*="order=asc"]:after,
+	a.active[href*="order=desc"]:hover:after {
+		content: '\2193'; /* down arrow */
+	}
+
+	a[href*="order=asc"]:after,
+	a.active[href*="order=desc"]:after,
+	a.active[href*="order=asc"]:hover:after {
+		content: '\2191'; /* up arrow */
+	}
+}
+
+td {
+	.transitioned(~'color, background');
+	color: @dark-grey; font-weight: 300; text-align: left; line-height: 1.4em; padding: @spacing-smallerish @spacing-smallish!important; border-top: 1px solid @lighter-grey; vertical-align: middle;
+
+	a {
+		color: @accent;
+
+		&:hover {
+			color: @dark-grey;
+		}
+	}
+}
+
+/*-----------------------------------------------------------------------------
+	Selectable rows
+-----------------------------------------------------------------------------*/
+
+table.selectable input {
+	display: none;
+}
+
+tr.selected td {
+	color: @white; background-color: @accent;
+
+	a {
+		color: @white;
+	}
+}
+
+tr.selected td a:hover {
+	color: @white;
+	border-bottom-color: @white;
+}
+
+tr.selected td a:focus {
+	color: @white;
+	border-bottom-color: @white;
+}
+
+tr.selected .inactive,
+tr.selected i {
+	color: @white;
+}
+
+/*-----------------------------------------------------------------------------
+	Orderable rows
+-----------------------------------------------------------------------------*/
+
+tr.ordering {
+	cursor: move;
+}
+
+tr.ordering td,
+tr:nth-child(odd).ordering td {
+	background-color: @accent;
+}
+
+tr.ordering td,
+tr.ordering a {
+	color: @white;
+}
+
+/*-----------------------------------------------------------------------------
+	Misc
+-----------------------------------------------------------------------------*/
+
+tr[class*=status-] a:first-of-type::after {
+	.transitioned(~'color');
+	content: attr(data-status);
+	color: @grey;
+}
+
+/*table.busy td {
+	border-top: 1px solid @lighter-grey;
+	border-bottom: 1px solid @lighter-grey;
+	background-color: @white;
+}
+
+table.busy tr:nth-child(odd) td {
+	border-top: 1px solid @lighter-grey;
+	border-bottom: 1px solid @lighter-grey;
+	background-color: @lightest-grey;
+}
+
+table.busy a {
+	color: @blue;
+}
+
+table + fieldset {
+	margin-top: @spacing-mid !important;
+}
+
+td img {
+	vertical-align: middle;
+}*/
+
+/*tr[class*=status-] {
+	border-left-width: 0.8rem;
+	border-left-style: solid;
+}
+
+tr.status-notice {
+	border-left-color: #f9ba4b;
+}
+
+tr.status-ok {
+	border-left-color: #90c648;
+}
+
+tr.status-error {
+	border-left-color: #c4301e;
+}
+
+tr[class*=status-].selected {
+	border-left-color: #4967a1;
+}
+
+tr[class*=status-] td:first-of-type {
+	padding-left: 1.5rem;
+}*/
+
+/*tr[class*=status-]:nth-child(even) a:first-of-type::after,
+tr[class*=status-]:nth-child(even):hover a:first-of-type::after {
+	border-bottom-color: @white;
+}
+
+tr[class*=status-]:hover a:first-of-type::after {
+	color: @grey;
+}
+
+tr.selected {
+	&[class*=status-]:hover a:first-of-type::after {
+		color: @white;
+	}
+}*/

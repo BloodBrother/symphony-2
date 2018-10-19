@@ -1,0 +1,94 @@
+/**
+ * Suggestions
+ */
+
+
+ /*-----------------------------------------------------------------------------
+ 	LESS — Variables Importing
+ -----------------------------------------------------------------------------*/
+
+ @import "variables";
+
+/*-----------------------------------------------------------------------------
+	Suggestions
+-----------------------------------------------------------------------------*/
+
+.frame.suggests,
+.suggests {
+	overflow: visible;
+}
+
+.suggestions {
+	.transitioned(~'opacity, max-height');
+	border-radius: @radius-current;
+	box-sizing: border-box;
+	overflow: hidden; position: absolute; margin: @spacing-micro 0 0!important; border: 1px solid @lighter-grey; background: @white; width: calc(~'100% - @{spacing-smallish}'); max-height: 0; min-height: 3.6rem; z-index: -1; opacity: 0;
+
+	.help {
+		display: none;
+
+		&.active {
+			display: block; color: @darker-grey; border-bottom: none; background-color: @lightest-grey; cursor: default;
+		}
+	}
+
+	.active {
+		color: @white; background-color: @accent; cursor: pointer;
+	}
+
+	li:not(.calendar) {
+		box-sizing: border-box;
+		padding: 0.5rem 0.8rem;
+		border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+	}
+
+	.calendar + li {
+		border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+	}
+
+	li:last-of-type {
+		border-bottom: none;
+	}
+}
+
+.frame .content .suggestions .help {
+	margin-top: 0!important;
+}
+
+/*-----------------------------------------------------------------------------
+	Special Cases
+-----------------------------------------------------------------------------*/
+
+input:focus ~ .suggestions:not(:empty),
+textarea:focus ~ .suggestions:not(:empty) {
+	max-height: 35rem;
+	transition: opacity 0s @easeInOutQuad @duration-shortest, max-height 0s @easeInOutQuad 0s;
+	opacity: 1;
+	overflow: auto;
+	z-index: 10000;
+}
+
+input:focus ~ .suggestions[data-search-types='date'] {
+	overflow: visible;
+	z-index: 10000;
+	max-width: 36rem;
+}
+
+.field-date[data-interactive] .suggestions {
+	transition: none;
+
+	li {
+		padding: 0; border-bottom: 0;
+	}
+}
+
+/*-----------------------------------------------------------------------------
+	Misc
+-----------------------------------------------------------------------------*/
+
+/*@media screen and (min-width: 700px) {
+
+	.column .suggestions {
+		width: calc(100% - 1.5rem);
+	}
+}*/

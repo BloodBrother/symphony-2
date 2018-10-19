@@ -1,0 +1,146 @@
+/**
+ * Drawers are areas in the backend that contain additional information
+ * like settings or documentation. They are hidden by default and can be
+ * expanded on click.
+ *
+ * @since Symphony 2.3
+ */
+
+ /*-----------------------------------------------------------------------------
+ 	LESS — Variables Importing
+ -----------------------------------------------------------------------------*/
+ 
+ @import "variables";
+
+/*-----------------------------------------------------------------------------
+	Horizontal drawers
+-----------------------------------------------------------------------------*/
+
+div.drawer.horizontal {
+	box-sizing: border-box;
+	position: absolute; right: 0; top: 100%; border: 1px solid @lighter-grey; background: @white; width: 80rem; max-width: 100%;
+
+	.contents {
+		padding: @spacing-smallish @spacing-smallish @spacing-mid;
+	}
+}
+
+/*-----------------------------------------------------------------------------
+	Vertical drawers
+-----------------------------------------------------------------------------*/
+
+div.drawer.vertical-left,
+div.drawer.vertical-right {
+	.transitioned(~'transform');
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+	position: fixed; top: @spacing-midlarge; bottom: 0; background: @white; width: @spacing-huger!important; height: auto!important; max-width: 100%; z-index: 100;
+
+	.contents {
+		padding: 0 0 @spacing-mid;
+	}
+}
+
+div.drawer.vertical-left {
+	left: 0;
+	border-right: 1px solid @lighter-grey;
+
+	&:not(.opened) {
+		transform: translateX(-100%);
+	}
+}
+
+div.drawer.vertical-right {
+	right: 0;
+	border-left: 1px solid @lighter-grey;
+
+	&:not(.opened) {
+		transform: translateX(100%);
+	}
+}
+
+/*-----------------------------------------------------------------------------
+	Dashboard
+-----------------------------------------------------------------------------*/
+
+#drawer-dashboard.drawer {
+	box-sizing: border-box;
+	overflow: auto; position: absolute; right: 0; top: 100%; padding: @spacing-smallish; border: 1px solid @lighter-grey; background: @white; width: 100%; height: calc(~'100vh - @{spacing-midlarge}'); z-index: 60;
+
+	.contents {
+		margin: 0 auto; padding: 0; max-width: @max-width-big;
+	}
+
+	#save-panel {
+		margin-top: 0;
+
+		label > span {
+			border: none; background: none;
+		}
+
+		a {
+			color: currentColor; line-height: 1.8em; border-color: currentColor;
+
+			&:hover {
+				border-color: transparent;
+			}
+		}
+
+		h3 {
+			color: @darker-grey; font-size: @text-big; font-weight: 300; padding: 0 0 @spacing-smallish; border: none;
+
+			span {
+				position: relative; left: 0; color: @accent;
+			}
+		}
+
+		fieldset {
+			border: none;
+
+			label + label {
+				margin-top: @spacing-smallish;
+			}
+		}
+
+		.actions {
+			.flex(~'row', ~'center', ~'flex-start');
+			margin: 0; padding: 0;
+
+			input, button {
+				font-size: @text-shorter; font-weight: 300; text-transform: uppercase; margin: 0; padding: @spacing-smallest @spacing-smallerish; border: none; background: @accent; border-radius: @radius-current; cursor: pointer;
+
+				&:hover {
+					background: @darker-grey;
+				}
+
+				&.delete {
+					background: @red;
+				}
+
+				& + * {
+					margin-left: @spacing-smallest!important;
+				}
+			}
+		}
+	}
+}
+
+/*-----------------------------------------------------------------------------
+	Documenter
+-----------------------------------------------------------------------------*/
+
+#drawer-documenter.drawer {
+	background: @white;
+
+	h2 {
+		color: @accent; font-size: @text-bigger; font-weight: 300; margin: 0; padding: @spacing-smallish @spacing-smallish; border: none;
+	}
+
+	.documenter-content {
+		color: @darker-grey; padding: 0 @spacing-smallish @spacing-smallish;
+
+		& + h2 {
+			padding-top: @spacing-smallish; border-top: 1px solid @lighter-grey;
+		}
+	}
+}

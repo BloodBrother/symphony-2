@@ -1,0 +1,118 @@
+/*-----------------------------------------------------------------------------
+	Media Query Breakpoints
+-----------------------------------------------------------------------------*/
+
+@xxs: 320px;
+@xs: 767px;
+@sm: 1024px;
+@md: 1280px;
+@lg: 1440px;
+
+/*-----------------------------------------------------------------------------
+	Spacing scale
+-----------------------------------------------------------------------------*/
+
+@spacing-nano: .2rem;
+@spacing-micro: .5rem;
+@spacing-smallest: 1rem;
+@spacing-smallerish: 1.5rem; // Small Basic Spacing
+@spacing-smaller: 2rem;
+@spacing-smallish: 3rem; // Basic Spacing
+@spacing-small: 4rem;
+@spacing-mid: 6rem;
+@spacing-midlarge: 6rem; // Height Context - original 8rem
+@spacing-large: 10rem;
+@spacing-larger: 18rem;
+@spacing-largest: 20rem;
+@spacing-huge: 25rem; // Width Nav
+@spacing-huger: 45rem; // Width Right Column - original 40rem
+
+@max-width-small: 90rem; // original 93rem
+@max-width-big: 128rem; // original 139rem
+
+/*-----------------------------------------------------------------------------
+	Color palette
+-----------------------------------------------------------------------------*/
+
+@white: #ffffff;
+@black: #121212;
+
+@darker-grey: #3B3D40; // Dark Text
+@dark-grey: #757c84; // Regular Text
+@grey: #d3dce3; // Light Text
+@light-grey: #B7C2CC; // Light Text
+@lighter-grey: #d3dce2; // Borders
+@lightest-grey: #f4f8fb; // Input Backgrounds
+
+@accent: #2f77eb;
+@red: #ee494e;
+
+/*-----------------------------------------------------------------------------
+	Fonts
+-----------------------------------------------------------------------------*/
+
+@text-shorter: 1.1rem;
+@text-short: 1.2rem; // original 1.4rem
+@text-current: 1.4rem; // original 1.6rem
+@text-big: 1.6rem; // original 2rem
+@text-bigger: 2.4rem; // original 3.2rem
+@text-biggest: 3.6rem;
+
+/*-----------------------------------------------------------------------------
+	Borders
+-----------------------------------------------------------------------------*/
+
+@radius-current: 5px;
+
+/*-----------------------------------------------------------------------------
+	Elements dimensions
+-----------------------------------------------------------------------------*/
+
+@field-height-current: @spacing-small + @spacing-micro * .325;
+
+/*-----------------------------------------------------------------------------
+	Duration scale
+-----------------------------------------------------------------------------*/
+
+@duration-shortest: 150ms;
+@duration-shorter: 200ms;
+@duration-short: 300ms;
+@duration: 500ms;
+@duration-long: 750ms;
+@duration-longer: 1000ms;
+@duration-longest: 1500ms;
+
+/*-----------------------------------------------------------------------------
+	Easing functions
+-----------------------------------------------------------------------------*/
+
+@ease: ease-in-out;
+@ease-in: ease-in;
+@ease-out: ease-out;
+@ease-in-out: ease-in-out;
+@easeInOutQuart: cubic-bezier(0.77, 0, 0.175, 1);
+@easeInOutQuad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+@easeOutQuint: cubic-bezier(0.23, 1, 0.32, 1);
+@easeOutCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
+@easeInCirc: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+@easeInOutCirc: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+@easeInExpo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+@easeInBack: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+
+/* Mixins
+---------------------------------------------*/
+
+.transitioned(@transProperty: color, @transDuration: 0.45s, @transDelay: 0s) {
+	transition-duration: @transDuration;
+	transition-property: @transProperty;
+	transition-delay: @transDelay;
+	transition-timing-function: 'ease-in-out';
+}
+
+.flex(@direction: row, @align: flex-start, @justify: space-between){ 
+	display: flex;
+	flex-direction: @direction;
+	align-items: @align;
+	justify-content: @justify;
+	
+}

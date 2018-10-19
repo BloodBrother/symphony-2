@@ -1,0 +1,93 @@
+/**
+ * Associations are visualisations of associated entries in Symphony's backend.
+ * They are hidden in Drawers by default and can be expanded on click.
+ *
+ * @since Symphony 2.3
+ */
+
+
+ /*-----------------------------------------------------------------------------
+ 	LESS — Variables Importing
+ -----------------------------------------------------------------------------*/
+
+ @import "variables";
+
+/*-----------------------------------------------------------------------------
+	Vertical drawers
+-----------------------------------------------------------------------------*/
+
+.association {
+	color: @dark-grey; font-size: @text-short; font-weight: 300; padding: @spacing-smallerish @spacing-smallish; border-bottom: 1px solid @lighter-grey; min-height: 3rem;
+
+	a {
+		color: @accent;
+
+		&:hover {
+			color: @black;
+		}
+	}
+
+	header p {
+		color: @dark-grey;
+	}
+
+	.association-section {
+		color: @black;
+	}
+
+	.association-new {
+		border-radius: @radius-current;
+		display: inline-block; color: @white; font-size: @text-shorter; font-weight: 300; text-transform: uppercase; margin: 0; padding: @spacing-smallest @spacing-smallerish; background: @accent;
+
+		&:hover {
+			color: @white; background: @darker-grey;
+		}
+	}
+}
+
+.association-links {
+	margin: 0;
+	padding: @spacing-smallest 0 0;
+
+	li {
+		display: block;
+		box-sizing: border-box;
+		line-height: 2;
+		white-space: nowrap;
+
+		& + li {
+			margin-top: @spacing-micro;
+		}
+	}
+
+	a {
+		display: block;
+		overflow: hidden;
+		width: 26rem;
+		line-height: 1.325;
+		text-overflow: ellipsis;
+		color: @accent;
+
+		&:hover {
+			color: @darker-grey;
+		}
+
+		&:before {
+			content: '\2192 ';
+			margin-right: @spacing-micro;
+		}
+	}
+
+	&.parent li a:before {
+		content: '\2190 ';
+		margin-right: @spacing-micro;
+	}
+}
+
+.association-more a {
+	color: #a9a9a9;
+
+	&:before {
+		content: '\00B7\00B7\00B7' !important;
+	}
+}
