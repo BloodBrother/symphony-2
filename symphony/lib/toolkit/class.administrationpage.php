@@ -501,11 +501,18 @@ class AdministrationPage extends HTMLPage
             Symphony::Profiler()->sample('Page action run', PROFILE_LAP);
         }
 
+        $home_url = APPLICATION_URL . Symphony::Author()->get('default_area');
+
+        // The default area is a section
+        if (strlen(Symphony::Author()->get('default_area')) === 1) {
+            $home_url = APPLICATION_URL . '/publish/' . SectionManager::select()->section(3)->execute()->next()->get('handle') . '/';
+        }
+
         $h1 = new XMLElement('h1');
         $h1->appendChild(
             Widget::Anchor(
                 '<div class="sun"><div></div><div></div><div></div><div></div></div><span><span>' . Symphony::Configuration()->get('sitename', 'general') . '</span></span>',
-                APPLICATION_URL . Symphony::Author()->get('default_area')
+                $home_url
             )
         );
         $this->Header->appendChild($h1);
