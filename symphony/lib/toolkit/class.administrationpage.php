@@ -504,8 +504,8 @@ class AdministrationPage extends HTMLPage
         $home_url = APPLICATION_URL . Symphony::Author()->get('default_area');
 
         // The default area is a section
-        if (strlen(Symphony::Author()->get('default_area')) === 1) {
-            $home_url = APPLICATION_URL . '/publish/' . SectionManager::select()->section(3)->execute()->next()->get('handle') . '/';
+        if (strpos(Symphony::Author()->get('default_area'), 'symphony') === false) {
+            $home_url = APPLICATION_URL . '/publish/' . SectionManager::select()->section(Symphony::Author()->get('default_area'))->execute()->next()->get('handle') . '/';
         }
 
         $h1 = new XMLElement('h1');
