@@ -350,10 +350,14 @@ class AdministrationPage extends HTMLPage
         if (in_array($button, array('prepend', 'append'))) {
             $this->insertAction(
                 Widget::Anchor(
-                    ($icon === '') ? $drawer->getAttribute('data-label') : $icon . '<span><span>' . $drawer->getAttribute('data-label') . '</span></span>',
+                    ($icon === '') ? $drawer->getAttribute('data-label') : $icon,
                     '#' . $drawer->getAttribute('id'),
                     null,
-                    'button drawer ' . $position
+                    'button drawer ' . $position,
+                    null,
+                    array(
+                        'title' => $drawer->getAttribute('data-label'),
+                    )
                 ),
                 ($button === 'append' ? true : false)
             );
@@ -505,7 +509,12 @@ class AdministrationPage extends HTMLPage
 
         // The default area is a section
         if (strpos(Symphony::Author()->get('default_area'), 'symphony') === false) {
-            $home_url = APPLICATION_URL . '/publish/' . SectionManager::select()->section(Symphony::Author()->get('default_area'))->execute()->next()->get('handle') . '/';
+            $section = SectionManager::select()->section(Symphony::Author()->get('default_area'))->execute()->next();
+            if ($section) {
+                $home_url = APPLICATION_URL . '/publish/' . $section->get('handle') . '/';
+            } else {
+                $home_url = rtrim(URL, '/') . '/';
+            }
         }
 
         $h1 = new XMLElement('h1');
