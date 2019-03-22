@@ -110,7 +110,7 @@ body {
 
 			.sun .layer {
 				position: absolute;
-				background-color: var(--color-brand);
+				background-color: var(--color-accent-alt);
 				border-radius: 100%;
 				opacity: 0.4;
 				-webkit-animation: Wave 1200ms cubic-bezier(0.19, 1, 0.22, 1) 1 both;
@@ -228,6 +228,10 @@ body {
 		@media (max-width: (@sm - 1)){
 			display: flex;
 			margin: 0 3rem;
+
+			> div {
+				flex-grow: 0;
+			}
 		}
 	}
 
@@ -360,7 +364,7 @@ body {
 					overflow: hidden;
 					max-width: 100%;
 					text-overflow: ellipsis;
-					line-height: 1em;
+					line-height: 1.25em;
 				}
 
 				li.active {
@@ -451,6 +455,7 @@ body {
 				box-sizing: border-box;
 				font-size: var(--text-current);
 				line-height: 1em;
+				font-weight: 500;
 
 				svg {
 					width: var(--spacing-smallerish);
@@ -814,11 +819,17 @@ body {
 
 }
 
-#contents-actions:not(:empty) {
+#contents-actions {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 	padding: var(--spacing-micro) 0;
+
+	&:empty {
+		padding: 0;
+		margin: 0;
+		height: var(--spacing-smaller);
+	}
 
 	.actions {
 		display: flex;
@@ -884,9 +895,6 @@ body {
 	#contents {
 
 		form {
-			background-color: var(--color-ui);
-			padding: 0 var(--spacing-smaller);
-
 			label {
 				margin-bottom: 0;
 			}

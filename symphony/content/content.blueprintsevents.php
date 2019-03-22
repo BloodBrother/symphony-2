@@ -184,6 +184,8 @@ class contentBlueprintsEvents extends ResourcesPage
             $this->ContentsActions->appendChild($div);
         }
 
+        $formInner = new XMLElement('div', null, array('class' => 'inner'));
+
         if (!$readonly) {
             $fieldset = new XMLElement('fieldset');
             $fieldset->setAttribute('class', 'settings');
@@ -244,7 +246,7 @@ class contentBlueprintsEvents extends ResourcesPage
             }
             $group->appendChild($div);
             $fieldset->appendChild($group);
-            $this->Form->appendChild($fieldset);
+            $formInner->appendChild($fieldset);
 
             // Filters
             $fieldset = new XMLElement('fieldset');
@@ -282,7 +284,7 @@ class contentBlueprintsEvents extends ResourcesPage
             );
 
             $fieldset->appendChild(Widget::Select('fields[filters][]', $options, array('multiple' => 'multiple', 'id' => 'event-filters')));
-            $this->Form->appendChild($fieldset);
+            $formInner->appendChild($fieldset);
 
             // Connections
             $fieldset = new XMLElement('fieldset');
@@ -318,7 +320,7 @@ class contentBlueprintsEvents extends ResourcesPage
             $div->appendChild($label);
 
             $fieldset->appendChild($div);
-            $this->Form->appendChild($fieldset);
+            $formInner->appendChild($fieldset);
 
             // Providers
             if (!empty($providers)) {
@@ -345,7 +347,7 @@ class contentBlueprintsEvents extends ResourcesPage
                 $fieldset->setAttribute('class', 'settings');
                 $fieldset->appendChild(new XMLElement('legend', __('Author')));
                 $fieldset->appendChild(new XMLElement('p', $link->generate(false)));
-                $this->Form->appendChild($fieldset);
+                $formInner->appendChild($fieldset);
             }
 
             // Version
@@ -368,7 +370,7 @@ class contentBlueprintsEvents extends ResourcesPage
                     new XMLElement('p', __('Last modified on %s', array(DateTimeObj::format($release_date, __SYM_DATE_FORMAT__))))
                 );
             }
-            $this->Form->appendChild($fieldset);
+            $formInner->appendChild($fieldset);
         }
 
         // If we are editing an event, it assumed that the event has documentation
@@ -387,7 +389,8 @@ class contentBlueprintsEvents extends ResourcesPage
             }
         }
 
-        $this->Form->appendChild($fieldset);
+        $formInner->appendChild($fieldset);
+        $this->Form->appendChild($formInner);
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');

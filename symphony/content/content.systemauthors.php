@@ -365,6 +365,8 @@ class contentSystemAuthors extends AdministrationPage
 
         $this->ContentsActions->appendChild($div);
 
+        $formInner = new XMLElement('div', null, array('class' => 'inner'));
+
         // Essentials
         $group = new XMLElement('fieldset');
         $group->setAttribute('class', 'settings');
@@ -388,7 +390,7 @@ class contentSystemAuthors extends AdministrationPage
         $label->appendChild(Widget::Input('fields[email]', $author->get('email'), 'text', array('autocomplete' => 'off')));
         $group->appendChild((isset($this->_errors['email']) ? Widget::Error($label, $this->_errors['email']) : $label));
 
-        $this->Form->appendChild($group);
+        $formInner->appendChild($group);
 
         // Login Details
         $group = new XMLElement('fieldset');
@@ -557,7 +559,7 @@ class contentSystemAuthors extends AdministrationPage
         $label->appendChild(Widget::Select('fields[default_area]', $options));
         $group->appendChild($label);
 
-        $this->Form->appendChild($group);
+        $formInner->appendChild($group);
 
         // Custom Language Selection
         $languages = Lang::getAvailableLanguages();
@@ -582,7 +584,7 @@ class contentSystemAuthors extends AdministrationPage
             $label->appendChild($select);
             $group->appendChild($label);
 
-            $this->Form->appendChild($group);
+            $formInner->appendChild($group);
         }
 
         // Administration password double check
@@ -602,12 +604,13 @@ class contentSystemAuthors extends AdministrationPage
                 isset($this->_errors['confirm-change-password']) ? Widget::Error($label, $this->_errors['confirm-change-password']) : $label
             );
 
-            $this->Form->appendChild($group);
+            $formInner->appendChild($group);
         }
 
         // Actions
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');
+        $this->Form->appendChild($formInner);
 
         /**
         * Allows the injection of custom form fields given the current `$this->Form`

@@ -509,11 +509,11 @@ class XMLElement implements IteratorAggregate
      * children when the `XMLElement` is generated
      *
      * @uses validateChild()
-     * @param XMLElement $child
+     * @param XMLElement|string $child
      * @return XMLElement
      *  The current instance
      */
-    public function prependChild(XMLElement $child)
+    public function prependChild($child)
     {
         $this->validateChild($child);
         array_unshift($this->children, $child);

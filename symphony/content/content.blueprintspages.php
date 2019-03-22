@@ -390,6 +390,8 @@ class contentBlueprintsPages extends AdministrationPage
             $this->insertBreadcrumbsUsingPageIdentifier((int)$_GET['parent'], true);
         }
 
+        $formInner = new XMLElement('div', null, array('class' => 'inner'));
+
         // Actions ------------------------------------------------------------
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
@@ -508,7 +510,7 @@ class contentBlueprintsPages extends AdministrationPage
         $column->appendChild($tags);
         $group->appendChild($column);
         $fieldset->appendChild($group);
-        $this->Form->appendChild($fieldset);
+        $formInner->appendChild($fieldset);
 
         // Events -------------------------------------------------------------
 
@@ -563,7 +565,7 @@ class contentBlueprintsPages extends AdministrationPage
         $label->appendChild(Widget::Select('fields[data_sources][]', $options, array('multiple' => 'multiple')));
         $group->appendChild($label);
         $fieldset->appendChild($group);
-        $this->Form->appendChild($fieldset);
+        $formInner->appendChild($fieldset);
 
         // Controls -----------------------------------------------------------
 
@@ -590,6 +592,7 @@ class contentBlueprintsPages extends AdministrationPage
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');
+        $this->Form->appendChild($formInner);
 
         if (isset($_REQUEST['parent']) && is_numeric($_REQUEST['parent'])) {
             $this->Form->appendChild(new XMLElement('input', null, array('type' => 'hidden', 'name' => 'parent', 'value' => $_REQUEST['parent'])));

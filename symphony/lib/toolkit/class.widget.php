@@ -904,7 +904,8 @@ class Widget
         c0,3.9,3.1,7,7,7s7-3.2,7-7c0-2.3-1.1-4.4-3-5.8c-0.5-0.3-0.6-0.9-0.2-1.4c0.3-0.5,0.9-0.6,1.4-0.2C16.6,3.2,18,6,18,8.9
         C18,13.9,14,17.9,9,17.9z"/><path fill="currentColor" d="M9,10c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1s1,0.4,1,1v8C10,9.6,9.6,10,9,10z"/></svg>',
         'kebab' => '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="18" r="2" fill="currentColor"/><circle cx="10" cy="10" r="2" fill="currentColor"/><circle cx="10" cy="2" r="2" fill="currentColor"/></svg>',
-        'placeholder' => '<svg class="placeholder" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="5" stroke="currentColor" stroke-width="2"/></svg>'
+        'placeholder' => '<svg class="placeholder" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="5" stroke="currentColor" stroke-width="2"/></svg>',
+        'drag' => '<svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="6" height="2" rx="1" fill="currentColor"/><rect y="4" width="6" height="2" rx="1" fill="currentColor"/><rect y="8" width="6" height="2" rx="1" fill="currentColor"/></svg>',
     );
 
     /**
