@@ -374,25 +374,27 @@ body {
 		.transitioned(~'opacity');
 		border-radius: @radius-current;
 		position: absolute;
-		left: 0;
 		right: 0;
 		top: 100%;
 		color: @dark-grey;
-		font-size: @text-short;
-		line-height: 1.4em;
 		margin: 0 0 @spacing-micro;
-		border: 1px solid @lighter-grey;
 		background: @white;
 		opacity: 0;
 		pointer-events: none;
 		z-index: 200;
+		overflow: hidden;
+		box-shadow: @shadow-main;
 
 		> li {
 			> a {
 				.transitioned(~'color');
 				.flex(~'row', ~'center', ~'space-between');
 				color: currentColor;
-				padding: @spacing-smallest @spacing-smallerish;
+				padding: @spacing-smaller @spacing-smallest;
+				min-width: 20rem;
+				box-sizing: border-box;
+				font-size: @text-current;
+				line-height: 1em;
 
 				svg {
 					width: @spacing-smallerish;
@@ -400,12 +402,13 @@ body {
 				}
 
 				&:hover {
-					color: @accent;
+					background-color: @accent;
+					color: @white;
 				}
 			}
 
 			& + li {
-				border-top: 1px solid @lighter-grey;
+				border-top: 1px solid @lightest-grey;
 			}
 		}
 	}

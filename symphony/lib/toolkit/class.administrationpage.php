@@ -412,7 +412,6 @@ class AdministrationPage extends HTMLPage
 
         // Add scripts
         $environment = array(
-
             'root'     => URL,
             'symphony' => SYMPHONY_URL,
             'path'     => '/' . Symphony::Configuration()->get('admin-path', 'symphony'),
@@ -420,11 +419,11 @@ class AdministrationPage extends HTMLPage
             'version'  => Symphony::Configuration()->get('version', 'symphony'),
             'lang'     => Lang::get(),
             'user'     => array(
-
                 'fullname' => Symphony::Author()->getFullName(),
                 'name'     => Symphony::Author()->get('first_name'),
                 'type'     => Symphony::Author()->get('user_type'),
-                'id'       => Symphony::Author()->get('id')
+                'id'       => Symphony::Author()->get('id'),
+                'username' => Symphony::Author()->get('username')
             ),
             'datetime' => array(
 
