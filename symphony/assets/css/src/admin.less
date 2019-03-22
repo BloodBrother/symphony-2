@@ -770,7 +770,7 @@ body.index #contents .actions {
 		padding-top: calc(~'@{spacing-smallish} + @{spacing-midlarge}');
 	}
 
-	& > * {
+	& > form {
 		transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 		transition-duration: 500ms;
 		transition-property: opacity, transform;
@@ -796,6 +796,10 @@ body.index #contents .actions {
 		margin-right: 0!important;
 	}
 
+	@media (max-width: (@sm - 1)){
+		padding-left: 0;
+	}
+
 }
 
 /*--------------------------------------------------------------------------
@@ -804,10 +808,12 @@ body.index #contents .actions {
 
 ul.page {
 	.flex(~'row',~'center',~'center');
-	margin: @spacing-smallish 0 0;
-	padding: 0 @spacing-smallish;
+	padding: @spacing-smallish;
+	box-sizing: border-box;
+	margin: 0;
 	color: @dark-grey;
 	cursor: default;
+	background-color: @white;
 
 	a {
 		color: @accent;
