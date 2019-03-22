@@ -13,7 +13,20 @@
 --------------------------------------------------------------------------*/
 
 #loading {
-	display: none;
+	display: block;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background-color: @white;
+	transition: ease-out 500ms opacity;
+	z-index: 200;
+}
+
+#loading.hidden {
+	opacity: 0;
+	pointer-events: none;
 }
 
 #wrapper {
