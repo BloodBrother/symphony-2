@@ -50,8 +50,7 @@
 	position: fixed;
 	left: 0;
 	top: 0;
-	border-right: 1px solid @lighter-grey;
-	background: @white;
+	background: @accent;
 	width: @spacing-huge;
 	height: 100vh;
 	z-index: 101;
@@ -86,7 +85,7 @@
 			position: absolute;
 			left: 0;
 			top: 0;
-			color: @dark-grey;
+			color: @white;
 			font-size: @text-bigger;
 			line-height: 1.2em;
 			padding: 0 @spacing-smallish!important;
@@ -151,17 +150,18 @@
 
 	> span {
 		display: block;
-		color: @light-grey;
+		color: @lightest-grey;
 		font-size: @text-shorter;
 		text-transform: uppercase;
 		line-height: 1.4em;
 		margin-bottom: @spacing-smallest;
+		opacity: 0.5;
 	}
 
 	/* First Level */
 
 	> ul {
-		color: @dark-grey;
+		color: @white;
 		margin: 0;
 		padding: 0;
 
@@ -185,7 +185,8 @@
 					position: absolute;
 					left: -@spacing-smallerish;
 					top: @spacing-micro;
-					color: @light-grey;
+					color: @lightest-grey;
+					opacity: 0.5;
 				}
 			}
 
@@ -194,7 +195,7 @@
 			}
 
 			&.opened, &.active, &:hover {
-				color: @accent;
+				color: @white;
 			}
 
 			& + li {
@@ -210,11 +211,22 @@
 				background: url(../img/bullet.png) repeat-y 0 0;
 
 				a {
-					color: @dark-grey;
+					color: @white;
 				}
 
-				li.active a, a:hover {
-					color: @accent;
+				li.active {
+					&::before {
+						content: '';
+						background-color: @green;
+						position: absolute;
+						left: -@spacing-smallish;
+						height: @spacing-smaller;
+						width: 3px;
+					}
+				}
+
+				a:hover {
+					color: @white;
 				}
 
 				li + li {
@@ -235,31 +247,32 @@
 	.flex(~'row', ~'center', ~'flex-start');
 	flex-shrink: 0;
 	position: relative;
-	margin: 0 @spacing-smallish;
+	margin: 0;
 	cursor: pointer;
 
 	> div {
-		.transitioned(~'color, background');
+		.transitioned(~'background');
 		.flex(~'row', ~'center', ~'space-between');
 		flex-grow: 1;
 		box-sizing: border-box;
 		border-radius: @radius-current;
 		padding: @spacing-micro @spacing-smallest;
 		min-height: @spacing-small;
-		background: @lightest-grey;
+		background: rgba(000, 000, 000, 0.25);
+		color: @white;
 
 		> span {
 			font-size: @text-short;
 		}
 
 		> svg {
+			margin-left: @spacing-smallest;
 			.transitioned(~'transform');
-			transform: rotateZ(180deg);
+			transform: none;
 		}
 
 		&:hover {
-			color: @white;
-			background: @accent;
+			background: rgba(000, 000, 000, 0.15);
 		}
 	}
 
@@ -269,7 +282,7 @@
 		position: absolute;
 		left: 0;
 		right: 0;
-		bottom: 100%;
+		top: 100%;
 		color: @dark-grey;
 		font-size: @text-short;
 		line-height: 1.4em;
@@ -278,6 +291,7 @@
 		background: @white;
 		opacity: 0;
 		pointer-events: none;
+		z-index: 200;
 
 		> li {
 			> a {
@@ -304,7 +318,7 @@
 
 	&.is-panel-opened {
 		> div svg {
-			transform: none;
+			transform: rotateZ(180deg);
 		}
 
 		> ul {
@@ -319,9 +333,8 @@
 #version {
 	flex-shrink: 0;
 	position: relative;
-	color: @grey;
+	color: @white;
 	font-size: @text-shorter;
-	text-transform: uppercase;
 	line-height: 1.4em;
 	margin-bottom: 0;
 	padding: @spacing-smallerish @spacing-smallish;
@@ -338,6 +351,9 @@
 		display: block;
 		background-color: @dark-accent;
 		height: @spacing-midlarge;
+		padding: 0 @spacing-smallish;
+		.flex(~'row', ~'center', ~'flex-end');
+		color: @white;
 	}
 }
 
@@ -345,10 +361,13 @@
 	.flex(~'row', ~'center', ~'space-between');
 	box-sizing: border-box;
 	left: @spacing-huge;
-	border-bottom: 1px solid @lighter-grey;
 	background: @white;
 	height: @spacing-midlarge;
 	z-index: 50;
+
+	#tools:empty + & {
+		margin-top: @spacing-smallish;
+	}
 
 	@media (max-width: (@sm - 1)){
 		/*justify-content: flex-end;*/
@@ -431,23 +450,15 @@
 				margin-right: -@spacing-smallerish;
 				max-width: 100%!important;
 
-				a,
-				button {
+				a, button {
 					padding-right: @spacing-smallish;
 
 					&.create {
 						box-sizing: border-box;
-						color: @white;
-						margin-left: @spacing-smallerish;
-						background: @accent;
-						width: @spacing-larger;
-
-						@media (max-width: (@xs - 1)){
-							width: auto;
-						}
+						color: @accent;
 
 						&:hover {
-							background: @darker-grey;
+							color: @green;
 						}
 					}
 				}
@@ -474,7 +485,7 @@
 /* Breadcrumbs */
 
 #breadcrumbs {
-	.flex(~'row',~'baseline', ~'flex-start');
+	.flex(~'row',~'center', ~'flex-start');
 	order: 1;
 	overflow: hidden;
 	position: relative;
@@ -493,8 +504,20 @@
 			padding-right: @spacing-smallish;
 
 			a {
+				background-color: @lightest-grey;
 				color: @dark-grey;
 				font-size: @text-short;
+				display: inline-block;
+				padding: 1.1rem 1.7rem;
+				border-radius: @radius-current;
+				font-weight: 700;
+				margin-left: @spacing-smallest;
+				.flex(~'center', ~'flex-start');
+				line-height: 1em;
+
+				&:first-of-type {
+					margin-left: 0;
+				}
 
 				svg {
 					padding-right: 15px;
@@ -514,8 +537,8 @@
 	h2 {
 		text-overflow: ellipsis;
 		overflow: hidden;
-		color: @accent;
-		font-size: @text-current;
+		color: @dark-grey;
+		font-size: @text-bigger;
 
 		img {
 			display: none;
@@ -525,6 +548,7 @@
 	p.inactive {
 		display: inline-block;
 		margin: 0;
+		margin-left: @spacing-smallest;
 
 		span {
 			color: @accent;

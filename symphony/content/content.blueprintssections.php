@@ -52,7 +52,7 @@ class contentBlueprintsSections extends AdministrationPage
         $this->appendSubheading(
             __('Sections'),
             Widget::Anchor(
-                Widget::SVGIcon('add') . '<span><span>' . __('Create New') . '</span></span>',
+                Widget::SVGIcon('add'),
                 Administration::instance()->getCurrentPageURL().'new/',
                 __('Create a section'),
                 'create button',
@@ -444,7 +444,7 @@ class contentBlueprintsSections extends AdministrationPage
         $this->appendSubheading(
             General::sanitize($meta['name']),
             Widget::Anchor(
-                Widget::SVGIcon('view') . '<span><span>' . __('View Entries') . '</span></span>',
+                Widget::SVGIcon('view'),
                 SYMPHONY_URL . '/publish/' . $section->get('handle') . '/',
                 __('View Section Entries'),
                 'button'

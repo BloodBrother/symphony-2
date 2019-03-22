@@ -525,7 +525,7 @@ class contentPublish extends AdministrationPage
 
         $subheading_buttons = array(
             Widget::Anchor(
-                Widget::SVGIcon('add') . '<span><span>' . __('Create New') . '</span></span>',
+                Widget::SVGIcon('add'),
                 Administration::instance()->getCurrentPageURL().'new/'.($prepopulate_querystring ? '?' . $prepopulate_querystring : ''),
                 __('Create a new entry'),
                 'create button',
@@ -539,7 +539,7 @@ class contentPublish extends AdministrationPage
             array_unshift(
                 $subheading_buttons,
                 Widget::Anchor(
-                    Widget::SVGIcon('edit') . '<span><span>' . __('Edit Section') . '</span></span>',
+                    Widget::SVGIcon('edit'),
                     SYMPHONY_URL . '/blueprints/sections/edit/' . $section_id . '/',
                     __('Edit Section Configuration'),
                     'button'
@@ -1143,7 +1143,7 @@ class contentPublish extends AdministrationPage
             $this->appendSubheading(
                 __('Untitled'),
                 Widget::Anchor(
-                    Widget::SVGIcon('edit') . '<span><span>' . __('Edit Section') . '</span></span>',
+                    Widget::SVGIcon('edit'),
                     SYMPHONY_URL . '/blueprints/sections/edit/' . $section_id . '/',
                     __('Edit Section Configuration'),
                     'button'
@@ -1545,7 +1545,7 @@ class contentPublish extends AdministrationPage
             $this->appendSubheading(
                 $title,
                 Widget::Anchor(
-                    Widget::SVGIcon('edit') . '<span><span>' . __('Edit Section') . '</span></span>',
+                    Widget::SVGIcon('edit'),
                     SYMPHONY_URL . '/blueprints/sections/edit/' . $section_id . '/',
                     __('Edit Section Configuration'),
                     'button'

@@ -18,7 +18,7 @@ class contentBlueprintsEvents extends ResourcesPage
         $this->appendSubheading(
             __('Events'),
             Widget::Anchor(
-                Widget::SVGIcon('add') . '<span><span>' . __('Create New') . '</span></span>',
+                Widget::SVGIcon('add'),
                 Administration::instance()->getCurrentPageURL().'new/',
                 __('Create a new event'),
                 'create button',

@@ -18,7 +18,7 @@ class contentBlueprintsDatasources extends ResourcesPage
         $this->appendSubheading(
             __('Data Sources'),
             Widget::Anchor(
-                Widget::SVGIcon('add') . '<span><span>' . __('Create New') . '</span></span>',
+                Widget::SVGIcon('add'),
                 Administration::instance()->getCurrentPageURL().'new/',
                 __('Create a new data source'),
                 'create button',

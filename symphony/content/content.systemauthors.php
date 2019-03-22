@@ -66,7 +66,7 @@ class contentSystemAuthors extends AdministrationPage
             $this->appendSubheading(
                 __('Authors'),
                 Widget::Anchor(
-                    Widget::SVGIcon('add') . '<span><span>' . __('Create New') . '</span></span>',
+                    Widget::SVGIcon('add'),
                     Administration::instance()->getCurrentPageURL().'new/',
                     __('Create a new author'),
                     'create button',

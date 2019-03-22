@@ -106,7 +106,7 @@ class contentBlueprintsPages extends AdministrationPage
                 ? General::sanitize($parent['title'])
                 : __('Pages'),
             Widget::Anchor(
-                Widget::SVGIcon('add') . '<span><span>' . __('Create New') . '</span></span>',
+                Widget::SVGIcon('add'),
                 Administration::instance()->getCurrentPageURL() . 'new/' . ($nesting && isset($parent) ? "?parent={$parent['id']}" : null),
                 __('Create a new page'),
                 'create button',
@@ -370,7 +370,7 @@ class contentBlueprintsPages extends AdministrationPage
                 General::sanitize($title),
                 [
                     Widget::Anchor(
-                        Widget::SVGIcon('view') . '<span><span>' . __('View Page') . '</span></span>',
+                        Widget::SVGIcon('view'),
                         $page_url,
                         __('View Page on Frontend'),
                         'button',
