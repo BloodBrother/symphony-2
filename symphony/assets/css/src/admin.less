@@ -192,8 +192,20 @@ body {
 		}
 	}
 
+	.index-btn {
+		display: none;
+		order: 2;
+		color: @white;
+		margin: 0 @spacing-smallish;
+		margin-top: @spacing-smallish;
+		margin-bottom: -@spacing-smaller;
+		@media (max-width: (@sm - 1)){
+			display: block;
+		}
+	}
+
 	.session {
-		display: flex;
+		display: none;
 
 		ul {
 			bottom: 100%;
@@ -208,7 +220,7 @@ body {
 		}
 
 		@media (max-width: (@sm - 1)){
-			display: block;
+			display: flex;
 			margin: 0 3rem;
 		}
 	}
@@ -486,14 +498,14 @@ body {
 		display: block;
 		background-color: @dark-accent;
 		height: @spacing-midlarge;
-		padding: 0 @spacing-smallish;
+		padding: 0 @spacing-smaller;
 		.flex(~'row', ~'center', ~'space-between');
 		color: @white;
 
 		@media (max-width: (@sm - 1)){
 			padding: 0 @spacing-smallest;
 
-			.session {
+			.index-btn, .session {
 				display: none;
 			}
 		}
@@ -642,7 +654,7 @@ body {
 	order: 1;
 	overflow: hidden;
 	position: relative;
-	padding: 0 @spacing-smallish;
+	padding: 0 @spacing-smaller;
 	white-space: nowrap;
 
 	@media (max-width: @xs) {
@@ -715,11 +727,12 @@ body {
 
 body.page-single #contents .actions {
 	display: block;
-
-	margin: 0;
-	padding: 0;
+	background-color: @white;
+	height: @spacing-mid;
+	.flex(row, center, center);
+	margin: 0 -@spacing-smaller 0 -@spacing-smallish;
 	z-index: 110;
-	margin-left: -@spacing-smallest;
+	padding: 0;
 
 	input, button {
 		margin-left: @spacing-smallest;
@@ -783,18 +796,6 @@ body.page-single #contents .actions {
 	}
 }
 
-body.index #contents .actions {
-	position: relative;
-
-	&:after {
-		content: '';
-		clear: both;
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 1px;
-	}
-}
 
 /*--------------------------------------------------------------------------
 	Contents
@@ -861,7 +862,7 @@ body.index #contents .actions {
 --------------------------------------------------------------------------*/
 #publish.page-single {
 	#contents {
-		padding: @spacing-smaller;
+		padding: @spacing-smaller @spacing-smaller 0 @spacing-smaller;
 		form {
 			background-color: @lightest-grey;
 			padding: 0;
@@ -879,6 +880,7 @@ body.index #contents .actions {
 
 		.columns {
 			margin-left: 0;
+			min-height: calc(100vh - @spacing-mid - @spacing-mid - @spacing-mid - @spacing-smaller);
 		}
 	
 		.column {

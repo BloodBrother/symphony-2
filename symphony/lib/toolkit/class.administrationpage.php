@@ -534,10 +534,10 @@ class AdministrationPage extends HTMLPage
             )
         );
 
-        $this->Tools->appendChild(Widget::Anchor(
-            'index',
-            rtrim(URL, '/') . '/'
-        ));
+        $indexBtn = Widget::Anchor(__('Index'), rtrim(URL, '/') . '/', __('Go to index page'), 'index-btn');
+
+        $this->Tools->appendChild($indexBtn);
+        $this->Header->appendChild($indexBtn);
 
         $this->appendUserLinks();
         $this->appendNavigation();
