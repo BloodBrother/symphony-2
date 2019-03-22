@@ -58,6 +58,7 @@
 		Symphony.Elements.context = $('#context');
 		Symphony.Elements.breadcrumbs = $('#breadcrumbs');
 		Symphony.Elements.contents = $('#contents');
+		Symphony.Elements.tools = $('#tools');
 
 		// Create context id
 		var path = Symphony.Context.get('path');
