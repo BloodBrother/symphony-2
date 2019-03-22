@@ -344,6 +344,7 @@ fieldset.settings .collapsible {
 	padding: @spacing-smallish;
 	width: 100%;
 	min-height: 100vh;
+	background-color: @accent;
 
 	fieldset {
 		padding: @spacing-smallerish;
@@ -357,34 +358,122 @@ fieldset.settings .collapsible {
 		}
 	}
 
+	.wrapper {
+		background-color: @white;
+		border-radius: @radius-current;
+		overflow: hidden;
+		box-shadow: 0 20px 20px 13px #0000000a;
+	}
+
 	.frame {
 		overflow: hidden;
 		padding: 0;
 		background: @white;
 		width: @spacing-huger;
 		max-width: 100%;
+		border: none;
+		background: none;
+		overflow: initial;
 
 		h1 {
-			padding: @spacing-smallest @spacing-smallerish;
-			background: @accent;
+			background: none;
+			padding: 0;
+			display: block;
+			font-size: @text-biggest;
+			font-weight: 300;
+			margin-bottom: @spacing-smallish;
 		}
+
+		.sun {
+			height: 50px;
+			width: 50px;
+			margin: 0 auto;
+			margin-bottom: 80px;
+
+			div {
+				background-color: #F9D362;
+				height: 50px;
+				width: 50px;
+				border-radius: 100%;
+				position: absolute;
+			}
+			
+			div:nth-of-type(1) {
+				transform: scale(2);
+				opacity: 0.3;
+				animation-iteration-count: 1;
+				animation-name: wave-middle;
+				animation-duration: 800ms;
+				animation-timing-function: cubic-bezier(0.39, 0.58, 0.57, 1);
+			}
+			
+			div:nth-of-type(2) {
+				transform: scale(3);
+				opacity: 0.3;
+				animation-iteration-count: 1;
+				animation-name: wave-end;
+				animation-duration: 800ms;
+				animation-timing-function: cubic-bezier(0.39, 0.58, 0.57, 1);
+			}
+			
+			div:nth-of-type(3) {
+				transform: scale(4);
+				opacity: 0;
+				animation-iteration-count: 1;
+				animation-name: wave-hide;
+				animation-duration: 800ms;
+				animation-timing-function: cubic-bezier(0.39, 0.58, 0.57, 1);
+			}
+		}
+		
+		@keyframes wave-middle {
+			0% {
+				transform: scale(1);
+				opacity: 0;
+			}
+			100% {
+				transform: scale(2);
+				opacity: 0.4;
+			}
+		}
+		
+		@keyframes wave-end {
+			0% {
+				transform: scale(0);
+				opacity: 0;
+			}
+			100% {
+				transform: scale(3);
+				opacity: 0.3;
+			}
+		}
+		
+		@keyframes wave-hide {
+			0% {
+				transform: scale(0);
+				opacity: 0;
+			}
+			100% {
+				transform: scale(4);
+				opacity: 0;
+			}
+		}
+		
 	}
 
 	.actions {
 		.flex(~'row-reverse', ~'center', ~'space-between');
 		padding: 0 @spacing-smallerish @spacing-smallerish;
+		margin: 0;
 
 		.action-link {
 			color: @dark-grey;
 			font-size: @text-short;
 		}
 
-		button {
-			border-radius: @radius-current;
-			font-size: @text-shorter;
-			text-transform: uppercase;
-			padding: @spacing-smallest @spacing-smallerish;
-			background: @accent;
+		button:hover {
+			background-color: @accent;
+			color: @white;
 		}
 	}
 }

@@ -118,8 +118,10 @@ class contentLogin extends HTMLPage
 
         $this->Form = Widget::Form(SYMPHONY_URL . '/login/', 'post');
         $this->Form->setAttribute('class', 'frame');
+        $this->Form->appendChild('<div class="sun"><div></div><div></div><div></div><div></div></div>');
         $this->Form->appendChild(new XMLElement('h1', Symphony::Configuration()->get('sitename', 'general')));
-
+        $wrapper = new XMLElement('div', null, array('class' => 'wrapper'));
+        $this->Form->appendChild($wrapper);
         $fieldset = new XMLElement('fieldset');
 
         // Display retrieve password UI
@@ -132,7 +134,7 @@ class contentLogin extends HTMLPage
                     '<code>' . General::sanitize($this->_email_sent_to) . '</code>')
                 )));
                 $fieldset->appendChild(new XMLElement('p', Widget::Anchor(__('Login'), SYMPHONY_URL.'/login/', null)));
-                $this->Form->appendChild($fieldset);
+                $wrapper->appendChild($fieldset);
 
                 // Default, get the email address for reset
             } else {
@@ -152,7 +154,7 @@ class contentLogin extends HTMLPage
 
                 $fieldset->appendChild($label);
 
-                $this->Form->appendChild($fieldset);
+                $wrapper->appendChild($fieldset);
 
                 $div = new XMLElement('div', null, array('class' => 'actions'));
                 $div->appendChild(
@@ -161,7 +163,7 @@ class contentLogin extends HTMLPage
                 $div->appendChild(
                     Widget::Anchor(__('Cancel'), SYMPHONY_URL.'/login/', null, 'action-link')
                 );
-                $this->Form->appendChild($div);
+                $wrapper->appendChild($div);
             }
 
             // Normal login
@@ -205,7 +207,7 @@ class contentLogin extends HTMLPage
             }
 
             $fieldset->appendChild($label);
-            $this->Form->appendChild($fieldset);
+            $wrapper->appendChild($fieldset);
 
             // Actions
             $div = new XMLElement('div', null, array('class' => 'actions'));
@@ -215,10 +217,10 @@ class contentLogin extends HTMLPage
             $div->appendChild(
                 Widget::Anchor(__('Retrieve password?'), SYMPHONY_URL.'/login/retrieve-password/', null, 'action-link')
             );
-            $this->Form->appendChild($div);
+            $wrapper->appendChild($div);
 
             if (isset($this->_context['redirect'])) {
-                $this->Form->appendChild(
+                $wrapper->appendChild(
                     Widget::Input('redirect', SYMPHONY_URL . General::sanitize($this->_context['redirect']), 'hidden')
                 );
             }
