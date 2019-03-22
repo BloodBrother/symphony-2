@@ -812,6 +812,49 @@ body.index #contents .actions {
 }
 
 /*--------------------------------------------------------------------------
+	Publish
+--------------------------------------------------------------------------*/
+#publish.page-single {
+	#contents {
+		padding: @spacing-smaller;
+		form {
+			background-color: @lightest-grey;
+			padding: 0;
+
+			label {
+				margin-bottom: 0;
+			}
+
+			.field {
+				&:last-of-type {
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		.columns {
+			margin-left: 0;
+		}
+	
+		.column {
+			background-color: @white;
+			padding: @spacing-smaller;
+			box-sizing: border-box;
+			border-radius: @radius-current;
+	
+			&.primary {
+				width: ~'calc(100% - @{spacing-smallish} - @{spacing-huger})';
+			}
+	
+			&.secondary {
+				margin-left: @spacing-smallish;
+			}
+		}
+
+	}
+}
+
+/*--------------------------------------------------------------------------
 	Pagination
 --------------------------------------------------------------------------*/
 
