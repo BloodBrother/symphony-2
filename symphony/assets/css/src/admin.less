@@ -89,7 +89,7 @@ body {
 			position: absolute;
 			left: 0;
 			top: 0;
-			color: var(--color-clear);
+			color: var(--color-main-light);
 			font-size: var(--text-bigger);
 			line-height: 1.2em;
 			padding: 0 var(--spacing-smallish)!important;
@@ -199,14 +199,14 @@ body {
 	}
 
 	.index-btn {
-		display: none;
 		order: 2;
-		color: var(--color-clear);
+		color: var(--color-main-light);
 		margin: 0 var(--spacing-smallish);
 		margin-top: var(--spacing-smallish);
 		margin-bottom: ~'calc(var(--spacing-smaller) * -1)';
-		@media (max-width: (@sm - 1)){
-			display: block;
+
+		&:hover {
+			color: var(--color-accent);
 		}
 	}
 
@@ -508,13 +508,13 @@ body {
 	display: block;
 	background-color: var(--color-clear);
 	height: var(--spacing-midlarge);
-	.flex(~'row', ~'center', ~'space-between');
+	.flex(~'row', ~'center', ~'flex-end');
 	color: var(--color-accent);
 
 	@media (max-width: (@sm - 1)){
 		order: -1;
 
-		.index-btn, .session {
+		.session {
 			display: none;
 		}
 	}
@@ -536,6 +536,7 @@ body {
 
 #context {
 	width: 100%;
+	max-width: 50%;
 	.flex(~'row', ~'center', ~'space-between');
 	box-sizing: border-box;
 	left: var(--spacing-huge);
@@ -545,6 +546,10 @@ body {
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0;
+
+	@media (max-width: (@sm - 1)){
+		max-width: 100%;
+	}
 
 	#tools:empty + & {
 		margin-top: var(--spacing-smallish);
@@ -681,15 +686,13 @@ body {
 			padding-right: var(--spacing-smallish);
 
 			a {
-				background-color: var(--color-ui);
-				color: var(--color-main-dark);
-				font-size: var(--text-short);
+
+				color: var(--color-main);
+				font-size: var(--text-current);
 				display: inline-block;
-				padding: 1.1rem 1.7rem;
-				border-radius: var(--radius-current);
-				font-weight: 700;
+
 				margin-left: var(--spacing-smallest);
-				.flex(~'center', ~'flex-start');
+				.flex(~'center', ~'center');
 				line-height: 1em;
 
 				&:first-of-type {
@@ -697,7 +700,7 @@ body {
 				}
 
 				svg {
-					padding-right: 15px;
+					padding-right: var(--spacing-smallest);
 				}
 
 				&:hover {
@@ -715,7 +718,7 @@ body {
 		text-overflow: ellipsis;
 		overflow: hidden;
 		color: var(--color-main-dark);
-		font-size: var(--text-bigger);
+		font-size: var(--text-biggest);
 		font-weight: 300;
 
 		img {
@@ -738,21 +741,12 @@ body {
 /* Actions - Page */
 
 body.page-single #contents .actions {
-	display: block;
-	background-color: var(--color-clear);
-	height: var(--spacing-mid);
-	.flex(row, center, center);
-	margin: 0 ~'calc(var(--spacing-smaller) * -1)' 0 ~'calc(var(--spacing-smallish) * -1)';
-	z-index: 110;
-	padding: 0;
-
 	input, button {
 		margin-left: var(--spacing-smallest);
 		.transitioned(~'opacity, background');
 		cursor: pointer;
 
 		&[name="action[save]"] {
-			float: right;
 			&:hover {
 				background: var(--color-success)!important;
 			}
@@ -794,8 +788,6 @@ body.page-single #contents .actions {
 		overflow: auto;
 		padding: 0;
 		margin: 0;
-		border-top: 1px solid var(--color-main-light);
-		background: var(--color-clear);
 		width: auto;
 		height: var(--spacing-midlarge);
 
@@ -841,6 +833,13 @@ body.page-single #contents .actions {
 		opacity: 0;
 		transform: ~'translateY(var(--spacing-small))';
 
+		> .inner {
+			background-color: var(--color-clear);
+			border-radius: var(--radius-current);
+			padding: var(--spacing-smaller);
+			box-sizing: border-box;
+		}
+
 		.pagination {
 			margin-bottom: var(--spacing-smallish);
 		}
@@ -874,15 +873,21 @@ body.page-single #contents .actions {
 
 }
 
+#contents-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
 /*--------------------------------------------------------------------------
 	Publish
 --------------------------------------------------------------------------*/
 #publish.page-single {
 	#contents {
-		padding: var(--spacing-smaller) var(--spacing-smaller) 0 var(--spacing-smaller);
+
 		form {
 			background-color: var(--color-ui);
-			padding: 0;
+			padding: 0 var(--spacing-smaller);
 
 			label {
 				margin-bottom: 0;
@@ -905,14 +910,15 @@ body.page-single #contents .actions {
 			padding: var(--spacing-smaller);
 			box-sizing: border-box;
 			border-radius: var(--radius-current);
+			box-shadow: var(--shadow);
 	
 			&.primary {
-				width: ~'calc(100% - var(--spacing-smallish) - var(--spacing-huger))';
+				width: ~'calc(100% - var(--spacing-smallerish) - var(--spacing-huger))';
 				flex-grow: 1;
 			}
 	
 			&.secondary {
-				margin-left: var(--spacing-smallish);
+				margin-left: var(--spacing-smallerish);
 				flex-shrink: 0;
 
 				@media (max-width: (@md - 1)){

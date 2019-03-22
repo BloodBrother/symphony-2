@@ -261,15 +261,16 @@ class AdministrationPage extends HTMLPage
      */
     public function insertAction(XMLElement $action, $append = true)
     {
-        $actions = $this->Context->getChildrenByName('ul');
+
+        $actions = $this->ContentsActions->getChildrenByName('ul');
 
         // Actions haven't be added yet, create the element
         if (empty($actions)) {
             $ul = new XMLElement('ul', null, array('class' => 'actions'));
-            $this->Context->appendChild($ul);
+            $this->ContentsActions->appendChild($ul);
         } else {
             $ul = current($actions);
-            $this->Context->replaceChildAt(1, $ul);
+            $this->ContentsActions->replaceChildAt(1, $ul);
         }
 
         $li = new XMLElement('li', $action);
@@ -460,6 +461,7 @@ class AdministrationPage extends HTMLPage
         $this->Context = new XMLElement('div', null, array('id' => 'context'));
         $this->Breadcrumbs = new XMLElement('div', null, array('id' => 'breadcrumbs'));
         $this->Contents = new XMLElement('div', null, array('id' => 'contents', 'role' => 'main'));
+        $this->ContentsActions = new XMLElement('div', null, array('id' => 'contents-actions'));
         $this->Form = Widget::Form(Administration::instance()->getCurrentPageURL(), 'post', null, null, array('role' => 'form'));
         $this->Tools = new XMLElement('div', null, array('id' => 'tools'));
 
@@ -534,10 +536,7 @@ class AdministrationPage extends HTMLPage
             )
         );
 
-        $indexBtn = Widget::Anchor(__('Index'), rtrim(URL, '/') . '/', __('Go to index page'), 'index-btn');
-
-        $this->Tools->appendChild($indexBtn);
-        $this->Header->appendChild($indexBtn);
+        $this->Header->appendChild(Widget::Anchor(__('Index'), rtrim(URL, '/') . '/', __('Go to index page'), 'index-btn'));
 
         $this->appendUserLinks();
         $this->appendNavigation();
@@ -547,7 +546,9 @@ class AdministrationPage extends HTMLPage
         $this->Header->appendChild($version);
         // Add Breadcrumbs
         $this->Context->prependChild($this->Breadcrumbs);
+        $this->Form->appendChild($this->ContentsActions);
         $this->Contents->appendChild($this->Form);
+
 
         // Validate date time config
         $dateFormat = defined('__SYM_DATE_FORMAT__') ? __SYM_DATE_FORMAT__ : null;

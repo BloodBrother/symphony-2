@@ -1172,7 +1172,7 @@ class contentPublish extends AdministrationPage
                     array('accesskey' => 's')
                 )
             );
-            $this->Form->appendChild($div);
+            $this->ContentsActions->appendChild($div);
         }
 
         $this->Form->appendChild(Widget::Input('MAX_FILE_SIZE', Symphony::Configuration()->get('max_upload_size', 'admin'), 'hidden'));
@@ -1584,11 +1584,14 @@ class contentPublish extends AdministrationPage
             $div = new XMLElement('div');
             $div->setAttribute('class', 'actions');
             $div->appendChild(
-                Widget::Input(
-                    'action[save]',
-                    __('Save Changes'),
-                    'submit',
-                    array('accesskey' => 's')
+                Widget::SVGIconContainer(
+                    'save',
+                    Widget::Input(
+                        'action[save]',
+                        null,
+                        'submit',
+                        array('accesskey' => 's', 'value' => '')
+                    )
                 )
             );
 
@@ -1598,7 +1601,7 @@ class contentPublish extends AdministrationPage
 
             $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
             $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));
-            $this->Form->appendChild($div);
+            $this->ContentsActions->appendChild($div);
             
             if (is_array($main_fields) && !empty($main_fields)) {
                 foreach ($main_fields as $field) {

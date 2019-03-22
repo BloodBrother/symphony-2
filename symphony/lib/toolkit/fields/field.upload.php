@@ -293,7 +293,7 @@ class FieldUpload extends Field implements ExportableField, ImportableField
             $label->appendChild(new XMLElement('i', null));
         }
 
-        $span = new XMLElement('span', null, array('class' => 'frame'));
+        $span = new XMLElement('span');
 
         if (isset($data['file'])) {
             $filename = $this->get('destination') . '/' . basename($data['file']);
