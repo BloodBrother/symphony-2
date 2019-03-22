@@ -27,21 +27,21 @@ table {
 		margin-bottom: 0!important;
 	}
 
-	@media (min-width: var(--sm)) and (max-width: ~'calc(var(--xl) - 1)'){
+	@media (min-width: @sm) and (max-width: (@xl - 1)){
 		td:nth-child(n + 6),
 		th:nth-child(n + 6) {
 			display: none;
 		}
 	}
 
-	@media (min-width: var(--xl)) and (max-width: ~'calc(var(--xxl) - 1)'){
+	@media (min-width: @xl) and (max-width: (@xxl - 1)){
 		td:nth-child(n + 8),
 		th:nth-child(n + 8) {
 			display: none;
 		}
 	}
 
-	@media (max-width: ~'calc(var(--sm) - 1)'){
+	@media (max-width: (@sm - 1)){
 	 	thead {
 	 		display: none;
 	 	}
@@ -96,7 +96,7 @@ th {
 	background: transparent;
 	white-space: nowrap;
 
-	@media (min-width: var(--sm)){
+	@media (min-width: @sm){
 		&:first-child {
 			padding-left: var(--spacing-smallish);
 		}
@@ -161,7 +161,7 @@ td {
 	vertical-align: middle;
 	overflow: hidden;
 
-	@media (min-width: var(--sm)){
+	@media (min-width: @sm){
 		&:first-child {
 			padding-left: var(--spacing-smallish)!important;
 		}

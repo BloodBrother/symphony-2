@@ -609,20 +609,20 @@ fieldset.settings {
 	margin-bottom: var(--spacing-smallish);
 	padding: 0;
 
-	@media (min-width: var(--md)){
+	@media (min-width: @md){
 		padding-left: var(--spacing-huge);
 	}
 
 	> legend {
 		line-height: 1.4em;
 
-		@media (min-width: var(--md)){
+		@media (min-width: @md){
 			position: absolute;
 			top: -0.1rem;
 			left: 0;
 			width: ~'calc(var(--spacing-huge) - var(--spacing-smallish))';
 		}
-		@media (max-width: ~'calc(var(--md) - 1)'){
+		@media (max-width: (@md - 1)){
 			color: var(--color-accent);
 			font-size: var(--text-big);
 			padding: ~'calc(var(--spacing-smallest) 0 var(--spacing-smallish))';
@@ -692,7 +692,7 @@ fieldset.settings {
 		width: ~'calc(var(--spacing-huge) - var(--spacing-smallish))';
 		width: 17rem;
 
-		@media (max-width: ~'calc(var(--md) - 1)'){
+		@media (max-width: (@md - 1)){
 			position: relative;
 			font-size: var(--text-small);
 			margin: ~'calc((var(--spacing-smallish) * -1) 0 var(--spacing-smallish))';
@@ -715,7 +715,7 @@ fieldset.settings {
 	& + fieldset.settings {
 		margin-top: var(--spacing-midlarge);
 
-		@media (max-width: ~'calc(var(--md) - 1)'){
+		@media (max-width: (@md - 1)){
 			margin-top: var(--spacing-smallish);
 
 			> legend {

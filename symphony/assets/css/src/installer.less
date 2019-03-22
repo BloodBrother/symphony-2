@@ -23,7 +23,7 @@ form {
 	padding: var(--spacing-smallish) var(--spacing-smallish) var(--spacing-mid);
 	max-width: 90rem;
 
-	@media (min-width: var(--sm)){
+	@media (min-width: @sm){
 		padding-left: var(--spacing-huge);
 	}
 }
@@ -37,7 +37,7 @@ h1 {
 	font-size: var(--text-current);
 	margin-bottom: var(--spacing-smallish);
 
-	@media (min-width: var(--sm)){
+	@media (min-width: @sm){
 		position: fixed;
 		margin: var(--spacing-smallest) 0 var(--spacing-smallish) ~'calc(var(--spacing-huge) *- 1)';
 		width: var(--spacing-huge);

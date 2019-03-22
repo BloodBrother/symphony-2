@@ -1,16 +1,24 @@
+@xxs: 320px;
+@xs: 767px;
+@sm: 1024px;
+@md: 1280px;
+@lg: 1440px;
+@xl: 1640px;
+@xxl: 1920px;
+
 :root {
 
 	/*-----------------------------------------------------------------------------
 		Breakpoints
 	-----------------------------------------------------------------------------*/
 
-	--xxs: 320px;
-	--xs: 767px;
-	--sm: 1024px;
-	--md: 1280px;
-	--lg: 1440px;
-	--xl: 1640px;
-	--xxl: 1920px;
+	--xxs: @xxs;
+	--xs: @xs;
+	--sm: @sm;
+	--md: @md;
+	--lg: @lg;
+	--xl: @xl;
+	--xxl: @xxl;
 
 
 	/*-----------------------------------------------------------------------------
@@ -112,7 +120,7 @@
 
 	--shadow: 0px 4px 20px 3px rgba(6, 4, 109, 0.11);
 }
-	
+
 .transitioned(@transProperty: color, @transDuration: var(--duration-shorter), @transDelay: 0s) {
 	transition-duration: @transDuration;
 	transition-property: @transProperty;
