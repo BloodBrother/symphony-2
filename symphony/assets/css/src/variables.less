@@ -1,126 +1,123 @@
-/*-----------------------------------------------------------------------------
-	Media Query Breakpoints
------------------------------------------------------------------------------*/
+:root {
 
-@xxs: 320px;
-@xs: 767px;
-@sm: 1024px;
-@md: 1280px;
-@lg: 1440px;
-@xl: 1640px;
-@xxl: 1920px;
+	/*-----------------------------------------------------------------------------
+		Breakpoints
+	-----------------------------------------------------------------------------*/
 
-/*-----------------------------------------------------------------------------
-	Spacing scale
------------------------------------------------------------------------------*/
+	--xxs: 320px;
+	--xs: 767px;
+	--sm: 1024px;
+	--md: 1280px;
+	--lg: 1440px;
+	--xl: 1640px;
+	--xxl: 1920px;
 
-@spacing-nano: .2rem;
-@spacing-micro: .5rem;
-@spacing-smallest: 1rem;
-@spacing-smallerish: 1.5rem; // Small Basic Spacing
-@spacing-smaller: 2rem;
-@spacing-smallish: 3rem; // Basic Spacing
-@spacing-small: 4rem;
-@spacing-mid: 6rem;
-@spacing-midlarge: 6rem; // Height Context
-@spacing-large: 10rem;
-@spacing-larger: 18rem;
-@spacing-largest: 20rem;
-@spacing-huge: 25rem; // Width Nav
-@spacing-huger: 50rem; // Width Right Column
 
-@max-width-small: 90rem;
-@max-width-big: 128rem;
+	/*-----------------------------------------------------------------------------
+		Spacings
+	-----------------------------------------------------------------------------*/
 
-/*-----------------------------------------------------------------------------
-	Color palette
------------------------------------------------------------------------------*/
+	// TODO: @fhamon remove spacings if possible
 
-@white: #ffffff;
-@black: #121212;
+	--spacing-nano: .2rem;
+	--spacing-micro: .5rem;
+	--spacing-smallest: 1rem;
+	--spacing-smallerish: 1.5rem;
+	--spacing-smaller: 2rem;
+	--spacing-smallish: 3rem;
+	--spacing-small: 4rem;
+	--spacing-mid: 6rem;
+	--spacing-midlarge: 6rem;
+	--spacing-large: 10rem;
+	--spacing-larger: 18rem;
+	--spacing-largest: 20rem;
+	--spacing-huge: 25rem;
+	--spacing-huger: 50rem;
 
-@darker-grey: #657685; // Dark Text
-@dark-grey: #657685; // Regular Text
-@grey: #d3dce3; // Light Text
-@light-grey: #B7C2CC; // Light Text
-@lighter-grey: #e1ebf2; // Borders
-@lightest-grey: #f4f8fb; // Input Backgrounds
 
-@darker-accent: #195FCF;
-@dark-accent: #1B6AE7;
-@accent: #3275EE;
-@red: #ee494e;
-@yellow: #efbd44;
-@green: #68E691;
+	/*-----------------------------------------------------------------------------
+		Color palette
+	-----------------------------------------------------------------------------*/
 
-/*-----------------------------------------------------------------------------
-	Fonts
------------------------------------------------------------------------------*/
+	--color-main: #405980;
+	--color-main-light: #7D93B3;
+	--color-main-dark: #172D4D;
 
-@text-shortest: 1.0rem;
-@text-shorter: 1.1rem;
-@text-short: 1.2rem;
-@text-current: 1.4rem;
-@text-big: 1.6rem;
-@text-bigger: 2.4rem;
-@text-biggest: 3.6rem;
+	--color-accent: #0D6EFF;
+	--color-accent-light: #E6F2FF;
 
-/*-----------------------------------------------------------------------------
-	Borders
------------------------------------------------------------------------------*/
+	--color-success: #3EDD88;
+	--color-success-light: #E4F7F3;
 
-@radius-current: 10px;
+	--color-error: #FF452B;
+	--color-error-light: #FFECE9;
 
-/*-----------------------------------------------------------------------------
-	Elements dimensions
------------------------------------------------------------------------------*/
+	--color-ui: #CEE3F2;
+	--color-clear: #ffffff;
+	--color-brand: #F9D362;
 
-@field-height-current: @spacing-small + @spacing-micro * .325;
 
-/*-----------------------------------------------------------------------------
-	Duration scale
------------------------------------------------------------------------------*/
+	/*-----------------------------------------------------------------------------
+		Fonts size
+	-----------------------------------------------------------------------------*/
 
-@duration-shortest: 150ms;
-@duration-shorter: 200ms;
-@duration-short: 300ms;
-@duration: 500ms;
-@duration-long: 750ms;
-@duration-longer: 1000ms;
-@duration-longest: 1500ms;
+	// TODO: @fhamon optimize this
 
-/*-----------------------------------------------------------------------------
-	Easing functions
------------------------------------------------------------------------------*/
+	--text-smallest: 1.0rem;
+	--text-smaller: 1.1rem;
+	--text-small: 1.2rem;
 
-@ease: ease-in-out;
-@ease-in: ease-in;
-@ease-out: ease-out;
-@ease-in-out: ease-in-out;
-@easeInOutQuart: cubic-bezier(0.77, 0, 0.175, 1);
-@easeInOutQuad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
-@easeOutQuint: cubic-bezier(0.23, 1, 0.32, 1);
-@easeOutCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
-@easeInCirc: cubic-bezier(0.6, 0.04, 0.98, 0.335);
-@easeInOutCirc: cubic-bezier(0.785, 0.135, 0.15, 0.86);
-@easeInExpo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
-@easeInBack: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+	--text-current: 1.4rem;
 
-/*-----------------------------------------------------------------------------
-	Mics
------------------------------------------------------------------------------*/
+	--text-big: 1.6rem;
+	--text-bigger: 2.4rem;
+	--text-biggest: 3.6rem;
 
-@shadow-main: 0px 4px 20px 3px rgba(6, 4, 109, 0.11);
 
-/*-----------------------------------------------------------------------------
-	Mixins
------------------------------------------------------------------------------*/
+	/*-----------------------------------------------------------------------------
+		Duration scale
+	-----------------------------------------------------------------------------*/
 
-.transitioned(@transProperty: color, @transDuration: @duration-shorter, @transDelay: 0s) {
+	// TODO: @fhamon remove unused
+
+	--duration-shortest: 150ms;
+	--duration-shorter: 200ms;
+	--duration-short: 300ms;
+
+	--duration: 500ms;
+
+	--duration-long: 750ms;
+	--duration-longer: 1000ms;
+	--duration-longest: 1500ms;
+
+
+	/*-----------------------------------------------------------------------------
+		Easing
+	-----------------------------------------------------------------------------*/
+
+	--ease-current: cubic-bezier(0.19, 1, 0.22, 1);
+
+
+	/*-----------------------------------------------------------------------------
+		Radius
+	-----------------------------------------------------------------------------*/
+
+	--radius-current: 10px;
+	--radius-big: 20px;
+
+
+	/*-----------------------------------------------------------------------------
+		Misc
+	-----------------------------------------------------------------------------*/
+
+	--shadow: 0px 4px 20px 3px rgba(6, 4, 109, 0.11);
+}
+	
+.transitioned(@transProperty: color, @transDuration: var(--duration-shorter), @transDelay: 0s) {
 	transition-duration: @transDuration;
 	transition-property: @transProperty;
 	transition-delay: @transDelay;
-	transition-timing-function: 'ease-in-out';
+	transition-timing-function: var(--ease-current);
 }
 
 .flex(@direction: row, @align: flex-start, @justify: space-between){

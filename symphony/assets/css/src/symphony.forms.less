@@ -31,15 +31,15 @@ textarea,
 select,
 .field-value-readonly {
 	box-sizing: border-box;
-	border-radius: @radius-current;
-	color: @darker-grey;
+	border-radius: var(--radius-current);
+	color: var(--darker-grey);
 	font-family: inherit;
-	font-size: @text-short;
+	font-size: var(--text-small);
 	text-transform: none;
 	line-height: 1em;
-	padding: @spacing-smallest;
-	border: 1px solid @lighter-grey;
-	background-color: @lightest-grey;
+	padding: var(--spacing-smallest);
+	border: 1px solid var(--lighter-grey);
+	background-color: var(--lightest-grey);
 	width: 100%;
 }
 
@@ -49,13 +49,13 @@ textarea:active,
 textarea:focus,
 select[multiple]:active,
 select[multiple]:focus {
-	border-color: @accent;
+	border-color: var(--color-accent);
 	outline: none;
 }
 
 input[readonly="readonly"],
 textarea[readonly="readonly"] {
-	border-color: @lighter-grey!important;
+	border-color: var(--lighter-grey)!important;
 }
 
 textarea {
@@ -69,10 +69,10 @@ input[type='checkbox'] {
 	box-shadow: 0 0 0 rgba(0,0,0,0);
 	display: inline-block;
 	position: relative;
-	margin: 0 @spacing-smallest 0 0;
+	margin: 0 var(--spacing-smallest) 0 0;
 	border: none;
-	width: @spacing-smallerish;
-	height: @spacing-smallerish;
+	width: var(--spacing-smallerish);
+	height: var(--spacing-smallerish);
 
 	&:before {
 		.transitioned(~'border-color, background-color');
@@ -82,17 +82,17 @@ input[type='checkbox'] {
 		position: absolute;
 		left: -1px;
 		top: 0;
-		border: 1px solid @lighter-grey;
+		border: 1px solid var(--lighter-grey);
 		width: 100%;
 		height: 100%;
-		background: @white;
+		background: var(--color-clear);
 		background-size: 70% auto!important;
 		pointer-events: none;
 	}
 
 	&:checked:before {
-		border-color: @accent;
-		background: @accent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAICAYAAADA+m62AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4BpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo2RjU3MjRFMjk4REFFNTExQThFNUI4MEZFQkU2MTI3RCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozMTNCOUI3MDJFNzkxMUU3OTM4REIzMEJDMTdCMkZGNiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozMTNCOUI2RjJFNzkxMUU3OTM4REIzMEJDMTdCMkZGNiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxNSAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmYmFjYzQ5YS0xYWFmLWE4NDAtYThiYi1mMGE1OTA3MDE5MmEiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDo4NGFmZTE1NS1lMjgyLTExZTYtYmFmZC1lMzczYTlmNGY0MzAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7CnGvAAAAAd0lEQVR42mL4//8/Ax4sA8SHgVgDnyJFIL73HwI241KkDsSPoIqOA7EATMIWSZEOED+HKjoIxLwgcZBEG1SwFIiNgPg1lL8TiLlgBoCINCD+C5X8BqU3ATE7snNgjBgg/gNVtAqI2dDdjcwJAeI5QMyMzYMAAQYA4KwGt2cV+XoAAAAASUVORK5CYII=') no-repeat center center;
+		border-color: var(--color-accent);
+		background: var(--color-accent) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAICAYAAADA+m62AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4BpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo2RjU3MjRFMjk4REFFNTExQThFNUI4MEZFQkU2MTI3RCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozMTNCOUI3MDJFNzkxMUU3OTM4REIzMEJDMTdCMkZGNiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozMTNCOUI2RjJFNzkxMUU3OTM4REIzMEJDMTdCMkZGNiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxNSAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmYmFjYzQ5YS0xYWFmLWE4NDAtYThiYi1mMGE1OTA3MDE5MmEiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDo4NGFmZTE1NS1lMjgyLTExZTYtYmFmZC1lMzczYTlmNGY0MzAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7CnGvAAAAAd0lEQVR42mL4//8/Ax4sA8SHgVgDnyJFIL73HwI241KkDsSPoIqOA7EATMIWSZEOED+HKjoIxLwgcZBEG1SwFIiNgPg1lL8TiLlgBoCINCD+C5X8BqU3ATE7snNgjBgg/gNVtAqI2dDdjcwJAeI5QMyMzYMAAQYA4KwGt2cV+XoAAAAASUVORK5CYII=') no-repeat center center;
 	}
 }
 
@@ -113,15 +113,15 @@ input[size] {
 }
 
 input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
-	line-height: 0.4rem + @text-short + @spacing-smallest * 2;
-	padding: 0 @spacing-smallest;
-	height: 0.4rem + @text-short + @spacing-smallest * 2;
+	line-height: ~'calc(0.4rem + var(--text-small) + var(--spacing-smallest) * 2)';
+	padding: 0 var(--spacing-smallest);
+	height: ~'calc(0.4rem + var(--text-small) + var(--spacing-smallest) * 2)';
 }
 
 select {
-	line-height: 0.4rem + @text-short + @spacing-smallest * 2;
-	padding: 0 @spacing-smallest;
-	height: 0.4rem + @text-short + @spacing-smallest * 2;
+	line-height: ~'calc(0.4rem + var(--text-small) + var(--spacing-smallest) * 2)';
+	padding: 0 var(--spacing-smallest);
+	height: ~'calc(0.4rem + var(--text-small) + var(--spacing-smallest) * 2)';
 
 	.disabled {
 		display: none;
@@ -131,7 +131,7 @@ select {
 select:not([multiple]) {
 	-webkit-appearance: none;
 	appearance: none;
-	background: @lightest-grey url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAGCAYAAAA2aTUtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4BpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo2RjU3MjRFMjk4REFFNTExQThFNUI4MEZFQkU2MTI3RCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpDODRERTZGMDIxNDgxMUU3OUEyM0REMkRGOUZBRjMxRSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpDODRERTZFRjIxNDgxMUU3OUEyM0REMkRGOUZBRjMxRSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxNSAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmYmFjYzQ5YS0xYWFmLWE4NDAtYThiYi1mMGE1OTA3MDE5MmEiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDo4NGFmZTE1NS1lMjgyLTExZTYtYmFmZC1lMzczYTlmNGY0MzAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4/KhcEAAAAgUlEQVR42mK0tnU4zsDAwA/E7kcO7X/MgARs7BxlgdROIP4AlLNiIBMwQS3QBOIDUEORLTgAlRNgoACwgHwAxPuBWBlqkQNUDmSBEhDfhaohGzD+//8f5mqYRfegcjALHIBB9YRiS5CCB2YRA7UsQLEEapEMkNoK5XpTwwIQAAgwAAbXLYrUHFExAAAAAElFTkSuQmCC) no-repeat right 50%;
+	background: var(--lightest-grey) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAGCAYAAAA2aTUtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4BpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo2RjU3MjRFMjk4REFFNTExQThFNUI4MEZFQkU2MTI3RCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpDODRERTZGMDIxNDgxMUU3OUEyM0REMkRGOUZBRjMxRSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpDODRERTZFRjIxNDgxMUU3OUEyM0REMkRGOUZBRjMxRSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxNSAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmYmFjYzQ5YS0xYWFmLWE4NDAtYThiYi1mMGE1OTA3MDE5MmEiIHN0UmVmOmRvY3VtZW50SUQ9ImFkb2JlOmRvY2lkOnBob3Rvc2hvcDo4NGFmZTE1NS1lMjgyLTExZTYtYmFmZC1lMzczYTlmNGY0MzAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4/KhcEAAAAgUlEQVR42mK0tnU4zsDAwA/E7kcO7X/MgARs7BxlgdROIP4AlLNiIBMwQS3QBOIDUEORLTgAlRNgoACwgHwAxPuBWBlqkQNUDmSBEhDfhaohGzD+//8f5mqYRfegcjALHIBB9YRiS5CCB2YRA7UsQLEEapEMkNoK5XpTwwIQAAgwAAbXLYrUHFExAAAAAElFTkSuQmCC) no-repeat right 50%;
 	cursor: pointer;
 }
 
@@ -139,14 +139,14 @@ select[multiple] {
 	.transitioned(~'border');
 	display: block;
 	padding: 0;
-	height: @spacing-larger;
+	height: var(--spacing-larger);
 
 	option {
-		color: @darker-grey;
-		padding: 0.2rem @spacing-smallest;
+		color: var(--darker-grey);
+		padding: 0.2rem var(--spacing-smallest);
 
 		&:checked {
-			background: @accent;
+			background: var(--color-accent);
 		}
 	}
 }
@@ -154,11 +154,11 @@ select[multiple] {
 optgroup {
 	font-weight: bold;
 	font-style: normal;
-	padding: @spacing-smallest;
+	padding: var(--spacing-smallest);
 
 	option {
-		margin-left: -@spacing-smallest;
-		margin-right: -@spacing-smallest;
+		margin-left: ~'calc(var(--spacing-smallest) * -1)';
+		margin-right: ~'calc(var(--spacing-smallest) * -1)';
 	}
 }
 
@@ -177,24 +177,24 @@ optgroup {
 	select:focus,
 	textarea:active,
 	textarea:focus {
-		border-color: @red!important;
+		border-color: var(--color-error)!important;
 	}
 
 	label {
-		color: @red;
+		color: var(--color-error);
 	}
 
 	> p,
 	> ul {
-		color: @red;
-		font-size: @text-short;
+		color: var(--color-error);
+		font-size: var(--text-small);
 		font-weight: 500;
 		line-height: 1.4em;
-		margin: (-@spacing-smallish + 0.5rem) 0 @spacing-smallish;
+		margin: ~'calc((var(--spacing-smallish) * -1) + 0.5rem) 0 var(--spacing-smallish)';
 		padding: 0;
 
 		li + li {
-			margin-top: @spacing-micro;
+			margin-top: var(--spacing-micro);
 		}
 
 		br:first-child {
@@ -203,17 +203,17 @@ optgroup {
 	}
 
 	.file + p {
-		margin-top: -@spacing-micro;
+		margin-top: -var(--spacing-micro);
 	}
 
 	.container + p {
-		margin-top: @spacing-micro;
+		margin-top: var(--spacing-micro);
 	}
 }
 
 .field-value-readonly {
 	display: block;
-	color: @darker-grey;
+	color: var(--darker-grey);
 	padding-left: 0;
 	border: none;
 	background: none;
@@ -259,17 +259,17 @@ button,
 .apply-label-right {
 	.transitioned(~'color');
 	cursor: pointer;
-	background-color: @lightest-grey;
+	background-color: var(--lightest-grey);
 	border: 0;
-	padding: @spacing-smallest @spacing-smallerish;
+	padding: var(--spacing-smallest) var(--spacing-smallerish);
 	line-height: 1em;
-	border-radius: @radius-current;
+	border-radius: var(--radius-current);
 	font-weight: 700;
-	color: @dark-grey;
-	font-size: @text-short;
+	color: var(--color-main-dark);
+	font-size: var(--text-small);
 
 	&:hover {
-		color: @accent;
+		color: var(--color-accent);
 	}
 }
 
@@ -285,8 +285,8 @@ label,
 #password legend {
 	display: block;
 	position: relative;
-	color: @dark-grey;
-	font-size: @text-shorter;
+	color: var(--color-main-dark);
+	font-size: var(--text-smaller);
 	line-height: 1.4em;
 }
 
@@ -297,7 +297,7 @@ label {
 	> .field-value-readonly,
 	> .frame,
 	> .color-chooser-container {
-		margin-top: @spacing-smallest;
+		margin-top: var(--spacing-smallest);
 	}
 
 	a {
@@ -313,17 +313,17 @@ label {
 label,
 label.column,
 .label {
-	margin-bottom: @spacing-smallish;
+	margin-bottom: var(--spacing-smallish);
 }
 
 label > i:not(:empty),
 p.label > i:not(:empty),
 #password legend i:not(:empty) {
 	display: inline;
-	color: @grey;
-	font-size: @text-shortest;
+	color: var(--color-main);
+	font-size: var(--text-smallest);
 	text-transform: none;
-	padding-left: @spacing-micro;
+	padding-left: var(--spacing-micro);
 
 	&:before {
 		content: '(';
@@ -348,8 +348,8 @@ label.inline-help > i {
 }
 
 legend {
-	color: @dark-grey;
-	font-size: @text-short;
+	color: var(--color-main-dark);
+	font-size: var(--text-small);
 }
 
 /*--------------------------------------------------------------------------
@@ -358,8 +358,8 @@ legend {
 
 .file {
 	input {
-		color: @dark-grey;
-		font-size: @text-short;
+		color: var(--color-main-dark);
+		font-size: var(--text-small);
 	}
 
 	.frame {
@@ -373,19 +373,19 @@ legend {
 
 	em {
 		.transitioned(~'color, background');
-		border-radius: @radius-current;
-		color: @white;
-		font-size: @text-shorter;
+		border-radius: var(--radius-current);
+		color: var(--color-clear);
+		font-size: var(--text-smaller);
 		font-style: normal;
 		text-transform: uppercase;
 		line-height: 1.6em;
-		margin-bottom: @spacing-smallest;
-		padding: @spacing-micro @spacing-smallest;
-		background: @accent;
+		margin-bottom: var(--spacing-smallest);
+		padding: var(--spacing-micro) var(--spacing-smallest);
+		background: var(--color-accent);
 		cursor: pointer;
 
 		&:hover {
-			background: @darker-grey;
+			background: var(--darker-grey);
 		}
 	}
 }
@@ -397,7 +397,7 @@ legend {
 .apply {
 	display: block;
 	float: right;
-	margin: @spacing-smallest 0 0;
+	margin: var(--spacing-smallest) 0 0;
 	padding: 0;
 
 	select {
@@ -409,7 +409,7 @@ legend {
 		box-sizing: border-box;
 		float: left;
 		text-align: left;
-		margin-right:@spacing-micro;
+		margin-right:var(--spacing-micro);
 	}
 
 	label {
@@ -422,15 +422,15 @@ legend {
 	.apply-label-right,
 	.apply-label-left {
 		.transitioned(~'border,background');
-		border-radius: @radius-current;
+		border-radius: var(--radius-current);
 		float: right;
-		color: @white!important;
-		font-size: @text-shorter;
+		color: var(--color-clear)!important;
+		font-size: var(--text-smaller);
 		text-transform: uppercase;
 		line-height: 1.6rem;
 		margin: 0;
-		padding: @spacing-smallest @spacing-smallerish;
-		background: @accent;
+		padding: var(--spacing-smallest) var(--spacing-smallerish);
+		background: var(--color-accent);
 	}
 
 	button,
@@ -439,8 +439,8 @@ legend {
 		cursor: pointer;
 
 		&:hover {
-			border-color: @darker-grey;
-			background: @darker-grey;
+			border-color: var(--darker-grey);
+			background: var(--darker-grey);
 		}
 	}
 
@@ -450,7 +450,7 @@ legend {
 	}
 
 	.apply-label-left + div {
-		margin-left: @spacing-micro;
+		margin-left: var(--spacing-micro);
 		margin-right: 0;
 	}
 
@@ -460,9 +460,9 @@ legend {
 		button,
 		button:hover,
 		&:hover button {
-			color: @dark-grey;
-			border-color: @grey;
-			background: @grey;
+			color: var(--color-main-dark);
+			border-color: var(--color-main);
+			background: var(--color-main);
 			cursor: default;
 		}
 	}
@@ -477,7 +477,7 @@ legend {
 .field.required > label:before,
 .field.required .container > label:before {
 	content: "* ";
-	color: @red;
+	color: var(--color-error);
 }
 
 /*--------------------------------------------------------------------------
@@ -485,8 +485,8 @@ legend {
 --------------------------------------------------------------------------*/
 
 ul.tags {
-	color: @grey;
-	font-size: @text-short;
+	color: var(--color-main);
+	font-size: var(--text-small);
 	margin: -2.5rem 0 0 0;
 	padding: 0;
 	list-style: none;
@@ -496,22 +496,22 @@ ul.tags {
 	li:last-of-type {
 		display: inline;
 		float: none;
-		font-size: @text-short;
-		padding: 0 @spacing-micro 0 0;
+		font-size: var(--text-small);
+		padding: 0 var(--spacing-micro) 0 0;
 		border: none;
 		cursor: pointer;
 	}
 
 	li:hover {
-		color: @darker-grey;
+		color: var(--darker-grey);
 	}
 
 	li.more {
-		color: @accent;
+		color: var(--color-accent);
 		border-bottom: 1px solid currentColor;
 
 		&:hover {
-			color: @darker-grey;
+			color: var(--darker-grey);
 			border-bottom-color: currentColor;
 		}
 	}
@@ -525,7 +525,7 @@ ul.tags {
 	display: block;
 
 	legend {
-		margin-left: @spacing-smallish!important;
+		margin-left: var(--spacing-smallish)!important;
 		padding: 0!important;
 	}
 
@@ -550,10 +550,10 @@ div.password {
 
 .field {
 	box-sizing: border-box;
-	margin-bottom: @spacing-smallish;
+	margin-bottom: var(--spacing-smallish);
 
 	&.field-multilingual div.container label {
-		margin-bottom: @spacing-smallest;
+		margin-bottom: var(--spacing-smallest);
 	}
 }
 
@@ -565,7 +565,7 @@ div.field-checkbox {
 	}
 
 	& + .field:not(.field-checkbox) {
-		margin-top: @spacing-smallish;
+		margin-top: var(--spacing-smallish);
 	}
 }
 
@@ -573,29 +573,29 @@ fieldset {
 	position: relative;
 
 	h3 {
-		color: @accent;
-		font-size: @text-big;
-		padding-bottom: @spacing-smallerish;
+		color: var(--color-accent);
+		font-size: var(--text-big);
+		padding-bottom: var(--spacing-smallerish);
 	}
 
 	input[type=submit] {
-		color: @white;
-		font-size: @text-shorter;
+		color: var(--color-clear);
+		font-size: var(--text-smaller);
 		text-transform: uppercase;
-		padding: @spacing-smallest @spacing-smallerish;
-		background: @accent;
+		padding: var(--spacing-smallest) var(--spacing-smallerish);
+		background: var(--color-accent);
 		cursor: pointer;
 
 		&:hover {
-			background: @darker-grey;
+			background: var(--darker-grey);
 		}
 	}
 
 	input[type=submit],
 	button,
 	.button {
-		margin-right: @spacing-smallest;
-		margin-bottom: @spacing-smallest;
+		margin-right: var(--spacing-smallest);
+		margin-bottom: var(--spacing-smallest);
 		margin-left: 0;
 	}
 }
@@ -606,26 +606,26 @@ fieldset {
 
 fieldset.settings {
 	position: relative;
-	margin-bottom: @spacing-smallish;
+	margin-bottom: var(--spacing-smallish);
 	padding: 0;
 
-	@media (min-width: @md){
-		padding-left: @spacing-huge;
+	@media (min-width: var(--md)){
+		padding-left: var(--spacing-huge);
 	}
 
 	> legend {
 		line-height: 1.4em;
 
-		@media (min-width: @md){
+		@media (min-width: var(--md)){
 			position: absolute;
 			top: -0.1rem;
 			left: 0;
-			width: @spacing-huge - @spacing-smallish;
+			width: ~'calc(var(--spacing-huge) - var(--spacing-smallish))';
 		}
-		@media (max-width: (@md - 1)){
-			color: @accent;
-			font-size: @text-big;
-			padding: @spacing-smallest 0 @spacing-smallish;
+		@media (max-width: ~'calc(var(--md) - 1)'){
+			color: var(--color-accent);
+			font-size: var(--text-big);
+			padding: ~'calc(var(--spacing-smallest) 0 var(--spacing-smallish))';
 		}
 	}
 
@@ -635,7 +635,7 @@ fieldset.settings {
 		}
 
 		h2 {
-			font-size: @text-current;
+			font-size: var(--text-current);
 			font-weight: 400;
 		}
 	}
@@ -644,16 +644,16 @@ fieldset.settings {
 		margin: 0;
 
 		& + span.frame {
-			margin-top: @spacing-smallest;
+			margin-top: var(--spacing-smallest);
 		}
 
 		& + p.help {
-			margin-top: @spacing-micro;
+			margin-top: var(--spacing-micro);
 		}
 	}
 
 	> p a {
-		color: @accent;
+		color: var(--color-accent);
 
 		&:hover {
 			color: currentColor;
@@ -665,7 +665,7 @@ fieldset.settings {
 	}
 
 	label + p.help {
-		margin: -(@spacing-smallish - 0.5rem) 0 @spacing-smallish;
+		margin: ~'calc(var(--spacing-smallish) - 0.5rem) 0 var(--spacing-smallish))';
 	}
 
 	p.help {
@@ -688,19 +688,19 @@ fieldset.settings {
 	> legend + .help {
 		position: absolute;
 		line-height: 1.8em;
-		margin: 2.5rem 0 0 -@spacing-huge;
-		width: @spacing-huge - @spacing-smallish;
+		margin: 2.5rem 0 0 ~'calc(var(--spacing-huge) * -1)';
+		width: ~'calc(var(--spacing-huge) - var(--spacing-smallish))';
 		width: 17rem;
 
-		@media (max-width: (@md - 1)){
+		@media (max-width: ~'calc(var(--md) - 1)'){
 			position: relative;
-			font-size: @text-short;
-			margin: -@spacing-smallish 0 @spacing-smallish;
+			font-size: var(--text-small);
+			margin: ~'calc((var(--spacing-smallish) * -1) 0 var(--spacing-smallish))';
 			width: auto;
 		}
 
 		p {
-			margin: 0 0 @spacing-smaller;
+			margin: 0 0 var(--spacing-smaller);
 		}
 	}
 
@@ -713,15 +713,15 @@ fieldset.settings {
 	}
 
 	& + fieldset.settings {
-		margin-top: @spacing-midlarge;
+		margin-top: var(--spacing-midlarge);
 
-		@media (max-width: (@md - 1)){
-			margin-top: @spacing-smallish;
+		@media (max-width: ~'calc(var(--md) - 1)'){
+			margin-top: var(--spacing-smallish);
 
 			> legend {
 				display: block;
-				padding-top: @spacing-smallish;
-				 border-top: 1px solid @lighter-grey;
+				padding-top: var(--spacing-smallish);
+				 border-top: 1px solid var(--lighter-grey);
 				 width: 100%;
 			}
 		}

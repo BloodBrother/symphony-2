@@ -20,11 +20,11 @@ form {
 	box-sizing: border-box;
 	position: relative;
 	margin: 0 auto;
-	padding: @spacing-smallish @spacing-smallish @spacing-mid;
-	max-width: @max-width-small;
+	padding: var(--spacing-smallish) var(--spacing-smallish) var(--spacing-mid);
+	max-width: 90rem;
 
-	@media (min-width: @sm){
-		padding-left: @spacing-huge;
+	@media (min-width: var(--sm)){
+		padding-left: var(--spacing-huge);
 	}
 }
 
@@ -33,26 +33,26 @@ form {
 -----------------------------------------------------------------------------*/
 
 h1 {
-	color: @accent;
-	font-size: @text-current;
-	margin-bottom: @spacing-smallish;
+	color: var(--color-accent);
+	font-size: var(--text-current);
+	margin-bottom: var(--spacing-smallish);
 
-	@media (min-width: @sm){
+	@media (min-width: var(--sm)){
 		position: fixed;
-		margin: @spacing-smallest 0 @spacing-smallish -@spacing-huge;
-		width: @spacing-huge;
+		margin: var(--spacing-smallest) 0 var(--spacing-smallish) ~'calc(var(--spacing-huge) *- 1)';
+		width: var(--spacing-huge);
 	}
 
 	em {
 		display: block;
-		color: @dark-grey;
-		font-size: @text-shorter;
+		color: var(--color-main);
+		font-size: var(--text-shorter);
 		font-style: normal;
 		text-transform: uppercase;
-		margin-top: @spacing-micro;
+		margin-top: var(--spacing-micro);
 
 		a {
-			color: @accent; border-bottom: 1px solid @accent;
+			color: var(--color-accent); border-bottom: 1px solid var(--color-accent);
 
 			&:hover {
 				border-color: transparent;
@@ -66,17 +66,17 @@ h1 {
 -----------------------------------------------------------------------------*/
 
 h2 {
-	color: @accent;
-	font-size: @text-bigger;
-	margin: 0 0 @spacing-smallish;
+	color: var(--color-accent);
+	font-size: var(--text-bigger);
+	margin: 0 0 var(--spacing-smallish);
 }
 
 p {
 	line-height: 1.4em;
-	margin-bottom: @spacing-smallish;
+	margin-bottom: var(--spacing-smallish);
 
 	a {
-		color: @accent;
+		color: var(--color-accent);
 
 		&:hover {
 			color: currentColor;
@@ -86,37 +86,37 @@ p {
 
 fieldset + h2,
 p + h2 {
-	padding-top: @spacing-small;
+	padding-top: var(--spacing-small);
 }
 
 form > fieldset {
-	margin: @spacing-smallish 0;
+	margin: var(--spacing-smallish) 0;
 
 	> legend {
 		display: block;
-		color: @accent;
-		font-size: @text-bigger;
-		padding: @spacing-small 0 @spacing-smallish;
+		color: var(--color-accent);
+		font-size: var(--text-bigger);
+		padding: var(--spacing-small) 0 var(--spacing-smallish);
 		width: 100%;
 	}
 
 	.frame {
-		margin-bottom: @spacing-smallish!important;
-		padding: @spacing-smallish @spacing-smallerish @spacing-smallerish;
-		background: @white;
+		margin-bottom: var(--spacing-smallish)!important;
+		padding: var(--spacing-smallish) var(--spacing-smallerish) var(--spacing-smallerish);
+		background: var(--color-clear);
 
 		legend {
 			position: absolute;
-			left: @spacing-smallerish;
-			top: @spacing-smallerish;
-			color: @dark-grey;
-			font-size: @text-shorter;
+			left: var(--spacing-smallerish);
+			top: var(--spacing-smallerish);
+			color: var(--color-main);
+			font-size: var(--text-shorter);
 			text-transform: uppercase;
 
 			& + p {
-				color: @dark-grey;
-				font-size: @text-short;
-				margin-top: @spacing-micro;
+				color: var(--color-main);
+				font-size: var(--text-short);
+				margin-top: var(--spacing-micro);
 			}
 		}
 	}
@@ -124,7 +124,7 @@ form > fieldset {
 
 .submit {
 	text-align: right;
-	margin-top: @spacing-smallish;
+	margin-top: var(--spacing-smallish);
 
 	input {
 		margin: 0;

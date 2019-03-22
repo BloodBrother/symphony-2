@@ -83,26 +83,26 @@ html {
 	font-size: 62.5%;
 	min-height: 100%;
 
-	@media (min-width: @sm) {
+	@media (min-width: var(--sm)) {
 		font-size: 50%;
 	}
 
-	@media (min-width: @lg) {
+	@media (min-width: var(--lg)) {
 		font-size: 62.5%;
 	}
 }
 
 body {
-	color: @darker-grey;
-	font-size: @text-current;
+	color: var(--color-main-dark);
+	font-size: var(--text-current);
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	line-height: 1.8em;
-	padding-left: @spacing-huge;
-	min-width: @xxs;
+	padding-left: var(--spacing-huge);
+	min-width: var(--xxs);
 	min-height: 100%;
 
-	@media (max-width: (@sm - 1)){
+	@media (max-width: calc(var(--sm) - 1)){
 		padding-left: 0;
 	}
 }
@@ -121,12 +121,12 @@ a, button {
 /* Paragraphs */
 
 p {
-	margin-bottom: @spacing-smallest;
+	margin-bottom: var(--spacing-smallest);
 }
 
 p.label {
 	position: relative;
-	margin: 0 0 @spacing-micro;
+	margin: 0 0 var(--spacing-micro);
 }
 
 /* Links */
@@ -138,7 +138,7 @@ a, input[type="submit"], button {
 /* Lists */
 
 ul, ol {
-	margin: 0 0 @spacing-smallest @spacing-smaller;
+	margin: 0 0 var(--spacing-smallest) var(--spacing-smaller);
 }
 
 /* Code */
@@ -150,11 +150,11 @@ code,
 }
 
 pre {
-	border-radius: @radius-current;
-	color: @darker-grey;
-	margin-bottom: @spacing-smaller;
-	border: 1px solid @lighter-grey;
-	background: @lightest-grey;
+	border-radius: var(--radius-current);
+	color: var(--color-main-dark);
+	margin-bottom: var(--spacing-smaller);
+	border: 1px solid var(--color-main);
+	background: var(--color-main-light);
 	white-space: normal;
 }
 pre:last-child {
@@ -164,20 +164,20 @@ pre:last-child {
 pre code {
 	display: block;
 	overflow: auto;
-	font-size: @text-short;
+	font-size: var(--text-short);
 	font-family: inherit;
 	line-height: 1.4em;
-	padding: @spacing-smallerish;
+	padding: var(--spacing-smallerish);
 	white-space: pre-wrap;
 }
 
 i code {
-	font-size: @text-shorter;
+	font-size: var(--text-smaller);
 	font-size-adjust: 0;
 }
 
 i, var {
-	color: #a9a9a9;
+	color: var(--color-main);
 	font-style: normal;
 	text-shadow: none;
 }
@@ -191,7 +191,7 @@ i, var {
 
 .inactive,
 .inactive * {
-	color: @grey;
+	color: var(--color-main);
 }
 
 .inactive a {
@@ -204,7 +204,7 @@ i, var {
 
 .selected, .selected a,
 .selected .inactive {
-	color: @white;
+	color: var(--color-clear);
 }
 
 .selected, .selected a {
@@ -212,13 +212,13 @@ i, var {
 }
 
 .selected a:hover {
-	color: @lighter-grey;
+	color: var(--color-main-light);
 }
 
 .help {
 	clear: both;
-	color: @dark-grey;
-	font-size: @text-shorter;
+	color: var(--color-main-dark);
+	font-size: var(--text-smaller);
 	text-transform: none;
 	line-height: 1.4em;
 }

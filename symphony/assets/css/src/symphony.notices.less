@@ -18,15 +18,15 @@
 	overflow: hidden;
 	position: fixed;
 	bottom: 0;
-	left: @spacing-huge;
+	left: var(--spacing-huge);
 	right: 0;
-	color: @black;
-	font-size: @text-short;
+	color: var(--color-main-dark);
+	font-size: var(--text-short);
 	max-height: 4.5rem!important;
 	z-index: 110;
 	pointer-events: none;
 
-	@media (max-width: (@sm - 1)){
+	@media (max-width: ~'calc(var(--sm) - 1)'){
 		display: none!important;
 		left: 0;
 	}
@@ -35,8 +35,8 @@
 		display: block;
 		position: absolute;
 		top: 0;
-		right: @spacing-smallish;
-		padding: @spacing-smallest 0;
+		right: var(--spacing-smallish);
+		padding: var(--spacing-smallest) 0;
 		cursor: pointer;
 
 		&:before {
@@ -52,12 +52,12 @@
 
 .notice {
 	position: relative;
-	color: @white;
-	font-size: @text-short;
+	color: var(--color-clear);
+	font-size: var(--text-short);
 	margin: 0;
 	border: none;
-	padding: @spacing-smallest @spacing-smallish;
-	background: @darker-grey;
+	padding: var(--spacing-smallest) var(--spacing-smallish);
+	background: var(--color-main-dark);
 	pointer-events: all;
 
 	a {
@@ -75,11 +75,11 @@
 	}
 
 	&.success {
-		background: @accent;
+		background: var(--color-success);
 	}
 
 	&.error {
-		background: @red;
+		background: var(--color-error);
 	}
 
 	&.dimmed {

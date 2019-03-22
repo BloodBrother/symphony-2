@@ -17,25 +17,25 @@
 
 .frame {
 	box-sizing: border-box;
-	border-radius: @radius-current;
+	border-radius: var(--radius-current);
 	position: relative;
 	margin: 0;
-	padding: @spacing-smallerish;
-	border: 1px solid @lighter-grey;
-	background: @lightest-grey;
+	padding: var(--spacing-smallerish);
+	border: 1px solid var(--color-main);
+	background: var(--color-main-light);
 
 	h1 {
-		padding: @spacing-smallest;
-		color: @white;
+		padding: var(--spacing-smallest);
+		color: var(--color-clear);
 		font-size: inherit;
 		font-weight: normal;
 		line-height: inherit;
-		border-radius: @radius-current @radius-current 0 0;
-		background: @darker-grey;
+		border-radius: var(--radius-current) var(--radius-current) 0 0;
+		background: var(--color-main-dark);
 	}
 
 	a {
-		color: @accent;
+		color: var(--color-accent);
 
 		&:hover {
 			color: currentColor;
@@ -43,7 +43,7 @@
 	}
 
 	.tags {
-		margin: -@spacing-smallish 0 @spacing-smallerish;
+		margin: ~'calc(var(--spacing-smallish) * -1)' 0 var(--spacing-smallerish);
 	}
 
 	iframe {
@@ -55,18 +55,18 @@
 	}
 
 	> button {
-		font-size: @text-shorter;
+		font-size: var(--text-smaller);
 		text-transform: uppercase;
 		line-height: 1.6rem;
 		margin: 0;
-		padding: @spacing-smallest @spacing-smallerish;
-		background: @accent;
-		border-radius: @radius-current;
+		padding: var(--spacing-smallest) var(--spacing-smallerish);
+		background: var(--color-accent);
+		border-radius: var(--radius-current);
 		cursor: pointer;
 
 		&:not(:disabled):hover {
-			border-color: @darker-grey;
-			background: @darker-grey;
+			border-color: var(--color-main-dark);
+			background: var(--color-main-dark);
 		}
 
 		&:disabled {
@@ -74,15 +74,15 @@
 		}
 
 		& + button {
-			margin-left: @spacing-micro;
+			margin-left: var(--spacing-micro);
 		}
 	}
 
 	.content {
-		padding-top: @spacing-smallerish;
+		padding-top: var(--spacing-smallerish);
 
 		.help {
-			margin-top: @spacing-smallest!important;
+			margin-top: var(--spacing-smallest)!important;
 		}
 	}
 
@@ -96,12 +96,12 @@
 .frame-header {
 	.flex(~'row', ~'center', ~'flex-start');
 	position: relative;
-	padding: @spacing-smallest @spacing-smallerish;
-	border-top: 1px solid @lighter-grey;
+	padding: var(--spacing-smallest) var(--spacing-smallerish);
+	border-top: 1px solid var(--color-main-light);
 
 	h4 {
 		.flex(~'row', ~'center', ~'flex-start');
-		font-size: @text-short;
+		font-size: var(--text-small);
 
 		* {
 			.transitioned(~'color');
@@ -112,13 +112,13 @@
 		}
 
 		span, & + span {
-			color: @dark-grey;
-			font-size: @text-short;
-			padding-left: @spacing-smallest;
+			color: var(--color-main-dark);
+			font-size: var(--text-small);
+			padding-left: var(--spacing-smallest);
 		}
 
 		svg {
-			padding-left: @spacing-smallerish;
+			padding-left: var(--spacing-smallerish);
 
 			* {
 				.transitioned(~'fill');
@@ -126,7 +126,7 @@
 		}
 
 		.required {
-			color: @grey;
+			color: var(--color-main);
 		}
 	}
 
@@ -140,14 +140,14 @@
 		display: block;
 		width: .1rem;
 		height: 1rem;
-		margin: 0 @spacing-smallest 0 0;
-		border-right: .3rem solid @lighter-grey;
-		border-left: .6rem solid @light-grey;
+		margin: 0 var(--spacing-smallest) 0 0;
+		border-right: .3rem solid var(--color-main-light);
+		border-left: .6rem solid var(--color-main-light);
 	}
 
 	&.sidebar:before {
-		border-right-color: @light-grey;
-		border-left-color: @lighter-grey;
+		border-right-color: var(--color-main-light);
+		border-left-color: var(--color-main-light);
 	}
 }
 
@@ -159,8 +159,8 @@ span.frame,
 fieldset.frame,
 .frame.inline {
 	display: block;
-	margin-bottom: @spacing-smaller;
-	padding: @spacing-smallest;
+	margin-bottom: var(--spacing-smaller);
+	padding: var(--spacing-smallest);
 }
 
 /*--------------------------------------------------------------------------
@@ -179,27 +179,27 @@ fieldset.frame,
 
 .frame .destructor,
 .frame .debug {
-	color: @light-grey;
-	font-size: @text-short!important;
-	margin: 0 0 0 @spacing-smallerish;
+	color: var(--color-main-light);
+	font-size: var(--text-small)!important;
+	margin: 0 0 0 var(--spacing-smallerish);
 }
 
 .frame .destructor {
 	margin-left: auto;
 
 	a {
-		padding: 0 0 0 @spacing-smallest;
+		padding: 0 0 0 var(--spacing-smallest);
 	}
 }
 
 .frame .destructor:hover,
 .frame .debug:hover,
 .frame .constructor:hover {
-	color: @darker-grey;
+	color: var(--color-main-dark);
 }
 
 .frame .disabled {
-	/*color: @light-grey;*/
+	/*color: var(--color-main-light);*/
 	opacity: 0.5;
 	cursor: not-allowed;
 }
@@ -207,11 +207,11 @@ fieldset.frame,
 /* Applicators */
 
 .frame .apply {
-	margin-top: @spacing-smallest;
+	margin-top: var(--spacing-smallest);
 }
 
 .frame .actions {
-	margin: 0 0 @spacing-smallest;
+	margin: 0 0 var(--spacing-smallest);
 }
 
 .frame .actions input {
@@ -235,7 +235,7 @@ fieldset.frame,
 .frame .selected .frame-header,
 .frame .ordering .frame-header {
 	h4, h4 span {
-		color: @accent;
+		color: var(--color-accent);
 	}
 }
 
@@ -248,7 +248,7 @@ fieldset.frame,
 	cursor: move;
 
 	h4, h4 span {
-		color: @accent;
+		color: var(--color-accent);
 	}
 }
 
@@ -256,7 +256,7 @@ fieldset.frame,
 .frame .ordering .frame-header .destructor,
 .frame .ordering .content i,
 .frame .ordering ul.tags {
-	color: @white;
+	color: var(--color-clear);
 }
 
 /*-----------------------------------------------------------------------------
@@ -276,8 +276,8 @@ fieldset.settings .collapsible {
 .constructable > * > li,
 .collapsible > * > li {
 	overflow: hidden;
-	margin-left: -@spacing-smallerish;
-	padding: 0 @spacing-smallerish!important;
+	margin-left: ~'calc(var(--spacing-smallerish) * -1)';
+	padding: 0 var(--spacing-smallerish)!important;
 	width: 100%;
 
 	&:first-of-type .frame-header {
@@ -285,8 +285,8 @@ fieldset.settings .collapsible {
 	}
 
 	.content {
-		padding: @spacing-smallerish;
-		border-top: 1px solid @lighter-grey;
+		padding: var(--spacing-smallerish);
+		border-top: 1px solid var(--color-main-light);
 	}
 }
 
@@ -312,7 +312,7 @@ fieldset.settings .collapsible {
 
 .collapsed.js-animate,
 .destructed.js-animate {
-	transition: max-height @duration-short @easeInOutQuad;
+	transition: max-height var(--duration-short) var(--ease-current);
 }
 
 .collapsible .js-animate {
@@ -321,7 +321,7 @@ fieldset.settings .collapsible {
 
 .collapsible .instance:not(.collapsed) .frame-header {
 	h4, h4 span {
-		color: @accent;
+		color: var(--color-accent);
 	}
 }
 
@@ -331,7 +331,7 @@ fieldset.settings .collapsible {
 
 .frame .js-animate {
 	overflow: hidden;
-	transition: max-height @duration-short @easeInOutQuad;
+	transition: max-height var(--duration-short) var(--ease-current);
 }
 
 /*--------------------------------------------------------------------------
@@ -341,26 +341,26 @@ fieldset.settings .collapsible {
 #login {
 	.flex(~'column', ~'center', ~'center');
 	box-sizing: border-box;
-	padding: @spacing-smallish;
+	padding: var(--spacing-smallish);
 	width: 100%;
 	min-height: 100vh;
-	background-color: @accent;
+	background-color: var(--color-accent);
 
 	fieldset {
-		padding: @spacing-smallerish;
+		padding: var(--spacing-smallerish);
 
 		legend {
 			display: none;
 		}
 
 		label + label {
-			margin-top: @spacing-smallish;
+			margin-top: var(--spacing-smallish);
 		}
 	}
 
 	.wrapper {
-		background-color: @white;
-		border-radius: @radius-current;
+		background-color: var(--color-clear);
+		border-radius: var(--radius-current);
 		overflow: hidden;
 		box-shadow: 0 20px 20px 13px #0000000a;
 	}
@@ -368,8 +368,8 @@ fieldset.settings .collapsible {
 	.frame {
 		overflow: hidden;
 		padding: 0;
-		background: @white;
-		width: @spacing-huger;
+		background: var(--color-clear);
+		width: var(--spacing-huger);
 		max-width: 100%;
 		border: none;
 		background: none;
@@ -379,9 +379,9 @@ fieldset.settings .collapsible {
 			background: none;
 			padding: 0;
 			display: block;
-			font-size: @text-biggest;
+			font-size: var(--text-biggest);
 			font-weight: 300;
-			margin-bottom: @spacing-smallish;
+			margin-bottom: var(--spacing-smallish);
 		}
 
 		.sun {
@@ -392,11 +392,11 @@ fieldset.settings .collapsible {
 			height: 6rem;
 			transform: scale(2);
 			margin: 0 auto;
-			margin-bottom: @spacing-large;
+			margin-bottom: var(--spacing-large);
 		}
 		.sun .layer {
 			position: absolute;
-			background-color: #F9D362;
+			background-color: var(--color-brand);
 			border-radius: 100%;
 			opacity: 0.4;
 			-webkit-animation: Wave 1200ms cubic-bezier(0.19, 1, 0.22, 1) 1 both;
@@ -482,17 +482,17 @@ fieldset.settings .collapsible {
 
 	.actions {
 		.flex(~'row-reverse', ~'center', ~'space-between');
-		padding: 0 @spacing-smallerish @spacing-smallerish;
+		padding: 0 var(--spacing-smallerish )var(--spacing-smallerish);
 		margin: 0;
 
 		.action-link {
-			color: @dark-grey;
-			font-size: @text-short;
+			color: var(--color-main-dark);
+			font-size: var(--text-small);
 		}
 
 		button:hover {
-			background-color: @accent;
-			color: @white;
+			background-color: var(--color-accent);
+			color: var(--color-clear);
 		}
 	}
 }
@@ -503,10 +503,10 @@ fieldset.settings .collapsible {
 
 .conflict {
 	.frame-header {
-		background-color: @red!important;
+		background-color: var(--color-error)!important;
 
 		* {
-			color: @white!important;
+			color: var(--color-clear)!important;
 
 		}
 	}

@@ -17,18 +17,18 @@
 .columns {
 	.flex(~'row', ~'baseline', ~'flex-start');
 	flex-wrap: wrap;
-	margin-left: -@spacing-smallish;
+	margin-left: ~'calc(var(--spacing-smallish) * -1)';
 
 	legend {
-		margin: 0 0 0 -@spacing-smaller !important;
-		padding: 0 0.5rem 0 @spacing-smaller !important;
+		margin: 0 0 0 ~'calc(var(--spacing-smaller) * -1)' !important;
+		padding: 0 0.5rem 0 var(--spacing-smaller) !important;
 	}
 
 	.column,
 	> .invalid {
 		box-sizing: border-box;
-		margin: 0 0 @spacing-smallish;
-		padding: 0 0 0 @spacing-smallish;
+		margin: 0 0 var(--spacing-smallish);
+		padding: 0 0 0 var(--spacing-smallish);
 
 		&.primary,
 		&.secondary {
@@ -49,24 +49,24 @@
 	&.two > .invalid {
 		width: 50%;
 
-		@media (max-width: (@xs - 1)){
+		@media (max-width: calc(var(--xs) - 1)){
 			width: 100%;
 		}
 
 		&.primary {
-			width: calc(~'100% - @{spacing-huger}');
+			width: calc(~'100% - var(--spacing-huger)');
 
-			@media (max-width: (@md - 1)){
+			@media (max-width: ~'calc(var(--md) - 1)'){
 				width: 100%;
 				max-width: 100%;
 			}
 		}
 
 		&.secondary {
-			padding-left: @spacing-mid;
-			width: @spacing-huger;
+			padding-left: var(--spacing-mid);
+			width: var(--spacing-huger);
 
-			@media (max-width: (@md - 1)){
+			@media (max-width: ~'calc(var(--md) - 1)'){
 				width: 100%;
 			}
 		}
