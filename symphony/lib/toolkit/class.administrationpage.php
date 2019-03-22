@@ -457,6 +457,7 @@ class AdministrationPage extends HTMLPage
         $this->Breadcrumbs = new XMLElement('div', null, array('id' => 'breadcrumbs'));
         $this->Contents = new XMLElement('div', null, array('id' => 'contents', 'role' => 'main'));
         $this->Form = Widget::Form(Administration::instance()->getCurrentPageURL(), 'post', null, null, array('role' => 'form'));
+        $this->Tools = new XMLElement('div', null, array('id' => 'tools'));
 
         /**
          * Allows developers to insert items into the page HEAD. Use
@@ -697,6 +698,7 @@ class AdministrationPage extends HTMLPage
             $this->Context->appendChildArray($this->Drawer['horizontal']);
         }
 
+        $this->Wrapper->appendChild($this->Tools);
         $this->Wrapper->appendChild($this->Context);
 
         // Add vertical-left drawers (between #context and #contents)

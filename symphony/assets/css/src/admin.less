@@ -331,13 +331,20 @@
 	Top Bar
 ---------------------------------------*/
 
+#tools {
+	display: none;
+
+	&:not(:empty) {
+		display: block;
+		background-color: @dark-accent;
+		height: @spacing-midlarge;
+	}
+}
+
 #context {
 	.flex(~'row', ~'center', ~'space-between');
 	box-sizing: border-box;
-	position: fixed;
 	left: @spacing-huge;
-	right: 0;
-	top: 0;
 	border-bottom: 1px solid @lighter-grey;
 	background: @white;
 	height: @spacing-midlarge;
@@ -629,7 +636,6 @@ body.index #contents .actions {
 #contents {
 	box-sizing: border-box;
 	position: relative;
-	margin-top: @spacing-midlarge;
 	padding: @spacing-mid @spacing-smallish @spacing-large;
 
 	&.spaced-top {
