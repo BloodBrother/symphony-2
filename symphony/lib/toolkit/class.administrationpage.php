@@ -511,7 +511,7 @@ class AdministrationPage extends HTMLPage
         $h1 = new XMLElement('h1');
         $h1->appendChild(
             Widget::Anchor(
-                '<div class="sun"><div></div><div></div><div></div><div></div></div><span><span>' . Symphony::Configuration()->get('sitename', 'general') . '</span></span>',
+                '<div class="sun"><div class="layer layer-1"></div><div class="layer layer-2"></div><div class="layer layer-3"></div><div class="layer layer-4"></div></div><span><span>' . Symphony::Configuration()->get('sitename', 'general') . '</span></span>',
                 $home_url
             )
         );
