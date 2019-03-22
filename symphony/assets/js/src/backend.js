@@ -52,9 +52,9 @@
 		Symphony.Elements.loading = $('#loading');
 		Symphony.Elements.wrapper = $('#wrapper');
 		Symphony.Elements.header = $('#header');
-		Symphony.Elements.headerMobileToggler = $('#btn-toggle-header-mobile');
+		Symphony.Elements.headerMobileToggler = $('.js-symphony-close-header');
 		Symphony.Elements.nav = $('#nav');
-		Symphony.Elements.session = $('#session');
+		Symphony.Elements.session = $('.session');
 		Symphony.Elements.context = $('#context');
 		Symphony.Elements.breadcrumbs = $('#breadcrumbs');
 		Symphony.Elements.contents = $('#contents');
@@ -104,9 +104,7 @@
 
 				t.parent().addClass('opened');
 				t.siblings('ul').slideDown(250);
-			}
-			// Close
-			else {
+			} else {
 				t.parent().removeClass('opened');
 				t.siblings('ul').slideUp(250);
 			}
