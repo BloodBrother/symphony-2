@@ -824,10 +824,39 @@ body {
 
 		> li {
 			a {
-				display: inline-block;
-				padding: 0;
+				display: flex;
+				padding: var(--spacing-smallest);
+				border-radius: 100%;
+
+				svg {
+					width: 20px;
+					height: 20px;
+				}
+
+
+				&:hover {
+					color: var(--color-clear);
+					background-color: var(--color-main-light);
+				}
 			}
 		}
+	}
+
+	.svg-icon-container {
+		position: relative;
+
+		
+
+		input {
+			all: unset;
+			border-radius: 100%;
+			width: var(--spacing-small);
+			height: var(--spacing-small);
+			&:hover {
+				background-color: var(--color-main-light);
+			}
+		}
+
 	}
 }
 

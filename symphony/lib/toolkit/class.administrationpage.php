@@ -270,7 +270,7 @@ class AdministrationPage extends HTMLPage
             $this->ContentsActions->appendChild($ul);
         } else {
             $ul = current($actions);
-            $this->ContentsActions->replaceChildAt(1, $ul);
+            $this->ContentsActions->replaceChildAt(0, $ul);
         }
 
         $li = new XMLElement('li', $action);
