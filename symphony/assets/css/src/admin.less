@@ -339,7 +339,7 @@
 		border-radius: @radius-current;
 		padding: @spacing-micro @spacing-smallest;
 		min-height: @spacing-small;
-		background: rgba(000, 000, 000, 0.25);
+		background: @darker-accent;
 		color: @white;
 
 		> span {
@@ -434,8 +434,24 @@
 		background-color: @dark-accent;
 		height: @spacing-midlarge;
 		padding: 0 @spacing-smallish;
-		.flex(~'row', ~'center', ~'flex-end');
+		.flex(~'row', ~'center', ~'space-between');
 		color: @white;
+
+
+		> a {
+			background-color: @darker-accent;
+			line-height: 1em;
+			color: @white;
+			font-weight: 700;
+			font-size: @text-short;
+			padding: @spacing-smallerish;
+			border-radius: @radius-current;
+
+			&:hover {
+				background: rgba(000, 000, 000, 0.15);
+			}
+		}
+
 	}
 }
 
