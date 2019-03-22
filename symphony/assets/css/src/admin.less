@@ -19,7 +19,7 @@
 	top: 0;
 	right: 0;
 	bottom: 0;
-	background: @white;
+	background: @accent;
 	z-index: 99999999999;
 
 	&.hidden {
@@ -212,6 +212,11 @@
 
 				a {
 					color: @white;
+					white-space: nowrap;
+					overflow: hidden;
+					max-width: 100%;
+					text-overflow: ellipsis;
+					line-height: 1em;
 				}
 
 				li.active {
@@ -263,6 +268,7 @@
 
 		> span {
 			font-size: @text-short;
+			user-select: none;
 		}
 
 		> svg {
@@ -539,6 +545,7 @@
 		overflow: hidden;
 		color: @dark-grey;
 		font-size: @text-bigger;
+		font-weight: 300;
 
 		img {
 			display: none;
@@ -565,11 +572,11 @@ body.page-single #contents .actions {
 	margin: 0;
 	padding: 0;
 	z-index: 110;
-	margin-left: -@spacing-smallest;
+	margin-left: -@spacing-smallish;
 
 	input, button {
+		margin-left: @spacing-smallest;
 		.transitioned(~'opacity, background');
-		background: @accent;
 		cursor: pointer;
 
 		&[name="action[save]"] {
@@ -581,10 +588,12 @@ body.page-single #contents .actions {
 
 		&[name="action[delete]"], &[name="action[delete]"]:hover {
 			background: @red!important;
+			color: #fff;
 		}
 
 		&:hover {
 			background: @darker-grey!important;
+			color: #fff;
 		}
 	}
 
@@ -660,10 +669,31 @@ body.index #contents .actions {
 #contents {
 	box-sizing: border-box;
 	position: relative;
-	padding: @spacing-mid @spacing-smallish @spacing-large;
+	padding-top: @spacing-mid;
+	padding-left: @spacing-smallish;
+	background-color: @lightest-grey;
+	min-height: ~'calc(100vh - @{spacing-midlarge} - @{spacing-midlarge})';
 
 	&.spaced-top {
 		padding-top: calc(~'@{spacing-smallish} + @{spacing-midlarge}');
+	}
+
+	& > * {
+		transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+		transition-duration: 500ms;
+		transition-property: opacity, transform;
+		background-color: @white;
+		min-height: ~'calc(100vh - @{spacing-midlarge} - @{spacing-midlarge} - @{spacing-midlarge})';
+		padding: @spacing-midlarge @spacing-smallish;
+		box-sizing: border-box;
+		border-top-left-radius: @radius-current;
+		opacity: 0;
+		transform: ~'translateY(@{spacing-small})';
+
+		.js-active & {
+			opacity: 1;
+			transform: none;
+		}
 	}
 
 	> p:first-child {
@@ -674,16 +704,6 @@ body.index #contents .actions {
 		margin-right: 0!important;
 	}
 
-	&.centered-content {
-		.flex(~'column', ~'center', ~'center');
-
-		> form,
-		> p {
-			margin-right: 0!important;
-			width: 100%;
-			max-width: @max-width-big;
-		}
-	}
 }
 
 /*--------------------------------------------------------------------------

@@ -257,22 +257,19 @@ button,
 .apply-button-right,
 .apply-label-left,
 .apply-label-right {
-	.transitioned(~'background');
-	border-radius: @radius-current;
-	display: inline-block;
-	color: @white;
-	font-size: @text-shorter;
-	text-transform: uppercase;
-	line-height: 1.6rem;
-	margin-left: 1rem;
-	padding: @spacing-smallest @spacing-smallest;
-	border: none;
-	background: @accent;
-	width: auto;
+	.transitioned(~'color');
 	cursor: pointer;
+	background-color: @lightest-grey;
+	border: 0;
+	padding: @spacing-smallest @spacing-smallerish;
+	line-height: 1em;
+	border-radius: @radius-current;
+	font-weight: 700;
+	color: @dark-grey;
+	font-size: @text-short;
 
 	&:hover {
-		background: @darker-grey;
+		color: @accent;
 	}
 }
 

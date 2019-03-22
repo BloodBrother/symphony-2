@@ -37,13 +37,13 @@ div.drawer.horizontal {
 	Vertical drawers
 -----------------------------------------------------------------------------*/
 
-div.drawer.vertical-left,
-div.drawer.vertical-right {
+#contents div.drawer.vertical-left,
+#contents div.drawer.vertical-right {
 	.transitioned(~'transform');
 	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
 	position: fixed;
-	top: @spacing-midlarge;
+	top: @spacing-midlarge * 2;
 	bottom: 0;
 	background: @white;
 	width: @spacing-huger!important;
@@ -56,20 +56,22 @@ div.drawer.vertical-right {
 	}
 }
 
-div.drawer.vertical-left {
+#contents div.drawer.vertical-left {
 	left: 0;
 	border-right: 1px solid @lighter-grey;
+	transform: translateX(-100%);
 
-	&:not(.opened) {
-		transform: translateX(-100%);
+	&.opened {
+		transform: none;
 	}
 }
 
-div.drawer.vertical-right {
+#contents div.drawer.vertical-right {
 	right: 0;
 	border-left: 1px solid @lighter-grey;
+	transform: translateX(100%);
 
-	&:not(.opened) {
-		transform: translateX(100%);
+	&.opened {
+		transform: none;
 	}
 }
