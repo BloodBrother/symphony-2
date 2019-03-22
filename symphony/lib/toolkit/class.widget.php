@@ -988,12 +988,12 @@ class Widget
      * Attributes set from this array will override existing attributes
      * @return XMLElement
      */
-    public static function Modal($elements = array(), $alignments = '', $attributes = array())
+    public static function Modal($elements = array(), $alignments = '', $attributes = array(), $icon = '')
     {
         $obj = new XMLElement('div', null, $attributes);
         $obj->addClass('modal js-modal');
-        $trigger = new XMLElement('button', Widget::SVGIcon('kebab'), array('class' => 'modal-trigger js-modal-trigger'));
-        $content = new XMLElement('ul', null, array('class' => 'modal-content js-modal-content ' . $alignments));
+        $trigger = new XMLElement('button', !empty($icon) ? $icon : Widget::SVGIcon('kebab'), array('class' => 'modal-trigger js-modal-trigger'));
+        $content = new XMLElement('ul', null, array('class' => 'modal-content ' . $alignments));
 
         foreach ($elements as $element) {
             $item = new XMLElement('li', $element);

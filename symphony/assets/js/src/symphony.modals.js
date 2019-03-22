@@ -7,20 +7,20 @@
 
 	var sels = {
 		ctn: '.js-modal',
-		trigger: '.js-modal-trigger',
-		content: '.js-modal-content'
+		trigger: '.js-modal-trigger'
 	};
 
 	var onClick = function (event) {
 		var t = $(this);
 		var ctn = t.closest(sels.ctn);
-		ctn.find(sels.content).addClass('is-open');
+		$(sels.ctn).removeClass('is-open');
+		ctn.addClass('is-open');
 		event.preventDefault();
 		return event.stopPropagation();
 	};
 
 	var onWindowClick = function () {
-		$(sels.content).removeClass('is-open');
+		$(sels.ctn).removeClass('is-open');
 	};
 
 	var init = function () {

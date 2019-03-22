@@ -61,12 +61,14 @@
 						if(object.data('ordering') == 1) {
 							object.trigger('orderstart.orderable', [item]);
 							item.addClass('ordering');
+							item.parent().addClass('is-ordering');
 						}
 					}, settings.delay);
 				}
 				else {
 					object.trigger('orderstart.orderable', [item]);
 					item.addClass('ordering');
+					item.parent().addClass('is-ordering');
 				}
 			}
 		});
@@ -79,6 +81,7 @@
 			if(object.data('ordering') == 1) {
 				item = object.find('.ordering');
 				item.removeClass('ordering');
+				item.parent().removeClass('is-ordering');
 				object.data('ordering', 0);
 				object.trigger('orderstop.orderable', [item]);
 

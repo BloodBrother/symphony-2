@@ -21,8 +21,9 @@
 	position: relative;
 	margin: 0;
 	padding: var(--spacing-smallerish);
-	border: 1px solid var(--color-main);
+	border: 2px solid var(--color-main-lightest);
 	background: var(--color-ui);
+	overflow: hidden;
 
 	h1 {
 		padding: var(--spacing-smallest);
@@ -97,7 +98,11 @@
 	.flex(~'row', ~'center', ~'flex-start');
 	position: relative;
 	padding: var(--spacing-smallest) var(--spacing-smallerish);
-	border-top: 1px solid var(--color-main-light);
+	border-top: 1px solid var(--color-accent-light);
+
+	&:last-of-type {
+		border-bottom: 1px solid var(--color-accent-light);
+	}
 
 	h4 {
 		.flex(~'row', ~'center', ~'flex-start');

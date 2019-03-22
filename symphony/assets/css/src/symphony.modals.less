@@ -19,11 +19,10 @@
 
 	.modal-trigger {
 		border-radius: 100%;
-		width: var(--spacing-small);
-		height: var(--spacing-small);
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		padding: var(--spacing-smallest);
 
 		svg {
 			flex-shrink: 0;
@@ -43,6 +42,7 @@
 		transition-property: opacity;
 		transition-duration: var(--duration-shorter);
 		overflow: hidden;
+		margin: 0;
 
 		&.top {
 			top: 0;
@@ -60,11 +60,6 @@
 			left: 0;
 		}
 
-		&.is-open {
-			opacity: 1;
-			pointer-events: all;
-		}
-
 		button {
 			display: flex;
 			align-items: center;
@@ -75,6 +70,8 @@
 			border-radius: 0;
 			font-size: var(--text-current);
 			font-weight: 500;
+			margin: 0;
+			color: var(--color-main);
 
 			svg {
 				margin-right: var(--spacing-smallest);
@@ -90,6 +87,11 @@
 				background-color: var(--color-error);
 			}
 		}
+	}
+
+	&.is-open .modal-content {
+		opacity: 1;
+		pointer-events: all;
 	}
 
 }
