@@ -903,7 +903,7 @@ class Widget
         'logout' => '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="17.9px" viewBox="0 0 18 17.9"><path fill="currentColor" d="M9,17.9c-5,0-9-4-9-9C0,6,1.4,3.2,3.9,1.5c0.5-0.3,1.1-0.2,1.4,0.2C5.6,2.2,5.5,2.8,5,3.1C3.1,4.5,2,6.6,2,8.9
         c0,3.9,3.1,7,7,7s7-3.2,7-7c0-2.3-1.1-4.4-3-5.8c-0.5-0.3-0.6-0.9-0.2-1.4c0.3-0.5,0.9-0.6,1.4-0.2C16.6,3.2,18,6,18,8.9
         C18,13.9,14,17.9,9,17.9z"/><path fill="currentColor" d="M9,10c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1s1,0.4,1,1v8C10,9.6,9.6,10,9,10z"/></svg>',
-        'kebab' => '<svg xmlns="http://www.w3.org/2000/svg"><path d="M4 2C4 3.10457 3.10457 4 2 4C0.89543 4 0 3.10457 0 2C0 0.89543 0.89543 0 2 0C3.10457 0 4 0.89543 4 2Z" fill="currentColor"/><path d="M11 2C11 3.10457 10.1046 4 9 4C7.89543 4 7 3.10457 7 2C7 0.89543 7.89543 0 9 0C10.1046 0 11 0.89543 11 2Z" fill="currentColor"/><path d="M18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2C14 0.89543 14.8954 0 16 0C17.1046 0 18 0.89543 18 2Z" fill="currentColor"/></svg>'
+        'kebab' => '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="18" r="2" fill="currentColor"/><circle cx="10" cy="10" r="2" fill="currentColor"/><circle cx="10" cy="2" r="2" fill="currentColor"/></svg>'
     );
 
     /**
@@ -968,6 +968,38 @@ class Widget
             $obj->appendChild($content);
         }
 
+
+        return $obj;
+    }
+
+    /**
+     * Generates a UI Element used by contextual menus
+     *
+     * @since Symphony 4.0
+     * @param array $elements (optional)
+     * List of links and buttons to add to the modal.
+     * They will be individually wraped inside an <li> tag
+     * @param string $alignments modal alignment
+     * @param array $attributes (optional)
+     * Any additional attributes can be included in an associative array with
+     * the key being the name and the value being the value of the attribute.
+     * Attributes set from this array will override existing attributes
+     * @return XMLElement
+     */
+    public static function Modal($elements = array(), $alignments = '', $attributes = array())
+    {
+        $obj = new XMLElement('div', null, $attributes);
+        $obj->addClass('modal js-modal');
+        $trigger = new XMLElement('button', Widget::SVGIcon('kebab'), array('class' => 'modal-trigger js-modal-trigger'));
+        $content = new XMLElement('ul', null, array('class' => 'modal-content js-modal-content ' . $alignments));
+
+        foreach ($elements as $element) {
+            $item = new XMLElement('li', $element);
+            $content->appendChild($item);
+        }
+
+        $obj->appendChild($trigger);
+        $obj->appendChild($content);
 
         return $obj;
     }

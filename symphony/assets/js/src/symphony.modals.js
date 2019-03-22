@@ -13,8 +13,9 @@
 
 	var onClick = function (event) {
 		var t = $(this);
-		var ctn = t.find(sels.ctn);
+		var ctn = t.closest(sels.ctn);
 		ctn.find(sels.content).addClass('is-open');
+		event.preventDefault();
 		return event.stopPropagation();
 	};
 

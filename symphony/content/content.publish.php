@@ -1597,7 +1597,7 @@ class contentPublish extends AdministrationPage
 
             $button = new XMLElement('button', __('Delete'));
             $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this entry'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this entry?')));
-            $div->appendChild($button);
+            $div->appendChild(Widget::Modal([$button], 'top right'));
 
             $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
             $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));

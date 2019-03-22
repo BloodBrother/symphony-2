@@ -15,14 +15,33 @@
 -----------------------------------------------------------------------------*/
 
 .modal {
+	position: relative;
 
 	.modal-trigger {
-		// 
+		border-radius: 100%;
+		width: var(--spacing-small);
+		height: var(--spacing-small);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		svg {
+			flex-shrink: 0;
+		}
 	}
 
 	.modal-content {
 		position: absolute;
+		z-index: 1;
 		background-color: var(--color-clear);
+		opacity: 0;
+		pointer-events: none;
+		border: 1px solid var(--color-main-lightest);
+		box-shadow: var(--shadow);
+		border-radius: var(--radius-current);
+		transition-timing-function: var(--ease-current);
+		transition-property: opacity;
+		transition-duration: var(--duration-shorter);
 
 		&.top {
 			top: 0;
@@ -38,6 +57,11 @@
 
 		&.left {
 			left: 0;
+		}
+
+		&.is-open {
+			opacity: 1;
+			pointer-events: all;
 		}
 	}
 
