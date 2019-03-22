@@ -120,14 +120,4 @@
 		});
 	});
 
-	$(window).load(function(){
-
-		// Cache main elements
-		Symphony.Elements.contextActions = $('#context .actions > li');
-
-		// Context Actions - LI Max-Width
-		Symphony.Elements.contextActions.css({'max-width': (100 / Symphony.Elements.contextActions.length) + '%'});
-
-	});
-
 })(window.jQuery, window.Symphony);

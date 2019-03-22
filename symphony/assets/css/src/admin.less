@@ -12,6 +12,10 @@
 	Structure
 --------------------------------------------------------------------------*/
 
+body {
+	background-color: #f4f8fb;
+}
+
 #loading {
 	display: block;
 	position: fixed;
@@ -55,12 +59,6 @@
 	width: @spacing-huge;
 	height: 100vh;
 	z-index: 101;
-
-	&.spaced-bottom {
-		@media (max-width: (@sm - 1)){
-			height: calc(~'100vh - @{spacing-midlarge}');
-		}
-	}
 
 	> * {
 		order: 3;
@@ -206,13 +204,7 @@
 	.flex(~'column', ~'center', ~'center');
 	transform: translateX(1px);
 	box-sizing: border-box;
-	position: fixed;
-	left: -1px;
-	top: 0;
 	color: @dark-grey;
-	border: 1px solid @lighter-grey;
-	border-top: none;
-	background: @white;
 	width: @spacing-midlarge;
 	height: @spacing-midlarge;
 	z-index: 102;
@@ -457,6 +449,9 @@
 		.flex(~'row', ~'center', ~'space-between');
 		color: @white;
 
+		@media (max-width: (@sm - 1)){
+			padding: 0 @spacing-smallest;
+		}
 
 		> a {
 			background-color: @darker-accent;
@@ -491,16 +486,6 @@
 		margin-top: @spacing-smallish;
 	}
 
-	@media (max-width: (@sm - 1)){
-		/*justify-content: flex-end;*/
-		left: 0;
-		padding-left: @spacing-midlarge;
-	}
-
-	@media (max-width: (@xs - 1)){
-		justify-content: flex-end;
-	}
-
 	/* Actions */
 
 	> .actions {
@@ -509,6 +494,10 @@
 		order: 3;
 		margin: 0 @spacing-smallerish 0 0;
 		max-width: 90%;
+
+		@media (max-width: (@sm - 1)){
+			margin: 0;
+		}
 
 		@media (max-width: (@xs - 1)){
 			max-width: calc(~'100% - @{spacing-midlarge}');
@@ -569,11 +558,9 @@
 
 			&.featured {
 				order: 99;
-				margin-right: -@spacing-smallerish;
 				max-width: 100%!important;
 
 				a, button {
-					padding-right: @spacing-smallish;
 
 					&.create {
 						box-sizing: border-box;
@@ -735,31 +722,18 @@ body.page-single #contents .actions {
 
 	@media (max-width: (@sm - 1)) {
 		.flex(~'row',~'center',~'flex-start');
-		box-sizing: border-box;
-		transform: translateY(-100%);
 		overflow: auto;
-		top: 100vh;
-		left: @spacing-huge;
-		padding: 0 @spacing-smallerish;
+		padding: 0;
+		margin: 0;
 		border-top: 1px solid @lighter-grey;
 		background: @white;
 		width: auto;
 		height: @spacing-midlarge;
 
-		@media (max-width: @sm) {
-			left: 0;
-		}
-
 		input, button {
-			line-height: 1.6rem;
-			padding: @spacing-smallest @spacing-smallerish;
-			border-radius: @radius-current;
-			width: auto;
-			height: auto;
-		}
-
-		.svg-icon-container svg {
-			display: none;
+			&:first-child {
+				margin-left: 0;
+			}
 		}
 
 	}
@@ -822,6 +796,14 @@ body.index #contents .actions {
 
 	@media (max-width: (@sm - 1)){
 		padding-left: 0;
+		padding-top: 0;
+
+		& > form {
+			border-top-left-radius: 0;
+			transform: ~'translateY(0)';
+			opacity: 1;
+			padding: @spacing-midlarge @spacing-smallest;
+		}
 	}
 
 }

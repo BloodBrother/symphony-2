@@ -398,6 +398,7 @@ class AdministrationPage extends HTMLPage
         $this->Html->setDTD('<!DOCTYPE html>');
         $this->Html->setAttribute('lang', Lang::get());
         $this->addElementToHead(new XMLElement('meta', null, array('charset' => 'UTF-8')), 0);
+        $this->addElementToHead(new XMLElement('meta', null, array('name' => 'theme-color', 'content' => '#1B6AE7')), 0);
         $this->addElementToHead(new XMLElement('meta', null, array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge,chrome=1')), 1);
         $this->addElementToHead(new XMLElement('meta', null, array('name' => 'viewport', 'content' => 'width=device-width, initial-scale=1')), 2);
 
@@ -708,7 +709,7 @@ class AdministrationPage extends HTMLPage
 
         $mobileNavToggler = new XMLElement('a', Widget::SVGIcon('burger'));
         $mobileNavToggler->setAttribute('id', 'btn-toggle-header-mobile');
-        $this->Wrapper->appendChild($mobileNavToggler);
+        $this->Context->prependChild($mobileNavToggler);
 
         // Add horizontal drawers (inside #context)
         if (isset($this->Drawer['horizontal'])) {
