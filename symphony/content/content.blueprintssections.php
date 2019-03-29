@@ -216,6 +216,17 @@ class contentBlueprintsSections extends AdministrationPage
             $meta['navigation_group'] = (isset($this->_navigation[0]['name']) ? $this->_navigation[0]['name'] : __('Content'));
         }
 
+        $div = new XMLElement('div');
+        $div->setAttribute('class', 'actions');
+        $div->appendChild(Widget::Input(
+            'action[save]',
+            __('Create Section'),
+            'submit',
+            ['accesskey' => 's']
+        ));
+
+        $this->Form->appendChild($div);
+
         $fieldset = new XMLElement('fieldset');
         $fieldset->setAttribute('class', 'settings');
         $fieldset->appendChild(new XMLElement('legend', __('Essentials')));
@@ -342,6 +353,7 @@ class contentBlueprintsSections extends AdministrationPage
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');
+<<<<<<< HEAD
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
         $div->appendChild(
@@ -358,6 +370,25 @@ class contentBlueprintsSections extends AdministrationPage
         $div->appendChild(Widget::SVGIcon('chevron'));
 
         $this->Form->appendChild($div);
+||||||| parent of a4e1ecc7f7... Move action bar at the top of the pages
+        $div = new XMLElement('div');
+        $div->setAttribute('class', 'actions');
+        $div->appendChild(
+            Widget::SVGIconContainer(
+                'save',
+                Widget::Input(
+                    'action[save]',
+                    __('Create Section'),
+                    'submit',
+                    ['accesskey' => 's']
+                )
+            )
+        );
+        $div->appendChild(Widget::SVGIcon('chevron'));
+
+        $this->Form->appendChild($div);
+=======
+>>>>>>> a4e1ecc7f7... Move action bar at the top of the pages
     }
 
     public function __viewEdit()
@@ -458,6 +489,26 @@ class contentBlueprintsSections extends AdministrationPage
                 ),
             )
         );
+
+        $div = new XMLElement('div');
+        $div->setAttribute('class', 'actions');
+        $div->appendChild(
+            Widget::Input(
+                'action[save]',
+                __('Save Changes'),
+                'submit',
+                ['accesskey' => 's']
+            )
+        );
+
+        $button = new XMLElement('button', __('Delete'));
+        $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this section'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this section?')));
+        $div->appendChild($button);
+
+        $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
+        $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));
+
+        $this->Form->appendChild($div);
 
         $fieldset = new XMLElement('fieldset');
         $fieldset->setAttribute('class', 'settings');
@@ -583,25 +634,6 @@ class contentBlueprintsSections extends AdministrationPage
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');
-        $div = new XMLElement('div');
-        $div->setAttribute('class', 'actions');
-        $div->appendChild(
-            Widget::Input(
-                'action[save]',
-                __('Save Changes'),
-                'submit',
-                ['accesskey' => 's']
-            )
-        );
-
-        $button = new XMLElement('button', __('Delete'));
-        $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this section'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this section?')));
-        $div->appendChild($button);
-
-        $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
-        $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));
-
-        $this->Form->appendChild($div);
     }
 
     public function __actionIndex()

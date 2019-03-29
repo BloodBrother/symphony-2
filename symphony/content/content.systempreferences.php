@@ -38,6 +38,23 @@ class contentSystemPreferences extends AdministrationPage
             $this->pageAlert(__('Preferences saved.'), Alert::SUCCESS);
         }
 
+        $div = new XMLElement('div');
+        $div->setAttribute('class', 'actions');
+        $attr = array('accesskey' => 's');
+
+        if (!$bIsWritable) {
+            $attr['disabled'] = 'disabled';
+        }
+
+        $div->appendChild(Widget::Input(
+            'action[save]',
+            __('Save Changes'),
+            'submit',
+            $attr
+        ));
+
+        $this->Form->appendChild($div);
+
         // Get available languages
         $languages = Lang::getAvailableLanguages();
 
@@ -160,22 +177,6 @@ class contentSystemPreferences extends AdministrationPage
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');
-        $div = new XMLElement('div');
-        $div->setAttribute('class', 'actions');
-        $attr = array('accesskey' => 's');
-
-        if (!$bIsWritable) {
-            $attr['disabled'] = 'disabled';
-        }
-
-        $div->appendChild(Widget::Input(
-            'action[save]',
-            __('Save Changes'),
-            'submit',
-            $attr
-        ));
-
-        $this->Form->appendChild($div);
     }
 
     public function action()

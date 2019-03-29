@@ -154,6 +154,27 @@ class contentBlueprintsEvents extends ResourcesPage
             )
         );
 
+        $div = new XMLElement('div');
+        $div->setAttribute('class', 'actions');
+        $div->appendChild(
+            Widget::Input(
+                'action[save]',
+                ($isEditing ? __('Save Changes') : __('Create Event')),
+                'submit',
+                ['accesskey' => 's']
+            )
+        );
+
+        if ($isEditing) {
+            $button = new XMLElement('button', __('Delete'));
+            $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this event'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this event?')));
+            $div->appendChild($button);
+        }
+
+        if (!$readonly) {
+            $this->Form->appendChild($div);
+        }
+
         if (!$readonly) {
             $fieldset = new XMLElement('fieldset');
             $fieldset->setAttribute('class', 'settings');
@@ -361,26 +382,6 @@ class contentBlueprintsEvents extends ResourcesPage
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');
-        $div = new XMLElement('div');
-        $div->setAttribute('class', 'actions');
-        $div->appendChild(
-            Widget::Input(
-                'action[save]',
-                ($isEditing ? __('Save Changes') : __('Create Event')),
-                'submit',
-                ['accesskey' => 's']
-            )
-        );
-
-        if ($isEditing) {
-            $button = new XMLElement('button', __('Delete'));
-            $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this event'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this event?')));
-            $div->appendChild($button);
-        }
-
-        if (!$readonly) {
-            $this->Form->appendChild($div);
-        }
     }
 
     public function __actionNew()

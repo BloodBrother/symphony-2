@@ -721,8 +721,12 @@ class AdministrationPage extends HTMLPage
             $this->Context->appendChildArray($this->Drawer['horizontal']);
         }
 
-        $this->Wrapper->appendChild($this->Tools);
-        $this->Wrapper->appendChild($this->Context);
+        $contextWrap = new XMLElement('div', null, array('class' => 'context-wrap'));
+
+        $contextWrap->appendChild($this->Context);
+        $contextWrap->appendChild($this->Tools);
+
+        $this->Wrapper->appendChild($contextWrap);
 
         // Add vertical-left drawers (between #context and #contents)
         if (isset($this->Drawer['vertical-left'])) {
@@ -1478,9 +1482,15 @@ class AdministrationPage extends HTMLPage
     public function appendUserLinks()
     {
         $div = new XMLElement('div', null, array('class' => 'js-session-panel-toggler'));
-        $span = new XMLElement('span', Symphony::Author()->getFullName(), array());
+
+        $initials = '';
+
+        foreach (explode(' ', Symphony::Author()->getFullName()) as $inital) {
+            $initials .= $inital[0];
+        }
+
+        $span = new XMLElement('span', $initials, array());
         $div->appendChild($span);
-        $div->appendChild(Widget::SVGIcon('chevron'));
         $this->Session->appendChild($div);
 
         $ul = new XMLElement('ul', null, array('class' => 'js-session-panel'));

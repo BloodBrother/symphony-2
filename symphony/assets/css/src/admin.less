@@ -57,7 +57,7 @@ body {
 	position: fixed;
 	left: 0;
 	top: 0;
-	background: var(--color-accent);
+	background: var(--color-clear);
 	width: var(--spacing-huge);
 	height: 100vh;
 	z-index: 101;
@@ -294,7 +294,7 @@ body {
 
 	> span {
 		display: block;
-		color: var(--color-ui);
+		color: var(--color-main);
 		font-size: var(--text-smaller);
 		text-transform: uppercase;
 		line-height: 1.4em;
@@ -305,7 +305,7 @@ body {
 	/* First Level */
 
 	> ul {
-		color: var(--color-clear);
+		color: var(--color-main-light);
 		margin: 0;
 		padding: 0;
 
@@ -339,7 +339,7 @@ body {
 			}
 
 			&.opened, &.active, &:hover {
-				color: var(--color-clear);
+				color: var(--color-accent);
 			}
 
 			& + li {
@@ -355,7 +355,7 @@ body {
 				background: url(../img/bullet.png) repeat-y 0 0;
 
 				a {
-					color: var(--color-clear);
+					color: var(--color-main-light);
 					white-space: nowrap;
 					overflow: hidden;
 					max-width: 100%;
@@ -364,18 +364,13 @@ body {
 				}
 
 				li.active {
-					&::before {
-						content: '';
-						background-color: var(--color-success);
-						position: absolute;
-						left: ~'calc(var(--spacing-smallish) * -1)';
-						height: var(--spacing-smaller);
-						width: 3px;
+					a {
+						color: var(--color-accent);
 					}
 				}
 
 				a:hover {
-					color: var(--color-clear);
+					color: var(--color-accent);
 				}
 
 				li + li {
@@ -404,14 +399,15 @@ body {
 		.flex(~'row', ~'center', ~'space-between');
 		flex-grow: 1;
 		box-sizing: border-box;
-		border-radius: var(--radius-current);
+		border-radius: 100%;
 		padding: var(--spacing-micro) var(--spacing-smallest);
 		min-height: var(--spacing-small);
-		background: var(--color-accent);
-		color: var(--color-clear);
+		background: var(--color-ui);
+		color: var(--color-main);
 
 		> span {
-			font-size: var(--text-short);
+			font-size: var(--text-big);
+			font-weight: 500;
 			user-select: none;
 		}
 
@@ -497,42 +493,49 @@ body {
 	Top Bar
 ---------------------------------------*/
 
+.context-wrap {
+	display: flex;
+	padding: 0 var(--spacing-small) 0 0;
+
+	@media (max-width: (@sm - 1)){
+		flex-direction: column;
+		padding: 0;
+	}
+}
+
 #tools {
-	display: none;
+	width: 100%;
+	display: block;
+	background-color: var(--color-clear);
+	height: var(--spacing-midlarge);
+	.flex(~'row', ~'center', ~'space-between');
+	color: var(--color-accent);
 
-	&:not(:empty) {
-		display: block;
-		background-color: var(--color-accent);
-		height: var(--spacing-midlarge);
-		padding: 0 var(--spacing-smaller);
-		.flex(~'row', ~'center', ~'space-between');
-		color: var(--color-clear);
+	@media (max-width: (@sm - 1)){
+		order: -1;
 
-		@media (max-width: (@sm - 1)){
-			padding: 0 var(--spacing-smallest);
-
-			.index-btn, .session {
-				display: none;
-			}
+		.index-btn, .session {
+			display: none;
 		}
+	}
 
-		> a {
-			background-color: var(--color-accent);
-			line-height: 1em;
-			color: var(--color-clear);
-			font-weight: 700;
-			font-size: var(--text-short);
-			padding: var(--spacing-smallest) var(--spacing-smallerish);
-			border-radius: var(--radius-current);
+	> a {
+		background-color: var(--color-accent);
+		line-height: 1em;
+		color: var(--color-clear);
+		font-weight: 700;
+		font-size: var(--text-short);
+		padding: var(--spacing-smallest) var(--spacing-smallerish);
+		border-radius: var(--radius-current);
 
-			&:hover {
-				background: rgba(000, 000, 000, 0.15);
-			}
+		&:hover {
+			background: rgba(000, 000, 000, 0.15);
 		}
 	}
 }
 
 #context {
+	width: 100%;
 	.flex(~'row', ~'center', ~'space-between');
 	box-sizing: border-box;
 	left: var(--spacing-huge);
@@ -542,7 +545,6 @@ body {
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0;
-	border-bottom: 1px solid var(--color-ui);
 
 	#tools:empty + & {
 		margin-top: var(--spacing-smallish);
@@ -660,11 +662,15 @@ body {
 	order: 1;
 	overflow: hidden;
 	position: relative;
-	padding: 0 var(--spacing-smaller);
+	padding: 0 var(--spacing-smaller) 0 0;
 	white-space: nowrap;
 
 	@media (max-width: (@xs - 1)) {
 		display: none;
+	}
+
+	@media (max-width: (@sm - 1)) {
+		padding: 0 var(--spacing-smaller);
 	}
 
 	nav {
@@ -810,10 +816,13 @@ body.page-single #contents .actions {
 #contents {
 	box-sizing: border-box;
 	position: relative;
-	padding-top: var(--spacing-mid);
-	padding-left: var(--spacing-smallish);
-	background-color: var(--color-ui);
+	background-color: var(--color-clear);
 	min-height: ~'calc(100vh - var(--spacing-midlarge) - var(--spacing-midlarge))';
+	padding: 0 var(--spacing-small) 0 0;
+
+	@media (max-width: (@sm - 1)) {
+		padding: 0;
+	}
 
 	&.spaced-top {
 		padding-top: ~'calc(var(--spacing-smallish) + var(--spacing-midlarge))';
@@ -823,11 +832,12 @@ body.page-single #contents .actions {
 		transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 		transition-duration: 500ms;
 		transition-property: opacity, transform;
-		background-color: var(--color-clear);
-		min-height: ~'calc(100vh - var(--spacing-midlarge) - var(--spacing-midlarge) - var(--spacing-midlarge))';
-		padding: var(--spacing-midlarge) var(--spacing-smallish);
+		background-color: var(--color-accent-light);
+		min-height: ~'calc(100vh - var(--spacing-midlarge))';
+		padding: var(--spacing-smaller);
 		box-sizing: border-box;
-		border-top-left-radius: var(--radius-current);
+		border-top-left-radius: var(--radius-big);
+		border-top-right-radius: var(--radius-big);
 		opacity: 0;
 		transform: ~'translateY(var(--spacing-small))';
 
@@ -855,6 +865,7 @@ body.page-single #contents .actions {
 
 		& > form {
 			border-top-left-radius: 0;
+			border-top-right-radius: 0;
 			transform: ~'translateY(0)';
 			opacity: 1;
 			padding: var(--spacing-midlarge) var(--spacing-smallest);

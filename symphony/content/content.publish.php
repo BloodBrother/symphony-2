@@ -1161,6 +1161,20 @@ class contentPublish extends AdministrationPage
             ),
         ));
 
+        if (!((!is_array($main_fields) || empty($main_fields)) && (!is_array($sidebar_fields) || empty($sidebar_fields)))) {
+            $div = new XMLElement('div');
+            $div->setAttribute('class', 'actions');
+            $div->appendChild(
+                Widget::Input(
+                    'action[save]',
+                    __('Create Entry'),
+                    'submit',
+                    array('accesskey' => 's')
+                )
+            );
+            $this->Form->appendChild($div);
+        }
+
         $this->Form->appendChild(Widget::Input('MAX_FILE_SIZE', Symphony::Configuration()->get('max_upload_size', 'admin'), 'hidden'));
 
         // If there is post data floating around, due to errors, create an entry object
@@ -1233,19 +1247,8 @@ class contentPublish extends AdministrationPage
             }
 
             $this->Header->setAttribute('class', 'spaced-bottom');
-            $div = new XMLElement('div');
-            $div->setAttribute('class', 'actions');
-            $div->appendChild(
-                Widget::Input(
-                    'action[save]',
-                    __('Create Entry'),
-                    'submit',
-                    array('accesskey' => 's')
-                )
-            );
 
             $this->Form->appendChild($fields_ctn);
-            $this->Form->appendChild($div);
 
             // Create a Drawer for Associated Sections
             $this->prepareAssociationsDrawer($section);
@@ -1578,6 +1581,25 @@ class contentPublish extends AdministrationPage
 
             $this->pageAlert($message, Alert::ERROR);
         } else {
+            $div = new XMLElement('div');
+            $div->setAttribute('class', 'actions');
+            $div->appendChild(
+                Widget::Input(
+                    'action[save]',
+                    __('Save Changes'),
+                    'submit',
+                    array('accesskey' => 's')
+                )
+            );
+
+            $button = new XMLElement('button', __('Delete'));
+            $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this entry'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this entry?')));
+            $div->appendChild($button);
+
+            $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
+            $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));
+            $this->Form->appendChild($div);
+            
             if (is_array($main_fields) && !empty($main_fields)) {
                 foreach ($main_fields as $field) {
                     $primary->appendChild($this->__wrapFieldWithDiv($field, $entry));
@@ -1598,26 +1620,8 @@ class contentPublish extends AdministrationPage
             }
 
             $this->Header->setAttribute('class', 'spaced-bottom');
-            $div = new XMLElement('div');
-            $div->setAttribute('class', 'actions');
-            $div->appendChild(
-                Widget::Input(
-                    'action[save]',
-                    __('Save Changes'),
-                    'submit',
-                    array('accesskey' => 's')
-                )
-            );
-
-            $button = new XMLElement('button', __('Delete'));
-            $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this entry'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this entry?')));
-            $div->appendChild($button);
-
-            $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
-            $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));
 
             $this->Form->appendChild($fields_ctn);
-            $this->Form->appendChild($div);
 
             // Create a Drawer for Associated Sections
             $this->prepareAssociationsDrawer($section);

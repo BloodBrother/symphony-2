@@ -37,7 +37,7 @@ h1 {
 	font-size: var(--text-current);
 	margin-bottom: var(--spacing-smallish);
 
-	@media (min-width: @sm){
+	@media (max-width: (@sm - 1)) {
 		position: fixed;
 		margin: var(--spacing-smallest) 0 var(--spacing-smallish) ~'calc(var(--spacing-huge) *- 1)';
 		width: var(--spacing-huge);
