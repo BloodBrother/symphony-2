@@ -341,7 +341,6 @@ class contentBlueprintsSections extends AdministrationPage
         $this->Form->appendChild($fieldset);
 
         $this->Header->setAttribute('class', 'spaced-bottom');
-        $this->Context->setAttribute('class', 'spaced-right');
         $this->Contents->setAttribute('class', 'centered-content');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
@@ -583,31 +582,21 @@ class contentBlueprintsSections extends AdministrationPage
         $this->Form->appendChild($fieldset);
 
         $this->Header->setAttribute('class', 'spaced-bottom');
-        $this->Context->setAttribute('class', 'spaced-right');
         $this->Contents->setAttribute('class', 'centered-content');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
         $div->appendChild(
-            Widget::SVGIconContainer(
-                'save',
-                Widget::Input(
-                    'action[save]',
-                    __('Save Changes'),
-                    'submit',
-                    ['accesskey' => 's']
-                )
+            Widget::Input(
+                'action[save]',
+                __('Save Changes'),
+                'submit',
+                ['accesskey' => 's']
             )
         );
 
         $button = new XMLElement('button', __('Delete'));
         $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this section'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this section?')));
-        $div->appendChild(
-            Widget::SVGIconContainer(
-                'delete',
-                $button
-            )
-        );
-        $div->appendChild(Widget::SVGIcon('chevron'));
+        $div->appendChild($button);
 
         $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
         $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));

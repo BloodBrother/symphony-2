@@ -353,12 +353,6 @@
 		justify-content: flex-end;
 	}
 
-	&.spaced-right {
-		@media (min-width: @sm){
-			padding-right: @spacing-larger;
-		}
-	}
-
 	/* Actions */
 
 	> .actions {
@@ -535,34 +529,24 @@
 /* Actions - Page */
 
 body.page-single #contents .actions {
-	.flex(~'column',~'flex-start',~'flex-start');
-	position: fixed;
-	right: 0;
-	top: 0;
+	display: block;
+
 	margin: 0;
 	padding: 0;
-	width: @spacing-larger;
-	height: @spacing-midlarge;
 	z-index: 110;
+	margin-left: -@spacing-smallest;
 
 	input, button {
 		.transitioned(~'opacity, background');
-		border-radius: 0px;
-		box-sizing: border-box;
-		display: block;
-		color: @white;
-		font-size: @text-shorter;
-		text-transform: uppercase;
-		text-align: left;
-		line-height: 1.2em;
-		margin: 0!important;
-		padding: 0 @spacing-smallish 0 5.2rem;
-		border: none;
-		background: @accent!important;
-		width: 100%;
-		height: @spacing-midlarge;
-		white-space: normal;
+		background: @accent;
 		cursor: pointer;
+
+		&[name="action[save]"] {
+			float: right;
+			&:hover {
+				background: @green!important;
+			}
+		}
 
 		&[name="action[delete]"], &[name="action[delete]"]:hover {
 			background: @red!important;
@@ -580,8 +564,8 @@ body.page-single #contents .actions {
 		svg {
 			content: ">";
 			position: absolute;
-			left: @spacing-smallerish;
-			top: 2rem;
+			left: 2.2rem;
+			top: 0.9rem;
 			color: @white;
 			max-width: 2.6rem;
 			max-height: 2.6rem;
@@ -591,36 +575,6 @@ body.page-single #contents .actions {
 		&:first-child + svg {
 			display: none;
 		}
-	}
-
-	> *:not(svg) {
-		.transitioned(~'opacity, color');
-		flex-shrink: 0;
-		width: 100%;
-
-		&[data-icon="action[delete]"] {
-			order: 10;
-		}
-	}
-
-	> *:nth-child(n + 2):not(svg) {
-		opacity: 0;
-		pointer-events: none;
-	}
-
-	&:hover > *:nth-child(n + 2):not(svg) {
-		opacity: 1;
-		pointer-events: auto;
-	}
-
-	> svg {
-		transform: translateY(-50%);
-		display: block;
-		position: absolute;
-		right: @spacing-smallerish;
-		top: 50%;
-		color: @white;
-		pointer-events: none;
 	}
 
 	@media (max-width: (@sm - 1)) {
@@ -652,25 +606,6 @@ body.page-single #contents .actions {
 			display: none;
 		}
 
-		> *:not(svg) {
-			order: 2;
-			width: auto;
-			opacity: 1!important;
-			pointer-events: auto!important;
-
-			&[data-icon="action[delete]"] {
-				order: 1;
-				margin-right: @spacing-smallest;
-			}
-
-			& + *:not(svg) {
-				margin-left: @spacing-smallest;
-			}
-		}
-
-		> svg {
-			display: none;
-		}
 	}
 }
 

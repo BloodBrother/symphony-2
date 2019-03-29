@@ -573,33 +573,23 @@ class contentBlueprintsPages extends AdministrationPage
         );
 
         $this->Header->setAttribute('class', 'spaced-bottom');
-        $this->Context->setAttribute('class', 'spaced-right');
         $this->Contents->setAttribute('class', 'centered-content');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
         $div->appendChild(
-            Widget::SVGIconContainer(
-                'save',
-                Widget::Input(
-                    'action[save]',
-                    $this->_context['action'] === 'edit' ? __('Save Changes') : __('Create Page'),
-                    'submit',
-                    ['accesskey' => 's']
-                )
+            Widget::Input(
+                'action[save]',
+                $this->_context['action'] === 'edit' ? __('Save Changes') : __('Create Page'),
+                'submit',
+                ['accesskey' => 's']
             )
         );
 
         if ($this->_context['action'] === 'edit') {
             $button = new XMLElement('button', __('Delete'));
             $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this page'), 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this page?')));
-            $div->appendChild(
-                Widget::SVGIconContainer(
-                    'delete',
-                    $button
-                )
-            );
+            $div->appendChild($button);
         }
-        $div->appendChild(Widget::SVGIcon('chevron'));
 
         $this->Form->appendChild($div);
 

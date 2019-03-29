@@ -159,7 +159,6 @@ class contentSystemPreferences extends AdministrationPage
         ));
 
         $this->Header->setAttribute('class', 'spaced-bottom');
-        $this->Context->setAttribute('class', 'spaced-right');
         $this->Contents->setAttribute('class', 'centered-content');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
@@ -169,18 +168,12 @@ class contentSystemPreferences extends AdministrationPage
             $attr['disabled'] = 'disabled';
         }
 
-        $div->appendChild(
-            Widget::SVGIconContainer(
-                'save',
-                Widget::Input(
-                    'action[save]',
-                    __('Save Changes'),
-                    'submit',
-                    $attr
-                )
-            )
-        );
-        $div->appendChild(Widget::SVGIcon('chevron'));
+        $div->appendChild(Widget::Input(
+            'action[save]',
+            __('Save Changes'),
+            'submit',
+            $attr
+        ));
 
         $this->Form->appendChild($div);
     }
