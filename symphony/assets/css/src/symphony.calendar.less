@@ -2,312 +2,265 @@
  * Symphony Calendar
  */
 
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
+
+@import "variables";
+
+/*--------------------------------------------------------------------------
+	Calendar
+--------------------------------------------------------------------------*/
+
+.field-date .suggestions {
+	.transitioned(~'border-color');
+	border-radius: 0 0 @radius-current @radius-current;
+	overflow: visible!important;
+	margin-top: -@radius-current!important;
+	border-top: none;
+	background: @lightest-grey;
+	width: 100%;
+
+	li {
+		padding: @spacing-smallerish;
+	}
+}
+
+.field-date input:focus + .suggestions {
+	.transitioned(~'border-color');
+	border-color: @accent;
+}
+
 .calendar {
 	position: relative;
-	margin-top: 0.2rem;
-	padding-bottom: 0.5rem;
-	border: 0.1rem solid #c5c5c5;
-	border-radius: 0.4rem 0.4rem 0 0;
-	background-color: #f5f5f5;
-	box-shadow: 0 0.2rem 0.15rem rgba(0, 0, 0, 0.15);
-}
-
-.calendar.hidden {
-	display: none;
-}
-
-.suggestions .calendar {
-	margin-top: 0;
-	padding-bottom: 0;
-	border: none;
-	border-bottom: 0.5rem solid #fff;
-	border-radius: 0.4rem;
-	background-image: linear-gradient(to bottom, transparent 0px, transparent 3.3rem, #ececec 3.3rem, #ececec 3.4rem, #f9f9f9 3.4rem, #f9f9f9 3.5rem, #fcfcfc 3.5rem, #fcfcfc 6.8rem, #e2e2e2 6.8rem, #e2e2e2 6.9rem, #f6f6f6 6.9rem, #f6f6f6 7rem, #fff 7rem);
-	box-shadow: none;
-}
-
-.calendar nav {
-	display: block;
-	position: relative;
-	box-sizing: border-box;
-	height: 3.3rem;
-	margin: 0;
-}
-
-/* Pagination */
-
-.calendar .clndr-previous-button,
-.calendar .clndr-next-button {
-	position: absolute;
-	top: 0.2rem;
-	left: 0.4rem;
-	width: 3rem;
-	height: 3rem;
-	text-indent: -1000em;
-	border: none;
-	background: url(../img/symphony.calendar.svg) 0 -3rem no-repeat;
-	background-size: 3rem 9rem;
-	opacity: 0.3;
-}
-
-.calendar .clndr-next-button {
-	left: auto;
-	right: 0.4rem;
-	background-position: 0 -6rem;
-}
-
-.calendar .clndr-previous-button:hover,
-.calendar .clndr-next-button:hover {
-	opacity: 1;
-}
-
-/* Switch */
-
-.calendar .switch {
-	position: absolute;
-	top: 0.8rem;
-	left: 50%;
-	float: left;
-	overflow: hidden;
-	width: 18rem;
-	height: 2rem;
-	margin: 0 0 0 -9rem;
-	border: none;
-	border-radius: 0.4rem;
-	background: none;
-	cursor: pointer;
-}
-
-.calendar .select {
-	top: calc(-2.2rem * 6 + 0.3rem);
-	overflow: visible;
-	height: auto;
-	border: 0.1rem solid #b3b3b3;
-	border-right-color: #a6a6a6;
-	border-bottom-color: #999;
-	border-left-color: #a6a6a6;
-	border-radius: 0.4rem;
-	background: #fcfcfc;
-	box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.35);
-	z-index: 12000;
-}
-
-.calendar .months,
-.calendar .years {
-	display: block;
-	position: relative;
-	float: left;
-	box-sizing: border-box;
-	width: 8rem;
-	margin: calc(-2.2rem * 6 - 0.5rem) 0 0;
-	padding: 0.25rem 0.25rem 0.25rem 0.15rem;
-	font-size: 1.2rem;
-	border: none;
-	border-radius: 0.4rem;
-}
-
-.calendar .months {
-	width: 10rem;
-	padding: 0.25rem 0.15rem 0.25rem 0.25rem;
-	text-align: right;
-	border-right: 0.1rem solid transparent;
-}
-
-.calendar .months::before,
-.calendar .years::before {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 50%;
-	left: 0;
-	width: 3rem;
-	height: 3rem;
-	margin-top: -1.5rem;
-	background: url(../img/symphony.calendar.svg) 0 0 no-repeat;
-	opacity: 0.3;
-}
-
-.calendar .years::before {
-	left: auto;
-	right: 0;
-}
-.calendar .switch:hover .months::before,
-.calendar .switch:hover .years::before {
-	opacity: 1;
-}
-
-.calendar .select .months::before,
-.calendar .select .years::before {
-	display: none;
-}
-
-.calendar .months li,
-.calendar .years li,
-.calendar .months li:hover,
-.calendar .years li:hover {
-	position: relative;
-	box-sizing: border-box;
-	height: 2.2rem;
-	padding: 0 0.4rem;
-	color: inherit;
-	line-height: 2.2rem;
-	border: none;
-	border-radius: 0.2rem 0 0 0.2rem;
-	background: none;
-	box-shadow: none;
-	cursor: pointer;
-	z-index: 3000;
-}
-
-.calendar .years li {
-	border-radius: 0 0.2rem 0.2rem 0;
-}
-
-.calendar .select .months,
-.calendar .select .years {
-	overflow: hidden;
-	margin: 0;
-	background: #fcfcfc;
-}
-
-.calendar .select .months {
-	border-color: rgba(0, 0, 0, 0.1);
-}
-
-.calendar .select ul:hover li:nth-child(7) {
-	color: #000;
-	background: #fff;
-}
-
-.calendar .select ul li:nth-child(7) {
-	color: #fff;
-	background: #668abe;
-}
-
-.calendar .select ul li:hover {
-	color: #fff !important;
-	background: #668abe !important;
-}
-
-/* Sheets */
-
-.calendar table {
-	margin: 0;
-	border-top: 0.1rem solid rgba(0, 0, 0, 0.075);
-	border-collapse: separate;
-	background-color: #f5f5f5;
-}
-
-.suggestions .calendar table {
-	max-width: 60rem;
 	margin: 0 auto;
-	border-color: transparent;
-	background-color: transparent;
+	max-width: 30rem;
+	z-index: 20;
+
+	&.hidden {
+		display: none;
+	}
 }
 
-.calendar thead td {
-	color: #333331;
-	text-transform: uppercase;
-	border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
-	background-color: #fcfcfc;
+/*--------------------------------------------------------------------------
+	Nav
+--------------------------------------------------------------------------*/
+
+.calendar{
+	nav {
+		display: block;
+		position: relative;
+		box-sizing: border-box;
+		height: 3.3rem;
+		margin: 0;
+	}
+
+	/* Arrows */
+
+	.clndr-previous-button,
+	.clndr-next-button {
+		.transitioned(~'opacity');
+		position: absolute;
+		top: 0.2rem;
+		left: 0.4rem;
+		text-indent: -1000em;
+		border: none;
+		background: url(../img/symphony.calendar.svg) 0 -3rem no-repeat;
+		background-size: 3rem 9rem;
+		width: 3rem;
+		height: 3rem;
+		opacity: 0.3;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	.clndr-next-button {
+		left: auto;
+		right: 0.4rem;
+		background-position: 0 -6rem;
+	}
+
+	/* Switch */
+
+	.switch {
+		overflow: hidden;
+		position: absolute;
+		top: 0.3rem;
+		left: 50%;
+		margin: 0 0 0 -9rem;
+		border: none;
+		border-radius: @radius-current;
+		background: @accent;
+		width: 18rem;
+		height: 2.4rem;
+		cursor: pointer;
+
+		.months,
+		.years {
+			box-sizing: border-box;
+			border-radius: @radius-current;
+			display: block;
+			float: left;
+			position: relative;
+			font-size: @text-shorter;
+			margin: calc(-2.4rem * 6) 0 0;
+			width: 8rem;
+
+			li,
+			li:hover {
+				box-shadow: none;
+				box-sizing: border-box;
+				position: relative;
+				color: inherit;
+				line-height: 2.4rem;
+				padding: 0 0.4rem;
+				border: none;
+				border-radius: 0.2rem 0 0 0.2rem;
+				background: none;
+				height: 2.4rem;
+				z-index: 3000;
+				cursor: pointer;
+			}
+
+			&:before {
+				content: '';
+				display: block;
+				position: absolute;
+				top: 50%;
+				left: 0;
+				margin-top: -1.5rem;
+				background: url(../img/symphony.calendar.svg) 0 0 no-repeat;
+				width: 3rem;
+				height: 3rem;
+				opacity: 0.3;
+			}
+		}
+
+		.months {
+			text-align: right;
+			border-right: 0.1rem solid transparent;
+			width: 10rem;
+		}
+
+		.years {
+			li {
+				border-radius: 0 0.2rem 0.2rem 0;
+			}
+
+			&:before {
+				left: auto;
+				right: 0;
+			}
+		}
+
+		&:hover .months:before,
+		&:hover .years:before {
+			opacity: 1;
+		}
+
+		&:not(.select) li {
+			color: @white!important;
+		}
+
+		&.select {
+			box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.2);
+			overflow: visible;
+			top: calc(-2.4rem * 6 + 0.3rem);
+			height: auto;
+			border-radius: @radius-current;
+			background: @white;
+			z-index: 12000;
+
+			.months,
+			.years {
+				overflow: hidden;
+				margin: 0;
+				background: @white;
+
+				li {
+					border-radius: 0;
+
+					&:hover,
+					&:nth-child(7) {
+						color: @white;
+						background: @accent;
+					}
+				}
+
+				&:before {
+					display: none;
+				}
+			}
+
+			.months {
+				border-color: @lighter-grey;
+				border-radius: @radius-current 0 0 @radius-current;
+			}
+
+			.years {
+				border-radius: 0 @radius-current @radius-current 0;
+			}
+		}
+	}
 }
 
-.suggestions .calendar thead td {
-	border-color: transparent;
-	background-color: transparent;
-}
+/*--------------------------------------------------------------------------
+	Table
+--------------------------------------------------------------------------*/
 
-.calendar tr,
-.calendar td {
-	height: 3.3rem;
-	padding: 0;
-	border: none;
-	background-color: inherit;
-}
+.calendar {
+	table {
+		border-radius: 0px;
+		border-collapse: collapse;
+		background: @white;
 
-.calendar tr:first-of-type td {
-	border-top: 0.1rem solid rgba(0, 0, 0, 0.025);
-}
+		td {
+			color: @accent;
+			text-align: center;
+			padding: 0!important;
+			width: 14.28%;
+			height: @spacing-smallish;
+			vertical-align: middle;
+		}
 
-.suggestions .calendar tr:first-of-type td {
-	border-top: none;
-}
+		thead td,
+		thead td:first-child,
+		thead td:last-child {
+			color: @accent;
+		}
 
-.calendar tbody tr:first-of-type td {
-	padding-top: 0.5rem;
-}
+		tbody td {
+			border: 1px solid @lighter-grey;
+			cursor: pointer;
+		}
 
-.calendar td {
-	width: 14.2857142857%;
-	text-align: center;
-	vertical-align: middle;
-}
+		td:first-child,
+		td:last-child {
+			background: none;
+		}
 
-.calendar .day {
-	display: inline-block;
-	box-sizing: boder-box;
-	width: 2.5rem;
-	height: 2.5rem;
-	line-height: 2.3rem;
-	border: 0.1rem solid transparent;
-	border-radius: 50%;
-	cursor: pointer;
-	color: #222;
-}
+		td.selected,
+		td.selected.today,
+		tbody td:hover {
+			color: @white;
+			background: @accent!important;
+		}
 
-.calendar .day:hover {
-	border-color: #c5c5c5;
-	box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-}
+		.adjacent-month {
+			color: @lighter-grey;
+		}
 
-.calendar .today,
-.calendar .today:hover {
-	border-color: #c5c5c5;
-	background: #fff;
-}
+		.day {
+			.flex(~'row',~'center',~'center');
+			width: 100%;
+			height: 100%;
 
-.calendar .last-month,
-.calendar .next-month {
-	color: rgba(0, 0, 0, 0.2);
-}
-
-.calendar .active,
-.calendar .active:hover {
-	color: #fff;
-	border-width: 0.2rem;
-	border-color: #fff;
-	background: #668abe;
-	box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-}
-
-/* Storage */
-
-.calendar:not(.hidden) + input,
-.calendar:not(.hidden) + input:focus {
-	height: 3.3rem;
-	margin-top: 0;
-	padding: 0.6rem 1rem;
-	border-top: none;
-	border-radius: 0 0 0.4rem 0.4rem;
-}
-
-/* Timezone Offset */
-
-.show-timezone label::after {
-	content: attr(data-timezone);
-	display: block;
-	position: absolute;
-	right: 0.1rem;
-	bottom: 0.1rem;
-	height: 2rem;
-	margin: 0;
-	padding: 0 0.5rem 0 1rem;
-	color: #a9a9a9;
-	line-height: 2rem;
-	background-color: #fff;
-}
-
-.show-timezone[data-interactive] label::after {
-	margin-bottom: 0.5rem;
-	padding-right: 1rem;
+			&:hover, .active, .today {
+				color: @white;
+				background: @accent;
+			}
+		}
+	}
 }
