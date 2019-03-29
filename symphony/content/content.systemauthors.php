@@ -353,22 +353,17 @@ class contentSystemAuthors extends AdministrationPage
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
 
-        $div->appendChild(
-            Widget::Input(
-                'action[save]',
-                ($this->_context['action'] == 'edit' ? __('Save Changes') : __('Create Author')),
-                'submit',
-                array('accesskey' => 's')
-            )
-        );
+        $saveBtn = new XMLElement('button', Widget::SVGIcon('save'));
+        $saveBtn->setAttributeArray(array('name' => 'action[save]', 'class' => 'button', 'title' => ($this->_context['action'] == 'edit' ? __('Save Changes') : __('Create Author')), 'type' => 'submit', 'accesskey' => 's'));
+        $div->appendChild($saveBtn);
 
         if ($isEditing && !$isOwner && !$author->isPrimaryAccount() && $canEdit) {
-            $button = new XMLElement('button', __('Delete'));
+            $button = new XMLElement('button', Widget::SVGIcon('delete'));
             $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this author'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this author?')));
             $div->appendChild($button);
         }
 
-        $this->Form->appendChild($div);
+        $this->ContentsActions->appendChild($div);
 
         // Essentials
         $group = new XMLElement('fieldset');

@@ -42,6 +42,7 @@
 		transition-timing-function: var(--ease-current);
 		transition-property: opacity;
 		transition-duration: var(--duration-shorter);
+		overflow: hidden;
 
 		&.top {
 			top: 0;
@@ -63,6 +64,38 @@
 			opacity: 1;
 			pointer-events: all;
 		}
+
+		button {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			padding: var(--spacing-micro) var(--spacing-smallest);
+			background-color: var(--color-clear);
+			width: var(--spacing-larger);
+			border-radius: 0;
+			font-size: var(--text-current);
+
+			svg {
+				margin-right: var(--spacing-smallest);
+			}
+
+			&:hover {
+				color: var(--color-main-dark);
+				background-color: var(--color-ui);
+			}
+
+			&[name="action[delete]"]:hover {
+				color: var(--color-clear);
+				background-color: var(--color-error);
+			}
+		}
 	}
 
+}
+
+#contents-actions .modal-trigger {
+	&:hover {
+		color: var(--color-clear);
+		background-color: var(--color-main-light);
+	}
 }

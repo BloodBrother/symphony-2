@@ -722,10 +722,6 @@ fieldset.settings {
 		margin: 1rem 0 1.25rem;
 	}
 
-	> .columns.two .column {
-		margin-bottom: 0;
-	}
-
 	& + fieldset.settings {
 		margin-top: var(--spacing-midlarge);
 
@@ -738,6 +734,12 @@ fieldset.settings {
 				 border-top: 1px solid var(--color-main-light);
 				 width: 100%;
 			}
+		}
+	}
+
+	&.condensed {
+		label:last-of-type {
+			margin-bottom: 0;
 		}
 	}
 

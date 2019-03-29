@@ -1497,11 +1497,11 @@ class AdministrationPage extends HTMLPage
         $ul = new XMLElement('ul', null, array('class' => 'js-session-panel'));
 
         $li = new XMLElement('li');
-        $li->appendChild(Widget::Anchor(__('Profile'), SYMPHONY_URL . '/system/authors/edit/' . Symphony::Author()->get('id') . '/', null, null, null, array('accesskey' => 'l')));
+        $li->appendChild(Widget::Anchor(Widget::SVGIcon('placeholder') . __('Profile'), SYMPHONY_URL . '/system/authors/edit/' . Symphony::Author()->get('id') . '/', null, null, null, array('accesskey' => 'l')));
         $ul->appendChild($li);
 
-        $li = new XMLElement('li');
-        $li->appendChild(Widget::Anchor(__('Log out') . Widget::SVGIcon('logout'), SYMPHONY_URL . '/logout/', null, null, null, array('accesskey' => 'l')));
+        $li = new XMLElement('li', null, array('class' => 'logout'));
+        $li->appendChild(Widget::Anchor(Widget::SVGIcon('logout') . __('Log out'), SYMPHONY_URL . '/logout/', null, null, null, array('accesskey' => 'l')));
         $ul->appendChild($li);
 
         $this->Session->appendChild($ul);

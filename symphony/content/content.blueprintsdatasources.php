@@ -227,7 +227,7 @@ class contentBlueprintsDatasources extends ResourcesPage
                 'action[save]',
                 ($isEditing ? __('Save Changes') : __('Create Data Source')),
                 'submit',
-                array('accesskey' => 's')
+                ['accesskey' => 's']
             )
         );
 

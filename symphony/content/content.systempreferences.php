@@ -40,20 +40,21 @@ class contentSystemPreferences extends AdministrationPage
 
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-        $attr = array('accesskey' => 's');
+        $saveAttr = array(
+            'accesskey' => 's',
+            'name' => 'action[save]',
+            'title' => _('Save Changes'),
+            'type' => 'submit',
+            ''
+        );
 
         if (!$bIsWritable) {
-            $attr['disabled'] = 'disabled';
+            $saveAttr['disabled'] = 'disabled';
         }
 
-        $div->appendChild(Widget::Input(
-            'action[save]',
-            __('Save Changes'),
-            'submit',
-            $attr
-        ));
+        $div->appendChild(new XMLElement('button', Widget::SVGIcon('save'), $saveAttr));
 
-        $this->Form->appendChild($div);
+        $this->ContentsActions->appendChild($div);
 
         // Get available languages
         $languages = Lang::getAvailableLanguages();

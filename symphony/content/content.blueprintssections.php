@@ -225,7 +225,11 @@ class contentBlueprintsSections extends AdministrationPage
             ['accesskey' => 's']
         ));
 
-        $this->Form->appendChild($div);
+        $saveBtn = new XMLElement('button', Widget::SVGIcon('save'));
+        $saveBtn->setAttributeArray(array('name' => 'action[save]', 'class' => 'button', 'title' => __('Create Section'), 'type' => 'submit', 'accesskey' => 's'));
+        $div->appendChild($saveBtn);
+
+        $this->ContentsActions->appendChild($div);
 
         $formInner = new XMLElement('div', null, array('class' => 'inner'));
 
@@ -356,42 +360,6 @@ class contentBlueprintsSections extends AdministrationPage
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');
-<<<<<<< HEAD
-        $div = new XMLElement('div');
-        $div->setAttribute('class', 'actions');
-        $div->appendChild(
-            Widget::SVGIconContainer(
-                'save',
-                Widget::Input(
-                    'action[save]',
-                    __('Create Section'),
-                    'submit',
-                    ['accesskey' => 's']
-                )
-            )
-        );
-        $div->appendChild(Widget::SVGIcon('chevron'));
-
-        $this->Form->appendChild($div);
-||||||| parent of a4e1ecc7f7... Move action bar at the top of the pages
-        $div = new XMLElement('div');
-        $div->setAttribute('class', 'actions');
-        $div->appendChild(
-            Widget::SVGIconContainer(
-                'save',
-                Widget::Input(
-                    'action[save]',
-                    __('Create Section'),
-                    'submit',
-                    ['accesskey' => 's']
-                )
-            )
-        );
-        $div->appendChild(Widget::SVGIcon('chevron'));
-
-        $this->Form->appendChild($div);
-=======
->>>>>>> a4e1ecc7f7... Move action bar at the top of the pages
     }
 
     public function __viewEdit()
@@ -495,19 +463,18 @@ class contentBlueprintsSections extends AdministrationPage
 
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-        $div->appendChild(
-            Widget::Input(
-                'action[save]',
-                __('Save Changes'),
-                'submit',
-                ['accesskey' => 's']
-            )
-        );
 
-        $button = new XMLElement('button', __('Delete'));
+        $saveBtn = new XMLElement('button', Widget::SVGIcon('save'));
+        $saveBtn->setAttributeArray(array('name' => 'action[save]', 'class' => 'button', 'title' => __('Save Changes'), 'type' => 'submit', 'accesskey' => 's'));
+        $div->appendChild($saveBtn);
+
+        $button = new XMLElement('button', Widget::SVGIcon('delete'));
         $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this section'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this section?')));
         $div->appendChild($button);
 
+        $this->ContentsActions->appendChild($div);
+
+        $div = new XMLElement('div');
         $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
         $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));
 

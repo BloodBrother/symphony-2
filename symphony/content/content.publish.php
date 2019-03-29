@@ -1164,14 +1164,10 @@ class contentPublish extends AdministrationPage
         if (!((!is_array($main_fields) || empty($main_fields)) && (!is_array($sidebar_fields) || empty($sidebar_fields)))) {
             $div = new XMLElement('div');
             $div->setAttribute('class', 'actions');
-            $div->appendChild(
-                Widget::Input(
-                    'action[save]',
-                    __('Create Entry'),
-                    'submit',
-                    array('accesskey' => 's')
-                )
-            );
+
+            $saveBtn = new XMLElement('button', Widget::SVGIcon('save'));
+            $saveBtn->setAttributeArray(array('name' => 'action[save]', 'class' => 'button', 'title' => __('Create Entry'), 'type' => 'submit', 'accesskey' => 's'));
+            $div->appendChild($saveBtn);
             $this->ContentsActions->appendChild($div);
         }
 
@@ -1583,21 +1579,14 @@ class contentPublish extends AdministrationPage
         } else {
             $div = new XMLElement('div');
             $div->setAttribute('class', 'actions');
-            $div->appendChild(
-                Widget::SVGIconContainer(
-                    'save',
-                    Widget::Input(
-                        'action[save]',
-                        null,
-                        'submit',
-                        array('accesskey' => 's', 'value' => '')
-                    )
-                )
-            );
 
-            $button = new XMLElement('button', __('Delete'));
-            $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this entry'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this entry?')));
-            $div->appendChild(Widget::Modal([$button], 'top right'));
+            $saveBtn = new XMLElement('button', Widget::SVGIcon('save'));
+            $saveBtn->setAttributeArray(array('name' => 'action[save]', 'class' => 'button', 'title' => __('Save this entry'), 'type' => 'submit', 'accesskey' => 's'));
+            $div->appendChild($saveBtn);
+
+            $deleteBtn = new XMLElement('button', Widget::SVGIcon('delete') . __('Delete'));
+            $deleteBtn->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this entry'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this entry?')));
+            $div->appendChild(Widget::Modal([$deleteBtn], 'top right'));
 
             $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
             $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));

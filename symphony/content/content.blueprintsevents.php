@@ -156,23 +156,32 @@ class contentBlueprintsEvents extends ResourcesPage
 
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-        $div->appendChild(
-            Widget::Input(
-                'action[save]',
-                ($isEditing ? __('Save Changes') : __('Create Event')),
-                'submit',
-                ['accesskey' => 's']
-            )
-        );
+
+        $saveBtn = new XMLElement('button', Widget::SVGIcon('save'));
+        $saveBtn->setAttributeArray([
+            'name' => 'action[save]',
+            'class' => 'button',
+            'title' => ($isEditing ? __('Save Changes') : __('Create Event')),
+            'type' => 'submit',
+            'accesskey' => 's'
+        ]);
+        $div->appendChild($saveBtn);
 
         if ($isEditing) {
-            $button = new XMLElement('button', __('Delete'));
-            $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this event'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this event?')));
+            $button = new XMLElement('button', Widget::SVGIcon('delete'));
+            $button->setAttributeArray([
+                'name' => 'action[delete]',
+                'class' => 'button confirm delete',
+                'title' => __('Delete this event'),
+                'type' => 'submit',
+                'accesskey' => 'd',
+                'data-message' => __('Are you sure you want to delete this event?')
+            ]);
             $div->appendChild($button);
         }
 
         if (!$readonly) {
-            $this->Form->appendChild($div);
+            $this->ContentsActions->appendChild($div);
         }
 
         if (!$readonly) {

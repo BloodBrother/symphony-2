@@ -393,22 +393,18 @@ class contentBlueprintsPages extends AdministrationPage
         // Actions ------------------------------------------------------------
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-        $div->appendChild(
-            Widget::Input(
-                'action[save]',
-                $this->_context['action'] === 'edit' ? __('Save Changes') : __('Create Page'),
-                'submit',
-                ['accesskey' => 's']
-            )
-        );
+
+        $saveBtn = new XMLElement('button', Widget::SVGIcon('save'));
+        $saveBtn->setAttributeArray(array('name' => 'action[save]', 'class' => 'button', 'title' => $this->_context['action'] === 'edit' ? __('Save Changes') : __('Create Page'), 'type' => 'submit', 'accesskey' => 's'));
+        $div->appendChild($saveBtn);
 
         if ($this->_context['action'] === 'edit') {
-            $button = new XMLElement('button', __('Delete'));
+            $button = new XMLElement('button', Widget::SVGIcon('delete'));
             $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this page'), 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this page?')));
             $div->appendChild($button);
         }
 
-        $this->Form->appendChild($div);
+        $this->ContentsActions->appendChild($div);
 
         // Title --------------------------------------------------------------
 
