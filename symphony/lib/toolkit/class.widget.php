@@ -939,7 +939,7 @@ class Widget
      *  Content to wrap in the container
      * @return XMLElement
      */
-    public static function SVGIconContainer($icon, XMLElement $content, array $attributes = null)
+    public static function SVGIconContainer($icon, XMLElement $content, array $attributes = null, $wrapped = false)
     {
         General::ensureType(array(
             'icon' => array('var' => $icon, 'type' => 'string'),
@@ -950,7 +950,12 @@ class Widget
         if (!empty($attributes)) {
             $obj->setAttributeArray($attributes);
         }
-        $obj->appendChild($content);
+        if ($wrapped) {
+            $obj->appendChild('<span><span>' . $content . '</span></span>');
+        } else {
+            $obj->appendChild($content);
+        }
+
 
         return $obj;
     }

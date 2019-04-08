@@ -15,7 +15,17 @@ class contentBlueprintsEvents extends ResourcesPage
         parent::__viewIndex(ResourceManager::RESOURCE_TYPE_EVENT);
 
         $this->setTitle(__('%1$s &ndash; %2$s', array(__('Events'), __('Symphony'))));
-        $this->appendSubheading(__('Events'), Widget::Anchor(__('Create New'), Administration::instance()->getCurrentPageURL().'new/', __('Create a new event'), 'create button', null, array('accesskey' => 'c')));
+        $this->appendSubheading(
+            __('Events'),
+            Widget::Anchor(
+                Widget::SVGIcon('add') . '<span><span>' . __('Create New') . '</span></span>',
+                Administration::instance()->getCurrentPageURL().'new/',
+                __('Create a new event'),
+                'create button',
+                null,
+                ['accesskey' => 'c']
+            )
+        );
     }
 
     public function __viewNew()
@@ -143,14 +153,10 @@ class contentBlueprintsEvents extends ResourcesPage
             $fieldset = new XMLElement('fieldset');
             $fieldset->setAttribute('class', 'settings');
             $fieldset->appendChild(new XMLElement('legend', __('Essentials')));
+            $group = new XMLElement('div');
 
             // Target
-            $sources = new XMLElement('div', null, array('class' => 'apply actions'));
-            $div = new XMLElement('div');
-            $label = Widget::Label(__('Target'), null, 'apply-label-left');
-            $sources->appendChild($label);
-            $sources->appendChild($div);
-
+            $label = Widget::Label(__('Target'), null);
             $sections = (new SectionManager)->select()->execute()->rows();
             $options = array();
             $section_options = array();
@@ -179,22 +185,17 @@ class contentBlueprintsEvents extends ResourcesPage
                 $options[] = $p;
             }
 
-            $div->appendChild(
-                Widget::Select('source', $options, array('id' => 'event-context'))
+            $label->appendChild(
+                Widget::Select('fields[source]', $options, array('id' => 'event-context'))
             );
 
             if (isset($this->_errors['source'])) {
-                $this->Context->prependChild(Widget::Error($sources, $this->_errors['source']));
+                $group->prependChild(Widget::Error($label, $this->_errors['source']));
             } else {
-                $this->Context->prependChild($sources);
+                $group->prependChild($label);
             }
 
-            $this->Form->appendChild(
-                Widget::Input('fields[source]', $options[0]['options'][0][0], 'hidden', array('id' => 'event-source'))
-            );
-
             // Name
-            $group = new XMLElement('div');
             $label = Widget::Label(__('Name'));
             $label->appendChild(Widget::Input('fields[name]', General::sanitize($fields['name'])));
 
@@ -353,14 +354,30 @@ class contentBlueprintsEvents extends ResourcesPage
 
         $this->Form->appendChild($fieldset);
 
+        $this->Context->setAttribute('class', 'spaced-right');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-        $div->appendChild(Widget::Input('action[save]', ($isEditing ? __('Save Changes') : __('Create Event')), 'submit', array('accesskey' => 's')));
+        $div->appendChild(
+            Widget::SVGIconContainer(
+                'save',
+                Widget::Input(
+                    'action[save]',
+                    ($isEditing ? __('Save Changes') : __('Create Event')),
+                    'submit',
+                    ['accesskey' => 's']
+                )
+            )
+        );
 
         if ($isEditing) {
             $button = new XMLElement('button', __('Delete'));
             $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this event'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this event?')));
-            $div->appendChild($button);
+            $div->appendChild(
+                Widget::SVGIconContainer(
+                    'delete',
+                    $button
+                )
+            );
         }
 
         if (!$readonly) {

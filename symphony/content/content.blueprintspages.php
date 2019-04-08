@@ -96,7 +96,7 @@ class contentBlueprintsPages extends AdministrationPage
                 ? General::sanitize($parent['title'])
                 : __('Pages'),
             Widget::Anchor(
-                __('Create New'),
+                Widget::SVGIcon('add') . '<span><span>' . __('Create New') . '</span></span>',
                 Administration::instance()->getCurrentPageURL() . 'new/' . ($nesting && isset($parent) ? "?parent={$parent['id']}" : null),
                 __('Create a new page'),
                 'create button',
@@ -354,14 +354,16 @@ class contentBlueprintsPages extends AdministrationPage
 
             $this->appendSubheading(
                 General::sanitize($title),
-                Widget::Anchor(
-                    __('View Page'),
-                    $page_url,
-                    __('View Page on Frontend'),
-                    'button',
-                    null,
-                    array('target' => '_blank', 'accesskey' => 'v')
-                )
+                [
+                    Widget::Anchor(
+                        Widget::SVGIcon('view') . '<span><span>' . __('View Page') . '</span></span>',
+                        $page_url,
+                        __('View Page on Frontend'),
+                        'button',
+                        null,
+                        ['target' => '_blank','accesskey' => 'v']
+                    )
+                ]
             );
         } else {
             $this->appendSubheading(!empty($title) ? General::sanitize($title) : __('Untitled'));
@@ -556,19 +558,30 @@ class contentBlueprintsPages extends AdministrationPage
             ]
         );
 
+        $this->Context->setAttribute('class', 'spaced-right');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-        $div->appendChild(Widget::Input(
-            'action[save]',
-            $this->_context['action'] === 'edit' ? __('Save Changes') : __('Create Page'),
-            'submit',
-            array('accesskey' => 's')
-        ));
+        $div->appendChild(
+            Widget::SVGIconContainer(
+                'save',
+                Widget::Input(
+                    'action[save]',
+                    $this->_context['action'] === 'edit' ? __('Save Changes') : __('Create Page'),
+                    'submit',
+                    ['accesskey' => 's']
+                )
+            )
+        );
 
         if ($this->_context['action'] === 'edit') {
             $button = new XMLElement('button', __('Delete'));
             $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this page'), 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this page?')));
-            $div->appendChild($button);
+            $div->appendChild(
+                Widget::SVGIconContainer(
+                    'delete',
+                    $button
+                )
+            );
         }
 
         $this->Form->appendChild($div);

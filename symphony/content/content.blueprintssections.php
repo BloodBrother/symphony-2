@@ -49,7 +49,17 @@ class contentBlueprintsSections extends AdministrationPage
     {
         $this->setPageType('table');
         $this->setTitle(__('%1$s &ndash; %2$s', array(__('Sections'), __('Symphony'))));
-        $this->appendSubheading(__('Sections'), Widget::Anchor(__('Create New'), Administration::instance()->getCurrentPageURL().'new/', __('Create a section'), 'create button', null, array('accesskey' => 'c')));
+        $this->appendSubheading(
+            __('Sections'),
+            Widget::Anchor(
+                Widget::SVGIcon('add') . '<span><span>' . __('Create New') . '</span></span>',
+                Administration::instance()->getCurrentPageURL().'new/',
+                __('Create a section'),
+                'create button',
+                null,
+                array('accesskey' => 'c')
+            )
+        );
 
         $sections = (new SectionManager)->select()->sort('sortorder')->execute()->rows();
 
@@ -331,9 +341,20 @@ class contentBlueprintsSections extends AdministrationPage
 
         $this->Form->appendChild($fieldset);
 
+        $this->Context->setAttribute('class', 'spaced-right');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-        $div->appendChild(Widget::Input('action[save]', __('Create Section'), 'submit', array('accesskey' => 's')));
+        $div->appendChild(
+            Widget::SVGIconContainer(
+                'save',
+                Widget::Input(
+                    'action[save]',
+                    __('Create Section'),
+                    'submit',
+                    ['accesskey' => 's']
+                )
+            )
+        );
 
         $this->Form->appendChild($div);
     }
@@ -419,8 +440,14 @@ class contentBlueprintsSections extends AdministrationPage
             'rel' => 'canonical',
             'href' => SYMPHONY_URL . $canonical_link,
         )));
-        $this->appendSubheading(General::sanitize($meta['name']),
-            Widget::Anchor(__('View Entries'), SYMPHONY_URL . '/publish/' . $section->get('handle') . '/', __('View Section Entries'), 'button')
+        $this->appendSubheading(
+            General::sanitize($meta['name']),
+            Widget::Anchor(
+                Widget::SVGIcon('view') . '<span><span>' . __('View Entries') . '</span></span>',
+                SYMPHONY_URL . '/publish/' . $section->get('handle') . '/',
+                __('View Section Entries'),
+                'button'
+            )
         );
         $this->insertBreadcrumbs(array(
             Widget::Anchor(__('Sections'), SYMPHONY_URL . '/blueprints/sections/'),
@@ -548,13 +575,29 @@ class contentBlueprintsSections extends AdministrationPage
 
         $this->Form->appendChild($fieldset);
 
+        $this->Context->setAttribute('class', 'spaced-right');
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-        $div->appendChild(Widget::Input('action[save]', __('Save Changes'), 'submit', array('accesskey' => 's')));
+        $div->appendChild(
+            Widget::SVGIconContainer(
+                'save',
+                Widget::Input(
+                    'action[save]',
+                    __('Save Changes'),
+                    'submit',
+                    ['accesskey' => 's']
+                )
+            )
+        );
 
         $button = new XMLElement('button', __('Delete'));
         $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this section'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this section?')));
-        $div->appendChild($button);
+        $div->appendChild(
+            Widget::SVGIconContainer(
+                'delete',
+                $button
+            )
+        );
 
         $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
         $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));
