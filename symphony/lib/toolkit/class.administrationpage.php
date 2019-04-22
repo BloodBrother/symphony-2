@@ -138,12 +138,7 @@ class AdministrationPage extends HTMLPage
      */
     public function setBodyClass($class)
     {
-        // Prevents duplicate "page-index" classes
-        if (!isset($this->_context['page']) || !in_array('page-index', [$this->_context['page'], $class])) {
-            $this->_body_class .= $class;
-        }
-
-        $this->Body->setAttribute('class', $this->_body_class);
+        $this->Body->addClass($class);
     }
 
     /**
