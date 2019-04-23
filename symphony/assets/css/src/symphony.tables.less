@@ -81,9 +81,8 @@ table {
 	}
 
 	tbody {
-		padding: 0 var(--spacing-smallerish);
+		padding: var(--spacing-smallerish);
 		box-sizing: border-box;
-		margin-top: var(--spacing-smallerish);
 
 		tr {
 			background-color: var(--color-clear);
@@ -105,8 +104,15 @@ table {
 				color: var(--color-main-light);
 			}
 
+			img {
+				max-width: var(--spacing-small);
+				border-radius: var(--radius-smallest);
+			}
+
 			a {
 				color: var(--color-accent);
+				display: flex;
+				align-items: center;
 			}
 
 			@media (max-width: (@sm - 1)) {
@@ -146,19 +152,22 @@ table.selectable input {
 }
 
 tr.selected {
-	color: var(--color-main-dark);
+	color: var(--color-main-light);
 	background-color: var(--color-accent-alt-light);
 
-	a {
-		color: var(--color-main-dark);
-		&:hover {
-			color: var(--color-main-dark);
+	td {
+		a {
+			color: var(--color-main-light);
+			&:hover {
+				color: var(--color-main-light);
+			}
+		}
+	
+		&.inactive {
+			color: var(--color-main-light);
 		}
 	}
 
-	.inactive {
-		color: var(--color-main-dark);
-	}
 }
 
 /*-----------------------------------------------------------------------------
@@ -169,32 +178,26 @@ tr.ordering {
 	cursor: move;
 }
 
-tr.ordering td,
-tr:nth-child(odd).ordering td {
-	background-color: var(--color-accent);
-}
-
-tr.ordering td,
-tr.ordering a {
-	color: var(--color-clear);
+tr.ordering {
+	background-color: var(--color-accent-alt-light);
 }
 
 /*-----------------------------------------------------------------------------
 	Status
 -----------------------------------------------------------------------------*/
 
-tr.status-ok:not(.selected) td:first-child {
+tr.status-ok:not(.selected) {
 	color: var(--color-accent);
 }
 
-tr.status-notice:not(.selected) td:first-child {
+tr.status-notice:not(.selected) {
 	color: var(--color-accent-alt);
 }
 
-tr.status-error:not(.selected) td:first-child {
+tr.status-error:not(.selected) {
 	color: var(--color-error);
 }
 
-tr.inactive:not(.selected) td:first-child {
-	color: var(--color-main);
+tr.inactive:not(.selected) {
+	opacity: 0.5;
 }

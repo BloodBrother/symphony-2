@@ -950,13 +950,16 @@ body {
 --------------------------------------------------------------------------*/
 
 ul.page {
-	.flex(~'row',~'center',~'center');
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	padding: var(--spacing-smallish);
 	box-sizing: border-box;
 	margin: 0;
 	color: var(--color-main-dark);
 	cursor: default;
-	background-color: var(--color-clear);
+	background-color: var(--color-accent-light);
+	width: 100%;
 
 	a {
 		color: var(--color-accent);

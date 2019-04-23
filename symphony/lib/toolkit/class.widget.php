@@ -769,14 +769,22 @@ class Widget
     {
         $fieldset = new XMLElement('fieldset', null, array('class' => 'apply'));
         $div = new XMLElement('div');
-        $div->appendChild(Widget::Label(__('Actions'), null, 'accessible', null, array(
-            'for' => 'with-selected'
-        )));
-        $div->appendChild(Widget::Select('with-selected', $options, array(
-            'id' => 'with-selected'
-        )));
+
+        foreach ($options as $option) {
+            $action = new XMLElement('button', $option[2], array(
+                'type' => 'submit',
+                'name' => 'with-selected',
+                'value' => $option[0]
+            ));
+
+            if (!empty($option[0])) {
+                $div->appendChild($action);
+            }
+        }
+
+        $div->appendChild(Widget::Input('action', '', 'hidden'));
+
         $fieldset->appendChild($div);
-        $fieldset->appendChild(new XMLElement('button', __('Apply'), array('name' => 'action[apply]', 'type' => 'submit')));
 
         return $fieldset;
     }

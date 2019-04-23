@@ -744,9 +744,9 @@ class contentPublish extends AdministrationPage
                             $value = ($position == 0 ? $link->generate() : __('None'));
                         }
 
-                        if ($value == __('None')) {
+                        if ($value == __('None') || $value == __('-')) {
                             $tableData[] = Widget::TableData(
-                                $value,
+                                '-',
                                 'inactive field-' . $column->get('type') . ' field-' . $column->get('id'),
                                 null,
                                 null,
