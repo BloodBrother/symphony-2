@@ -232,28 +232,31 @@ optgroup {
 	opacity: 1;
 }
 
-textarea[disabled=disabled],
-textarea[disabled=disabled]:hover,
-textarea[disabled=disabled]:active,
-textarea[disabled=disabled]:focus,
+input:disabled,
+textarea:disabled,
+textarea:disabled:hover,
+textarea:disabled:active,
+textarea:disabled:focus,
 textarea[readonly=readonly],
 textarea[readonly=readonly]:hover,
 textarea[readonly=readonly]:active,
 textarea[readonly=readonly]:focus,
-input[type=submit][disabled=disabled]:hover,
-input[type=submit][disabled=disabled]:active,
-input[type=submit][disabled=disabled]:focus,
+input[type=submit]:disabled:hover,
+input[type=submit]:disabled:active,
+input[type=submit]:disabled:focus,
 input[readonly=readonly],
 input[readonly=readonly]:hover,
 input[readonly=readonly]:active,
 input[readonly=readonly]:focus,
 button[disabled],
-button[disabled=disabled],
-button[disabled=disabled]:hover,
-button[disabled=disabled]:active,
-button[disabled=disabled]:focus {
+button:disabled,
+button:disabled:hover,
+button:disabled:active,
+button:disabled:focus {
 	opacity: 0.5;
 	cursor: not-allowed!important;
+	background-color: var(--color-main-lightest);
+	color: var(--color-main);
 }
 
 /*--------------------------------------------------------------------------

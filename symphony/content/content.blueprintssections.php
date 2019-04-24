@@ -464,13 +464,13 @@ class contentBlueprintsSections extends AdministrationPage
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
 
-        $saveBtn = new XMLElement('button', Widget::SVGIcon('save'));
-        $saveBtn->setAttributeArray(array('name' => 'action[save]', 'class' => 'button', 'title' => __('Save Changes'), 'type' => 'submit', 'accesskey' => 's'));
-        $div->appendChild($saveBtn);
-
         $button = new XMLElement('button', Widget::SVGIcon('delete'));
         $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this section'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this section?')));
         $div->appendChild($button);
+
+        $saveBtn = new XMLElement('button', Widget::SVGIcon('save'));
+        $saveBtn->setAttributeArray(array('name' => 'action[save]', 'class' => 'button', 'title' => __('Save Changes'), 'type' => 'submit', 'accesskey' => 's'));
+        $div->appendChild($saveBtn);
 
         $this->ContentsActions->appendChild($div);
 

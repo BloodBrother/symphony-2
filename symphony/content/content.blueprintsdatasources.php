@@ -223,22 +223,18 @@ class contentBlueprintsDatasources extends ResourcesPage
 
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-        $div->appendChild(
-            Widget::Input(
-                'action[save]',
-                ($isEditing ? __('Save Changes') : __('Create Data Source')),
-                'submit',
-                ['accesskey' => 's']
-            )
-        );
 
         if ($isEditing) {
-            $button = new XMLElement('button', __('Delete'));
+            $button = new XMLElement('button', Widget::SVGIcon('delete'));
             $button->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this data source'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this data source?')));
             $div->appendChild($button);
         }
 
-        $this->Form->appendChild($div);
+        $saveBtn = new XMLElement('button', Widget::SVGIcon('save'));
+        $saveBtn->setAttributeArray(array('name' => 'action[save]', 'class' => 'button', 'title' => ($isEditing ? __('Save Changes') : __('Create Data Source')), 'type' => 'submit', 'accesskey' => 's'));
+        $div->appendChild($saveBtn);
+
+        $this->ContentsActions->appendChild($div);
 
         // Source
         $fieldset = new XMLElement('fieldset');
