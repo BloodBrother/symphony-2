@@ -52,7 +52,11 @@ table {
 	thead {
 		box-shadow: var(--shadow);
 		padding: 0 var(--spacing-smallerish);
+		background-color: var(--color-accent-light);
 		box-sizing: border-box;
+		position: sticky;
+		top: 0;
+		z-index: 1;
 
 		a {
 			color: var(--color-main-dark);
@@ -111,8 +115,6 @@ table {
 
 			a {
 				color: var(--color-accent);
-				display: flex;
-				align-items: center;
 			}
 
 			@media (max-width: (@sm - 1)) {

@@ -23,9 +23,15 @@
 		align-items: center;
 		justify-content: center;
 		padding: var(--spacing-smallest);
+		background-color: transparent;
+		color: var(--color-main);
 
 		svg {
 			flex-shrink: 0;
+		}
+
+		&:hover {
+			background-color: var(--color-main-lightest);
 		}
 	}
 
@@ -94,11 +100,4 @@
 		pointer-events: all;
 	}
 
-}
-
-#contents-actions .modal-trigger {
-	&:hover {
-		color: var(--color-clear);
-		background-color: var(--color-main-light);
-	}
 }

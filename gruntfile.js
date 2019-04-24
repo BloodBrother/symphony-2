@@ -37,7 +37,8 @@ module.exports = function (grunt) {
                         'symphony/assets/css/src/symphony.calendar.less',
                         'symphony/assets/css/src/symphony.filtering.less',
                         'symphony/assets/css/src/symphony.modals.less',
-                        'symphony/assets/css/src/admin.less'
+                        'symphony/assets/css/src/admin.less',
+                        'symphony/assets/css/src/login.less'
                     ],
                     'symphony/assets/css/installer.min.css': [
                         'symphony/assets/css/src/symphony.less',
