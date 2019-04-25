@@ -328,6 +328,10 @@ label,
 label.column,
 .label {
 	margin-bottom: var(--spacing-smallish);
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
 }
 
 label > i:not(:empty),
@@ -708,7 +712,8 @@ fieldset.settings {
 		@media (max-width: (@md - 1)){
 			position: relative;
 			font-size: var(--text-small);
-			margin: ~'calc((var(--spacing-smallish) * -1) 0 var(--spacing-smallish))';
+			margin: 0;
+			margin-bottom: var(--spacing-smaller);
 			width: auto;
 		}
 

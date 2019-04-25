@@ -394,7 +394,7 @@ class AdministrationPage extends HTMLPage
         $this->Html->setDTD('<!DOCTYPE html>');
         $this->Html->setAttribute('lang', Lang::get());
         $this->addElementToHead(new XMLElement('meta', null, array('charset' => 'UTF-8')), 0);
-        $this->addElementToHead(new XMLElement('meta', null, array('name' => 'theme-color', 'content' => '#1B6AE7')), 0);
+        $this->addElementToHead(new XMLElement('meta', null, array('name' => 'theme-color', 'content' => '#FFF7D9')), 0);
         $this->addElementToHead(new XMLElement('meta', null, array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge,chrome=1')), 1);
         $this->addElementToHead(new XMLElement('meta', null, array('name' => 'viewport', 'content' => 'width=device-width, initial-scale=1')), 2);
 
