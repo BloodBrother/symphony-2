@@ -770,7 +770,25 @@ class Widget
         $fieldset = new XMLElement('fieldset', null, array('class' => 'apply'));
         $div = new XMLElement('div');
 
+        $computedOptions = array();
+
         foreach ($options as $option) {
+            if (!empty($option['options']) && is_array($option['options'])) {
+                foreach ($option['options'] as $subOption) {
+                    $computedOptions[] = [
+                        $subOption[0],
+                        false,
+                        $option['label'] . ' ' . $subOption[2]
+                    ];
+                }
+            } else {
+                $computedOptions[] = $option;
+            }
+        }
+
+        $computedOptions = array_reverse($computedOptions);
+
+        foreach ($computedOptions as $option) {
             $action = new XMLElement('button', $option[2], array(
                 'type' => 'submit',
                 'name' => 'with-selected',
@@ -783,7 +801,6 @@ class Widget
         }
 
         $div->appendChild(Widget::Input('action', '', 'hidden'));
-
         $fieldset->appendChild($div);
 
         return $fieldset;

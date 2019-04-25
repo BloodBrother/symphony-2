@@ -52,7 +52,6 @@
 		Symphony.Elements.loading = $('#loading');
 		Symphony.Elements.wrapper = $('#wrapper');
 		Symphony.Elements.header = $('#header');
-		Symphony.Elements.headerMobileToggler = $('.js-symphony-close-header');
 		Symphony.Elements.nav = $('#nav');
 		Symphony.Elements.session = $('.session');
 		Symphony.Elements.context = $('#context');
@@ -108,13 +107,6 @@
 				t.parent().removeClass('opened');
 				t.siblings('ul').slideUp(250);
 			}
-		});
-
-		// Header Nav - Mobile Toggler
-		Symphony.Elements.headerMobileToggler.on('click', function(){
-			Symphony.Elements.header.toggleClass('opened');
-
-			return false;
 		});
 	});
 

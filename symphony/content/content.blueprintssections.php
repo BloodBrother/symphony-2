@@ -218,12 +218,6 @@ class contentBlueprintsSections extends AdministrationPage
 
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
-        $div->appendChild(Widget::Input(
-            'action[save]',
-            __('Create Section'),
-            'submit',
-            ['accesskey' => 's']
-        ));
 
         $saveBtn = new XMLElement('button', Widget::SVGIcon('save'));
         $saveBtn->setAttributeArray(array('name' => 'action[save]', 'class' => 'button', 'title' => __('Create Section'), 'type' => 'submit', 'accesskey' => 's'));
