@@ -768,7 +768,6 @@ class Widget
     public static function Apply(array $options = null)
     {
         $fieldset = new XMLElement('fieldset', null, array('class' => 'apply'));
-        $div = new XMLElement('div');
 
         $computedOptions = array();
 
@@ -796,12 +795,11 @@ class Widget
             ));
 
             if (!empty($option[0])) {
-                $div->appendChild($action);
+                $fieldset->appendChild($action);
             }
         }
 
-        $div->appendChild(Widget::Input('action', '', 'hidden'));
-        $fieldset->appendChild($div);
+        $fieldset->appendChild(Widget::Input('action', '', 'hidden'));
 
         return $fieldset;
     }

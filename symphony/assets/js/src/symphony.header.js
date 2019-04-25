@@ -27,7 +27,7 @@
 		}
 
 		var opacity = (1 * pos) /header.outerWidth() * -1;
-		opacity  = Math.min(1 - opacity, 0.4);
+		opacity  = Math.min(1 - opacity, 0.7);
 
 		headerBg.css('opacity', opacity);
 		currentPos = pos;
