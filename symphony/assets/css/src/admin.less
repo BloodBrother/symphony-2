@@ -251,7 +251,7 @@ body {
 	left: 0;
 	right: 0;
 	z-index: 100;
-	background-color: var(--color-accent-alt-light);
+	background-color: var(--color-accent-light);
 	opacity: 0;
 	pointer-events: none;
 
@@ -513,14 +513,15 @@ body {
 
 #tools {
 	width: 100%;
-	display: block;
-	background-color: var(--color-clear);
 	height: var(--spacing-midlarge);
 	.flex(~'row', ~'center', ~'flex-end');
+
 	color: var(--color-accent);
+	background-color: var(--color-clear);
 
 	@media (max-width: (@sm - 1)){
 		order: -1;
+		display: none;
 
 		.session {
 			display: none;
@@ -856,20 +857,7 @@ body {
 			border-top-right-radius: var(--radius-big);
 
 			@media (max-width: (@sm - 1)) {
-				left: var(--spacing-smallerish);
-				right: var(--spacing-smallerish);
-				display: flex;
-				float: none;
-				flex-direction: column;
-
-				button {
-					margin-bottom: var(--spacing-smallerish);
-					width: 100%;
-
-					&:last-of-type {
-						margin-bottom: 0;
-					}
-				}
+				display: none;
 			}
 
 			&.inactive {
@@ -931,6 +919,10 @@ body {
 		padding: 0;
 		margin: 0;
 		height: var(--spacing-smaller);
+
+		@media (max-width: (@sm - 1)) {
+			display: none;
+		}
 	}
 
 	.actions {

@@ -1016,6 +1016,7 @@ class Widget
         $obj = new XMLElement('div', null, $attributes);
         $obj->addClass('modal js-modal');
         $trigger = new XMLElement('button', !empty($icon) ? $icon : Widget::SVGIcon('kebab'), array('class' => 'modal-trigger js-modal-trigger'));
+        $contentCtn = new XMLElement('div', null, array('class' => 'modal-content-ctn'));
         $content = new XMLElement('ul', null, array('class' => 'modal-content ' . $alignments));
 
         foreach ($elements as $element) {
@@ -1023,8 +1024,11 @@ class Widget
             $content->appendChild($item);
         }
 
+        $contentCtn->appendChild($content);
+
         $obj->appendChild($trigger);
-        $obj->appendChild($content);
+        $obj->appendChild(new XMLElement('div', null, array('class' => 'modal-mobile-bg')));
+        $obj->appendChild($contentCtn);
 
         return $obj;
     }

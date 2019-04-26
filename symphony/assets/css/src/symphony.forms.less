@@ -329,7 +329,7 @@ label.column,
 .label {
 	margin-bottom: var(--spacing-smallish);
 
-	&:last-of-type {
+	.column &:last-of-type {
 		margin-bottom: 0;
 	}
 }
@@ -695,6 +695,14 @@ fieldset.settings {
 				border-color: transparent;
 			}
 		}
+
+		&:last-of-type {
+			margin-bottom: 0;
+
+			& + div:not(.columns) {
+				margin: var(--spacing-smaller) 0;
+			}
+		}
 	}
 
 	input + p.help,
@@ -702,7 +710,7 @@ fieldset.settings {
 		margin-top: 1rem;
 	}
 
-	> legend + .help {
+	.toggle {
 		position: absolute;
 		line-height: 1.8em;
 		margin: 2.5rem 0 0 ~'calc(var(--spacing-huge) * -1)';
@@ -715,10 +723,6 @@ fieldset.settings {
 			margin: 0;
 			margin-bottom: var(--spacing-smaller);
 			width: auto;
-		}
-
-		p {
-			margin: 0 0 var(--spacing-smaller);
 		}
 	}
 
@@ -738,6 +742,10 @@ fieldset.settings {
 		label:last-of-type {
 			margin-bottom: 0;
 		}
+	}
+
+	& .column:last-of-type, & > label:last-of-type, &.label:last-of-type {
+		margin-bottom: 0;
 	}
 
 	&:last-of-type {

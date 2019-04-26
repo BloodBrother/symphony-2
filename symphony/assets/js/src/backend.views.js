@@ -327,7 +327,7 @@ Symphony.View.add('/blueprints/sections/:action:/:id:/:status:', function(action
 		'text': Symphony.Language.get('Collapse all')
 	});
 	toggle = $('<p />', {
-		'class': 'help toggle'
+		'class': 'toggle'
 	});
 
 	// Add toggle controls
