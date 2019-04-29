@@ -865,14 +865,19 @@ body {
 				transform: translateY(100%);
 			}
 
-			button {
-				color: var(--color-main-dark);
-				border: 2px solid var(--color-main-dark);
+			button, select {
+				color: var(--color-main);
+				border: 2px solid var(--color-main);
 				background-color: transparent;
 				font-size: var(--text-current);
-				line-height: 1em;
+				font-weight: 500;
+				line-height: 1.2em;
 				padding: var(--spacing-micro);
 				text-transform: none;
+				float: none;
+				max-width: none;
+				min-width: 0;
+				width: auto;
 
 				transition-property: color, background-color;
 				transition-duration: var(--duration-short);
@@ -880,9 +885,9 @@ body {
 
 				margin-right: var(--spacing-smallest);
 
-				&:hover {
+				&:hover:not(select) {
 					color: var(--color-accent-alt-light);
-					background-color: var(--color-main-dark);
+					background-color: var(--color-main);
 				}
 			}
 		}

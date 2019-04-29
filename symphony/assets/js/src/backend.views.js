@@ -116,6 +116,23 @@ Symphony.View.add('/:context*:', function() {
 			select = applicable.find('select'),
 			button = applicable.find('button');
 
+		// confirm selection and submit form
+		select.on('change', function () {
+			var t = $(this);
+			var selected = t.find(':selected');
+			var message = t.attr('data-message') || Symphony.Language.get('Are you sure you want to proceed?');
+
+			if (!!selected.length && !!selected.attr('disabled')) {
+				return;
+			}
+
+			if (!!window.confirm(message)) {
+				t.closest('form').submit();
+			} else {
+				t.find('[disabled]').prop('selected', true);
+			}
+		});
+
 		// Set menu status
 		if(selection.length > 0) {
 			selection.on('select.selectable deselect.selectable check.selectable', 'tbody tr', function() {
@@ -123,13 +140,11 @@ Symphony.View.add('/:context*:', function() {
 				// Activate menu
 				if(selection.has('.selected').length > 0) {
 					applicable.removeClass('inactive');
-					select.removeAttr('disabled');
 				}
 
 				// Deactivate menu
 				else {
 					applicable.addClass('inactive');
-					select.attr('disabled', 'disabled');
 				}
 			});
 

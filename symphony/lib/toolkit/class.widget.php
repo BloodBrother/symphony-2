@@ -769,37 +769,24 @@ class Widget
     {
         $fieldset = new XMLElement('fieldset', null, array('class' => 'apply'));
 
-        $computedOptions = array();
-
         foreach ($options as $option) {
-            if (!empty($option['options']) && is_array($option['options'])) {
-                foreach ($option['options'] as $subOption) {
-                    $computedOptions[] = [
-                        $subOption[0],
-                        false,
-                        $option['label'] . ' ' . $subOption[2]
-                    ];
-                }
+            if (!empty($option['options'])) {
+                $fieldset->appendChild(Widget::Select('with-selected', array_merge([[null, true, $option['label'], null, null, ['disabled' => 'true'] ]], $option['options'])));
             } else {
-                $computedOptions[] = $option;
+                $action = new XMLElement('button', $option[2], array(
+                    'type' => 'submit',
+                    'name' => 'with-selected',
+                    'value' => $option[0],
+                    'class' => $option[3]
+                ));
+    
+                if (!empty($option[0])) {
+                    $fieldset->appendChild($action);
+                }
             }
         }
 
-        $computedOptions = array_reverse($computedOptions);
-
-        foreach ($computedOptions as $option) {
-            $action = new XMLElement('button', $option[2], array(
-                'type' => 'submit',
-                'name' => 'with-selected',
-                'value' => $option[0]
-            ));
-
-            if (!empty($option[0])) {
-                $fieldset->appendChild($action);
-            }
-        }
-
-        $fieldset->appendChild(Widget::Input('action', '', 'hidden'));
+        $fieldset->appendChild(Widget::Input('action[apply]', '', 'hidden'));
 
         return $fieldset;
     }
