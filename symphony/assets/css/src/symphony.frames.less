@@ -24,15 +24,15 @@
 	border: 2px solid var(--color-main-lightest);
 	background: var(--color-ui);
 	overflow: hidden;
+	box-shadow: var(--shadow);
 
 	h1 {
 		padding: var(--spacing-smallest);
-		color: var(--color-clear);
+		color: var(--color-main);
 		font-size: inherit;
 		font-weight: normal;
 		line-height: inherit;
-		border-radius: var(--radius-current) var(--radius-current) 0 0;
-		background: var(--color-main-dark);
+		background: var(--color-main-lightest);
 	}
 
 	a {
@@ -142,13 +142,13 @@
 		width: .1rem;
 		height: 1rem;
 		margin: 0 var(--spacing-smallest) 0 0;
-		border-right: .3rem solid var(--color-main-light);
+		border-right: .3rem solid var(--color-main-lightest);
 		border-left: .6rem solid var(--color-main-light);
 	}
 
 	&.sidebar:before {
 		border-right-color: var(--color-main-light);
-		border-left-color: var(--color-main-light);
+		border-left-color: var(--color-main-lightest);
 	}
 }
 

@@ -225,10 +225,6 @@ class contentBlueprintsSections extends AdministrationPage
 
         $this->ContentsActions->appendChild($div);
 
-        $this->Form = new XMLElement('div', null, array('class' => 'inner'));
-
-        $this->Form->appendChild($this->Form);
-
         $fieldset = new XMLElement('fieldset');
         $fieldset->setAttribute('class', 'settings');
         $fieldset->appendChild(new XMLElement('legend', __('Essentials')));

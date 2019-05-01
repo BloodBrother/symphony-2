@@ -23,24 +23,11 @@ body#error {
 }
 
 .frame.error {
-	overflow: hidden;
-	line-height: 1.5em;
-	margin: var(--spacing-smallish) auto;
 	padding: 0;
+	overflow: hidden;
 	background: var(--color-clear);
-	width: 90rem;
+	width: @sm;
 	max-width: 100%;
-
-	h1 {
-		padding: var(--spacing-smallest) var(--spacing-smallerish);
-		background: var(--color-accent);
-	}
-
-	li strong,
-	li em {
-		font-weight: 700;
-		padding-right: var(--spacing-smallest);
-	}
 
 	.error {
 		color: var(--color-error);
@@ -58,33 +45,35 @@ body#error {
 		}
 	}
 
-	> ul > li > ul {
-		border-top: 1px solid var(--color-main-light);
-		padding: var(--spacing-micro) 0;
+	> ul {
+		margin: 0;
 
-		li {
-			color: var(--color-main-dark);
-			font-size: var(--text-small);
+		p, h1 {
+			padding: var(--spacing-smallest) var(--spacing-smallerish);
 			margin: 0;
-			padding: 0 var(--spacing-smallerish);
 		}
-	}
 
-	.frame-header {
-		color: var(--color-clear);
-		background: var(--color-accent);
-
-		label {
-			color: var(--color-clear);
-			margin-bottom: 0!important;
+		> li > ul {
+			border-top: 1px solid var(--color-main-light);
+			padding: var(--spacing-micro) 0;
+	
+			li {
+				color: var(--color-main-dark);
+				font-size: var(--text-small);
+				margin: 0;
+				padding: 0 var(--spacing-smallerish);
+			}
 		}
 	}
 
 	.content {
-		padding: 0;
+		padding: 0 var(--spacing-smallerish);
+		box-sizing: border-box;
+		overflow-x: auto;
 
 		ul {
 			padding: var(--spacing-micro) 0;
+			margin: 0;
 		}
 
 		li {
@@ -93,20 +82,5 @@ body#error {
 			margin: 0;
 			padding: 0 var(--spacing-smallerish);
 		}
-	}
-
-	code {
-		white-space: pre;
-	}
-
-	p {
-		color: var(--color-main-dark);
-		font-size: var(--text-small);
-		margin: 0;
-		padding: var(--spacing-micro) var(--spacing-smallerish);
-	}
-
-	ol, ul {
-		margin: 0;
 	}
 }
