@@ -45,19 +45,19 @@
 	}
 
 	.active {
-		color: var(--color-clear);
-		background-color: var(--color-accent);
+		color: var(--color-main);
+		background-color: var(--color-accent-alt-light);
 		cursor: pointer;
 	}
 
 	li:not(.calendar) {
 		box-sizing: border-box;
 		padding: 0.5rem 0.8rem;
-		border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+		border-bottom: 0.1rem solid var(--color-main-lightest);
 	}
 
 	.calendar + li {
-		border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+		border-top: 0.1rem solid var(--color-main-lightest);
 	}
 
 	li:last-of-type {

@@ -219,30 +219,9 @@ fieldset.frame,
 	Orderables and Selectables
 -----------------------------------------------------------------------------*/
 
-.orderable .frame-header,
-.collapsible.orderable .ordering * {
-	cursor: move;
-}
-
-.orderable .frame-header:hover,
-.frame .selected .frame-header,
-.frame .ordering .frame-header {
-	h4, h4 span {
-		color: var(--color-accent);
-	}
-}
-
 .frame .selected,
 .frame .ordering {
 	position: relative;
-}
-
-.ordering .frame-header {
-	cursor: move;
-
-	h4, h4 span {
-		color: var(--color-accent);
-	}
 }
 
 .frame .ordering .frame-header span,
@@ -293,10 +272,6 @@ fieldset.settings .collapsible {
 .collapsible select,
 .collapsible option {
 	-webkit-font-smoothing: subpixel-antialiased !important;
-}
-
-.collapsible .frame-header {
-	cursor: pointer;
 }
 
 .collapsible legend {

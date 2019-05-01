@@ -56,8 +56,6 @@ class contentSystemPreferences extends AdministrationPage
 
         $this->ContentsActions->appendChild($div);
 
-        $formInner = new XMLElement('div', null, array('class' => 'inner'));
-
         // Get available languages
         $languages = Lang::getAvailableLanguages();
 
@@ -81,7 +79,7 @@ class contentSystemPreferences extends AdministrationPage
             $group->appendChild($label);
             $group->appendChild(new XMLElement('p', __('Authors can set up a differing language in their profiles.'), array('class' => 'help')));
             // Append language selection
-            $formInner->appendChild($group);
+            $this->Form->appendChild($group);
         }
 
         // Get available EmailGateways
@@ -108,14 +106,14 @@ class contentSystemPreferences extends AdministrationPage
             $label->appendChild($select);
             $group->appendChild($label);
             // Append email gateway selection
-            $formInner->appendChild($group);
+            $this->Form->appendChild($group);
         }
 
         foreach ($email_gateways as $gateway) {
             $gateway_settings = EmailGatewayManager::create($gateway['handle'])->getPreferencesPane();
 
             if (is_a($gateway_settings, 'XMLElement')) {
-                $formInner->appendChild($gateway_settings);
+                $this->Form->appendChild($gateway_settings);
             }
         }
 
@@ -159,7 +157,7 @@ class contentSystemPreferences extends AdministrationPage
                 'errors' => $this->_errors
             ));
 
-            $formInner->appendChild($group);
+            $this->Form->appendChild($group);
         }
 
         /**
@@ -180,7 +178,6 @@ class contentSystemPreferences extends AdministrationPage
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');
-        $this->Form->appendChild($formInner);
     }
 
     public function action()

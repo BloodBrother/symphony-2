@@ -797,6 +797,10 @@ body {
 		padding: 0 var(--spacing-smaller) var(--spacing-smaller) var(--spacing-smaller);
 		position: relative;
 
+		> .columns {
+			margin-top: 0;
+		}
+
 		body.page-index & {
 			padding: 0;
 		}
@@ -809,7 +813,7 @@ body {
 			}
 		}
 
-		> .inner {
+		body.page-single:not(#publish) & > .inner {
 			background-color: var(--color-clear);
 			border-radius: var(--radius-current);
 			padding: var(--spacing-smaller);
@@ -834,7 +838,7 @@ body {
 		margin-right: 0!important;
 	}
 
-	> form > .actions {
+	> form .inner > .actions {
 		height: var(--spacing-large);
 		.apply {
 			position: fixed;

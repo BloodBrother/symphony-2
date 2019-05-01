@@ -225,9 +225,9 @@ class contentBlueprintsSections extends AdministrationPage
 
         $this->ContentsActions->appendChild($div);
 
-        $formInner = new XMLElement('div', null, array('class' => 'inner'));
+        $this->Form = new XMLElement('div', null, array('class' => 'inner'));
 
-        $this->Form->appendChild($formInner);
+        $this->Form->appendChild($this->Form);
 
         $fieldset = new XMLElement('fieldset');
         $fieldset->setAttribute('class', 'settings');
@@ -291,8 +291,8 @@ class contentBlueprintsSections extends AdministrationPage
 
         $div->appendChild($navgroupdiv);
         $fieldset->appendChild($div);
-        $formInner->appendChild($fieldset);
-        $formInner->appendChild($this->addSectionOptions($meta));
+        $this->Form->appendChild($fieldset);
+        $this->Form->appendChild($this->addSectionOptions($meta));
 
         $fieldset = new XMLElement('fieldset');
         $fieldset->setAttribute('class', 'settings');
@@ -350,7 +350,7 @@ class contentBlueprintsSections extends AdministrationPage
         $div->appendChild($ol);
         $fieldset->appendChild($div);
 
-        $formInner->appendChild($fieldset);
+        $this->Form->appendChild($fieldset);
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');
@@ -474,9 +474,6 @@ class contentBlueprintsSections extends AdministrationPage
 
         $this->Form->appendChild($div);
 
-        $formInner = new XMLElement('div', null, array('class' => 'inner'));
-        $this->Form->appendChild($formInner);
-
         $fieldset = new XMLElement('fieldset');
         $fieldset->setAttribute('class', 'settings');
         $fieldset->appendChild(new XMLElement('legend', __('Essentials')));
@@ -539,9 +536,9 @@ class contentBlueprintsSections extends AdministrationPage
 
         $div->appendChild($navgroupdiv);
         $fieldset->appendChild($div);
-        $formInner->appendChild($fieldset);
+        $this->Form->appendChild($fieldset);
 
-        $formInner->appendChild($this->addSectionOptions($meta));
+        $this->Form->appendChild($this->addSectionOptions($meta));
 
         $fieldset = new XMLElement('fieldset');
         $fieldset->setAttribute('class', 'settings');
@@ -597,7 +594,7 @@ class contentBlueprintsSections extends AdministrationPage
         $div->appendChild($ol);
         $fieldset->appendChild($div);
 
-        $formInner->appendChild($fieldset);
+        $this->Form->appendChild($fieldset);
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');

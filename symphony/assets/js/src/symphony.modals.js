@@ -24,8 +24,8 @@
 	};
 
 	var init = function () {
-		$(sels.trigger).on('click', onClick);
-		$(window).on('click', onWindowClick);
+		window.Symphony.Elements.body.on('click', sels.trigger, onClick);
+		window.Symphony.Elements.window.on('click', onWindowClick);
 	};
 
 	$(init);
