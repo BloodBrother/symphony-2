@@ -43,8 +43,7 @@
 				buttons = $('.button.drawer'),
 				button = buttons.filter('[href="#' + drawer.attr('id') + '"]'),
 				samePositionButtons = buttons.filter('.' + position),
-				context = drawer.data('context') ? '.' + drawer.data('context') : '',
-				height = getHeight();
+				context = drawer.data('context') ? '.' + drawer.data('context') : '';
 
 			drawer.trigger('expandstart.drawer');
 
@@ -62,7 +61,6 @@
 			if (position === 'vertical-left') {
 				drawer.css({
 					width: 0,
-					height: height,
 					display: 'block'
 				})
 				.animate({
@@ -174,22 +172,6 @@
 			drawer.data('open', false);
 		});
 
-		// Resize drawers
-		$(window).on('resize.drawer load.drawer', function() {
-			var height = getHeight();
-			objects.filter('.vertical-left, .vertical-right').css('height', height);
-		});
-
-	/*-------------------------------------------------------------------------
-		Utilities
-	-------------------------------------------------------------------------*/
-
-		var getHeight = function() {
-			var height = Math.max(window.innerHeight - contents[0].offsetTop - 1, contents[0].clientHeight);
-
-			return height;
-		};
-
 	/*-------------------------------------------------------------------------
 		Initialisation
 	-------------------------------------------------------------------------*/
@@ -198,7 +180,8 @@
 			var drawer = $(this),
 				button = $('.button.drawer[href="#' + drawer.attr('id') + '"]'),
 				context = drawer.data('context') ? '.' + drawer.data('context') : '',
-				storedState;
+				storedState,
+				closeBtn = $('<button />').text(Symphony.Language.get('close')).addClass('close-btn');
 
 			// Initial state
 			if (drawer.data('default-state') === 'opened') {
@@ -220,6 +203,14 @@
 				event.preventDefault();
 				drawer.trigger(!drawer.data('open') ? 'expand.drawer': 'collapse.drawer');
 			});
+
+			if (!drawer.hasClass('horizontal')) {
+				closeBtn.on('click', function (event) {
+					event.preventDefault();
+					drawer.trigger('collapse.drawer');
+				});
+				drawer.append(closeBtn);
+			}
 
 			// Initially opened drawers
 			if (drawer.data('open')) {

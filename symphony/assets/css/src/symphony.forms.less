@@ -247,16 +247,20 @@ input[type=submit]:disabled:focus,
 input[readonly=readonly],
 input[readonly=readonly]:hover,
 input[readonly=readonly]:active,
-input[readonly=readonly]:focus,
+input[readonly=readonly]:focus {
+	opacity: 0.5;
+	cursor: not-allowed!important;
+	background-color: var(--color-main-lightest);
+	color: var(--color-main);
+}
+
 button[disabled],
 button:disabled,
 button:disabled:hover,
 button:disabled:active,
 button:disabled:focus {
 	opacity: 0.5;
-	cursor: not-allowed!important;
-	background-color: var(--color-main-lightest);
-	color: var(--color-main);
+	pointer-events: none;
 }
 
 /*--------------------------------------------------------------------------
@@ -278,7 +282,7 @@ button,
 	padding: var(--spacing-smallest) var(--spacing-smallerish);
 	line-height: 1em;
 	border-radius: var(--radius-current);
-	font-weight: 700;
+	font-weight: 500;
 	color: var(--color-clear);
 	font-size: var(--text-small);
 

@@ -23,10 +23,10 @@ div.drawer.horizontal {
 	position: absolute;
 	right: 0;
 	top: 100%;
-	border: 1px solid var(--color-main-light);
 	background: var(--color-clear);
 	width: 80rem;
 	max-width: 100%;
+	box-shadow: var(--shadow);
 
 	.contents {
 		padding: var(--spacing-smallish) var(--spacing-smallish) var(--spacing-mid);
@@ -37,41 +37,51 @@ div.drawer.horizontal {
 	Vertical drawers
 -----------------------------------------------------------------------------*/
 
-#contents div.drawer.vertical-left,
-#contents div.drawer.vertical-right {
-	.transitioned(~'transform');
-	overflow: scroll;
-	-webkit-overflow-scrolling: touch;
-	position: fixed;
-	top: ~'calc(var(--spacing-midlarge) * 2)';
-	bottom: 0;
-	background: var(--color-clear);
-	width: var(--spacing-huger)!important;
-	height: auto!important;
-	max-width: 100%;
-	z-index: 100;
+#contents {
+	div.drawer {
+		&:not(.horizontal) {
+			.transitioned(~'transform');
+			overflow: scroll;
+			-webkit-overflow-scrolling: touch;
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			background: var(--color-clear);
+			width: var(--spacing-huger)!important;
+			max-width: 100%;
+			z-index: 100;
+			box-shadow: var(--shadow);
 
-	.contents {
-		padding: 0 0 var(--spacing-mid);
-	}
-}
+			.contents {
+				padding: 0 0 var(--spacing-mid);
+			}
+		}
 
-#contents div.drawer.vertical-left {
-	left: 0;
-	border-right: 1px solid var(--color-main-light);
-	transform: translateX(-100%);
+		.close-btn {
+			position: absolute;
+			right: var(--spacing-smallish);
+			top: var(--spacing-smallish);
+		}
 
-	&.opened {
-		transform: none;
-	}
-}
+		&.vertical-left {
+			left: 0;
+			border-right: 1px solid var(--color-main-light);
+			transform: translateX(-100%);
 
-#contents div.drawer.vertical-right {
-	right: 0;
-	border-left: 1px solid var(--color-main-light);
-	transform: translateX(100%);
+			&.opened {
+				transform: none;
+			}
+		}
 
-	&.opened {
-		transform: none;
+		&.vertical-right {
+			right: 0;
+			transform: translateX(100%);
+			overflow-x: hidden;
+			overflow-y: auto;
+
+			&.opened {
+				transform: none;
+			}
+		}
 	}
 }

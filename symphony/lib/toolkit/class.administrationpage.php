@@ -547,6 +547,7 @@ class AdministrationPage extends HTMLPage
 
         $innerForm = new XMLElement('div', null, array('class' => 'inner'));
         $this->Form->appendChild($innerForm);
+        $this->Form->setAttribute('enctype', 'multipart/form-data');
         $this->Form = $innerForm;
 
         // Validate date time config

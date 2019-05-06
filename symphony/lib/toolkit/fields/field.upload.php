@@ -480,7 +480,7 @@ class FieldUpload extends Field implements ExportableField, ImportableField
             }
 
             // Found the file, add any missing meta information:
-            if (file_exists($file) && is_readable($file)) {
+            if (General::checkFileReadable($file)) {
                 if (empty($result['mimetype'])) {
                     $result['mimetype'] = General::getMimeType($file);
                 }

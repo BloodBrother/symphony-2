@@ -181,12 +181,12 @@
 		var activate = function() {
 			actions.apply.prop('disabled', false);
 			actions.apply.removeAttr('disabled');
-			actions.clear.show();
+			actions.clear.removeAttr('disabled');
 		};
 
 		var deactivate = function() {
 			actions.apply.prop('disabled', true);
-			actions.clear.hide();
+			actions.clear.prop('disabled', true);
 		};
 
 	/*-------------------------------------------------------------------------
@@ -198,7 +198,7 @@
 		 */
 		var createAddButton = function() {
 			actions.apply = $('<button/>', {
-				'text': Symphony.Language.get('Apply filters'),
+				'text': Symphony.Language.get('Apply'),
 				'class': 'apply-filters',
 				'click': handleFiltering
 			}).insertBefore(apply);
@@ -209,7 +209,7 @@
 		 */
 		var createClearButton = function() {
 			actions.clear = $('<button/>', {
-				'text': Symphony.Language.get('Clear filters'),
+				'text': Symphony.Language.get('Clear'),
 				'class': 'clear-filters delete',
 				'click': handleClearing
 			}).insertBefore(apply);

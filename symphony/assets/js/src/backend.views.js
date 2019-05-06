@@ -278,19 +278,20 @@ Symphony.View.add('/publish/:context*:', function() {
 	});
 
 	// Upload field destructors
-	$('<em />', {
+	$('<button />', {
 		text: Symphony.Language.get('Remove File'),
 		on: {
 			click: function(event) {
-				event.preventDefault();
-
 				var span = $(this).parent(),
 					name = span.find('input').attr('name');
 
-				span.empty().append('<input name="' + name + '" type="file">');
+				span.empty().append('<input name="' + name + '" type="file" />');
+
+				event.preventDefault();
+				event.stopPropagation();
 			}
 		}
-	}).appendTo('label.file:has(a) span.frame');
+	}).appendTo('label.file:has(a) > span');
 
 	// Calendars
 	$('.field-date').each(function() {

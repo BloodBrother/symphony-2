@@ -19,17 +19,12 @@
 	position: fixed;
 	bottom: 0;
 	left: var(--spacing-huge);
-	right: 0;
+	right: var(--spacing-small);
 	color: var(--color-main-dark);
 	font-size: var(--text-short);
 	max-height: 4.5rem!important;
 	z-index: 110;
 	pointer-events: none;
-
-	@media (max-width: (@sm - 1)){
-		display: none!important;
-		left: 0;
-	}
 
 	nav {
 		display: block;

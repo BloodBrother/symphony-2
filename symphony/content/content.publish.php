@@ -1125,7 +1125,6 @@ class contentPublish extends AdministrationPage
 
         // Ensure errored entries still maintain any prepopulated values [#2211]
         $this->Form->setAttribute('action', $this->Form->getAttribute('action') . $this->getPrepopulateString());
-        $this->Form->setAttribute('enctype', 'multipart/form-data');
 
         $sidebar_fields = $section->fetchFields(null, 'sidebar');
         $main_fields = $section->fetchFields(null, 'main');
@@ -1521,7 +1520,6 @@ class contentPublish extends AdministrationPage
         }
 
         $this->setPageType('form');
-        $this->Form->setAttribute('enctype', 'multipart/form-data');
         $this->setTitle(__('%1$s &ndash; %2$s &ndash; %3$s', array($title, General::sanitize($section->get('name')), __('Symphony'))));
         $this->addElementToHead(new XMLElement('link', null, array(
             'rel' => 'canonical',
