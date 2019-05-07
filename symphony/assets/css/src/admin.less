@@ -940,8 +940,7 @@ body {
 		justify-content: flex-end;
 		margin: 0;
 
-
-		a {
+		a, button {
 			display: flex;
 			padding: var(--spacing-smallest);
 			border-radius: 100%;
@@ -959,34 +958,9 @@ body {
 				background-color: var(--color-main-lightest);
 			}
 		}
-	}
 
-	.actions > button {
-		position: relative;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: var(--spacing-smallest);
-		cursor: pointer;
-		border-radius: 100%;
-		transition-property: background-color, color;
-		transition-duration: var(--duration);
-		transition-timing-function: var(--ease-current);
-		margin-right: var(--spacing-micro);
-		background-color: transparent;
-		color: var(--color-main);
-
-		&:last-child {
+		.modal-trigger {
 			margin-right: 0;
-		}
-
-		svg {
-			width: 20px;
-			height: 20px;
-		}
-
-		&:hover {
-			background-color: var(--color-main-lightest);
 		}
 	}
 
