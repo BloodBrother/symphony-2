@@ -43,7 +43,7 @@ class contentSystemPreferences extends AdministrationPage
         $saveAttr = array(
             'accesskey' => 's',
             'name' => 'action[save]',
-            'title' => _('Save Changes'),
+            'title' => __('Save Changes'),
             'type' => 'submit',
             ''
         );
