@@ -330,8 +330,8 @@ body {
 					.transitioned(~'transform',~'0.15s');
 					position: absolute;
 					left: ~'calc(var(--spacing-smallerish) * -1)';
-					top: var(--spacing-micro);
-					color: var(--color-ui);
+					top: 6px;
+					color: currentColor;
 					opacity: 0.5;
 				}
 			}
@@ -346,6 +346,10 @@ body {
 
 			& + li {
 				padding-top: var(--spacing-smallest);
+
+				@media (max-width: (@sm - 1)) {
+					padding-top: var(--spacing-smallerish);
+				}
 			}
 
 			/* Second Level */
@@ -438,7 +442,7 @@ body {
 		z-index: 200;
 		overflow: hidden;
 		box-shadow: var(--shadow);
-		border: 1px solid var(--color-main-lightest);
+		border: 1px solid var(--color-main-lighter);
 		box-shadow: var(--shadow);
 
 		> li {
@@ -467,7 +471,7 @@ body {
 			}
 
 			&.logout {
-				border-top: 1px solid var(--color-main-lightest);
+				border-top: 1px solid var(--color-main-lighter);
 			}
 		}
 	}
@@ -674,7 +678,7 @@ body {
 	border-radius: 0;
 
 	> ol {
-		border: 2px dashed var(--color-main-lightest);
+		border: 2px dashed var(--color-main-lighter);
 		border-radius: var(--radius-current);
 		min-height: 5rem;
 	}
@@ -806,7 +810,7 @@ body {
 		}
 
 		> #contents-actions:not(:empty) + table {
-			border-top: 1px solid var(--color-main-lightest);
+			border-top: 1px solid var(--color-main-lighter);
 
 			thead {
 				position: static;
@@ -894,6 +898,10 @@ body {
 					background-color: var(--color-main);
 				}
 			}
+
+			select {
+				max-width: 20rem;
+			}
 		}
 	}
 
@@ -917,7 +925,7 @@ body {
 	position: sticky;
 	top: 0;
 	background-color: var(--color-accent-light);
-	z-index: 1;
+	z-index: 5;
 
 	body.page-index & {
 		border-top-left-radius: var(--radius-big);
@@ -940,7 +948,7 @@ body {
 		justify-content: flex-end;
 		margin: 0;
 
-		a, button {
+		a, > button {
 			display: flex;
 			padding: var(--spacing-smallest);
 			border-radius: 100%;
@@ -955,7 +963,7 @@ body {
 
 
 			&:hover {
-				background-color: var(--color-main-lightest);
+				background-color: var(--color-main-lighter);
 			}
 		}
 
