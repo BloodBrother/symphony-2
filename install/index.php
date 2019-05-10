@@ -27,7 +27,7 @@
     define('DOCROOT', $clean_path);
 
     // Required boot components
-    define('VERSION', '3.0.0');
+    define('VERSION', '4.0.0');
     define('INSTALL', DOCROOT . '/install');
 
     // Disable DB
