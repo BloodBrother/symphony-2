@@ -413,6 +413,11 @@ legend {
 	padding: 0;
 	float: right;
 
+	@media (max-width: (@sm - 1)) {
+		float: none;
+		width: 100%;
+	}
+
 	select {
 		max-width: 35rem;
 	}
@@ -422,6 +427,11 @@ legend {
 		float: left;
 		text-align: left;
 		margin-right:var(--spacing-micro);
+
+		@media (max-width: (@sm - 1)) {
+			float: none;
+			margin-right: 0;
+		}
 	}
 
 	label {
@@ -443,6 +453,10 @@ legend {
 		margin: 0;
 		padding: var(--spacing-smallest) var(--spacing-smallerish);
 		background: var(--color-accent);
+
+		@media (max-width: (@sm - 1)) {
+			margin-top: var(--spacing-smallest);
+		}
 	}
 
 	button,
@@ -506,7 +520,8 @@ ul.tags {
 	list-style: none;
 
 	.column > & {
-		margin-top: ~'calc(var(--spacing-smallish) * -1)';
+		margin: var(--spacing-micro);
+		margin-bottom: 0;
 	}
 
 	* > {
@@ -522,10 +537,11 @@ ul.tags {
 		padding: 0 var(--spacing-micro) 0 0;
 		border: none;
 		cursor: pointer;
+		white-space: nowrap;
 	}
 
 	li:hover {
-		color: var(--color-main-light);
+		color: var(--color-accent);
 	}
 
 	li.more {

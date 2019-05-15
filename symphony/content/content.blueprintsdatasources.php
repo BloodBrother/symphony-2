@@ -624,7 +624,7 @@ class contentBlueprintsDatasources extends ResourcesPage
         $p->setAttribute('class', 'help');
         $fieldset->appendChild($p);
 
-        $div = new XMLElement('div');
+        $div = new XMLElement('div', null, array('class' => 'column'));
 
         $label = Widget::Label(__('Sort By'));
 
