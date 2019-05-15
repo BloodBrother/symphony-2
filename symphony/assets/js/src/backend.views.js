@@ -290,8 +290,9 @@ Symphony.View.add('/publish/:context*:', function() {
 				event.preventDefault();
 				event.stopPropagation();
 			}
-		}
-	}).appendTo('label.file:has(a) > span');
+		},
+		addClass: 'remove'
+	}).appendTo('.file:has(a)');
 
 	// Calendars
 	$('.field-date').each(function() {
