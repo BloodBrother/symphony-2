@@ -116,22 +116,24 @@ Symphony.View.add('/:context*:', function() {
 			select = applicable.find('select'),
 			button = applicable.find('button');
 
-		// confirm selection and submit form
-		select.on('change', function () {
-			var t = $(this);
-			var selected = t.find(':selected');
-			var message = t.attr('data-message') || Symphony.Language.get('Are you sure you want to proceed?');
+		if (!button.length || !!button.attr('name')) {
+			// confirm selection and submit form
+			select.on('change', function () {
+				var t = $(this);
+				var selected = t.find(':selected');
+				var message = t.attr('data-message') || Symphony.Language.get('Are you sure you want to proceed?');
 
-			if (!!selected.length && !!selected.attr('disabled')) {
-				return;
-			}
+				if (!!selected.length && !!selected.attr('disabled')) {
+					return;
+				}
 
-			if (!!window.confirm(message)) {
-				t.closest('form').submit();
-			} else {
-				t.find('[disabled]').prop('selected', true);
-			}
-		});
+				if (!!window.confirm(message)) {
+					t.closest('form').submit();
+				} else {
+					t.find('[disabled]').prop('selected', true);
+				}
+			});
+		}
 
 		// Set menu status
 		if(selection.length > 0) {
