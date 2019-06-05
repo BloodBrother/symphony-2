@@ -108,6 +108,16 @@
 				t.siblings('ul').slideUp(250);
 			}
 		});
+
+		Symphony.Elements.body.on('click', 'a[href]', function (event) {
+			var t = $(this);
+			event.preventDefault();
+			Symphony.Elements.loading.removeClass('hidden');
+
+			setTimeout(function () {
+				window.location.href = t.attr('href');
+			}, 50);
+		});
 	});
 
 })(window.jQuery, window.Symphony);
