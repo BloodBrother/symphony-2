@@ -532,14 +532,18 @@ class AdministrationPage extends HTMLPage
             )
         );
 
+        $scrollCtn = new XMLElement('div', null, array('class' => 'scroll-ctn'));
+
         $this->Header->appendChild(Widget::Anchor(__('Index'), rtrim(URL, '/') . '/', __('Go to index page'), 'index-btn'));
 
         $this->appendUserLinks();
-        $this->appendNavigation();
+        $scrollCtn->appendChild($this->appendNavigation());
 
         $this->Tools->appendChild($this->Session);
-        $this->Header->appendChild($this->Session); // For mobile
-        $this->Header->appendChild($version);
+        $scrollCtn->appendChild($this->Session); // For mobile
+        $scrollCtn->appendChild($version);
+        $this->Header->appendChild($scrollCtn);
+
         // Add Breadcrumbs
         $this->Context->prependChild($this->Breadcrumbs);
         $this->Form->appendChild($this->ContentsActions);
@@ -1055,8 +1059,9 @@ class AdministrationPage extends HTMLPage
         $navElement->appendChild($contentNav);
         $navElement->appendChild($structureNavTitle);
         $navElement->appendChild($structureNav);
-        $this->Header->appendChild($navElement);
         Symphony::Profiler()->sample('Navigation Built', PROFILE_LAP);
+
+        return $navElement;
     }
 
     /**

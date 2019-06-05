@@ -52,7 +52,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	-webkit-overflow-scrolling: touch;
-	overflow: auto;
+	overflow: hidden;
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -67,6 +67,21 @@ body {
 
 	> * {
 		order: 3;
+	}
+
+	.scroll-ctn {
+		margin-top: 4rem;
+		overflow-y: auto;
+
+		&::-webkit-scrollbar-thumb {
+			background: var(--color-clear);
+		}
+
+		&:hover {
+			&::-webkit-scrollbar-thumb {
+				background: var(--color-main-light);
+			}
+		}
 	}
 
 	h1 {
@@ -291,6 +306,7 @@ body {
 	flex-grow: 1;
 	margin: 0;
 	padding: var(--spacing-smallish);
+	padding-top: 0;
 	list-style: none;
 
 	/* Titles */
