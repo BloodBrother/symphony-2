@@ -534,7 +534,7 @@ class AdministrationPage extends HTMLPage
 
         $scrollCtn = new XMLElement('div', null, array('class' => 'scroll-ctn'));
 
-        $this->Header->appendChild(Widget::Anchor(__('Index'), rtrim(URL, '/') . '/', __('Go to index page'), 'index-btn'));
+        $scrollCtn->appendChild(Widget::Anchor(__('Index'), rtrim(URL, '/') . '/', __('Go to index page'), 'index-btn'));
 
         $this->appendUserLinks();
         $scrollCtn->appendChild($this->appendNavigation());
