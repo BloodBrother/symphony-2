@@ -23,11 +23,22 @@ body#error {
 }
 
 .frame.error {
-	padding: 0;
+	padding: var(--spacing-smallest);
 	overflow: hidden;
 	background: var(--color-clear);
 	width: @sm;
 	max-width: 100%;
+	box-shadow: var(--shadow);
+
+	h1 {
+		margin: ~'calc(var(--spacing-smallest) * -1) calc(var(--spacing-smallest) * -1) 0';
+		font-size: var(--text-bigger);
+	}
+
+	p {
+		margin-top: 1rem;
+		margin-bottom: 0;
+	}
 
 	.error {
 		color: var(--color-error);
