@@ -37,7 +37,7 @@ class Widget
             'id' => array('var' => $id, 'type' => 'string', 'optional' => true)
         ));
 
-        $obj = new XMLElement('label', ($name ? $name : null));
+        $obj = new XMLElement('label', ($name ? new XMLElement('span', $name) : null));
 
         if (is_object($child)) {
             $obj->appendChild($child);
