@@ -188,13 +188,16 @@ class fieldTextarea extends Field implements ExportableField, ImportableField
             'textarea' => &$textarea
         ));
 
-        $label->appendChild($textarea);
+        $label->setAttribute('for', $this->get('element_name'));
+        $textarea->setAttribute('id', $this->get('element_name'));
 
         if ($flagWithError != null) {
             $wrapper->appendChild(Widget::Error($label, $flagWithError));
         } else {
             $wrapper->appendChild($label);
         }
+
+        $wrapper->appendChild($textarea);
     }
 
     public function checkPostFieldData($data, &$message, $entry_id = null)

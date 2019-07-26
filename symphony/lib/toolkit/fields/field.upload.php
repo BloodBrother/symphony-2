@@ -319,15 +319,19 @@ class FieldUpload extends Field implements ExportableField, ImportableField
             $filename = null;
         }
 
-        $span->appendChild(Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, $filename, ($filename ? 'hidden' : 'file')));
+        $input = Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, $filename, ($filename ? 'hidden' : 'file'));
+        $label->setAttribute('for', $this->get('element_name'));
+        $input->setAttribute('id', $this->get('element_name'));
 
-        $label->appendChild($span);
+        $span->appendChild($input);
+
 
         if ($flagWithError != null) {
             $wrapper->appendChild(Widget::Error($label, $flagWithError));
         } else {
             $wrapper->appendChild($label);
         }
+        $wrapper->appendChild($span);
     }
 
     public function validateFilename($file, &$message)

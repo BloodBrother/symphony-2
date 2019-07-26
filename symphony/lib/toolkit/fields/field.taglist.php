@@ -354,16 +354,18 @@ class FieldTagList extends Field implements ExportableField, ImportableField
         if ($this->get('required') !== 'yes') {
             $label->appendChild(new XMLElement('i', __('Optional')));
         }
+        $input = Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, (strlen($value) != 0 ? General::sanitize($value) : null));
 
-        $label->appendChild(
-            Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, (strlen($value) != 0 ? General::sanitize($value) : null))
-        );
+        $label->setAttribute('for', $this->get('element_name'));
+        $input->setAttribute('id', $this->get('element_name'));
 
         if ($flagWithError != null) {
             $wrapper->appendChild(Widget::Error($label, $flagWithError));
         } else {
             $wrapper->appendChild($label);
         }
+
+        $wrapper->appendChild($input);
 
         if ($this->get('pre_populate_source') != null) {
             $existing_tags = $this->getToggleStates();
