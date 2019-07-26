@@ -36,7 +36,7 @@
 		objects.on('click.tags', settings.items, function tagging() {
 			var item = $(this),
 				object = item.parent(),
-				input = object.prev().find('input, textarea'),
+				input = object.siblings('input, textarea'),
 				value = input.val(),
 				tag = item.attr('class') || item.data('value') || item.text();
 
