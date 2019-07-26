@@ -541,9 +541,13 @@ class FieldDate extends Field implements ExportableField, ImportableField
             $label->appendChild(new XMLElement('i', __('Optional')));
         }
 
-        // Input
-        $label->appendChild(Widget::Input("fields{$fieldnamePrefix}[{$name}]", $value));
+        // Input & Label
+        $input = Widget::Input("fields{$fieldnamePrefix}[{$name}]", $value);
+        $label->setAttribute('for', $this->get('element_name'));
+        $input->setAttribute('id', $this->get('element_name'));
         $label->setAttribute('class', 'date');
+        $wrapper->appendChild($label);
+        $wrapper->appendChild($input);
 
         // Calendar
         if ($this->get('calendar') === 'yes') {
@@ -558,14 +562,14 @@ class FieldDate extends Field implements ExportableField, ImportableField
             $calendar->appendChild(Widget::Calendar(($this->get('time') === 'yes')));
             $ul->appendChild($calendar);
 
-            $label->appendChild($ul);
+            $wrapper->appendChild($ul);
         }
 
         // Wrap label in error
         if (!is_null($flagWithError)) {
             $label = Widget::Error($label, $flagWithError);
         }
-        $wrapper->appendChild($label);
+
     }
 
     public function checkPostFieldData($data, &$message, $entry_id = null)

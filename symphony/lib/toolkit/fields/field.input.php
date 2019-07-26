@@ -150,17 +150,25 @@ class FieldInput extends Field implements ExportableField, ImportableField
         $value = General::sanitize(isset($data['value']) ? $data['value'] : null);
         $label = Widget::Label($this->get('label'));
 
+        $label->setAttribute('for', $this->get('element_name'));
+
         if ($this->get('required') !== 'yes') {
             $label->appendChild(new XMLElement('i', __('Optional')));
         }
 
-        $label->appendChild(Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, (strlen($value) != 0 ? $value : null)));
 
         if ($flagWithError != null) {
             $wrapper->appendChild(Widget::Error($label, $flagWithError));
         } else {
             $wrapper->appendChild($label);
         }
+
+        $input = Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, (strlen($value) != 0 ? $value : null));
+
+        $input->setAttribute('id', $this->get('element_name'));
+
+
+        $wrapper->appendChild($input);
     }
 
     public function checkPostFieldData($data, &$message, $entry_id = null)

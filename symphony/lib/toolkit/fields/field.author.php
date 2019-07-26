@@ -164,17 +164,21 @@ class FieldAuthor extends Field implements ExportableField
             array('manager', empty($types) ? true : in_array('manager', $types), __('Manager')),
             array('developer', empty($types) ? true : in_array('developer', $types), __('Developer'))
         );
-        $label->appendChild(
-            Widget::Select('fields['.$this->get('sortorder').'][author_types][]', $options, array(
-                'multiple' => 'multiple'
-            ))
-        );
-
+        
         if (isset($errors['author_types'])) {
             $wrapper->appendChild(Widget::Error($label, $errors['author_types']));
         } else {
             $wrapper->appendChild($label);
         }
+
+        $input = Widget::Select('fields['.$this->get('sortorder').'][author_types][]', $options, array('multiple' => 'multiple'));
+
+        $label->setAttribute('for', $this->get('element_name'));
+        $input->setAttribute('id', $this->get('element_name'));
+
+        $wrapper->appendChild($input);
+
+        
 
         // Options
         $div = new XMLElement('div', null, array('class' => 'two columns'));
@@ -293,13 +297,17 @@ class FieldAuthor extends Field implements ExportableField
             $label->appendChild(new XMLElement('i', __('Optional')));
         }
 
-        $label->appendChild(Widget::Select($fieldname, $options, ($this->get('allow_multiple_selection') === 'yes' ? array('multiple' => 'multiple') : null)));
-
         if ($flagWithError != null) {
             $wrapper->appendChild(Widget::Error($label, $flagWithError));
         } else {
             $wrapper->appendChild($label);
         }
+
+        $input = Widget::Select($fieldname, $options, ($this->get('allow_multiple_selection') === 'yes' ? array('multiple' => 'multiple') : null));
+        $label->setAttribute('for', $this->get('element_name'));
+        $input->setAttribute('id', $this->get('element_name'));
+
+        $wrapper->appendChild($input);
     }
 
     public function processRawFieldData($data, &$status, &$message = null, $simulate = false, $entry_id = null)

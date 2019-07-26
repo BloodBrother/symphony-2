@@ -331,13 +331,16 @@ class FieldSelect extends FieldTagList implements ExportableField, ImportableFie
             $label->appendChild(new XMLElement('i', __('Optional')));
         }
 
-        $label->appendChild(Widget::Select($fieldname, $options, ($this->get('allow_multiple_selection') === 'yes' ? array('multiple' => 'multiple', 'size' => count($options)) : null)));
+        $select = Widget::Select($fieldname, $options, ($this->get('allow_multiple_selection') === 'yes' ? array('multiple' => 'multiple', 'size' => count($options)) : null));
+        $label->setAttribute('for', $this->get('element_name'));
+        $select->setAttribute('id', $this->get('element_name'));
 
         if ($flagWithError != null) {
             $wrapper->appendChild(Widget::Error($label, $flagWithError));
         } else {
             $wrapper->appendChild($label);
         }
+        $wrapper->appendChild($select);
     }
 
     public function checkPostFieldData($data, &$message, $entry_id = null)
