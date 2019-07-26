@@ -32,15 +32,15 @@
 	--spacing-larger:    18rem;
 	--spacing-largest:   20rem;
 
-	--dimension-tiniest:   calc(var(--spacing-thinnest) * 25);
-	--dimension-tinier:    calc(var(--spacing-thinner) * 25);
-	--dimension-tiny:      calc(var(--spacing-thin) * 25);
-	--dimension-smallest:  calc(var(--spacing-broad) * 25);
-	--dimension-smaller:   calc(var(--spacing-broader) * 25);
-	--dimension-small:     calc(var(--spacing-broadest) * 25);
-	--dimension-big:       calc(var(--spacing-large) * 25);
-	--dimension-bigger:    calc(var(--spacing-larger) * 25);
-	--dimension-biggest:   calc(var(--spacing-largest) * 25);
+	--dimension-tiniest:   ~'calc(var(--spacing-thinnest) * 25)';
+	--dimension-tinier:    ~'calc(var(--spacing-thinner) * 25)';
+	--dimension-tiny:      ~'calc(var(--spacing-thin) * 25)';
+	--dimension-smallest:  ~'calc(var(--spacing-broad) * 25)';
+	--dimension-smaller:   ~'calc(var(--spacing-broader) * 25)';
+	--dimension-small:     ~'calc(var(--spacing-broadest) * 25)';
+	--dimension-big:       ~'calc(var(--spacing-large) * 25)';
+	--dimension-bigger:    ~'calc(var(--spacing-larger) * 25)';
+	--dimension-biggest:   ~'calc(var(--spacing-largest) * 25)';
 
 
 	/*-----------------------------------------------------------------------------
@@ -76,15 +76,15 @@
 
 	// TODO: @fhamon optimize this
 
-	--text-smallest: 1.0rem;
+	--text-smallest: 0.9rem;
 	--text-smaller: 1.1rem;
-	--text-small: 1.2rem;
+	--text-small: 1.3rem;
 
-	--text-current: 1.4rem;
+	--text-current: 1.5rem;
 
-	--text-big: 1.6rem;
-	--text-bigger: 2.4rem;
-	--text-biggest: 3.2rem;
+	--text-big: 1.9rem;
+	--text-bigger: 1.9rem; // 2.4rem
+	--text-biggest: 1.9rem; // 3.2rem
 
 
 	/*-----------------------------------------------------------------------------
@@ -115,10 +115,10 @@
 		Radius
 	-----------------------------------------------------------------------------*/
 
-	--radius-smallest: 2px;
-	--radius-small: 5px;
-	--radius-current: 10px;
-	--radius-big: 20px;
+	--radius-smallest: 1px;
+	--radius-small: 1px;
+	--radius-current: 1px;
+	--radius-big: 5px;
 
 
 	/*-----------------------------------------------------------------------------
@@ -127,4 +127,10 @@
 
 	--shadow: 0px 10px 15px rgba(8, 110, 255, 0.1);
 	--shadow-up: 0px -10px 15px rgba(8, 110, 255, 0.1);
+
+
+	--color-backframe: var(--color-main-lightest);
+
 }
+
+
