@@ -13,10 +13,22 @@
 @import "variables";
 
 /*-----------------------------------------------------------------------------
-	Font importing — Roboto | Google Fonts
+	Font importing — Inter
 -----------------------------------------------------------------------------*/
+@import url('https://rsms.me/inter/inter.css');
+html { 
+	font-family: 'Inter', sans-serif; 
+	-webkit-font-smoothing: antialiased;
+}
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter var', sans-serif; }
+}
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+/*-----------------------------------------------------------------------------
+	Language and Theme importing
+-----------------------------------------------------------------------------*/
+@import "language";
+
 
 /*-----------------------------------------------------------------------------
 	Reset – based on http://meyerweb.com/eric/tools/css/reset/
@@ -64,10 +76,6 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 1.2em;
 }
 
-* {
-	letter-spacing: .02em;
-}
-
 /*-----------------------------------------------------------------------------
 	Basic styles
 -----------------------------------------------------------------------------*/
@@ -88,7 +96,6 @@ html {
 body {
 	color: var(--color-main-dark);
 	font-size: var(--text-current);
-	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	line-height: 1.8em;
 	padding-left: var(--spacing-huge);
@@ -140,7 +147,6 @@ ul, ol {
 code,
 .code {
 	tab-size: 4;
-	font-family: 'Roboto', 'Lucida Grande', Leelawadee, Tahoma, Verdana, sans-serif;
 }
 
 pre {
