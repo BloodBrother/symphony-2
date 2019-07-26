@@ -38,11 +38,25 @@ select,
 	text-transform: none;
 	line-height: 1em;
 	padding: var(--spacing-thinnest);
-	border: 2px solid var(--color-main-lighter);
+	border: 1px solid var(--color-main-light);
 	width: 100%;
 	transition-property: border-color, color;
 	transition-timing-function: var(--ease-current);
 	transition-duration: var(--duration);
+	background-color: var(--color-clear);
+
+	&:placeholder-shown:not(:focus) {
+		background-color: transparent;
+		border-style: dashed;
+
+		.required & {
+			border-color: var(--color-error-light);
+		}
+	}
+
+	&:hover {
+		background-color: var(--color-accent-alt-light);
+	}
 }
 
 input:not([type="submit"]):active,
@@ -51,9 +65,18 @@ textarea:active,
 textarea:focus,
 select[multiple]:active,
 select[multiple]:focus {
-	border-color: var(--color-main);
+	border-color: var(--color-accent);
+	border-width: 2px;
 	color: var(--color-main);
 	outline: none;
+	box-shadow: var(--shadow);
+}
+
+input:not([type="submit"]):active,
+input:not([type="submit"]):focus,
+textarea:active,
+textarea:focus {
+	padding: ~'calc(var(--spacing-thinnest) - 1px)';
 }
 
 input[readonly="readonly"],
