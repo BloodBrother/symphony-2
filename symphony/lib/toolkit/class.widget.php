@@ -85,6 +85,7 @@ class Widget
 
         $obj = new XMLElement('input');
         $obj->setAttribute('name', $name);
+        $obj->setAttribute('placeholder', ' ');
 
         if ($type) {
             $obj->setAttribute('type', $type);
