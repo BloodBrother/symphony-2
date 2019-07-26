@@ -33,17 +33,17 @@
 		margin-left: 0;
 
 		.content {
-			padding: var(--spacing-smallest) 0 0;
+			padding: var(--spacing-thinnest) 0 0;
 			border: none;
 		}
 	}
 
 	.columns.two {
-		margin: 0 0 0 ~'calc(var(--spacing-smallish) * -1)'!important;
+		margin: 0 0 0 ~'calc(var(--spacing-broad) * -1)'!important;
 
 		.column {
 			margin: 0!important;
-			padding: 0 0 0 var(--spacing-smallish)!important;
+			padding: 0 0 0 var(--spacing-broad)!important;
 			border: none!important;
 			width: 50%!important;
 		}
@@ -55,7 +55,7 @@
 
 	.instance {
 		overflow: visible;
-		padding: 0 0 var(--spacing-smallish)!important;
+		padding: 0 0 var(--spacing-broad)!important;
 	}
 
 	&.duplicator {
@@ -68,13 +68,13 @@
 
 	.clear-filters {
 		order: 3;
-		margin-left: var(--spacing-smallest);
+		margin-left: var(--spacing-thinnest);
 		cursor: pointer;
 	}
 
 	.apply-filters {
 		order: 2;
-		margin-left: var(--spacing-smallest);
+		margin-left: var(--spacing-thinnest);
 		cursor: pointer;
 	}
 
@@ -86,7 +86,7 @@
 	}
 
 	.calendar {
-		padding: var(--spacing-smallerish);
+		padding: var(--spacing-thinner);
 	}
 
 	&.empty {
@@ -98,8 +98,8 @@
 			color: var(--color-main-dark);
 			font-size: var(--text-shorter);
 			text-transform: uppercase;
-			margin-bottom: var(--spacing-smallish);
-			padding-bottom: var(--spacing-smallish);
+			margin-bottom: var(--spacing-broad);
+			padding-bottom: var(--spacing-broad);
 		}
 	}
 }

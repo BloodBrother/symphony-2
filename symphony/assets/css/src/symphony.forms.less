@@ -37,7 +37,7 @@ select,
 	font-size: var(--text-small);
 	text-transform: none;
 	line-height: 1em;
-	padding: var(--spacing-smallest);
+	padding: var(--spacing-thinnest);
 	border: 2px solid var(--color-main-lighter);
 	width: 100%;
 	transition-property: border-color, color;
@@ -80,7 +80,7 @@ input[type='checkbox'] {
 	position: relative;
 	vertical-align: bottom;
 	cursor: pointer;
-	margin-right: var(--spacing-smallest);
+	margin-right: var(--spacing-thinnest);
 }
 
 input[type='checkbox']:before {
@@ -128,15 +128,15 @@ input[size] {
 }
 
 input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
-	line-height: ~'calc(0.4rem + var(--text-small) + var(--spacing-smallest) * 2)';
-	padding: 0 var(--spacing-smallest);
-	height: ~'calc(0.4rem + var(--text-small) + var(--spacing-smallest) * 2)';
+	line-height: ~'calc(0.4rem + var(--text-small) + var(--spacing-thinnest) * 2)';
+	padding: 0 var(--spacing-thinnest);
+	height: ~'calc(0.4rem + var(--text-small) + var(--spacing-thinnest) * 2)';
 }
 
 select {
-	line-height: ~'calc(0.4rem + var(--text-small) + var(--spacing-smallest) * 2)';
-	padding: 0 var(--spacing-smallest);
-	height: ~'calc(0.4rem + var(--text-small) + var(--spacing-smallest) * 2)';
+	line-height: ~'calc(0.4rem + var(--text-small) + var(--spacing-thinnest) * 2)';
+	padding: 0 var(--spacing-thinnest);
+	height: ~'calc(0.4rem + var(--text-small) + var(--spacing-thinnest) * 2)';
 
 	.disabled {
 		display: none;
@@ -155,7 +155,7 @@ select[multiple] {
 
 	option {
 		color: var(--color-main-light);
-		padding: 0.2rem var(--spacing-smallest);
+		padding: 0.2rem var(--spacing-thinnest);
 
 		&:checked {
 			background: var(--color-accent);
@@ -166,11 +166,11 @@ select[multiple] {
 optgroup {
 	font-weight: bold;
 	font-style: normal;
-	padding: var(--spacing-smallest);
+	padding: var(--spacing-thinnest);
 
 	option {
-		margin-left: ~'calc(var(--spacing-smallest) * -1)';
-		margin-right: ~'calc(var(--spacing-smallest) * -1)';
+		margin-left: ~'calc(var(--spacing-thinnest) * -1)';
+		margin-right: ~'calc(var(--spacing-thinnest) * -1)';
 	}
 }
 
@@ -279,7 +279,7 @@ button,
 	cursor: pointer;
 	background-color: var(--color-main);
 	border: 0;
-	padding: var(--spacing-smallest) var(--spacing-smallerish);
+	padding: var(--spacing-thinnest) var(--spacing-thinner);
 	line-height: 1em;
 	border-radius: var(--radius-current);
 	font-weight: 500;
@@ -331,7 +331,7 @@ label {
 label,
 label.column,
 .label {
-	margin-bottom: var(--spacing-smallish);
+	margin-bottom: var(--spacing-broad);
 
 	.column &:last-of-type {
 		margin-bottom: 0;
@@ -392,8 +392,8 @@ legend {
 		font-style: normal;
 		text-transform: uppercase;
 		line-height: 1.6em;
-		margin-bottom: var(--spacing-smallest);
-		padding: var(--spacing-micro) var(--spacing-smallest);
+		margin-bottom: var(--spacing-thinnest);
+		padding: var(--spacing-micro) var(--spacing-thinnest);
 		background: var(--color-accent);
 		cursor: pointer;
 
@@ -409,7 +409,7 @@ legend {
 
 .apply {
 	display: block;
-	margin: var(--spacing-smallest) 0 0;
+	margin: var(--spacing-thinnest) 0 0;
 	padding: 0;
 	float: right;
 
@@ -455,11 +455,11 @@ legend {
 		text-transform: uppercase;
 		line-height: 1.6rem;
 		margin: 0;
-		padding: var(--spacing-smallest) var(--spacing-smallerish);
+		padding: var(--spacing-thinnest) var(--spacing-thinner);
 		background: var(--color-accent);
 
 		@media (max-width: (@sm - 1)) {
-			margin-top: var(--spacing-smallest);
+			margin-top: var(--spacing-thinnest);
 		}
 	}
 
@@ -566,7 +566,7 @@ ul.tags {
 	display: block;
 
 	legend {
-		margin-left: var(--spacing-smallish)!important;
+		margin-left: var(--spacing-broad)!important;
 		padding: 0!important;
 	}
 
@@ -591,10 +591,10 @@ div.password {
 
 .field {
 	box-sizing: border-box;
-	margin-bottom: var(--spacing-smallish);
+	margin-bottom: var(--spacing-broad);
 
 	&.field-multilingual div.container label {
-		margin-bottom: var(--spacing-smallest);
+		margin-bottom: var(--spacing-thinnest);
 	}
 }
 
@@ -606,25 +606,25 @@ div.field-checkbox {
 	}
 
 	& + .field:not(.field-checkbox) {
-		margin-top: var(--spacing-smallish);
+		margin-top: var(--spacing-broad);
 	}
 }
 
 fieldset {
 	position: relative;
-	margin-top: var(--spacing-smallish);
+	margin-top: var(--spacing-broad);
 
 	h3 {
 		color: var(--color-accent);
 		font-size: var(--text-big);
-		padding-bottom: var(--spacing-smallerish);
+		padding-bottom: var(--spacing-thinner);
 	}
 
 	input[type=submit] {
 		color: var(--color-clear);
 		font-size: var(--text-smaller);
 		text-transform: uppercase;
-		padding: var(--spacing-smallest) var(--spacing-smallerish);
+		padding: var(--spacing-thinnest) var(--spacing-thinner);
 		background: var(--color-accent);
 		cursor: pointer;
 
@@ -636,8 +636,8 @@ fieldset {
 	input[type=submit],
 	button,
 	.button {
-		margin-right: var(--spacing-smallest);
-		margin-bottom: var(--spacing-smallest);
+		margin-right: var(--spacing-thinnest);
+		margin-bottom: var(--spacing-thinnest);
 		margin-left: 0;
 	}
 }
@@ -648,27 +648,27 @@ fieldset {
 
 fieldset.settings {
 	position: relative;
-	margin-bottom: var(--spacing-smallish);
+	margin-bottom: var(--spacing-broad);
 	padding: 0;
 
 	@media (min-width: @md){
-		padding-left: var(--spacing-huge);
+		padding-left: var(--dimension-tiniest);
 	}
 
 	> legend {
 		line-height: 1.4em;
-		margin-bottom: var(--spacing-smallest);
+		margin-bottom: var(--spacing-thinnest);
 
 		@media (min-width: @md){
 			position: absolute;
 			top: -0.1rem;
 			left: 0;
-			width: ~'calc(var(--spacing-huge) - var(--spacing-smallish))';
+			width: ~'calc(var(--dimension-tiniest) - var(--spacing-broad))';
 		}
 		@media (max-width: (@md - 1)){
 			color: var(--color-accent);
 			font-size: var(--text-big);
-			padding: ~'calc(var(--spacing-smallest) 0 var(--spacing-smallish))';
+			padding: ~'calc(var(--spacing-thinnest) 0 var(--spacing-broad))';
 		}
 	}
 
@@ -687,7 +687,7 @@ fieldset.settings {
 		margin: 0;
 
 		& + span.frame {
-			margin-top: var(--spacing-smallest);
+			margin-top: var(--spacing-thinnest);
 		}
 
 		& + p.help {
@@ -718,7 +718,7 @@ fieldset.settings {
 
 		&:last-of-type {
 			& + div:not(.columns) {
-				margin: var(--spacing-smaller) 0;
+				margin: var(--spacing-thin) 0;
 			}
 		}
 	}
@@ -731,15 +731,15 @@ fieldset.settings {
 	.toggle {
 		position: absolute;
 		line-height: 1.8em;
-		margin: 2.5rem 0 0 ~'calc(var(--spacing-huge) * -1)';
-		width: ~'calc(var(--spacing-huge) - var(--spacing-smallish))';
+		margin: 2.5rem 0 0 ~'calc(var(--dimension-tiniest) * -1)';
+		width: ~'calc(var(--dimension-tiniest) - var(--spacing-broad))';
 		width: 17rem;
 
 		@media (max-width: (@md - 1)){
 			position: relative;
 			font-size: var(--text-small);
 			margin: 0;
-			margin-bottom: var(--spacing-smaller);
+			margin-bottom: var(--spacing-thin);
 			width: auto;
 		}
 	}
@@ -749,10 +749,10 @@ fieldset.settings {
 	}
 
 	& + fieldset.settings {
-		margin-top: var(--spacing-midlarge);
+		margin-top: var(--spacing-broadest);
 
 		@media (max-width: (@md - 1)){
-			margin-top: var(--spacing-smallish);
+			margin-top: var(--spacing-broad);
 		}
 	}
 

@@ -29,7 +29,7 @@ div.drawer.horizontal {
 	box-shadow: var(--shadow);
 
 	.contents {
-		padding: var(--spacing-smallish) var(--spacing-smallish) var(--spacing-mid);
+		padding: var(--spacing-broad) var(--spacing-broad) var(--spacing-broadest);
 	}
 }
 
@@ -47,20 +47,20 @@ div.drawer.horizontal {
 			top: 0;
 			bottom: 0;
 			background: var(--color-clear);
-			width: var(--spacing-huger)!important;
+			width: var(--dimension-tiny)!important;
 			max-width: 100%;
 			z-index: 100;
 			box-shadow: var(--shadow);
 
 			.contents {
-				padding: 0 0 var(--spacing-mid);
+				padding: 0 0 var(--spacing-broadest);
 			}
 		}
 
 		.close-btn {
 			position: absolute;
-			right: var(--spacing-smallish);
-			top: var(--spacing-smallish);
+			right: var(--spacing-broad);
+			top: var(--spacing-broad);
 		}
 
 		&.vertical-left {
