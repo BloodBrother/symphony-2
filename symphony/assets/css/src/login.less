@@ -11,25 +11,25 @@
 #login {
 	.flex(~'column', ~'center', ~'center');
 	box-sizing: border-box;
-	padding: var(--spacing-smallish);
+	padding: var(--spacing-broad);
 	width: 100%;
 	min-height: 100vh;
 	background-color: var(--color-accent-light);
 
 	fieldset {
-		padding: var(--spacing-smallerish);
+		padding: var(--spacing-thinner);
 
 		legend {
 			display: none;
 		}
 
 		label + label {
-			margin-top: var(--spacing-smallish);
+			margin-top: var(--spacing-broad);
 		}
 
 		p {
-			margin-bottom: var(--spacing-smallerish);
-			padding-bottom: var(--spacing-smallish);
+			margin-bottom: var(--spacing-thinner);
+			padding-bottom: var(--spacing-broad);
 			max-width: 350px;
 		}
 	}
@@ -45,7 +45,7 @@
 		overflow: hidden;
 		padding: 0;
 		background: var(--color-clear);
-		width: var(--spacing-huger);
+		width: var(--dimension-tiny);
 		max-width: 100%;
 		border: none;
 		background: none;
@@ -58,7 +58,7 @@
 			display: block;
 			font-size: var(--text-biggest);
 			font-weight: 400;
-			margin-bottom: var(--spacing-smallish);
+			margin-bottom: var(--spacing-broad);
 		}
 
 		.sun {
@@ -159,7 +159,7 @@
 
 	.actions {
 		.flex(~'row-reverse', ~'center', ~'space-between');
-		padding: 0 var(--spacing-smallerish )var(--spacing-smallerish);
+		padding: 0 var(--spacing-smallerish )var(--spacing-thinner);
 		margin: 0;
 
 		.action-link {

@@ -20,13 +20,13 @@
 	border-radius: var(--radius-current);
 	position: relative;
 	margin: 0;
-	padding: var(--spacing-smallerish);
+	padding: var(--spacing-thinner);
 	border: 2px solid var(--color-main-lighter);
 	background-color: var(--color-ui);
 	overflow: hidden;
 
 	h1 {
-		padding: var(--spacing-smallest);
+		padding: var(--spacing-thinnest);
 		color: var(--color-main);
 		font-size: inherit;
 		font-weight: normal;
@@ -43,7 +43,7 @@
 	}
 
 	.tags {
-		margin: ~'calc(var(--spacing-smallish) * -1)' 0 var(--spacing-smallerish);
+		margin: ~'calc(var(--spacing-broad) * -1)' 0 var(--spacing-thinner);
 	}
 
 	iframe {
@@ -59,7 +59,7 @@
 		text-transform: uppercase;
 		line-height: 1.6rem;
 		margin: 0;
-		padding: var(--spacing-smallest) var(--spacing-smallerish);
+		padding: var(--spacing-thinnest) var(--spacing-thinner);
 		background: var(--color-accent);
 		border-radius: var(--radius-current);
 		cursor: pointer;
@@ -79,10 +79,10 @@
 	}
 
 	.content {
-		padding-top: var(--spacing-smallerish);
+		padding-top: var(--spacing-thinner);
 
 		.help {
-			margin-top: var(--spacing-smallest)!important;
+			margin-top: var(--spacing-thinnest)!important;
 		}
 	}
 
@@ -96,7 +96,7 @@
 .frame-header {
 	.flex(~'row', ~'center', ~'flex-start');
 	position: relative;
-	padding: var(--spacing-smallest) var(--spacing-smallerish);
+	padding: var(--spacing-thinnest) var(--spacing-thinner);
 	border-top: 2px solid var(--color-accent-light);
 
 	h4 {
@@ -114,11 +114,11 @@
 		span, & + span {
 			color: var(--color-main-dark);
 			font-size: var(--text-small);
-			padding-left: var(--spacing-smallest);
+			padding-left: var(--spacing-thinnest);
 		}
 
 		svg {
-			padding-left: var(--spacing-smallerish);
+			padding-left: var(--spacing-thinner);
 
 			* {
 				.transitioned(~'fill');
@@ -140,7 +140,7 @@
 		display: block;
 		width: .1rem;
 		height: 1rem;
-		margin: 0 var(--spacing-smallest) 0 0;
+		margin: 0 var(--spacing-thinnest) 0 0;
 		border-right: .3rem solid var(--color-main-lighter);
 		border-left: .6rem solid var(--color-main-light);
 	}
@@ -159,8 +159,8 @@ span.frame,
 fieldset.frame,
 .frame.inline {
 	display: block;
-	margin-bottom: var(--spacing-smaller);
-	padding: var(--spacing-smallest);
+	margin-bottom: var(--spacing-thin);
+	padding: var(--spacing-thinnest);
 }
 
 /*--------------------------------------------------------------------------
@@ -177,14 +177,14 @@ fieldset.frame,
 .frame .debug {
 	color: var(--color-main-light);
 	font-size: var(--text-small)!important;
-	margin: 0 0 0 var(--spacing-smallerish);
+	margin: 0 0 0 var(--spacing-thinner);
 }
 
 .frame .destructor {
 	margin-left: auto;
 
 	a {
-		padding: 0 0 0 var(--spacing-smallest);
+		padding: 0 0 0 var(--spacing-thinnest);
 	}
 }
 
@@ -203,7 +203,7 @@ fieldset.frame,
 /* Applicators */
 
 .frame .actions {
-	margin: 0 0 var(--spacing-smallest);
+	margin: 0 0 var(--spacing-thinnest);
 }
 
 .frame .actions input {
@@ -247,8 +247,8 @@ fieldset.settings .collapsible {
 .constructable > * > li,
 .collapsible > * > li {
 	overflow: hidden;
-	margin-left: ~'calc(var(--spacing-smallerish) * -1)';
-	padding: 0 var(--spacing-smallerish)!important;
+	margin-left: ~'calc(var(--spacing-thinner) * -1)';
+	padding: 0 var(--spacing-thinner)!important;
 	width: 100%;
 
 	&:first-of-type .frame-header {
@@ -256,7 +256,7 @@ fieldset.settings .collapsible {
 	}
 
 	.content {
-		padding: var(--spacing-smallerish);
+		padding: var(--spacing-thinner);
 		border-top: 2px solid var(--color-accent-light);
 	}
 }

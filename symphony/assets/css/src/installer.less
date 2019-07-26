@@ -20,7 +20,7 @@ form {
 	box-sizing: border-box;
 	position: relative;
 	margin: 0 auto;
-	padding: var(--spacing-smallish) var(--spacing-smallish) var(--spacing-mid);
+	padding: var(--spacing-broad) var(--spacing-broad) var(--spacing-broadest);
 	max-width: 90rem;
 }
 
@@ -31,12 +31,12 @@ form {
 h1 {
 	color: var(--color-accent);
 	font-size: var(--text-current);
-	margin-bottom: var(--spacing-smallish);
+	margin-bottom: var(--spacing-broad);
 
 	@media (max-width: (@sm - 1)) {
 		position: fixed;
-		margin: var(--spacing-smallest) 0 var(--spacing-smallish) ~'calc(var(--spacing-huge) *- 1)';
-		width: var(--spacing-huge);
+		margin: var(--spacing-thinnest) 0 var(--spacing-broad) ~'calc(var(--dimension-tiniest) * -1)';
+		width: var(--dimension-tiniest);
 	}
 
 	em {
@@ -64,12 +64,12 @@ h1 {
 h2 {
 	color: var(--color-accent);
 	font-size: var(--text-bigger);
-	margin: 0 0 var(--spacing-smallish);
+	margin: 0 0 var(--spacing-broad);
 }
 
 p {
 	line-height: 1.4em;
-	margin-bottom: var(--spacing-smallish);
+	margin-bottom: var(--spacing-broad);
 
 	a {
 		color: var(--color-accent);
@@ -82,29 +82,29 @@ p {
 
 fieldset + h2,
 p + h2 {
-	padding-top: var(--spacing-small);
+	padding-top: var(--spacing-broader);
 }
 
 form > fieldset {
-	margin: var(--spacing-smallish) 0;
+	margin: var(--spacing-broad) 0;
 
 	> legend {
 		display: block;
 		color: var(--color-accent);
 		font-size: var(--text-bigger);
-		padding: var(--spacing-small) 0 var(--spacing-smallish);
+		padding: var(--spacing-broader) 0 var(--spacing-broad);
 		width: 100%;
 	}
 
 	.frame {
-		margin-bottom: var(--spacing-smallish)!important;
-		padding: var(--spacing-smallish) var(--spacing-smallerish) var(--spacing-smallerish);
+		margin-bottom: var(--spacing-broad)!important;
+		padding: var(--spacing-broad) var(--spacing-thinner) var(--spacing-thinner);
 		background: var(--color-clear);
 
 		legend {
 			position: absolute;
-			left: var(--spacing-smallerish);
-			top: var(--spacing-smallerish);
+			left: var(--spacing-thinner);
+			top: var(--spacing-thinner);
 			color: var(--color-main);
 			font-size: var(--text-shorter);
 			text-transform: uppercase;
@@ -120,7 +120,7 @@ form > fieldset {
 
 .submit {
 	text-align: right;
-	margin-top: var(--spacing-smallish);
+	margin-top: var(--spacing-broad);
 
 	input {
 		margin: 0;

@@ -17,13 +17,13 @@
 body#error {
 	.flex(~'column', ~'center', ~'center');
 	box-sizing: border-box;
-	padding: var(--spacing-smallish);
+	padding: var(--spacing-broad);
 	width: 100%;
 	min-height: 100vh;
 }
 
 .frame.error {
-	padding: var(--spacing-smallest);
+	padding: var(--spacing-thinnest);
 	overflow: hidden;
 	background: var(--color-clear);
 	width: @sm;
@@ -31,7 +31,7 @@ body#error {
 	box-shadow: var(--shadow);
 
 	h1 {
-		margin: ~'calc(var(--spacing-smallest) * -1) calc(var(--spacing-smallest) * -1) 0';
+		margin: ~'calc(var(--spacing-thinnest) * -1) calc(var(--spacing-thinnest) * -1) 0';
 		font-size: var(--text-bigger);
 	}
 
@@ -60,7 +60,7 @@ body#error {
 		margin: 0;
 
 		p, h1 {
-			padding: var(--spacing-smallest) var(--spacing-smallerish);
+			padding: var(--spacing-thinnest) var(--spacing-thinner);
 			margin: 0;
 		}
 
@@ -72,13 +72,13 @@ body#error {
 				color: var(--color-main-dark);
 				font-size: var(--text-small);
 				margin: 0;
-				padding: 0 var(--spacing-smallerish);
+				padding: 0 var(--spacing-thinner);
 			}
 		}
 	}
 
 	.content {
-		padding: 0 var(--spacing-smallerish);
+		padding: 0 var(--spacing-thinner);
 		box-sizing: border-box;
 		overflow-x: auto;
 
@@ -91,7 +91,7 @@ body#error {
 			color: var(--color-main-dark);
 			font-size: var(--text-small);
 			margin: 0;
-			padding: 0 var(--spacing-smallerish);
+			padding: 0 var(--spacing-thinner);
 		}
 	}
 }

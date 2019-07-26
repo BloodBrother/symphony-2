@@ -25,7 +25,7 @@ table {
 		display: flex;
 		align-items: center;
 		width: 100%;
-		padding: var(--spacing-smallest) var(--spacing-smaller);
+		padding: var(--spacing-thinnest) var(--spacing-thin);
 		box-sizing: border-box;
 	}
 
@@ -37,7 +37,7 @@ table {
 		text-overflow: ellipsis;
 		white-space: nowrap;
 
-		padding-right: var(--spacing-smaller);
+		padding-right: var(--spacing-thin);
 		box-sizing: border-box;
 
 		text-align: left;
@@ -50,7 +50,7 @@ table {
 
 	thead {
 		box-shadow: var(--shadow);
-		padding: 0 var(--spacing-smallerish);
+		padding: 0 var(--spacing-thinner);
 		background-color: var(--color-accent-light);
 		box-sizing: border-box;
 		position: sticky;
@@ -84,18 +84,18 @@ table {
 	}
 
 	tbody {
-		padding: var(--spacing-smallerish);
+		padding: var(--spacing-thinner);
 		box-sizing: border-box;
 
 		tr {
 			background-color: var(--color-clear);
-			margin: var(--spacing-nano);
+			margin: var(--spacing-pico);
 			box-shadow: var(--shadow);
 			border-radius: var(--radius-current);
 			overflow: hidden;
 
 			@media (max-width: (@sm - 1)) {
-				margin: var(--spacing-smallest) var(--spacing-nano);
+				margin: var(--spacing-thinnest) var(--spacing-pico);
 			}
 		}
 
@@ -103,7 +103,7 @@ table {
 			color: var(--color-main-light);
 			font-size: var(--text-current);
 
-			padding-right: var(--spacing-smaller);
+			padding-right: var(--spacing-thin);
 			box-sizing: border-box;
 			text-overflow: ellipsis;
 			overflow: hidden;
@@ -114,8 +114,8 @@ table {
 			}
 
 			img {
-				max-width: var(--spacing-mid) !important;
-				max-height: var(--spacing-small) !important;
+				max-width: var(--spacing-broadest) !important;
+				max-height: var(--spacing-broader) !important;
 				border-radius: var(--radius-smallest);
 			}
 
@@ -141,7 +141,7 @@ table {
 				&::before {
 					content: attr(data-title);
 					font-weight: 500;
-					margin-right: var(--spacing-smallest);
+					margin-right: var(--spacing-thinnest);
 					color: var(--color-main-dark);
 				}
 
@@ -156,7 +156,7 @@ table {
 	//  Hide content when on small screen
 	@media (max-width: (@sm - 1)) {
 		td:first-of-type {
-			margin-right: var(--spacing-smaller);
+			margin-right: var(--spacing-thin);
 		}
 
 		td:nth-child(n + 3) {
