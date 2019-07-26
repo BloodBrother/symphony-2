@@ -13,7 +13,7 @@
 --------------------------------------------------------------------------*/
 
 body {
-	background-color: var(--color-clear);
+	background-color: var(--color-backframe);
 }
 
 #loading {
@@ -23,7 +23,7 @@ body {
 	bottom: 0;
 	right: 0;
 	left: 0;
-	background-color: var(--color-clear);
+	background-color: var(--color-backframe);
 	z-index: 200;
 }
 
@@ -56,7 +56,7 @@ body {
 	position: fixed;
 	left: 0;
 	top: 0;
-	background: var(--color-clear);
+	background: var(--color-backframe);
 	width: var(--dimension-tiniest);
 	height: 100vh;
 	z-index: 101;
@@ -451,7 +451,7 @@ body {
 		top: 0;
 		color: var(--color-main-dark);
 		margin: 0 0 var(--spacing-micro);
-		background: var(--color-clear);
+		background: var(--color-backframe);
 		opacity: 0;
 		pointer-events: none;
 		z-index: 200;
@@ -536,7 +536,7 @@ body {
 	.flex(~'row', ~'center', ~'flex-end');
 
 	color: var(--color-accent);
-	background-color: var(--color-clear);
+	background-color: var(--color-backframe);
 
 	@media (max-width: (@sm - 1)){
 		order: -1;
@@ -568,7 +568,7 @@ body {
 	.flex(~'row', ~'center', ~'space-between');
 	box-sizing: border-box;
 	left: var(--dimension-tiniest);
-	background: var(--color-clear);
+	background: var(--color-backframe);
 	height: var(--spacing-broadest);
 	z-index: 50;
 	position: -webkit-sticky;
@@ -790,7 +790,7 @@ body {
 #contents {
 	box-sizing: border-box;
 	position: relative;
-	background-color: var(--color-clear);
+	background-color: var(--color-backframe);
 	min-height: ~'calc(100vh - var(--spacing-broadest) - var(--spacing-broadest))';
 	padding: 0 var(--spacing-broader) 0 0;
 
@@ -833,7 +833,7 @@ body {
 		}
 
 		body:not(#publish):not(.page-index) & > .inner {
-			background-color: var(--color-clear);
+			background-color: var(--color-backframe);
 			border-radius: var(--radius-current);
 			padding: var(--spacing-thin);
 			box-sizing: border-box;
@@ -1029,11 +1029,11 @@ body {
 		}
 	
 		.column {
-			background-color: var(--color-clear);
+			// background-color: var(--color-backframe);
 			padding: var(--spacing-thin);
 			box-sizing: border-box;
 			border-radius: var(--radius-current);
-			box-shadow: var(--shadow);
+			// box-shadow: var(--shadow);
 	
 			&.primary {
 				width: ~'calc(100% - var(--spacing-thinner) - var(--dimension-tiny))';
