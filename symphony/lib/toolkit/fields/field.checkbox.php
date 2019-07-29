@@ -180,19 +180,23 @@ class FieldCheckbox extends Field implements ExportableField, ImportableField
 
         $label = Widget::Label();
 
+        $input = Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, 'yes', 'checkbox', ($value === 'yes' ? array('checked' => 'checked') : null));
+
+        $label->setValue($this->get('label'))->setAttribute('for', $this->get('element_name'));
+        
         if ($this->get('required') !== 'yes') {
             $label->appendChild(new XMLElement('i', __('Optional')));
         }
 
-        $input = Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, 'yes', 'checkbox', ($value === 'yes' ? array('checked' => 'checked') : null));
-
-        $label->setValue($input->generate(false) . ' ' . $this->get('label'));
+        $input->setAttribute('id', $this->get('element_name'));
 
         if ($flagWithError != null) {
             $wrapper->appendChild(Widget::Error($label, $flagWithError));
         } else {
             $wrapper->appendChild($label);
         }
+
+        $wrapper->appendChild($input->generate(false));
     }
 
     public function checkPostFieldData($data, &$message, $entry_id = null)
