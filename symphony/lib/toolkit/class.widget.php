@@ -204,6 +204,7 @@ class Widget
         $obj->setAttribute('name', $name);
         $obj->setAttribute('rows', $rows);
         $obj->setAttribute('cols', $cols);
+        $obj->setAttribute('placeholder', ' ');
 
         if (is_array($attributes) && !empty($attributes)) {
             $obj->setAttributeArray($attributes);
