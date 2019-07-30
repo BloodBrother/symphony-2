@@ -301,7 +301,17 @@ class FieldUpload extends Field implements ExportableField, ImportableField
             if (file_exists($file) === false || !is_readable($file)) {
                 $flagWithError = __('The file uploaded is no longer available. Please check that it exists, and is readable.');
             }
+        } else {
+            $filename = null;
+        }
 
+        $input = Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, $filename, ($filename ? 'hidden' : 'file'));
+        $label->setAttribute('for', $this->get('element_name'));
+        $input->setAttribute('id', $this->get('element_name'));
+
+        $span->appendChild($input);
+        
+        if (isset($data['file'])) {
             $span->appendChild(
                 new XMLElement(
                     'span',
@@ -315,16 +325,7 @@ class FieldUpload extends Field implements ExportableField, ImportableField
                     )
                 )
             );
-        } else {
-            $filename = null;
         }
-
-        $input = Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, $filename, ($filename ? 'hidden' : 'file'));
-        $label->setAttribute('for', $this->get('element_name'));
-        $input->setAttribute('id', $this->get('element_name'));
-
-        $span->appendChild($input);
-
 
         if ($flagWithError != null) {
             $wrapper->appendChild(Widget::Error($label, $flagWithError));
