@@ -56,12 +56,12 @@ select,
 	box-sizing: border-box;
 	border-radius: var(--radius-current);
 	color: var(--color-main);
-	line-height: 1em;
+	line-height: 1.2em;
 	padding: var(--spacing-thinnest);
-	min-height: var(--spacing-broader);
+	min-height: var(--spacing-broad);
 	width: 100%;
-	border: 1px solid var(--color-main-light);
-	font-weight: 500;
+	border: 1px solid transparent;
+	border-bottom-color: var(--color-main-light);
 
 	&:placeholder-shown:not(:focus) {
 		background-color: var(--color-main-lighter);
@@ -204,7 +204,6 @@ select {
 	-webkit-border-radius: var(--radius-current);
 	background: var(--color-main-lighter);
 	color: var(--color-main-dark);
-	font-weight: 450;
 
 	.disabled {
 		display: none;
@@ -212,8 +211,7 @@ select {
 
 	&:not([multiple]) {
 		cursor: pointer;
-		padding-top: 0;
-		padding-bottom: 0;
+		padding-right: ~'calc(.65em + var(--spacing-thinnest) * 2)';
 		background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23172D4D%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
 		background-repeat: no-repeat;
 		background-position: right .7em top 50%;
@@ -227,9 +225,11 @@ select {
 		-webkit-appearance: none;
 		min-height: min-content;
 
-		option {
+		option, optgroup {
 			padding: var(--spacing-pico) var(--spacing-thinnest);
+		}
 
+		option {
 			&:checked {
 				background: var(--color-clear) -webkit-linear-gradient(bottom, var(--color-clear) 0%, var(--color-clear) 100%);
 			}
@@ -320,7 +320,6 @@ button,
 	padding: var(--spacing-thinnest) var(--spacing-thinner);
 	line-height: 1em;
 	border-radius: var(--radius-current);
-	font-weight: 500;
 	color: var(--color-clear);
 	font-size: var(--text-small);
 
@@ -339,7 +338,6 @@ legend {
 	position: relative;
 	display: block;
 	color: inherit;
-	font-weight: 450;
 }
 
 label[for] {
@@ -355,8 +353,9 @@ legend i:not(:empty) {
 	opacity: 0;
 	height: 0;
 	line-height: 0;
-	top: var(--spacing-micro);
+	top: var(--spacing-pico);
 	position: relative;
+	color: var(--color-main-light);
 
 	.field:hover & {
 		opacity: 1;
@@ -374,92 +373,30 @@ legend {
 --------------------------------------------------------------------------*/
 
 .apply {
-	display: block;
-	margin: var(--spacing-thinnest) 0 0;
-	padding: 0;
-	float: right;
+	padding-left: var(--spacing-thinner);
+	padding-right: var(--spacing-thinner);
+	>* {
+		max-width: max-content;
+		display: inline-block;
 
-	@media (max-width: (@sm - 1)) {
-		float: none;
-		width: 100%;
 	}
-
-	select {
-		max-width: 35rem;
-
-		@media (max-width: (@sm - 1)) {
-			max-width: none;
-		}
+	>*:not(:hover) {
+		// background-color: none;
+		border-color: transparent;
 	}
-
-	div {
-		box-sizing: border-box;
-		float: left;
-		text-align: left;
-		margin-right:var(--spacing-micro);
-
-		@media (max-width: (@sm - 1)) {
-			float: none;
-			margin-right: 0;
-		}
+	>*+* {
+		margin-left: var(--spacing-thinnest);
 	}
-
-	label {
-		margin-bottom: 0!important;
-	}
-
-	button,
-	.apply-button-right,
-	.apply-button-left,
-	.apply-label-right,
-	.apply-label-left {
-		.transitioned(~'border,background');
-		border-radius: var(--radius-current);
+	button {
 		float: right;
-		color: var(--color-clear);
-		font-size: var(--text-smaller);
-		text-transform: uppercase;
-		line-height: 1.6rem;
-		margin: 0;
-		padding: var(--spacing-thinnest) var(--spacing-thinner);
-		background: var(--color-accent);
-
-		@media (max-width: (@sm - 1)) {
-			margin-top: var(--spacing-thinnest);
-		}
-	}
-
-	button,
-	.apply-button-right,
-	.apply-button-left {
-		cursor: pointer;
-
-		&:hover {
-			border-color: var(--color-main-light);
-			background: var(--color-main-light);
-		}
-	}
-
-	.apply-button-left,
-	.apply-label-left {
-		float: left;
-	}
-
-	.apply-label-left + div {
-		margin-left: var(--spacing-micro);
-		margin-right: 0;
+		margin-left: var(--spacing-thinnest);
 	}
 
 	&.inactive {
-		pointer-events: none;
-
-		button,
-		button:hover,
-		&:hover button {
-			color: var(--color-main-dark);
-			border-color: var(--color-main);
-			background: var(--color-main);
-			cursor: default;
+		cursor: not-allowed;
+		opacity: .5;
+		>* {
+			pointer-events: none;
 		}
 	}
 }
@@ -468,15 +405,12 @@ legend {
 	Required
 --------------------------------------------------------------------------*/
 
-// .field.required .invalid > label:before,
-// .field.required .invalid .container > label:before,
-// .field.required > label:before,
-// .field.required .container > label:before {
-// 	content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNCIgaGVpZ2h0PSI0IiB2aWV3Qm94PSIwIDAgNCA0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMiIgZmlsbD0iI0ZENTM1MyIvPgo8L3N2Zz4K');
-// 	position: absolute;
-// 	top: -0.2rem;
-// 	left: -1.1rem;
-// }
+.field.required label:before {
+	content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNCIgaGVpZ2h0PSI0IiB2aWV3Qm94PSIwIDAgNCA0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMiIgZmlsbD0iI0ZENTM1MyIvPgo8L3N2Zz4K');
+	position: absolute;
+	top: -0.4rem;
+	left: -1.4rem;
+}
 
 /*--------------------------------------------------------------------------
 	Tags
@@ -485,29 +419,13 @@ legend {
 ul.tags {
 	color: var(--color-main-light);
 	font-size: var(--text-small);
-	padding: 0;
-	margin-top: 0;
-	margin-bottom: 0;
 	list-style: none;
+	line-height: 1.4em;
 
-	.column > & {
-		margin: var(--spacing-micro);
-		margin-bottom: 0;
-	}
-
-	* > {
-		user-select: none;
-	}
-
-	li,
-	li:first-of-type,
-	li:last-of-type {
-		display: inline;
-		float: none;
-		font-size: var(--text-small);
-		padding: 0 var(--spacing-micro) 0 0;
-		border: none;
+	>* {
+		display: inline-block;
 		cursor: pointer;
+		margin-right: var(--spacing-nano);
 	}
 
 	li:hover {
@@ -569,12 +487,15 @@ div.password {
 	}
 
 	&>*:first-child {
-		max-width: 30%;
-		flex-basis: 15%;
-		flex-grow: 1;
-		flex-shrink: 5;
-		margin-right: auto;
 		order: 0;
+	}
+
+
+	&>*:first-child, &:after {
+		flex-basis: 16rem;
+		flex-grow: 0;
+		flex-shrink: 0;
+		margin-right: auto;
 	}
 
 	&>*+* {
@@ -583,6 +504,7 @@ div.password {
 		flex-grow: 5;
 		flex-shrink: 1;
 		order: 1;
+		margin-right: auto;
 	}
 
 	&:before {
@@ -596,28 +518,25 @@ div.password {
 		content: "";
 		display: block;
 		order: 2;
-		max-width: 30%;
-		flex-basis: 15%;
-		flex-grow: 1;
-		flex-shrink: 5;
-		margin-right: auto;
 	}
 
 	&>*+*~* {
 		order: 3;
 		max-width: var(--dimension-smallest);
-		margin-left: auto;
+		margin-right: auto;
+		margin-top: var(--spacing-nano);
 	}
 
 	[type="hidden"]~* a {
 		background-color: var(--color-clear);
 		padding: var(--spacing-thinnest);
 		display: block;
-		line-height: 1em;
-		min-height: var(--spacing-broader);
+		line-height: 1.2em;
+		min-height: var(--spacing-broad);
 		box-sizing: border-box;
 		color: var(--color-main);
-		border: 1px solid var(--color-main-light);
+		border-radius: var(--radius-current);
+		border-bottom: 1px solid var(--color-main-light);
 	}
 
 	[type="hidden"]~* a:hover {
@@ -633,6 +552,10 @@ div.password {
 		}
 
 	}
+
+	&:not(:hover) {
+		color: var(--color-main-light);
+	}
 }
 
 
@@ -640,37 +563,6 @@ fieldset {
 	position: relative;
 	margin-top: var(--spacing-broad);
 
-	h3 {
-		color: var(--color-accent);
-		font-size: var(--text-big);
-		padding-bottom: var(--spacing-thinner);
-	}
-
-	input[type=submit] {
-		color: var(--color-clear);
-		font-size: var(--text-smaller);
-		text-transform: uppercase;
-		padding: var(--spacing-thinnest) var(--spacing-thinner);
-		background: var(--color-accent);
-		cursor: pointer;
-
-		&:hover {
-			background: var(--color-main-light);
-		}
-	}
-
-	>*:not(legend)+*,
-	>div:not([class])>*+* {
-		margin-top: var(--spacing-thin);
-	}
-
-	input[type=submit],
-	button,
-	.button {
-		margin-right: var(--spacing-thinnest);
-		margin-bottom: var(--spacing-thinnest);
-		margin-left: 0;
-	}
 }
 
 /*--------------------------------------------------------------------------
@@ -681,6 +573,12 @@ fieldset.settings {
 	position: relative;
 	margin-bottom: var(--spacing-broad);
 	padding: 0;
+
+
+	>*:not(legend)+*,
+	>div:not([class])>*+* {
+		margin-top: var(--spacing-thin);
+	}
 
 	@media (min-width: @md){
 		padding-left: var(--dimension-tiniest);
@@ -710,7 +608,6 @@ fieldset.settings {
 
 		h2 {
 			font-size: var(--text-current);
-			font-weight: 400;
 		}
 	}
 
