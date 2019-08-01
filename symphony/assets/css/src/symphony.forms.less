@@ -27,11 +27,14 @@ select {
 	transition-property: background-color, color, border-width, border-color;
 	transition-duration: var(--duration-shorter);
 	transition-timing-function: var(--ease-current);
-}
-
-input, textarea, select {
+	min-height: var(--spacing-broad);
+	box-sizing: border-box;
+	border-radius: var(--radius-current);
+	color: var(--color-main);
+	line-height: 1.2em;
 	font-size: var(--text-current);
 }
+
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -53,26 +56,28 @@ input[type="password"],
 textarea,
 select,
 .field-value-readonly {
-	box-sizing: border-box;
-	border-radius: var(--radius-current);
-	color: var(--color-main);
-	line-height: 1.2em;
 	padding: var(--spacing-thinnest);
-	min-height: var(--spacing-broad);
 	width: 100%;
 	border: 1px solid transparent;
 	border-bottom-color: var(--color-main-light);
 
 	&:placeholder-shown:not(:focus) {
 		background-color: var(--color-main-lighter);
+		mix-blend-mode: multiply;
 
 		.required & {
 			background-color: var(--color-error-light);
+			mix-blend-mode: initial;
 		}
 	}
 
 	&:focus {
 		background-color: var(--color-accent-alt-light);
+	}
+
+	&:hover {
+		border-color: var(--color-accent);
+		box-shadow: 0px 0px 0px 1px var(--color-accent);
 	}
 }
 
@@ -97,7 +102,9 @@ input[type="file"]:focus,
 textarea:active,
 textarea:focus,
 select:active,
-select:focus {
+select:focus,
+button:active,
+button:focus {
 	border-color: var(--color-accent);
 	color: var(--color-main);
 	outline: none;
@@ -120,14 +127,7 @@ input[type='checkbox'] {
 	position: relative;
 	cursor: pointer;
 	align-self: center;
-	border-top-left-radius: var(--radius-current);
-	border-bottom-left-radius: var(--radius-current);
-	border-top-right-radius: 20px;
-	border-bottom-right-radius: 20px;
-
-	&:hover {
-		background-color: var(--color-main-lighter);
-	}
+	vertical-align: middle;
 
 	&:before {
 		width: var(--spacing-broader);
@@ -145,13 +145,16 @@ input[type='checkbox'] {
 		transition-duration: var(--duration-short);
 		transition-property: background-color;
 		background-color: var(--color-main-light);
-		box-shadow: inset 0px 0px 1px 2px rgba(0,0,0,0.18), 0px 0px 0px 2px var(--color-main-lighter);
+		box-shadow: inset 0px 0px 1px 2px rgba(0,0,0,0.08), 0px 0px 0px 2px var(--color-main-lighter);
+		margin-top: var(--spacing-thinnest);
+		margin-bottom: var(--spacing-thinnest);
 	}
 
 	&:after{
 		content: '';
 		position: absolute;
 		top: 3px;
+		margin-top: var(--spacing-thinnest);
 		margin-left: 1px;
 		right: ~'calc(var(--spacing-broader) - var(--spacing-thin) + 3px)';
 		width: ~'calc(var(--spacing-thin) - 6px)';
@@ -179,18 +182,20 @@ input[type='checkbox'] {
 	}
 
 	&:checked:after {
-		background: var(--color-success-light);
+		background: var(--color-clear);
 	}
 
 	&:hover:after,
 	&:focus:after {
-		background-color: var(--color-clear);
-		transform: scale(1.12);
+		background-color: var(--color-accent-alt-light);
+		transform: scale(1.5);
+		box-shadow: 1px 1px 2px rgba(0,0,0,.4);
 	}
 	
 	&:checked:hover:after,
 	&:checked:focus:after {
-		transform: translateX(~'calc(var(--spacing-broader) - 100% - 7px)') scale(1.12);
+		transform: translateX(~'calc(var(--spacing-broader) - 100% - 7px)') scale(1.5);
+		box-shadow: -1px 1px 2px rgba(0,0,0,.4);
 	}
 }
 
@@ -202,7 +207,6 @@ input[type=file] {
 select {
 	-webkit-appearance: none;
 	-webkit-border-radius: var(--radius-current);
-	background: var(--color-main-lighter);
 	color: var(--color-main-dark);
 
 	.disabled {
@@ -224,6 +228,10 @@ select {
 		padding-right: 0;
 		-webkit-appearance: none;
 		min-height: min-content;
+		
+		&:not(:focus) {
+			background: var(--color-main-lighter);
+		}
 
 		option, optgroup {
 			padding: var(--spacing-pico) var(--spacing-thinnest);
@@ -233,6 +241,10 @@ select {
 			&:checked {
 				background: var(--color-clear) -webkit-linear-gradient(bottom, var(--color-clear) 0%, var(--color-clear) 100%);
 			}
+		}
+
+		&:not(:focus):hover {
+			background-color: var(--color-main-lighter);
 		}
 
 		&:focus {
@@ -318,10 +330,8 @@ button,
 	background-color: var(--color-main);
 	border: 0;
 	padding: var(--spacing-thinnest) var(--spacing-thinner);
-	line-height: 1em;
 	border-radius: var(--radius-current);
 	color: var(--color-clear);
-	font-size: var(--text-small);
 
 	&:hover {
 		background-color: var(--color-accent);
@@ -338,27 +348,41 @@ legend {
 	position: relative;
 	display: block;
 	color: inherit;
+
+	>i:not(:empty) {
+		display: block;
+		font-size: var(--text-smaller);
+		font-style: normal;
+		opacity: 0;
+		height: 0;
+		line-height: 0;
+		top: var(--spacing-pico);
+		position: relative;
+		color: var(--color-main-light);
+
+		.field:hover & {
+			opacity: 1;
+		}
+	}
 }
 
-label[for] {
-	cursor: pointer;
-}
+label {
+	[for] {
+		cursor: pointer;
+	}
 
+	>input:first-child,
+	>input:first-child~input {
+		margin-right: var(--spacing-thinnest);
+	}
 
-label > i:not(:empty),
-legend i:not(:empty) {
-	display: block;
-	font-size: var(--text-smaller);
-	font-style: normal;
-	opacity: 0;
-	height: 0;
-	line-height: 0;
-	top: var(--spacing-pico);
-	position: relative;
-	color: var(--color-main-light);
-
-	.field:hover & {
-		opacity: 1;
+	span {
+		~:not(i) {
+			margin-top: var(--spacing-thinnest);
+		}
+		~select[multiple] {
+			border-top-color: var(--color-main-light);
+		}
 	}
 }
 
@@ -381,7 +405,6 @@ legend {
 
 	}
 	>*:not(:hover) {
-		// background-color: none;
 		border-color: transparent;
 	}
 	>*+* {
@@ -573,20 +596,28 @@ fieldset.settings {
 	position: relative;
 	margin-bottom: var(--spacing-broad);
 	padding: 0;
+	box-sizing: content-box;
+	margin-left: var(--spacing-thinner);
+	margin-right: var(--spacing-thinner);
 
+	label {
+		cursor: pointer;
+	}
 
-	>*:not(legend)+*,
+	>*:not(legend):not(.toggle)+*,
 	>div:not([class])>*+* {
 		margin-top: var(--spacing-thin);
 	}
+
 
 	@media (min-width: @md){
 		padding-left: var(--dimension-tiniest);
 	}
 
 	> legend {
-		line-height: 1.4em;
 		margin-bottom: var(--spacing-thinnest);
+		font-size: inherit;
+		color: var(--color-main-light);
 
 		@media (min-width: @md){
 			position: absolute;
@@ -643,12 +674,6 @@ fieldset.settings {
 				border-color: transparent;
 			}
 		}
-
-		&:last-of-type {
-			& + div:not(.columns) {
-				margin: var(--spacing-thin) 0;
-			}
-		}
 	}
 
 	input + p.help,
@@ -677,7 +702,7 @@ fieldset.settings {
 	}
 
 	& + fieldset.settings {
-		margin-top: var(--spacing-broadest);
+		margin-top: var(--spacing-large);
 
 		@media (max-width: (@md - 1)){
 			margin-top: var(--spacing-broad);
