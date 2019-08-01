@@ -15,14 +15,13 @@
 -----------------------------------------------------------------------------*/
 
 .notifier {
-	overflow: hidden;
+	// overflow: hidden;
 	position: fixed;
-	bottom: 0;
-	left: var(--dimension-tiniest);
-	right: var(--spacing-broader);
+	bottom: var(--spacing-thin);
+	left: auto;
+	right: var(--spacing-broadest);
 	color: var(--color-main-dark);
 	font-size: var(--text-short);
-	max-height: 4.5rem!important;
 	z-index: 110;
 	pointer-events: none;
 
@@ -52,13 +51,17 @@
 
 .notice {
 	position: relative;
-	color: var(--color-clear);
+	color: var(--color-accent-alt-dark);
 	font-size: var(--text-short);
 	margin: 0;
-	border: none;
-	padding: var(--spacing-thinnest) var(--spacing-broad);
-	background: var(--color-main-dark);
+	padding: var(--spacing-thinnest) var(--spacing-thinner);
+	background: var(--color-accent-alt-light);
+	border: 1px solid var(--color-accent-alt);
 	pointer-events: all;
+	line-height: 1.4em;
+	border-radius: var(--radius-current);
+	box-shadow: var(--shadow-up);
+	max-width: var(--dimension-tiny);
 
 	a {
 		color: currentColor;
@@ -75,11 +78,15 @@
 	}
 
 	&.success {
-		background: var(--color-success);
+		background: var(--color-success-light);
+		border: 1px solid var(--color-success);
+		color: var(--color-success-dark);
 	}
 
 	&.error {
-		background: var(--color-error);
+		background: var(--color-error-light);
+		border: 1px solid var(--color-error);
+		color: var(--color-error-dark);
 	}
 
 	&.dimmed {
