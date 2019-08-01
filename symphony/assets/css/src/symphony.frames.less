@@ -20,10 +20,7 @@
 	border-radius: var(--radius-current);
 	position: relative;
 	margin: 0;
-	padding: var(--spacing-thinner);
-	border: 2px solid var(--color-main-lighter);
-	background-color: var(--color-ui);
-	overflow: hidden;
+	// padding: var(--spacing-thinner);
 
 	h1 {
 		padding: var(--spacing-thinnest);
@@ -78,43 +75,52 @@
 		}
 	}
 
-	.content {
-		padding-top: var(--spacing-thinner);
+	.instance {
+		background-color: var(--color-main-lighter);
+		margin-bottom: var(--spacing-pico);
+		border-top: 1px solid transparent;
 
-		.help {
-			margin-top: var(--spacing-thinnest)!important;
+		&:not(.collapsed) {
+			border-top-color: var(--color-main-light);
+			margin-top: var(--spacing-thinnest);
+			margin-bottom: var(--spacing-thinnest);
 		}
 	}
 
+
 	&.empty {
-		min-height: 3.6rem;
+		min-height: var(--spacing-broad);
 	}
 }
 
 /* Headers */
 
 .frame-header {
-	.flex(~'row', ~'center', ~'flex-start');
+	display: flex;
+	align-items: baseline;
 	position: relative;
+	border: 1px solid transparent;
 	padding: var(--spacing-thinnest) var(--spacing-thinner);
-	border-top: 2px solid var(--color-accent-light);
+	// margin-bottom: var(--spacing-pico);
 
 	h4 {
-		.flex(~'row', ~'center', ~'flex-start');
-		font-size: var(--text-small);
-
-		* {
-			.transitioned(~'color');
-		}
-
+		display: flex;
+		align-items: baseline;
+		flex-grow: 1;
+		
 		strong {
-			font-weight: 400;
+			font-weight: inherit;
 		}
 
 		span, & + span {
-			color: var(--color-main-dark);
 			font-size: var(--text-small);
 			padding-left: var(--spacing-thinnest);
+		}
+
+		.type {
+			order: 2;
+			margin-left: auto;
+			margin-right: var(--spacing-thin);
 		}
 
 		svg {
@@ -134,15 +140,39 @@
 		margin-left: auto!important;
 	}
 
+	:not(.collapsed)>& {
+		border-top-color: transparent;
+		// border-bottom-color: var(--color-accent-light);
+		top: var(--spacing-micro);
+		// padding-left: 0;
+		// padding-top: var(--spacing-thin);
+	}
+
+	&:hover {
+		color: var(--color-accent);
+	}
+
+	// &.main, &.sidebar {
+	// 	&+.content {
+	// 		padding-left: var(--spacing-broader);
+	// 	}
+	// }
+
 	&.main:before,
 	&.sidebar:before {
-		content: '';
-		display: block;
-		width: .1rem;
-		height: 1rem;
-		margin: 0 var(--spacing-thinnest) 0 0;
-		border-right: .3rem solid var(--color-main-lighter);
-		border-left: .6rem solid var(--color-main-light);
+		content: "〈";
+		writing-mode: vertical-lr;
+		font-weight: 900;
+		margin-right: var(--spacing-thinner);
+		margin-left: ~'calc(-1 * var(--spacing-nano))';
+		font-size: var(--text-current);
+		color: inherit;
+		height: 0;
+
+		.collapsed & {
+			transform: scaleY(-1) translateY(3px);
+			align-self: flex-end;
+		}
 	}
 
 	&.sidebar:before {
@@ -170,6 +200,7 @@ fieldset.frame,
 .duplicator {
 	.apply {
 		margin-top: 2rem;
+		text-align: right;
 	}
 }
 
@@ -195,7 +226,6 @@ fieldset.frame,
 }
 
 .frame .disabled {
-	/*color: var(--color-main-light);*/
 	opacity: 0.5;
 	cursor: not-allowed;
 }
@@ -241,36 +271,31 @@ fieldset.frame,
 
 fieldset.settings .constructable,
 fieldset.settings .collapsible {
-	background: none;
+	// background: none;
 }
 
 .constructable > * > li,
 .collapsible > * > li {
-	overflow: hidden;
-	margin-left: ~'calc(var(--spacing-thinner) * -1)';
-	padding: 0 var(--spacing-thinner)!important;
+	position: relative;
 	width: 100%;
-
-	&:first-of-type .frame-header {
-		border: none;
-	}
 
 	.content {
 		padding: var(--spacing-thinner);
-		border-top: 2px solid var(--color-accent-light);
+		padding-bottom: var(--spacing-broader);
+
+		>*:not([type="hidden"])+*,
+		>div>*+* {
+			margin-top: var(--spacing-thin);
+		}
 	}
 }
 
 .collapsible .instance.collapsed {
 	overflow: hidden;
-}
 
-.collapsible .instance,
-.collapsible input,
-.collapsible textarea,
-.collapsible select,
-.collapsible option {
-	-webkit-font-smoothing: subpixel-antialiased !important;
+	.frame-header:hover {
+		background-color: var(--color-clear);
+	}
 }
 
 .collapsible legend {
@@ -286,11 +311,7 @@ fieldset.settings .collapsible {
 	overflow: hidden;
 }
 
-.collapsible .instance:not(.collapsed) .frame-header {
-	h4, h4 span {
-		color: var(--color-accent);
-	}
-}
+
 
 .collapsible .field-publishnotes {
 	margin-top: 0;
