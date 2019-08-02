@@ -457,6 +457,7 @@ class AdministrationPage extends HTMLPage
         $this->Breadcrumbs = new XMLElement('div', null, array('id' => 'breadcrumbs'));
         $this->Contents = new XMLElement('div', null, array('id' => 'contents', 'role' => 'main'));
         $this->ContentsActions = new XMLElement('div', null, array('id' => 'contents-actions'));
+        $this->Controls = new XMLElement('div', null, array('id' => 'controls'));
         $this->Form = Widget::Form(Administration::instance()->getCurrentPageURL(), 'post', null, null, array('role' => 'form'));
         $this->Tools = new XMLElement('div', null, array('id' => 'tools'));
 
@@ -545,8 +546,9 @@ class AdministrationPage extends HTMLPage
         $this->Header->appendChild($scrollCtn);
 
         // Add Breadcrumbs
-        $this->Context->prependChild($this->Breadcrumbs);
-        $this->Form->appendChild($this->ContentsActions);
+        $this->Controls->appendChild($this->Breadcrumbs);
+        $this->Controls->appendChild($this->ContentsActions);        
+        $this->Form->appendChild($this->Controls);
         $this->Contents->appendChild($this->Form);
 
 
