@@ -18,7 +18,7 @@
 @import url('https://rsms.me/inter/inter.css');
 html { 
 	font-family: 'Inter', sans-serif; 
-	-webkit-font-smoothing: antialiased;
+	-webkit-font-smoothing: subpixel-antialiased;
 }
 @supports (font-variation-settings: normal) {
   html { font-family: 'Inter var', sans-serif; }
@@ -83,14 +83,6 @@ h1, h2, h3, h4, h5, h6 {
 html {
 	font-size: 62.5%;
 	min-height: 100%;
-
-	@media (min-width: @sm) {
-		font-size: 50%;
-	}
-
-	@media (min-width: @lg) {
-		font-size: 62.5%;
-	}
 }
 
 body {
@@ -138,9 +130,6 @@ a, input[type="submit"], button {
 
 /* Lists */
 
-ul, ol {
-	margin: 0 0 var(--spacing-thinnest) var(--spacing-thin);
-}
 
 /* Code */
 
@@ -189,11 +178,6 @@ i, var {
 	cursor: wait;
 }
 
-.inactive,
-.inactive * {
-	color: var(--color-main);
-}
-
 .inactive a {
 	border-bottom-color: currentColor;
 }
@@ -220,7 +204,6 @@ i, var {
 	color: var(--color-main-dark);
 	font-size: var(--text-smaller);
 	text-transform: none;
-	line-height: 1.4em;
 }
 
 .centered {
@@ -240,21 +223,3 @@ svg.placeholder {
 	color: var(--color-main-lighter);
 }
 
-::-webkit-scrollbar {
-	width: 6px;
-}
-
-::-webkit-scrollbar-track {
-	background: var(--color-clear);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-	background: var(--color-main-light);
-	border-radius: 5px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-	background: var(--color-accent);
-}
