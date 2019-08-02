@@ -31,11 +31,8 @@
 	}
 
 	nav {
-		display: block;
-		position: absolute;
 		top: 0;
-		right: var(--spacing-broad);
-		padding: var(--spacing-thinnest) 0;
+		display: inline;
 		cursor: pointer;
 
 		&:before {
@@ -93,5 +90,9 @@
 		.transitioned(~'opacity');
 		opacity: 0;
 		pointer-events: none;
+	}
+	
+	&:not(.active) {
+		display: none;
 	}
 }
