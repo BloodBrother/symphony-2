@@ -16,7 +16,7 @@ table {
 	display: block;
 	width: 100%;
 
-	thead, tbody, th, tr, td {
+	thead, tbody, th, tr {
 		display: block;
 		width: 100%;
 	}
@@ -41,11 +41,17 @@ table {
 		box-sizing: border-box;
 
 		text-align: left;
-		text-transform: uppercase;
-		font-weight: 500;
-
-		color: var(--color-main-dark);
+		font-weight: 400;
 		font-size: var(--text-smaller);
+	}
+
+	td, th {
+		flex: 0px 1 1;
+
+		&:first-child {
+			flex: 15% 1 1;
+			max-width: var(--dimension-tiniest);
+		}
 	}
 
 	thead {
@@ -63,6 +69,7 @@ table {
 
 		a:after {
 			margin-left: var(--spacing-micro);
+			font-size: var(--text-smallest);
 			content: '';
 		}
 
