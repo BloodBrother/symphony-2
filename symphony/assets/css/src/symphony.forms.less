@@ -27,7 +27,7 @@ select {
 	transition-property: background-color, color, border-width, border-color;
 	transition-duration: var(--duration-shorter);
 	transition-timing-function: var(--ease-current);
-	min-height: var(--spacing-broad);
+	min-height: var(--standard-field-height);
 	box-sizing: border-box;
 	border-radius: var(--radius-current);
 	color: var(--color-main);
@@ -65,7 +65,8 @@ select,
 		background-color: var(--color-main-lighter);
 		mix-blend-mode: multiply;
 
-		.required & {
+		.required &,
+		.invalid & {
 			background-color: var(--color-error-light);
 			mix-blend-mode: initial;
 		}
@@ -329,7 +330,7 @@ button,
 	cursor: pointer;
 	background-color: var(--color-main);
 	border: 0;
-	padding: var(--spacing-thinnest) var(--spacing-thinner);
+	padding: var(--spacing-thinnest);
 	border-radius: var(--radius-current);
 	color: var(--color-clear);
 
@@ -505,26 +506,23 @@ div.password {
 	color: var(--color-main);
 	--multiplier: ~'calc(var(--dimension-tinier) - 100%)';
 
-	&.field-multilingual div.container label {
-		margin-bottom: var(--spacing-thinnest);
-	}
-
 	&>*:first-child {
 		order: 0;
 	}
 
 
 	&>*:first-child, &:after {
-		flex-basis: 16rem;
-		flex-grow: 0;
+		flex-basis: var(--standard-label-min-width);
+		flex-grow: 1;
 		flex-shrink: 0;
-		margin-right: auto;
+		max-width: var(--standard-label-column-width);
 	}
 
 	&>*+* {
 		max-width: var(--dimension-smallest);
 		flex-basis: ~'calc(var(--multiplier) * 999)';
-		flex-grow: 5;
+		flex-grow: 10;
+		min-width: var(--dimension-tiniest);
 		flex-shrink: 1;
 		order: 1;
 		margin-right: auto;
@@ -555,7 +553,7 @@ div.password {
 		padding: var(--spacing-thinnest);
 		display: block;
 		line-height: 1.2em;
-		min-height: var(--spacing-broad);
+		min-height: var(--standard-field-height);
 		box-sizing: border-box;
 		color: var(--color-main);
 		border-radius: var(--radius-current);
@@ -584,7 +582,7 @@ div.password {
 
 fieldset {
 	position: relative;
-	margin-top: var(--spacing-broad);
+	// margin-top: var(--spacing-broad);
 
 }
 
@@ -593,12 +591,9 @@ fieldset {
 --------------------------------------------------------------------------*/
 
 fieldset.settings {
-	position: relative;
 	margin-bottom: var(--spacing-broad);
 	padding: 0;
 	box-sizing: content-box;
-	margin-left: var(--spacing-thinner);
-	margin-right: var(--spacing-thinner);
 
 	label {
 		cursor: pointer;
@@ -611,7 +606,7 @@ fieldset.settings {
 
 
 	@media (min-width: @md){
-		padding-left: var(--dimension-tiniest);
+		margin-left: var(--dimension-tiniest);
 	}
 
 	> legend {
@@ -620,25 +615,14 @@ fieldset.settings {
 		color: var(--color-main-light);
 
 		@media (min-width: @md){
-			position: absolute;
-			top: -0.1rem;
-			left: 0;
-			width: ~'calc(var(--dimension-tiniest) - var(--spacing-broad))';
+			float: left;
+			margin-left: ~'calc(-1 * var(--dimension-tiniest))';
+			width: var(--dimension-tiniest);
 		}
 		@media (max-width: (@md - 1)){
 			color: var(--color-accent);
 			font-size: var(--text-big);
 			padding: ~'calc(var(--spacing-thinnest) 0 var(--spacing-broad))';
-		}
-	}
-
-	.frame {
-		ul:not(.tags), ol:not(.tags) {
-			margin: 0;
-		}
-
-		h2 {
-			font-size: var(--text-current);
 		}
 	}
 
