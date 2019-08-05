@@ -57,7 +57,7 @@ body {
 	left: 0;
 	top: 0;
 	background: var(--color-backframe);
-	width: var(--dimension-tiniest);
+	width: var(--navigation-sidebar-width);
 	height: 100vh;
 	z-index: 101;
 
@@ -312,7 +312,7 @@ body {
 
 	> span {
 		display: block;
-		color: var(--color-main);
+		color: var(--color-main-dark);
 		font-size: var(--text-smaller);
 		text-transform: uppercase;
 		line-height: 1.4em;
@@ -334,7 +334,7 @@ body {
 		> li {
 			display: block;
 			position: relative;
-			font-weight: 300;
+			// font-weight: 300;
 			line-height: 2rem;
 			cursor: pointer;
 
@@ -670,7 +670,7 @@ body {
 		padding-top: ~'calc(var(--standard-container-rhythm) + var(--spacing-broadest))';
 	}
 
-	& > form {
+	> form {
 		transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 		transition-duration: 500ms;
 		transition-property: opacity, transform;
@@ -689,10 +689,6 @@ body {
 			thead {
 				position: static;
 			}
-		}
-
-		>*:not(table) {
-			padding: var(--standard-container-rhythm);
 		}
 
 		body:not(#publish):not(.page-index) & > .inner {
@@ -718,69 +714,6 @@ body {
 		margin-right: 0!important;
 	}
 
-	> form .inner > .actions {
-		height: var(--spacing-large);
-		.apply {
-			position: fixed;
-			bottom: 0;
-			left: var(--dimension-tiniest);
-			right: var(--spacing-broader);
-			opacity: 1;
-			box-shadow: var(--shadow-up);
-
-			transition-property: transform;
-			transition-duration: var(--duration-short);
-			transition-timing-function: var(--ease-current);
-			
-			background-color: var(--color-accent-alt-light);
-
-			padding: var(--spacing-thinner);
-			box-sizing: border-box;
-
-			border-top-left-radius: var(--radius-big);
-			border-top-right-radius: var(--radius-big);
-
-			@media (max-width: (@sm - 1)) {
-				display: none;
-			}
-
-			&.inactive {
-				opacity: 0;
-				transform: translateY(100%);
-			}
-
-			button, select {
-				color: var(--color-main);
-				border: 2px solid var(--color-main);
-				background-color: transparent;
-				font-size: var(--text-current);
-				font-weight: 500;
-				line-height: 1.2em;
-				padding: var(--spacing-micro);
-				text-transform: none;
-				float: none;
-				max-width: none;
-				min-width: 0;
-				width: auto;
-
-				transition-property: color, background-color;
-				transition-duration: var(--duration-short);
-				transition-timing-function: var(--ease-current);
-
-				margin-right: var(--spacing-thinnest);
-
-				&:hover:not(select) {
-					color: var(--color-accent-alt-light);
-					background-color: var(--color-main);
-				}
-			}
-
-			select {
-				max-width: 20rem;
-			}
-		}
-	}
-
 	@media (max-width: (@sm - 1)) {
 		padding-left: 0;
 		padding-top: 0;
@@ -801,12 +734,12 @@ body {
 #controls {
 	display: flex;
 	align-items: center;
-	padding: var(--spacing-micro) var(--spacing-thin);
+	padding: var(--spacing-micro) var(--standard-container-rhythm);
 	position: sticky;
 	top: 0;
 	background-color: var(--color-accent-light);
 	z-index: 5;
-	border-bottom: 2px solid var(--color-main-lightest);
+	border-bottom: 3px solid var(--color-main-lightest);
 	border-top-left-radius: var(--radius-big);
 	border-top-right-radius: var(--radius-big);
 
@@ -877,59 +810,26 @@ body {
 #publish.page-single {
 	#contents {
 
-		form {
-			label {
-				margin-bottom: 0;
-			}
-
-			.field {
-				&:last-of-type {
-					margin-bottom: 0;
-				}
-			}
-
-			.file {
-				position: relative;
-				.remove {
-					position: absolute;
-					right: 0;
-					top: 0;
-					background: none;
-					padding: 0;
-					color: var(--color-main);
-	
-					&:hover {
-						color: var(--color-accent);
-					}
-				}
-			}
-		}
-
 		.columns {
-			// margin-left: 0;
-			// padding-left: var(--spacing-thinner);
-			// padding-right: var(--spacing-thinner);
-			// min-height: ~'calc(100vh - var(--spacing-broadest) - var(--spacing-broadest) - var(--spacing-broadest) - var(--spacing-thin))';
+			margin-left: 0;
 		}
-	
+
 		.column {
-			// background-color: var(--color-backframe);
-			// padding: var(--spacing-thin);
+			padding: var(--standard-container-rhythm);
 			box-sizing: border-box;
 			border-radius: var(--radius-current);
 			max-width: var(--dimension-smaller);
-			// box-shadow: var(--shadow);
 	
 			&.primary {
 				width: ~'calc(100% - var(--spacing-thinner) - var(--dimension-tiny))';
 				margin-right: auto;
 				flex-grow: 1;
-
 			}
 	
 			&.secondary {
 				margin-left: var(--spacing-thinner);
 				flex-shrink: 0;
+				border-left: 3px solid var(--color-main-lightest);
 
 				@media (max-width: (@md - 1)){
 					margin-left: 0;
