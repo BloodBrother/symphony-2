@@ -313,16 +313,13 @@ class FieldUpload extends Field implements ExportableField, ImportableField
         
         if (isset($data['file'])) {
             $span->appendChild(
-                new XMLElement(
-                    'span',
-                    Widget::Anchor(
-                        preg_replace("![^a-z0-9]+!i","$0&#8203;", $filename),
-                        URL . $filename,
-                        null,
-                        null,
-                        null,
-                        array('target' => '_blank')
-                    )
+                Widget::Anchor(
+                    preg_replace("![^a-z0-9]+!i","$0&#8203;", $filename),
+                    URL . $filename,
+                    null,
+                    null,
+                    null,
+                    array('target' => '_blank')
                 )
             );
         }
