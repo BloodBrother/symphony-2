@@ -294,7 +294,7 @@ Symphony.View.add('/publish/:context*:', function() {
 			}
 		},
 		addClass: 'remove'
-	}).appendTo('.file:has(a)');
+	}).appendTo('.file+span:has(a)');
 
 	// Calendars
 	$('.field-date').each(function() {
