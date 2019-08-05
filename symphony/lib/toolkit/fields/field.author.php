@@ -171,7 +171,7 @@ class FieldAuthor extends Field implements ExportableField
             $wrapper->appendChild($label);
         }
 
-        $input = Widget::Select('fields['.$this->get('sortorder').'][author_types][]', $options, array('multiple' => 'multiple'));
+        $input = Widget::Select('fields['.$this->get('sortorder').'][author_types][]', $options, array('multiple' => 'multiple', 'size' => count($options)));
 
         $label->setAttribute('for', $this->get('element_name'));
         $input->setAttribute('id', $this->get('element_name'));
@@ -303,7 +303,7 @@ class FieldAuthor extends Field implements ExportableField
             $wrapper->appendChild($label);
         }
 
-        $input = Widget::Select($fieldname, $options, ($this->get('allow_multiple_selection') === 'yes' ? array('multiple' => 'multiple') : null));
+        $input = Widget::Select($fieldname, $options, ($this->get('allow_multiple_selection') === 'yes' ? array('multiple' => 'multiple', 'size' => count($options)) : null));
         $label->setAttribute('for', $this->get('element_name'));
         $input->setAttribute('id', $this->get('element_name'));
 
