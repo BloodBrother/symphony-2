@@ -62,8 +62,7 @@ select,
 	border-bottom-color: var(--color-main-light);
 
 	&:placeholder-shown:not(:focus) {
-		background-color: var(--color-main-lighter);
-		mix-blend-mode: multiply;
+		background-color: var(--color-accent-light);
 
 		.required &,
 		.invalid & {
@@ -88,7 +87,7 @@ input[type="password"],
 textarea,
 select,
 .field-value-readonly {
-	background-color: var(--color-clear);
+	background-color: var(--standard-field-background-color);
 }
 
  
@@ -201,7 +200,7 @@ input[type='checkbox'] {
 }
 
 input[type=file] {
-	background-color: var(--color-main-lighter);
+	background-color: var(--color-accent-light);
 	font-size: var(--text-smaller);
 }
 
@@ -231,11 +230,12 @@ select {
 		min-height: min-content;
 		
 		&:not(:focus) {
-			background: var(--color-main-lighter);
+			background-color: var(--color-accent-light);
 		}
 
 		option, optgroup {
 			padding: var(--spacing-pico) var(--spacing-thinnest);
+			mix-blend-mode: initial;
 		}
 
 		option {
@@ -368,7 +368,8 @@ legend {
 }
 
 label {
-	[for] {
+	
+	&[for] {
 		cursor: pointer;
 	}
 
@@ -398,8 +399,8 @@ legend {
 --------------------------------------------------------------------------*/
 
 .apply {
-	padding-left: var(--spacing-thinner);
-	padding-right: var(--spacing-thinner);
+	padding-left: var(--standard-container-rhythm);
+	padding-right: var(--standard-container-rhythm);
 	>* {
 		max-width: max-content;
 		display: inline-block;
@@ -425,16 +426,7 @@ legend {
 	}
 }
 
-/*--------------------------------------------------------------------------
-	Required
---------------------------------------------------------------------------*/
 
-.field.required label:before {
-	content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNCIgaGVpZ2h0PSI0IiB2aWV3Qm94PSIwIDAgNCA0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMiIgZmlsbD0iI0ZENTM1MyIvPgo8L3N2Zz4K');
-	position: absolute;
-	top: -0.4rem;
-	left: -1.4rem;
-}
 
 /*--------------------------------------------------------------------------
 	Tags
@@ -516,10 +508,11 @@ div.password {
 		flex-grow: 1;
 		flex-shrink: 0;
 		max-width: var(--standard-label-column-width);
+		box-sizing: border-box;
 	}
 
 	&>*+* {
-		max-width: var(--dimension-smallest);
+		max-width: var(--dimension-tiny);
 		flex-basis: ~'calc(var(--multiplier) * 999)';
 		flex-grow: 10;
 		min-width: var(--dimension-tiniest);
@@ -543,12 +536,12 @@ div.password {
 
 	&>*+*~* {
 		order: 3;
-		max-width: var(--dimension-smallest);
+		max-width: var(--dimension-tiny);
 		margin-right: auto;
 		margin-top: var(--spacing-nano);
 	}
 
-	[type="hidden"]~* a {
+	[type="hidden"]~a {
 		background-color: var(--color-clear);
 		padding: var(--spacing-thinnest);
 		display: block;
@@ -560,8 +553,53 @@ div.password {
 		border-bottom: 1px solid var(--color-main-light);
 	}
 
-	[type="hidden"]~* a:hover {
+	[type="hidden"]~a:hover {
 		color: var(--color-accent);
+	}
+
+	label {
+		&:before {
+			content: "•";
+			margin-left: ~'calc(-1 * var(--standard-container-rhythm) - .25em)';
+			position: absolute;
+			color: inherit;
+			z-index: 1;
+			font-size: var(--text-taller);
+		}
+		// &:after {
+		// 	content: "";
+		// 	width: var(--spacing-broad);
+		// 	left: ~'calc(-1 * var(--spacing-broad))';
+		// 	border-bottom: 4px solid var(--color-main-lighter);
+		// 	top: ~'calc(50% - 2px)';
+		// 	position: absolute;
+		// }
+		padding-left: var(--compensate-for-absolute-label);
+	}
+
+	&:not(:hover) {
+		label {
+			color: var(--standard-label-color);
+			&:before, &:after {
+				opacity: .4;
+			}
+		}
+	}
+
+	label+span {
+		display: flex;
+
+		a {
+			flex-grow: 1;
+
+			~* {
+				margin-left: var(--standard-inner-rhythm);
+			}
+		}
+
+		button:not(:hover) {
+			background-color: var(--color-main-light);
+		}
 	}
 
 	&:hover {
@@ -575,7 +613,14 @@ div.password {
 	}
 
 	&:not(:hover) {
-		color: var(--color-main-light);
+		color: var(--standard-field-color);
+	}
+
+	&.required label:before {
+			color: var(--color-error);
+	}
+	&.required:not(:hover) label:before {
+		opacity: .6;
 	}
 }
 
@@ -591,8 +636,8 @@ fieldset {
 --------------------------------------------------------------------------*/
 
 fieldset.settings {
-	margin-bottom: var(--spacing-broad);
-	padding: 0;
+	padding: var(--standard-container-rhythm);
+	margin-bottom: var(--standard-container-rhythm);
 	box-sizing: content-box;
 
 	label {
@@ -604,25 +649,37 @@ fieldset.settings {
 		margin-top: var(--spacing-thin);
 	}
 
+	>select {
+		margin-left: var(--standard-inner-rhythm);
+	}
+
 
 	@media (min-width: @md){
-		margin-left: var(--dimension-tiniest);
+		margin-left: var(--standard-label-column-width);
 	}
 
 	> legend {
 		margin-bottom: var(--spacing-thinnest);
 		font-size: inherit;
 		color: var(--color-main-light);
+		padding-left: var(--compensate-for-absolute-label);
+		box-sizing: border-box;
+
+		&:before {
+			content: "•";
+			margin-left: ~'calc(-1 * var(--standard-container-rhythm) - .25em)';
+			position: absolute;
+		}
 
 		@media (min-width: @md){
 			float: left;
-			margin-left: ~'calc(-1 * var(--dimension-tiniest))';
-			width: var(--dimension-tiniest);
+			margin-left: ~'calc(-1 * var(--standard-label-column-width))';
+			width: var(--standard-label-column-width);
 		}
 		@media (max-width: (@md - 1)){
 			color: var(--color-accent);
 			font-size: var(--text-big);
-			padding: ~'calc(var(--spacing-thinnest) 0 var(--spacing-broad))';
+			padding: var(--spacing-thinnest) 0 var(--spacing-broad);
 		}
 	}
 
@@ -671,6 +728,8 @@ fieldset.settings {
 		margin: 2.5rem 0 0 ~'calc(var(--dimension-tiniest) * -1)';
 		width: ~'calc(var(--dimension-tiniest) - var(--spacing-broad))';
 		width: 17rem;
+		padding-left: var(--compensate-for-absolute-label);
+
 
 		@media (max-width: (@md - 1)){
 			position: relative;

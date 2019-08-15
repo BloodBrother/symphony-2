@@ -14,16 +14,16 @@
 	General column definitions
 -----------------------------------------------------------------------------*/
 .column {
-	>*+*:not(i) {
-		margin-top: var(--spacing-thinner);
+	>*:not(span):not(i)+*:not(i) {
+		margin-top: var(--standard-inner-rhythm);
 	}
 }
 
 .columns {
 	display: flex;
-	align-items: baseline;
+	// align-items: baseline;
 	flex-wrap: wrap;
-	margin-left: ~'calc(var(--spacing-broad) * -1)';
+	margin-left: ~'calc(var(--standard-container-rhythm) * -1)';
 
 	legend {
 		margin: 0 0 0 ~'calc(var(--spacing-thin) * -1)' !important;
