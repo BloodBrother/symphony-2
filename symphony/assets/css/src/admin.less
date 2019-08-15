@@ -266,7 +266,7 @@ body {
 	left: 0;
 	right: 0;
 	z-index: 100;
-	background-color: var(--color-accent-light);
+	background-color: var(--color-accent-lighter);
 	opacity: 0;
 	pointer-events: none;
 
@@ -482,7 +482,7 @@ body {
 				}
 
 				&:hover {
-					background-color: var(--color-accent-light);
+					background-color: var(--color-accent-lighter);
 				}
 			}
 
@@ -588,6 +588,8 @@ body {
 		flex-grow: 1;
 		flex-basis: var(--standard-label-min-width);
 		max-width: var(--standard-label-column-width);
+		padding-left: var(--compensate-for-absolute-label);
+		box-sizing: border-box;
 		
 		p {
 			display: contents;
@@ -606,7 +608,8 @@ body {
 				}
 
 				svg {
-					padding-right: var(--spacing-thinnest);
+					margin-left: ~'calc(-1 * var(--standard-container-rhythm))';
+					position: absolute;
 				}
 
 				&:hover {
@@ -623,7 +626,6 @@ body {
 	nav+h2 {
 		flex-grow: 10;
 		max-width: var(--dimension-smallest);
-		text-indent: var(--spacing-thinner);	
 	}
 
 
@@ -674,7 +676,7 @@ body {
 		transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 		transition-duration: 500ms;
 		transition-property: opacity, transform;
-		background-color: var(--color-accent-light);
+		background-color: var(--color-accent-lighter);
 		min-height: ~'calc(100vh - var(--spacing-broadest))';
 		box-sizing: border-box;
 		border-top-left-radius: var(--radius-big);
@@ -737,7 +739,7 @@ body {
 	padding: var(--spacing-micro) var(--standard-container-rhythm);
 	position: sticky;
 	top: 0;
-	background-color: var(--color-accent-light);
+	background-color: var(--color-accent-lighter);
 	z-index: 5;
 	border-bottom: 3px solid var(--color-main-lightest);
 	border-top-left-radius: var(--radius-big);
@@ -829,7 +831,7 @@ body {
 			&.secondary {
 				margin-left: var(--spacing-thinner);
 				flex-shrink: 0;
-				border-left: 3px solid var(--color-main-lightest);
+				// border-left: 3px solid var(--color-main-lightest);
 
 				@media (max-width: (@md - 1)){
 					margin-left: 0;
@@ -853,7 +855,7 @@ ul.page {
 	margin: 0;
 	color: var(--color-main-dark);
 	cursor: default;
-	background-color: var(--color-accent-light);
+	background-color: var(--color-accent-lighter);
 	width: 100%;
 
 	a {
