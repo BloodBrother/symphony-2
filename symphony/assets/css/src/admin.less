@@ -94,7 +94,7 @@ body {
 		left: 0;
 		font-size: var(--text-current);
 		font-weight: 300;
-		margin: var(--standard-container-rhythm) 0 0;
+		margin: var(--standard-side-rhythm) 0 0;
 		padding: 0!important;
 		height: var(--spacing-broadest) !important;
 
@@ -110,7 +110,7 @@ body {
 			color: var(--color-main-light);
 			font-size: var(--text-bigger);
 			line-height: 1.2em;
-			padding: 0 var(--standard-container-rhythm)!important;
+			padding: 0 var(--standard-side-rhythm)!important;
 			width: 100%!important;
 			height: 100%!important;
 
@@ -219,8 +219,8 @@ body {
 	.index-btn {
 		order: 2;
 		color: var(--color-main-light);
-		margin: 0 var(--standard-container-rhythm);
-		margin-top: var(--standard-container-rhythm);
+		margin: 0 var(--standard-side-rhythm);
+		margin-top: var(--standard-side-rhythm);
 
 		&:hover {
 			color: var(--color-accent);
@@ -305,7 +305,7 @@ body {
 	flex-shrink: 0;
 	flex-grow: 1;
 	margin: 0;
-	padding: var(--standard-container-rhythm);
+	padding: var(--standard-side-rhythm);
 	list-style: none;
 
 	/* Titles */
@@ -523,6 +523,7 @@ body {
 
 .context-wrap {
 	display: flex;
+	align-items: center;
 	padding: 0 var(--spacing-broader) 0 0;
 
 	@media (max-width: (@sm - 1)){
@@ -531,8 +532,13 @@ body {
 	}
 }
 
+#context {
+	flex-grow: 1;
+}
+
 #tools {
-	width: 100%;
+	// width: 100%;
+	margin-left: auto;
 	height: var(--spacing-broadest);
 	.flex(~'row', ~'center', ~'flex-end');
 
@@ -587,7 +593,7 @@ body {
 		flex-shrink: 0;
 		flex-grow: 1;
 		flex-basis: var(--standard-label-min-width);
-		max-width: var(--standard-label-column-width);
+		// max-width: var(--standard-label-column-width);
 		padding-left: var(--compensate-for-absolute-label);
 		box-sizing: border-box;
 		
@@ -820,12 +826,20 @@ body {
 			padding: var(--standard-container-rhythm);
 			box-sizing: border-box;
 			border-radius: var(--radius-current);
-			max-width: var(--dimension-smaller);
+			// max-width: var(--dimension-smaller);
 	
 			&.primary {
-				width: ~'calc(100% - var(--spacing-thinner) - var(--dimension-tiny))';
-				margin-right: auto;
 				flex-grow: 1;
+
+				&:not(:last-of-type) {
+					width: ~'calc(100% - var(--spacing-thinner) - var(--dimension-tiny))';
+					margin-right: auto;
+				}
+
+				&:last-of-type {
+					margin: auto;
+					max-width: var(--dimension-smaller);
+				}
 			}
 	
 			&.secondary {
