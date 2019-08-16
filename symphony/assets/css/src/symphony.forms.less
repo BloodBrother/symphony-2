@@ -32,7 +32,7 @@ select {
 	border-radius: var(--radius-current);
 	color: var(--color-main);
 	line-height: 1.2em;
-	font-size: var(--text-current);
+	font-size: var(--standard-field-font-size);
 }
 
 
@@ -59,10 +59,10 @@ select,
 	padding: var(--spacing-thinnest);
 	width: 100%;
 	border: 1px solid transparent;
-	border-bottom-color: var(--color-main-light);
+	border-bottom-color: var(--color-main-lighter);
 
 	&:placeholder-shown:not(:focus) {
-		background-color: var(--color-accent-light);
+		background-color: var(--color-main-lightest);
 
 		.required &,
 		.invalid & {
@@ -228,19 +228,24 @@ select {
 		padding-right: 0;
 		-webkit-appearance: none;
 		min-height: min-content;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
 		
 		&:not(:focus) {
-			background-color: var(--color-accent-light);
+			background-color: var(--color-main-lightest);
+			border: 1px solid var(--color-main-lighter);
 		}
 
 		option, optgroup {
 			padding: var(--spacing-pico) var(--spacing-thinnest);
-			mix-blend-mode: initial;
+			// mix-blend-mode: initial;
 		}
 
 		option {
 			&:checked {
-				background: var(--color-clear) -webkit-linear-gradient(bottom, var(--color-clear) 0%, var(--color-clear) 100%);
+				background: var(--color-accent-light) -webkit-linear-gradient(bottom, var(--color-accent-light) 0%, var(--color-accent-light) 100%);
 			}
 		}
 
@@ -349,6 +354,7 @@ legend {
 	position: relative;
 	display: block;
 	color: inherit;
+	font-size: var(--text-small);
 
 	>i:not(:empty) {
 		display: block;
@@ -390,7 +396,7 @@ label {
 
 legend {
 	color: var(--color-main-dark);
-	font-size: var(--text-small);
+	// font-size: var(--text-small);
 }
 
 
@@ -495,6 +501,7 @@ div.password {
 	display: flex;
 	align-items: baseline;
 	flex-wrap: wrap;
+	// padding-left: var(--compensate-for-absolute-label);
 	color: var(--color-main);
 	--multiplier: ~'calc(var(--dimension-tinier) - 100%)';
 
@@ -503,43 +510,43 @@ div.password {
 	}
 
 
-	&>*:first-child, &:after {
-		flex-basis: var(--standard-label-min-width);
-		flex-grow: 1;
-		flex-shrink: 0;
-		max-width: var(--standard-label-column-width);
-		box-sizing: border-box;
-	}
+	// &>*:first-child, &:after {
+	// 	flex-basis: var(--standard-label-min-width);
+	// 	flex-grow: 1;
+	// 	flex-shrink: 0;
+	// 	max-width: var(--standard-label-column-width);
+	// 	box-sizing: border-box;
+	// }
 
-	&>*+* {
-		max-width: var(--dimension-tiny);
-		flex-basis: ~'calc(var(--multiplier) * 999)';
-		flex-grow: 10;
-		min-width: var(--dimension-tiniest);
-		flex-shrink: 1;
-		order: 1;
-		margin-right: auto;
-	}
+	// &>*+* {
+	// 	// max-width: var(--dimension-tiny);
+	// 	flex-basis: ~'calc(var(--multiplier) * 999)';
+	// 	flex-grow: 10;
+	// 	min-width: var(--dimension-tiniest);
+	// 	flex-shrink: 1;
+	// 	order: 1;
+	// 	margin-right: auto;
+	// }
 
-	&:before {
-		content: "";
-		display: block;
-		flex: 100% 0 0;
-		order: 2;
-	}
+	// &:before {
+	// 	content: "";
+	// 	display: block;
+	// 	flex: 100% 0 0;
+	// 	order: 2;
+	// }
 
-	&:after {
-		content: "";
-		display: block;
-		order: 2;
-	}
+	// &:after {
+	// 	content: "";
+	// 	display: block;
+	// 	order: 2;
+	// }
 
-	&>*+*~* {
-		order: 3;
-		max-width: var(--dimension-tiny);
-		margin-right: auto;
-		margin-top: var(--spacing-nano);
-	}
+	// &>*+*~* {
+	// 	order: 3;
+	// 	max-width: var(--dimension-tiny);
+	// 	margin-right: auto;
+	// 	margin-top: var(--spacing-nano);
+	// }
 
 	[type="hidden"]~a {
 		background-color: var(--color-clear);
@@ -558,13 +565,17 @@ div.password {
 	}
 
 	label {
-		&:before {
-			content: "•";
-			margin-left: ~'calc(-1 * var(--standard-container-rhythm) - .25em)';
-			position: absolute;
-			color: inherit;
-			z-index: 1;
-			font-size: var(--text-taller);
+		margin-bottom: var(--spacing-micro);
+		// &:before {
+		// 	content: "•";
+		// 	margin-left: ~'calc(-1 * var(--standard-container-rhythm) - .25em)';
+		// 	position: absolute;
+		// 	color: inherit;
+		// 	z-index: 1;
+		// 	font-size: var(--text-taller);
+		// }
+		&+* {
+			font-size: var(--text-big);
 		}
 		// &:after {
 		// 	content: "";
@@ -574,7 +585,7 @@ div.password {
 		// 	top: ~'calc(50% - 2px)';
 		// 	position: absolute;
 		// }
-		padding-left: var(--compensate-for-absolute-label);
+		// padding-left: var(--compensate-for-absolute-label);
 	}
 
 	&:not(:hover) {
