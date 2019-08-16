@@ -546,7 +546,7 @@ class AdministrationPage extends HTMLPage
         $this->Header->appendChild($scrollCtn);
 
         // Add Breadcrumbs
-        $this->Controls->appendChild($this->Breadcrumbs);
+        $this->Context->appendChild($this->Breadcrumbs);
         $this->Controls->appendChild($this->ContentsActions);        
         $this->Form->appendChild($this->Controls);
         $this->Contents->appendChild($this->Form);
