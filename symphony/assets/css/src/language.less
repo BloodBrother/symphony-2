@@ -25,8 +25,8 @@
 	--spacing-thinnest:  1rem;
 	--spacing-thinner:   1.5rem;
 	--spacing-thin:      2rem;
-	--spacing-broad:     3rem;
-	--spacing-broader:   4rem;
+	--spacing-broad:     3.5rem;
+	--spacing-broader:   5rem;
 	--spacing-broadest:  6rem;
 	--spacing-large:     10rem;
 	--spacing-larger:    18rem;
@@ -56,7 +56,8 @@
 	--color-accent: #0D6EFF;
 	--color-accent-light: #d5ecfc;
 	// --color-accent-light: #cff2ff;
-	--color-accent-lighter: #e2f5ff; //#E6F2FF
+	--color-accent-lighter: #e2f5ff;
+	--color-accent-lighter: #E6F2FF;
 
 	--color-accent-alt: #F9D362;
 	--color-accent-alt-light: #FFF7D9;
@@ -87,7 +88,7 @@
 
 	--text-current: 1.5rem;
 
-	--text-big: 1.6rem;
+	--text-big: 1.7rem;
 	--text-bigger: 1.9rem; // 2.4rem
 	--text-biggest: 1.9rem; // 3.2rem
 
@@ -122,7 +123,7 @@
 
 	--radius-smallest: 1px;
 	--radius-small: 1px;
-	--radius-current: 3px;
+	--radius-current: 4px;
 	--radius-big: 11px;
 
 
@@ -134,15 +135,19 @@
 	--shadow-up: 0px -10px 15px rgba(8, 110, 255, 0.1);
 
 
+	--compensate-for-absolute-label: var(--standard-container-rhythm);
+
+
 	--color-backframe: var(--color-main-lightest);
 	--standard-field-height: var(--spacing-broader);
-	--standard-label-column-width: var(--dimension-tiniest);
-	--standard-container-rhythm: var(--spacing-broad);
-	--compensate-for-absolute-label: var(--spacing-broad);
-	--standard-inner-rhythm: var(--spacing-thin);
+	--standard-label-column-width: var(--spacing-larger);
+	--standard-container-rhythm: var(--spacing-broadest);
+	--standard-inner-rhythm: var(--spacing-thinner);
+	--standard-side-rhythm: var(--spacing-broad);
 	--standard-label-min-width: 13rem;
-	--standard-label-color: var(--color-main-light);
-	--standard-field-color: var(--color-main);
+	--standard-label-color: var(--color-main);
+	--standard-field-color: var(--color-main-dark);
+	--standard-field-font-size: var(--text-current);
 	--standard-field-background-color: var(--color-clear);
 	--navigation-sidebar-width: ~'calc(var(--dimension-tiniest) + 1vw)';
 }
