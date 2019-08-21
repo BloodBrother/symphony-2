@@ -17,9 +17,12 @@
 
 .frame {
 	box-sizing: border-box;
-	border-radius: var(--radius-current);
+	border-radius: var(--radius-big);
 	position: relative;
 	margin: 0;
+	background-color: var(--color-main-lightest);
+	padding: var(--standard-inner-rhythm);
+	// border: 1px solid var(--color-accent-lighter);
 	// padding: var(--spacing-thinner);
 
 	h1 {
@@ -76,14 +79,25 @@
 	}
 
 	.instance {
-		background-color: var(--color-main-lighter);
-		margin-bottom: var(--spacing-pico);
-		border-top: 1px solid transparent;
+		background-color: var(--color-main-lightest);
+		// margin-bottom: var(--spacing-pico);
+		border: 1px solid transparent;
+		border-radius: var(--radius-current);
 
 		&:not(.collapsed) {
-			border-top-color: var(--color-main-light);
-			margin-top: var(--spacing-thinnest);
-			margin-bottom: var(--spacing-thinnest);
+			border-radius: var(--radius-big);
+			background-color: var(--color-clear);
+			// box-shadow: var(--shadow-small);
+			z-index: 1;
+			border-color: var(--color-ui);
+			// border-top-color: var(--color-main-light);
+			&:not(:first-of-type) {
+				margin-top: var(--standard-inner-rhythm);
+			}
+
+			&:not(:last-of-type) {
+				margin-bottom: var(--standard-inner-rhythm);
+			}
 		}
 	}
 
@@ -103,7 +117,7 @@
 	align-items: baseline;
 	position: relative;
 	border: 1px solid transparent;
-	padding: var(--spacing-thinnest) var(--spacing-thinner);
+	padding: var(--spacing-thinner) var(--standard-container-rhythm);
 	// margin-bottom: var(--spacing-pico);
 
 	h4 {
@@ -254,13 +268,14 @@ fieldset.frame,
 .frame .selected,
 .frame .ordering {
 	position: relative;
+	box-shadow: var(--shadow);
 }
 
 .frame .ordering .frame-header span,
 .frame .ordering .frame-header .destructor,
 .frame .ordering .content i,
 .frame .ordering ul.tags {
-	color: var(--color-clear);
+	color: var(--color-main-lighter);
 }
 
 /*-----------------------------------------------------------------------------
@@ -269,7 +284,7 @@ fieldset.frame,
 
 .constructable,
 .collapsible {
-	padding: 0;
+	// padding: 0;
 }
 
 fieldset.settings .constructable,
@@ -283,11 +298,11 @@ fieldset.settings .collapsible {
 	width: 100%;
 
 	.content {
-		padding: var(--spacing-thinner);
-		padding-bottom: var(--spacing-broader);
+		padding: var(--standard-container-rhythm);
+		// padding-bottom: var(--spacing-broader);
 
 		>*:not([type="hidden"])+*,
-		>div>*+* {
+		>div:not(.columns)>*+* {
 			margin-top: var(--spacing-thin);
 		}
 	}
@@ -296,9 +311,36 @@ fieldset.settings .collapsible {
 .collapsible .instance.collapsed {
 	overflow: hidden;
 
-	.frame-header:hover {
+	&:hover {
+		z-index: 2;
+		// box-shadow: var(--shadow-small);
 		background-color: var(--color-clear);
+		border-color: var(--color-ui);
 	}
+
+	&:not(:hover)+.collapsed:not(:hover) {
+		border-radius: 0;
+		border-top-color: var(--color-ui);
+	}
+	
+	// &:not(:last-child):hover + * {
+	// 	border-top-color: transparent;
+	// }
+}
+
+.orderable .instance.collapsed .frame-header {
+	cursor: s-resize;
+}
+
+.orderable .instance:not(.collapsed) .frame-header {
+	cursor: n-resize;
+}
+
+.orderable .instance.ordering .frame-header {
+	cursor: move;
+	cursor: grab;
+	cursor: -moz-grab;
+	cursor: -webkit-grab;
 }
 
 .collapsible legend {

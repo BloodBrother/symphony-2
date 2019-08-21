@@ -13,7 +13,7 @@
 --------------------------------------------------------------------------*/
 
 body {
-	background-color: var(--color-backframe);
+	background-color: var(--backframe-background-color);
 }
 
 #loading {
@@ -23,7 +23,7 @@ body {
 	bottom: 0;
 	right: 0;
 	left: 0;
-	background-color: var(--color-backframe);
+	background-color: var(--backframe-background-color);
 	z-index: 200;
 }
 
@@ -56,7 +56,7 @@ body {
 	position: fixed;
 	left: 0;
 	top: 0;
-	background: var(--color-backframe);
+	background: var(--backframe-background-color);
 	width: var(--navigation-sidebar-width);
 	height: 100vh;
 	z-index: 101;
@@ -307,6 +307,7 @@ body {
 	margin: 0;
 	padding: var(--standard-side-rhythm);
 	list-style: none;
+	font-size: var(--text-small);
 
 	/* Titles */
 
@@ -334,7 +335,7 @@ body {
 		> li {
 			display: block;
 			position: relative;
-			// font-weight: 300;
+			font-weight: 300;
 			line-height: 2rem;
 			cursor: pointer;
 
@@ -452,7 +453,7 @@ body {
 		top: 0;
 		color: var(--color-main-dark);
 		margin: 0 0 var(--spacing-micro);
-		background: var(--color-backframe);
+		background: var(--backframe-background-color);
 		opacity: 0;
 		pointer-events: none;
 		z-index: 200;
@@ -524,7 +525,8 @@ body {
 .context-wrap {
 	display: flex;
 	align-items: center;
-	padding: 0 var(--spacing-broader) 0 0;
+	padding: var(--spacing-thinnest) 0;
+	padding-right: var(--standard-container-rhythm);
 
 	@media (max-width: (@sm - 1)){
 		flex-direction: column;
@@ -543,7 +545,7 @@ body {
 	.flex(~'row', ~'center', ~'flex-end');
 
 	color: var(--color-accent);
-	background-color: var(--color-backframe);
+	background-color: var(--backframe-background-color);
 
 	@media (max-width: (@sm - 1)){
 		order: -1;
@@ -591,11 +593,12 @@ body {
 		}
 
 		flex-shrink: 0;
-		flex-grow: 1;
-		flex-basis: var(--standard-label-min-width);
+		flex-grow: 0;
+		// flex-basis: var(--standard-label-min-width);
 		// max-width: var(--standard-label-column-width);
-		padding-left: var(--compensate-for-absolute-label);
+		// padding-left: var(--compensate-for-absolute-label);
 		box-sizing: border-box;
+		margin-right: var(--standard-inner-rhythm);
 		
 		p {
 			display: contents;
@@ -614,8 +617,8 @@ body {
 				}
 
 				svg {
-					margin-left: ~'calc(-1 * var(--standard-container-rhythm))';
-					position: absolute;
+					margin-right: var(--standard-inner-rhythm);
+					// position: absolute;
 				}
 
 				&:hover {
@@ -637,8 +640,8 @@ body {
 
 	h2 {
 		color: var(--color-main-dark);
-		font-size: var(--text-big);
-		font-weight: 500;
+		font-size: var(--text-bigger);
+		// font-weight: 500;
 
 		
 		img {
@@ -665,7 +668,7 @@ body {
 [role="main"] {
 	box-sizing: border-box;
 	position: relative;
-	background-color: var(--color-backframe);
+	background-color: var(--backframe-background-color);
 	min-height: ~'calc(100vh - var(--spacing-broadest) - var(--spacing-broadest))';
 	padding: 0 var(--spacing-broader) 0 0;
 	border-radius: var(--radius-big);
@@ -682,7 +685,7 @@ body {
 		transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 		transition-duration: 500ms;
 		transition-property: opacity, transform;
-		background-color: var(--color-accent-lighter);
+		background-color: var(--frontframe-background-color);
 		min-height: ~'calc(100vh - var(--spacing-broadest))';
 		box-sizing: border-box;
 		border-top-left-radius: var(--radius-big);
@@ -745,9 +748,9 @@ body {
 	padding: var(--spacing-micro) var(--standard-container-rhythm);
 	position: sticky;
 	top: 0;
-	background-color: var(--color-accent-lighter);
+	background-color: var(--frontframe-background-color);
 	z-index: 5;
-	border-bottom: 3px solid var(--color-main-lightest);
+	border-bottom: 1px solid var(--color-ui);
 	border-top-left-radius: var(--radius-big);
 	border-top-right-radius: var(--radius-big);
 
@@ -825,7 +828,7 @@ body {
 		.column {
 			padding: var(--standard-container-rhythm);
 			box-sizing: border-box;
-			border-radius: var(--radius-current);
+			// border-radius: var(--radius-current);
 			// max-width: var(--dimension-smaller);
 	
 			&.primary {
@@ -843,8 +846,9 @@ body {
 			}
 	
 			&.secondary {
-				margin-left: var(--spacing-thinner);
+				// margin-left: var(--spacing-thinner);
 				flex-shrink: 0;
+				background-color: var(--sidebar-background-color);
 				// border-left: 3px solid var(--color-main-lightest);
 
 				@media (max-width: (@md - 1)){
