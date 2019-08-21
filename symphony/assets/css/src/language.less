@@ -25,8 +25,8 @@
 	--spacing-thinnest:  1rem;
 	--spacing-thinner:   1.5rem;
 	--spacing-thin:      2rem;
-	--spacing-broad:     3.5rem;
-	--spacing-broader:   5rem;
+	--spacing-broad:     3rem;
+	--spacing-broader:   4rem;
 	--spacing-broadest:  6rem;
 	--spacing-large:     10rem;
 	--spacing-larger:    18rem;
@@ -34,7 +34,7 @@
 
 	--dimension-tiniest:   ~'calc(var(--spacing-thinnest) * 25)';
 	--dimension-tinier:    ~'calc(var(--spacing-thinner) * 25)';
-	--dimension-tiny:      ~'calc(var(--spacing-thin) * 27)';
+	--dimension-tiny:      ~'calc(var(--spacing-thin) * 23)';
 	--dimension-smallest:  ~'calc(var(--spacing-broad) * 25)';
 	--dimension-smaller:   ~'calc(var(--spacing-broader) * 25)';
 	--dimension-small:     ~'calc(var(--spacing-broadest) * 25)';
@@ -48,7 +48,8 @@
 	-----------------------------------------------------------------------------*/
 
 	--color-main: #405980;
-	--color-main-lightest: #F7FBFF;
+	// --color-main-lightest: #F7FBFF;
+	--color-main-lightest: #F1F8FE;
 	--color-main-lighter: #CEE3F2;
 	--color-main-light: #7D93B3;
 	--color-main-dark: #172D4D;
@@ -56,7 +57,7 @@
 	--color-accent: #0D6EFF;
 	--color-accent-light: #d5ecfc;
 	// --color-accent-light: #cff2ff;
-	--color-accent-lighter: #e2f5ff;
+	// --color-accent-lighter: #e2f5ff;
 	--color-accent-lighter: #E6F2FF;
 
 	--color-accent-alt: #F9D362;
@@ -71,7 +72,7 @@
 	--color-error-light: #FFADAD;
 	--color-error-dark: #8c1100;
 
-	--color-ui: #CEE3F2;
+	--color-ui: #D9E9FF;
 	--color-clear: #ffffff;
 	--color-brand: #F9D362;
 
@@ -84,13 +85,13 @@
 
 	--text-smallest: 0.9rem;
 	--text-smaller: 1.1rem;
-	--text-small: 1.3rem;
+	--text-small: 1.4rem;
 
-	--text-current: 1.5rem;
+	--text-current: 1.6rem;
 
 	--text-big: 1.7rem;
-	--text-bigger: 1.9rem; // 2.4rem
-	--text-biggest: 1.9rem; // 3.2rem
+	--text-bigger: 2.6rem;
+	--text-biggest: 3.2rem;
 
 
 	/*-----------------------------------------------------------------------------
@@ -122,30 +123,34 @@
 	-----------------------------------------------------------------------------*/
 
 	--radius-smallest: 1px;
-	--radius-small: 1px;
-	--radius-current: 4px;
-	--radius-big: 11px;
+	--radius-small: 4px;
+	--radius-current: 10px;
+	--radius-big: 20px;
 
 
 	/*-----------------------------------------------------------------------------
 		Misc
 	-----------------------------------------------------------------------------*/
 
-	--shadow: 0px 10px 15px rgba(8, 110, 255, 0.1);
+	--shadow: 0px 10px 15px rgba(8, 110, 255, 0.16);
+	--shadow-small: 0px 3px 9px rgba(8, 110, 255, 0.16);
 	--shadow-up: 0px -10px 15px rgba(8, 110, 255, 0.1);
 
 
 	--compensate-for-absolute-label: var(--standard-container-rhythm);
 
 
-	--color-backframe: var(--color-main-lightest);
-	--standard-field-height: var(--spacing-broader);
+	--backframe-background-color: var(--color-accent-lighter);
+	--frontframe-background-color: var(--color-clear);
+	--sidebar-background-color: var(--color-main-lightest);
 	--standard-label-column-width: var(--spacing-larger);
-	--standard-container-rhythm: var(--spacing-broadest);
+	--standard-container-rhythm: var(--spacing-broad);
 	--standard-inner-rhythm: var(--spacing-thinner);
 	--standard-side-rhythm: var(--spacing-broad);
 	--standard-label-min-width: 13rem;
 	--standard-label-color: var(--color-main);
+
+	--standard-field-height: 8rem;
 	--standard-field-color: var(--color-main-dark);
 	--standard-field-font-size: var(--text-current);
 	--standard-field-background-color: var(--color-clear);
