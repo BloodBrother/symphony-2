@@ -74,9 +74,10 @@ select,
 		border-bottom-color: var(--color-accent);
 	}
 
-	&:hover {
+	&:hover:not(:focus) {
 		// border-color: var(--color-accent);
 		// box-shadow: 0px 0px 0px 1px var(--color-accent);
+		border-bottom-color: var(--color-main-lighter);
 	}
 }
 
@@ -244,6 +245,7 @@ select {
 		}
 
 		option {
+			color: var(--color-main-light);
 			&:checked {
 				background: var(--color-accent-alt-light) -webkit-linear-gradient(bottom, var(--color-accent-alt-light) 0%, var(--color-accent-alt-light) 100%);
 			}
@@ -354,7 +356,7 @@ legend {
 	position: relative;
 	display: block;
 	color: inherit;
-	font-size: var(--text-small);
+	font-size: var(--standard-label-font-size);
 
 	>i:not(:empty) {
 		display: block;
@@ -363,7 +365,7 @@ legend {
 		opacity: 0;
 		height: 0;
 		line-height: 0;
-		top: var(--spacing-pico);
+		top: var(--spacing-nano);
 		position: relative;
 		color: var(--color-main-light);
 
@@ -553,15 +555,14 @@ div.password {
 	}
 
 	[type="hidden"]~a {
-		background-color: var(--color-clear);
-		padding: var(--spacing-thinnest);
+		// background-color: var(--color-clear);
+		// padding: var(--spacing-thinnest);
 		display: block;
-		line-height: 1.2em;
-		min-height: var(--standard-field-height);
-		box-sizing: border-box;
-		color: var(--color-main);
-		border-radius: var(--radius-current);
-		border-bottom: 1px solid var(--color-main-light);
+		// line-height: 1.2em;
+		// min-height: var(--standard-field-height);
+		color: inherit;
+		// border-radius: var(--radius-current);
+		// border-bottom: 1px solid var(--color-main-light);
 	}
 
 	[type="hidden"]~a:hover {
@@ -620,9 +621,10 @@ div.password {
 	&:hover {
 		color: var(--color-accent);
 
-		input:not([type=checkbox]), select, textarea {
+		input:not([type=checkbox]):not(:focus), select:not(:focus), textarea:not(:focus) {
 			// border-color: var(--color-accent);
 			// box-shadow: 0px 0px 0px 1px var(--color-accent);
+			border-bottom-color: var(--color-main-lighter);
 		}
 
 	}
@@ -643,10 +645,15 @@ div.password {
 		align-items: center;
 	}
 
+	select:not(:hover):not(:focus),
+	textarea:not(:hover):not(:focus),
+	input:not(:hover):not(:focus) {
+		border-color: transparent;
+	}
+
 	select,
 	textarea,
 	input {
-		border-color: transparent;
 		padding-left: 0;
 	}
 
@@ -701,7 +708,7 @@ fieldset.settings {
 
 		&:hover {
 			input, select {
-				border-bottom-color: var(--color-main-light);
+				border-bottom-color: var(--color-main-lighter);
 			}
 		}
 	}
@@ -725,11 +732,10 @@ fieldset.settings {
 	}
 
 	> legend {
-		margin-bottom: var(--spacing-thinnest);
-		font-size: inherit;
+
 		color: var(--color-main-light);
 		// padding-left: var(--compensate-for-absolute-label);
-		box-sizing: border-box;
+
 
 		// &:before {
 		// 	content: "•";

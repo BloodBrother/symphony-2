@@ -314,8 +314,11 @@ fieldset.settings .collapsible {
 	&:hover {
 		z-index: 2;
 		// box-shadow: var(--shadow-small);
-		background-color: var(--color-clear);
 		border-color: var(--color-ui);
+
+		&:not(.ordering) {
+			background-color: var(--color-clear);
+		}
 	}
 
 	&:not(:hover)+.collapsed:not(:hover) {
@@ -341,6 +344,15 @@ fieldset.settings .collapsible {
 	cursor: grab;
 	cursor: -moz-grab;
 	cursor: -webkit-grab;
+}
+
+.orderable .instance.ordering {
+	background-color: var(--color-accent-alt-light);
+}
+
+.orderable .instance.ordering > * {
+	background: transparent !important;
+	color: var(--color-main-light) !important;
 }
 
 .collapsible legend {
