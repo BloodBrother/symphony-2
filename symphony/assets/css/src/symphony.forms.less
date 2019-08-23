@@ -65,15 +65,16 @@ select,
 
 		.required &,
 		.invalid & {
-			background-color: var(--color-error-light);
+			border-color: var(--color-error-light);
 			mix-blend-mode: initial;
 		}
 	}
 
 	&:focus {
-		border-bottom-color: var(--color-main);
+		border-bottom-color: var(--color-accent-alt);
 		background-color: var(--color-accent-alt-light);
 		outline: none;
+		box-shadow: inset 0px 2px 0px var(--color-accent-alt);
 	}
 
 	&:hover:not(:focus) {
@@ -351,14 +352,28 @@ input[type=submit],
 button,
 .button {
 	cursor: pointer;
-	background-color: var(--color-main-dark);
+	background-color: var(--color-main);
 	border: 0;
 	padding: var(--spacing-thinnest);
 	border-radius: var(--radius-small);
 	color: var(--color-clear);
+	box-shadow: 0px 2px 1px var(--color-main-dark);
+	position: relative;
+	outline: 0;
 
 	&:hover {
 		background-color: var(--color-accent);
+		// color: var(--color-clear);
+	}
+
+	&.selected, &.selected:before {
+		background-color: var(--color-accent-alt-light);
+	}
+
+	&:active {
+		box-shadow: 0px -1px 1px var(--color-ui), inset 0px 1px 1px var(--color-main-dark);
+		top: 2px;
+		outline: 0;
 	}
 }
 
@@ -423,8 +438,8 @@ legend {
 --------------------------------------------------------------------------*/
 
 .apply {
-	padding-left: var(--standard-container-rhythm);
-	padding-right: var(--standard-container-rhythm);
+	// padding-left: var(--standard-container-rhythm);
+	// padding-right: var(--standard-container-rhythm);
 	>* {
 		max-width: max-content;
 		display: inline-block;
@@ -436,7 +451,7 @@ legend {
 	>*+* {
 		margin-left: var(--spacing-thinnest);
 	}
-	button {
+	.actions & button {
 		float: right;
 		margin-left: var(--spacing-thinnest);
 	}
@@ -529,7 +544,7 @@ div.password {
 	flex-wrap: wrap;
 	position: relative;
 	// padding-left: var(--compensate-for-absolute-label);
-	border-bottom: 2px dotted var(--color-ui);
+	// border-bottom: 2px dotted var(--color-ui);
 	color: var(--color-main);
 	min-height: var(--standard-field-height);
 	--multiplier: ~'calc(var(--dimension-tinier) - 100%)';
@@ -669,10 +684,10 @@ div.password {
 		align-items: center;
 	}
 
-	select:not(:hover):not(:focus),
-	textarea:not(:hover):not(:focus),
-	input:not(:hover):not(:focus) {
-		border-color: transparent;
+	&:not(:hover) select:not(:focus),
+	&:not(:hover) textarea:not(:focus),
+	&:not(:hover) input:not([type=checkbox]):not(:focus) {
+		border-style: dotted;
 	}
 
 	input:not([type=checkbox]),
@@ -680,14 +695,19 @@ div.password {
 	select {
 		min-height: var(--standard-field-height);
 		margin-left: ~'calc(-1 *  var(--standard-label-min-width))';
-		margin-top: -1px;
+		// margin-top: -2px;
+		// position: relative;
+		// top: 1px;
 		padding-left: ~'calc(var(--standard-label-min-width) + var(--standard-inner-rhythm))';
 		transition: all 200ms var(--ease-current);
 	}
 
 	select:focus,
 	textarea:focus,
-	input:not([type=checkbox]):focus {
+	input:not([type=checkbox]):focus,
+	&:hover select,
+	&:hover textarea,
+	&:hover input:not([type=checkbox]) {
 		margin-left: ~'calc(-1 *  var(--standard-label-min-width) - var(--standard-container-rhythm))';
 		margin-right: ~'calc(-1 *  var(--standard-container-rhythm))';
 		padding-left: ~'calc(var(--standard-label-min-width) + var(--standard-inner-rhythm) + var(--standard-container-rhythm))';
@@ -780,6 +800,10 @@ fieldset.settings {
 			font-size: var(--text-big);
 			padding: var(--spacing-thinnest) 0 var(--spacing-broad);
 		}
+	}
+
+	.apply {
+		margin-top: var(--standard-inner-rhythm);
 	}
 
 	span.frame {

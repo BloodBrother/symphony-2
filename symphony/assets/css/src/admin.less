@@ -526,8 +526,9 @@ body {
 .context-wrap {
 	display: flex;
 	align-items: center;
-	padding: var(--spacing-thinnest) 0;
+	padding: var(--standard-inner-rhythm) 0;
 	padding-right: var(--standard-container-rhythm);
+	position: relative;
 
 	@media (max-width: (@sm - 1)){
 		flex-direction: column;
@@ -538,19 +539,22 @@ body {
 #context {
 	flex-grow: 1;
 	width: 100%;
+	z-index: 11;
 	display: flex;
 	align-items: center;
-	padding-left: var(--standard-container-rhythm);
+	flex-wrap: wrap;
+	padding: 0 var(--standard-container-rhythm);
 }
 
 #tools {
 	// width: 100%;
 	margin-left: auto;
-	height: var(--spacing-broadest);
-	.flex(~'row', ~'center', ~'flex-end');
-
+	// height: var(--spacing-broadest);
+	// .flex(~'row', ~'center', ~'flex-end');
+	position: absolute;
+	right: var(--standard-container-rhythm);
+	top: var(--standard-inner-rhythm);
 	color: var(--color-accent);
-	background-color: var(--backframe-background-color);
 
 	@media (max-width: (@sm - 1)){
 		order: -1;
@@ -674,7 +678,6 @@ body {
 	box-sizing: border-box;
 	position: relative;
 	background-color: var(--backframe-background-color);
-	min-height: ~'calc(100vh - var(--spacing-broadest) - var(--spacing-broadest))';
 	padding: 0 var(--spacing-broader) 0 0;
 	border-radius: var(--radius-big);
 
@@ -739,6 +742,10 @@ body {
 		}
 	}
 
+	.actions {
+		margin: var(--standard-container-rhythm);
+	}
+
 }
 
 #contents-actions {
@@ -753,7 +760,7 @@ body {
 	position: sticky;
 	top: 0;
 	background-color: var(--frontframe-background-color);
-	z-index: 5;
+	z-index: 10;
 	border-bottom: 1px solid var(--color-ui);
 	border-top-left-radius: var(--radius-big);
 	border-top-right-radius: var(--radius-big);
@@ -786,7 +793,7 @@ body {
 			color: var(--color-main);
 			position: relative;
 			border-radius: 100%;
-
+			box-shadow: initial;
 			svg {
 				width: 20px;
 				height: 20px;
@@ -802,13 +809,17 @@ body {
 				height: 20px;
 				padding: var(--spacing-thinnest);
 				border-radius: 100%;
-				background-color: transparent;
+				// background-color: transparent;
 				right: 0;
 				top: 0;
 			}
 
 			&:hover:before {
 				background-color: var(--color-main-lighter);
+			}
+
+			&:active {
+				// box-shadow: initial;
 			}
 		}
 

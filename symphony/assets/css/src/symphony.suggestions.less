@@ -19,12 +19,12 @@
 
 .suggestions {
 	.transitioned(~'opacity, max-height');
-	border-radius: var(--radius-current);
+	border-radius: var(--radius-small);
 	box-sizing: border-box;
 	overflow: hidden;
 	position: absolute;
 	margin: var(--spacing-micro) 0 0!important;
-	border: 1px solid var(--color-main-light);
+	// border: 1px solid var(--color-main-light);
 	background: var(--color-clear);
 	width: calc(~'100% - var(--spacing-broad)');
 	max-height: 0;
@@ -39,7 +39,7 @@
 			display: block;
 			color: var(--color-main-dark);
 			border-bottom: none;
-			background-color: var(--color-main-light);
+			background-color: var(--color-main-lightest);
 			cursor: default;
 		}
 	}
