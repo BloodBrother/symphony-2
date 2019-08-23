@@ -1830,7 +1830,7 @@ class contentPublish extends AdministrationPage
         $parent_associations = SectionManager::fetchParentAssociations($section->get('id'), true);
         $child_associations = SectionManager::fetchChildAssociations($section->get('id'), true);
         $content = null;
-        $drawer_position = 'vertical-right';
+        $drawer_position = 'horizontal';
 
         /**
          * Prepare Associations Drawer from an Extension
