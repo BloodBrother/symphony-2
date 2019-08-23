@@ -71,7 +71,9 @@ select,
 	}
 
 	&:focus {
-		border-bottom-color: var(--color-accent);
+		border-bottom-color: var(--color-main);
+		background-color: var(--color-accent-alt-light);
+		outline: none;
 	}
 
 	&:hover:not(:focus) {
@@ -91,25 +93,24 @@ select,
 }
 
  
-input[type="text"]:active,
-input[type="text"]:focus,
-input[type="input"]:active,
-input[type="input"]:focus,
-input[type="password"]:active,
-input[type="password"]:focus,
-input[type="file"]:active,
-input[type="file"]:focus,
-textarea:active,
-textarea:focus,
-select:active,
-select:focus,
-button:active,
-button:focus {
-	border-bottom-color: var(--color-accent);
-	color: var(--color-main);
-	outline: none;
-	// box-shadow: 0px 0px 0px 1px var(--color-accent), var(--shadow);
-}
+// input[type="text"]:active,
+// input[type="text"]:focus,
+// input[type="input"]:active,
+// input[type="input"]:focus,
+// input[type="password"]:active,
+// input[type="password"]:focus,
+// input[type="file"]:active,
+// input[type="file"]:focus,
+// textarea:active,
+// textarea:focus,
+// select:active,
+// select:focus,
+// button:active,
+// button:focus {
+// 	border-bottom-color: var(--color-main);
+
+// 	// box-shadow: 0px 0px 0px 1px var(--color-accent), var(--shadow);
+// }
 
 input[readonly="readonly"],
 textarea[readonly="readonly"] {
@@ -201,6 +202,8 @@ input[type='checkbox'] {
 
 input[type=file] {
 	font-size: var(--text-small);
+	height: var(--standard-field-height);
+	padding-top: ~'calc(var(--standard-field-height) / 2  - .6em)';
 }
 
 
@@ -240,14 +243,24 @@ select {
 		}
 
 		option, optgroup {
-			padding: var(--spacing-pico) var(--spacing-thinnest);
+			padding: var(--spacing-pico) var(--standard-inner-rhythm);
+			margin-left: ~'calc(-1 * var(--standard-inner-rhythm))';
 			// mix-blend-mode: initial;
 		}
 
 		option {
 			color: var(--color-main-light);
 			&:checked {
-				background: var(--color-accent-alt-light) -webkit-linear-gradient(bottom, var(--color-accent-alt-light) 0%, var(--color-accent-alt-light) 100%);
+				background: var(--frontframe-background-color) -webkit-linear-gradient(bottom, var(--frontframe-background-color) 0%, var(--frontframe-background-color) 100%);
+				&:before {
+					content: "▶";
+					margin-right: var(--spacing-micro);
+					font-size: var(--text-smaller);
+					vertical-align: middle;
+					position: relative;
+					top: -.09125em;
+					margin-left: -.125em;
+				}
 			}
 		}
 
@@ -259,6 +272,9 @@ select {
 			option {
 				&:checked {
 					background: var(--color-main) -webkit-linear-gradient(bottom, var(--color-main) 0%, var(--color-main) 100%);
+					&:before {
+						color: var(--color-clear);
+					}
 				}
 			}
 		}
@@ -442,7 +458,9 @@ legend {
 
 ul.tags {
 	color: var(--color-main-light);
-	font-size: var(--text-small);
+	font-size: var(--text-smallest);
+	font-weight: 600;
+	color: var(--color-main-dark);
 	list-style: none;
 	line-height: 1.4em;
 	margin-top: var(--spacing-thinnest);
@@ -450,7 +468,12 @@ ul.tags {
 	>* {
 		display: inline-block;
 		cursor: pointer;
-		margin-right: var(--spacing-nano);
+		margin-right: var(--spacing-micro);
+		background-color: var(--color-accent-light);
+		border-radius: var(--radius-small);
+		padding: var(--spacing-pico);
+		line-height: 1.2em;
+		border: 1px solid var(--color-ui);
 	}
 
 	li:hover {
@@ -506,7 +529,7 @@ div.password {
 	flex-wrap: wrap;
 	position: relative;
 	// padding-left: var(--compensate-for-absolute-label);
-	border-bottom: 1px solid var(--color-ui);
+	border-bottom: 2px dotted var(--color-ui);
 	color: var(--color-main);
 	min-height: var(--standard-field-height);
 	--multiplier: ~'calc(var(--dimension-tinier) - 100%)';
@@ -605,7 +628,7 @@ div.password {
 	label+span {
 		display: flex;
 
-		a {
+		a, input {
 			flex-grow: 1;
 
 			~* {
@@ -620,11 +643,12 @@ div.password {
 
 	&:hover {
 		color: var(--color-accent);
+		// border-color: currentColor;
 
 		input:not([type=checkbox]):not(:focus), select:not(:focus), textarea:not(:focus) {
 			// border-color: var(--color-accent);
 			// box-shadow: 0px 0px 0px 1px var(--color-accent);
-			border-bottom-color: var(--color-main-lighter);
+			border-bottom-color: var(--color-accent);
 		}
 
 	}
@@ -651,22 +675,25 @@ div.password {
 		border-color: transparent;
 	}
 
-	select,
-	textarea,
-	input {
-		padding-left: 0;
-	}
-
-
-
-	input[type=text],
-	input[type=password],
-	input[type=email],
-	input[type=input],
+	input:not([type=checkbox]),
 	textarea,
 	select {
 		min-height: var(--standard-field-height);
+		margin-left: ~'calc(-1 *  var(--standard-label-min-width))';
+		margin-top: -1px;
+		padding-left: ~'calc(var(--standard-label-min-width) + var(--standard-inner-rhythm))';
+		transition: all 200ms var(--ease-current);
 	}
+
+	select:focus,
+	textarea:focus,
+	input:not([type=checkbox]):focus {
+		margin-left: ~'calc(-1 *  var(--standard-label-min-width) - var(--standard-container-rhythm))';
+		margin-right: ~'calc(-1 *  var(--standard-container-rhythm))';
+		padding-left: ~'calc(var(--standard-label-min-width) + var(--standard-inner-rhythm) + var(--standard-container-rhythm))';
+		// z-index: 2;
+	}
+
 
 	.tags {
 		position: absolute;
@@ -707,13 +734,13 @@ fieldset.settings {
 		// }
 
 		&:hover {
-			input, select {
+			input:not(:focus), select:not(:focus) {
 				border-bottom-color: var(--color-main-lighter);
 			}
 		}
 	}
 
-	input[type=text],input[type=email],input[type=input],input[type=password], select {
+	input[type=text]:not(:focus),input[type=email]:not(:focus),input[type=input]:not(:focus),input[type=password]:not(:focus), select:not(:focus) {
 		background-color: var(--color-main-lightest);
 	}
 
