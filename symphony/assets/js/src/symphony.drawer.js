@@ -27,7 +27,7 @@
 			form = contents.find('> form'),
 			settings = {
 				verticalWidth: 300,
-				speed: 'fast'
+				speed: 0
 			};
 
 		$.extend(settings, options);
