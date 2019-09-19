@@ -44,14 +44,14 @@ div.drawer.horizontal {
 			.transitioned(~'transform');
 			overflow: scroll;
 			-webkit-overflow-scrolling: touch;
-			position: fixed;
+			position: absolute;
 			top: 0;
 			bottom: 0;
-			background: var(--color-clear);
-			width: var(--dimension-tiny)!important;
+			background: var(--sidebar-background-color);
+			width: var(--dimension-tinier);
 			max-width: 100%;
-			z-index: 100;
-			box-shadow: var(--shadow);
+			z-index: 1;
+			// box-shadow: var(--shadow);
 
 			.contents {
 				padding: 0 0 var(--spacing-broadest);
@@ -61,7 +61,7 @@ div.drawer.horizontal {
 		.close-btn {
 			position: absolute;
 			right: var(--spacing-broad);
-			top: var(--spacing-broad);
+			top: auto;
 		}
 
 		&.vertical-left {
@@ -75,13 +75,17 @@ div.drawer.horizontal {
 		}
 
 		&.vertical-right {
-			right: 0;
-			transform: translateX(100%);
+			right: var(--spacing-broader);
+			// transform: ~'translateX(calc(100% + var(--spacing-broader)))';
 			overflow-x: hidden;
 			overflow-y: auto;
+			width: var(--sidebar-width);
+			border-radius: var(--radius-duller);
+			padding-top: var(--spacing-large);
 
-			&.opened {
-				transform: none;
+			&:not(.opened) {
+				opacity: 0;
+				pointer-events: none;
 			}
 		}
 	}
