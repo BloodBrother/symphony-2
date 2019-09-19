@@ -17,63 +17,53 @@
 	Vertical drawers
 -----------------------------------------------------------------------------*/
 
-.association-title {
-	// color: var(--color-accent);
-	// padding: var(--spacing-broad) var(--spacing-broad) 0;
-}
-
-* + .association-title {
-	// margin-top: var(--spacing-broad);
-	// border-top: 1px solid var(--color-main-light);
-}
 [id="drawer-section-associations"] a:not([class]) {
 	color: inherit;
 }
 [id="drawer-section-associations"] .content  {
-	// display: flex;
-	// flex-wrap: wrap;
-	// border-radius: var(--radius-current);
 	padding: var(--standard-inner-rhythm);
-	// background-color: var(--color-main-lighter);
-	// align-items: flex-start;
 }
 
 [id="drawer-section-associations"] .content>h2 {
-	// flex: 100% 0 0;
-	// writing-mode: vertical-lr;
-	// text-orientation: upright;
-	// transform: rotateZ(180deg);
 	font-size: var(--text-current);
-	margin-bottom: var(--spacing-thinnest);
+	margin-top: var(--spacing-broadest);
+	margin-bottom: var(--standard-inner-rhythm);
+	margin-left: var(--standard-inner-rhythm);
 }
 
 [id="drawer-section-associations"] .content>*+* {
-	margin-top: var(--standard-inner-rhythm);
+
 }
 
 [id="drawer-section-associations"] .content>section {
 	padding: var(--standard-inner-rhythm);
-	background-color: var(--color-accent-lighter);
-	border: 1px solid var(--color-ui);
+	border: 1px solid transparent;
 	border-radius: var(--radius-current);
+
+	&:hover {
+		border-color: var(--color-ui);
+		background-color: var(--color-accent-lighter);
+	}
 }
 
 .association {
 
 	header {
 		display: flex;
-		align-items: baseline;
-		justify-content: space-between;
+		flex-direction: column;
+		font-size: var(--text-smaller);
+		position: relative;
+		margin-bottom: var(--spacing-micro);
 	}
 
 	header p {
-		flex-grow: 1;
-		overflow: hidden;
-		text-overflow: ellipsis;
 		color: var(--color-main);
 		line-height: 20px;
 		margin-bottom: 0;
-		white-space: nowrap;
+
+		+ p {
+			margin-left: var(--spacing-thinnest);
+		}
 	}
 
 	.association-section {
@@ -82,6 +72,15 @@
 		&:hover {
 			color: var(--color-accent);
 		}
+	}
+
+	.association-new {
+		font-size: var(--text-small);
+		font-weight: 700;
+		margin-left: auto;
+		position: absolute;
+		top: 0;
+		right: 0;
 	}
 
 	&:not(:hover) {
@@ -109,10 +108,6 @@
 
 		>a {
 			vertical-align: text-bottom;
-		}
-
-		& + li {
-			// border-top: 1px solid var(--color-main-light);
 		}
 	}
 
