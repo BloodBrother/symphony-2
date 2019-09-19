@@ -16,25 +16,18 @@
 	margin-bottom: var(--standard-inner-rhythm);
 	z-index: 1
 }
+
 .drawer-filtering .frame {
-	// .flex(~'row', ~'center', ~'flex-end');
-	// flex-wrap: wrap;
-	// border: none;
-	// background: none;
 	display: flex;
 	align-items: baseline;
 	font-size: var(--text-small);
 	color: var(--color-main-light);
 
 	.frame-header {
-		// padding: 0;
-		// border: none;
 		display: contents;
 	}
 
 	ol {
-		// width: 100%;
-		// margin: 0;
 		flex-grow: 1;
 	}
 
@@ -49,7 +42,7 @@
 	}
 
 	.columns.two {
-		margin: 0 0 0 ~'calc(var(--spacing-broad) * -1)'!important;
+		margin: 0 0 0 calc(var(--spacing-broad) * -1) !important;
 
 		.column {
 			margin: 0!important;
@@ -109,8 +102,6 @@
 	}
 
 	&.empty {
-		// height: auto;
-
 		ol::before {
 			content: attr(data-empty);
 			display: block;

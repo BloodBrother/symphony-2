@@ -22,8 +22,6 @@
 	margin: 0;
 	background-color: var(--color-main-lightest);
 	padding: var(--standard-inner-rhythm);
-	// border: 1px solid var(--color-accent-lighter);
-	// padding: var(--spacing-thinner);
 
 	h1 {
 		padding: var(--spacing-thinnest);
@@ -43,7 +41,7 @@
 	}
 
 	.tags {
-		margin: ~'calc(var(--spacing-broad) * -1)' 0 var(--spacing-thinner);
+		margin: calc(var(--spacing-broad) * -1) 0 var(--spacing-thinner);
 	}
 
 	iframe {
@@ -54,43 +52,21 @@
 		height: 206px;
 	}
 
-	> button {
-		// font-size: var(--text-smaller);
-		// text-transform: uppercase;
-		// line-height: 1.6rem;
-		// margin: 0;
-		// padding: var(--spacing-thinnest) var(--spacing-thinner);
-		// background: var(--color-accent);
-		// border-radius: var(--radius-current);
-		// cursor: pointer;
-
-		&:not(:disabled):hover {
-			// border-color: var(--color-main-dark);
-			// background: var(--color-main-dark);
-		}
-
-		&:disabled {
-			// cursor: default;
-		}
-
-		& + button {
-			margin-left: var(--spacing-micro);
-		}
+	> button + button {
+		margin-left: var(--spacing-micro);
 	}
 
 	.instance {
 		background-color: var(--color-main-lightest);
-		// margin-bottom: var(--spacing-pico);
 		border: 1px solid transparent;
 		border-radius: var(--radius-current);
 
 		&:not(.collapsed) {
 			border-radius: var(--radius-big);
 			background-color: var(--color-clear);
-			// box-shadow: var(--shadow-small);
 			z-index: 1;
 			border-color: var(--color-ui);
-			// border-top-color: var(--color-main-light);
+
 			&:not(:first-of-type) {
 				margin-top: var(--standard-inner-rhythm);
 			}
@@ -99,15 +75,6 @@
 				margin-bottom: var(--standard-inner-rhythm);
 			}
 		}
-	}
-
-
-	&.empty ol {
-		// min-height: var(--standard-field-height);
-		// background-color: var(--color-main-lighter);
-		// border-radius: var(--radius-current);
-		// border: 2px dotted var(--color-ui);
-		// padding: var(--standard-inner-rhythm);
 	}
 }
 
@@ -119,7 +86,6 @@
 	position: relative;
 	border: 1px solid transparent;
 	padding: var(--spacing-thinner) var(--standard-container-rhythm);
-	// margin-bottom: var(--spacing-pico);
 
 	h4 {
 		display: flex;
@@ -154,27 +120,14 @@
 		}
 	}
 
-	// > a:first-of-type {
-	// 	margin-left: auto!important;
-	// }
-
 	:not(.collapsed)>& {
 		border-top-color: transparent;
-		// border-bottom-color: var(--color-accent-lighter);
 		top: var(--spacing-micro);
-		// padding-left: 0;
-		// padding-top: var(--spacing-thin);
 	}
 
 	&:hover {
 		color: var(--color-accent);
 	}
-
-	// &.main, &.sidebar {
-	// 	&+.content {
-	// 		padding-left: var(--spacing-broader);
-	// 	}
-	// }
 
 	&.main:before,
 	&.sidebar:before {
@@ -182,7 +135,7 @@
 		writing-mode: vertical-lr;
 		font-weight: 900;
 		margin-right: var(--spacing-thinner);
-		margin-left: ~'calc(-1 * var(--spacing-nano))';
+		margin-left: calc(-1 * var(--spacing-nano));
 		font-size: var(--text-current);
 		color: inherit;
 		height: 0;
@@ -217,7 +170,6 @@ fieldset.frame,
 
 .duplicator {
 	.apply {
-		// margin-top: 2rem;
 		text-align: right;
 	}
 }
@@ -235,12 +187,6 @@ fieldset.frame,
 	a {
 		padding: 0 0 0 var(--spacing-thinnest);
 	}
-}
-
-.frame .destructor:hover,
-.frame .debug:hover,
-.frame .constructor:hover {
-	// color: var(--color-main-dark);
 }
 
 .frame .disabled {
@@ -283,16 +229,6 @@ fieldset.frame,
 	Collapsibles
 -----------------------------------------------------------------------------*/
 
-.constructable,
-.collapsible {
-	// padding: 0;
-}
-
-fieldset.settings .constructable,
-fieldset.settings .collapsible {
-	// background: none;
-}
-
 .constructable > * > li,
 .collapsible > * > li {
 	position: relative;
@@ -300,7 +236,6 @@ fieldset.settings .collapsible {
 
 	fieldset.settings & .content {
 		padding: var(--standard-container-rhythm);
-		// padding-bottom: var(--spacing-broader);
 
 		>*:not([type="hidden"])+*,
 		>div:not(.columns)>*+* {
@@ -314,7 +249,6 @@ fieldset.settings .collapsible {
 
 	&:hover {
 		z-index: 2;
-		// box-shadow: var(--shadow-small);
 		border-color: var(--color-ui);
 
 		&:not(.ordering) {
@@ -326,10 +260,7 @@ fieldset.settings .collapsible {
 		border-radius: 0;
 		border-top-color: var(--color-ui);
 	}
-	
-	// &:not(:last-child):hover + * {
-	// 	border-top-color: transparent;
-	// }
+
 }
 
 .orderable .instance.collapsed .frame-header {

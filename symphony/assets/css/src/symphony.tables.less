@@ -29,16 +29,12 @@ table {
 		align-items: center;
 		width: 100%;
 		box-sizing: border-box;
-		// padding: 0 var(--standard-inner-rhythm);
 	}
 
 	th {
 		display: flex;
 		width: 100%;
 		align-self: flex-end;
-		// overflow: hidden;
-		// text-overflow: ellipsis;
-		// white-space: nowrap;
 		padding: var(--spacing-micro) var(--spacing-thinnest);
 		box-sizing: border-box;
 		text-align: left;
@@ -65,15 +61,11 @@ table {
 	}
 
 	thead {
-		// box-shadow: var(--shadow-small);
 		padding: var(--standard-inner-rhythm);
 		background-color: var(--color-main-lightest);
 		box-sizing: border-box;
 		border-top-left-radius: var(--radius-big);
 		border-top-right-radius: var(--radius-big);
-
-		// position: sticky;
-		// top: var(--spacing-broadest);
 		z-index: 1;
 		color: var(--color-main-light);
 
@@ -108,19 +100,16 @@ table {
 		padding: var(--standard-inner-rhythm);
 		padding-top: 0;
 		box-sizing: border-box;
-		// width: auto;
 
 		tr {
 			margin: var(--spacing-pico) 0;
 			cursor: copy;
-			// box-shadow: var(--shadow);
 			border-radius: var(--radius-current);
 			overflow: hidden;
 			border: 1px solid transparent;
 
 			&:hover:not(.selected) {
 				z-index: 2;
-				// box-shadow: var(--shadow-small);
 				background-color: var(--color-clear);
 				border-color: var(--color-ui);
 			}
@@ -151,7 +140,6 @@ table {
 			}
 
 			&:not(:first-child) {
-				// background-color: var(--color-accent-light);
 				font-size: var(--text-smaller);
 			}
 
@@ -242,16 +230,13 @@ table.selectable input {
 		z-index: 1;
 
 		td {
-			// color: var(--color-main-light);
-
-			
 			a {
 				color: var(--color-main-light);
 				&:hover {
 					color: var(--color-main-light);
 				}
 			}
-		
+
 			&.inactive {
 				color: var(--color-main-light);
 			}
