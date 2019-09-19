@@ -346,7 +346,7 @@ body {
 				svg {
 					.transitioned(~'transform',~'0.15s');
 					position: absolute;
-					left: ~'calc(var(--spacing-thinner) * -1)';
+					left: calc(var(--spacing-thinner) * -1);
 					top: 6px;
 					color: currentColor;
 					opacity: 0.5;
@@ -409,7 +409,9 @@ body {
 /* Session */
 
 .session {
-	.flex(~'row', ~'center', ~'flex-start');
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 	flex-shrink: 0;
 	position: relative;
 	margin: 0;
@@ -418,6 +420,9 @@ body {
 	> div {
 		.transitioned(~'background');
 		.flex(~'row', ~'center', ~'space-between');
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		flex-grow: 1;
 		box-sizing: border-box;
 		border-radius: 100%;
@@ -851,7 +856,7 @@ body {
 				flex-grow: 1;
 
 				&:not(:last-of-type) {
-					width: ~'calc(100% - var(--spacing-thinner) - var(--dimension-tiny))';
+					width: calc(100% - var(--spacing-thinner) - var(--dimension-tiny));
 					margin-right: auto;
 				}
 

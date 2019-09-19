@@ -15,7 +15,10 @@
 --------------------------------------------------------------------------*/
 
 body#error {
-	.flex(~'column', ~'center', ~'center');
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	box-sizing: border-box;
 	padding: var(--spacing-broad);
 	width: 100%;
@@ -31,7 +34,7 @@ body#error {
 	box-shadow: var(--shadow);
 
 	h1 {
-		margin: ~'calc(var(--spacing-thinnest) * -1) calc(var(--spacing-thinnest) * -1) 0';
+		margin: calc(var(--spacing-thinnest) * -1) calc(var(--spacing-thinnest) * -1) 0;
 		font-size: var(--text-bigger);
 	}
 
