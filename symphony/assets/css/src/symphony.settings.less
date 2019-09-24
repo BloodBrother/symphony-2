@@ -1,0 +1,169 @@
+/**
+* Symphony Settings Forms
+*
+* This file contains layout specific styling rules for the
+* settings-style sections (Blueprints, Data Sources, etc.) of the admin interface. 
+*
+* @since Symphony 4.0.0
+*/
+
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
+
+@import "variables";
+
+/*--------------------------------------------------------------------------
+	Settings
+--------------------------------------------------------------------------*/
+
+fieldset.settings {
+	padding: var(--standard-container-rhythm);
+	margin-bottom: var(--standard-container-rhythm);
+	box-sizing: content-box;
+
+	label {
+		cursor: pointer;
+
+		&:hover {
+			input:not(:focus), select:not(:focus) {
+				border-bottom-color: var(--color-main-lighter);
+			}
+		}
+	}
+
+	input[type=text]:not(:focus),input[type=email]:not(:focus),input[type=input]:not(:focus),input[type=password]:not(:focus), select:not(:focus) {
+		background-color: var(--color-main-lightest);
+	}
+
+	>*:not(legend):not(.toggle)+*,
+	>div:not([class])>*+* {
+		margin-top: var(--spacing-thin);
+	}
+
+	>select {
+		margin-left: var(--standard-inner-rhythm);
+	}
+
+
+	@media (min-width: @md){
+		margin-left: var(--standard-label-column-width);
+	}
+
+	> legend {
+		color: var(--color-main-light);
+
+		@media (min-width: @md){
+			float: left;
+			margin-left: calc(-1 * var(--standard-label-column-width));
+			width: var(--standard-label-column-width);
+		}
+
+		@media (max-width: (@md - 1)){
+			color: var(--color-accent);
+			font-size: var(--text-big);
+			padding: var(--spacing-thinnest) 0 var(--spacing-broad);
+		}
+	}
+
+	.apply {
+		margin-top: var(--standard-inner-rhythm);
+	}
+
+	span.frame {
+		margin: 0;
+
+		& + span.frame {
+			margin-top: var(--spacing-thinnest);
+		}
+
+		& + p.help {
+			margin-top: var(--spacing-micro);
+		}
+	}
+
+	> p a {
+		color: var(--color-accent);
+
+		&:hover {
+			color: currentColor;
+		}
+	}
+
+	select {
+		width: 100%;
+	}
+
+	p.help {
+		a {
+			border-bottom: 1px solid currentColor;
+
+			&:hover {
+				border-color: transparent;
+			}
+		}
+	}
+
+	input + p.help,
+	select + p.help {
+		margin-top: 1rem;
+	}
+
+	.toggle {
+		position: absolute;
+		line-height: 1.8em;
+		margin: 3rem 0 0 -17rem;
+		left: var(--spacing-thinner);
+		width: 17rem;
+
+		@media (max-width: (@md - 1)){
+			position: relative;
+			font-size: var(--text-small);
+			margin: 0;
+			margin-bottom: var(--spacing-thin);
+			width: auto;
+		}
+	}
+
+	li .label {
+		margin: 1rem 0 1.25rem;
+	}
+
+	& + fieldset.settings {
+		margin-top: var(--spacing-large);
+
+		@media (max-width: (@md - 1)){
+			margin-top: var(--spacing-broad);
+		}
+	}
+
+	&.condensed {
+		label:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	& .column:last-of-type, & > label:last-of-type, &.label:last-of-type {
+		margin-bottom: 0;
+	}
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+
+
+	fieldset.columns { // generalized special case for password in authors
+		display: block;
+		font-size: 0;
+		
+		legend {
+			margin-left: var(--standard-inner-rhythm);
+			margin-bottom: var(--spacing-micro);
+		}
+
+		.column {
+			display: inline-block;
+			vertical-align: top;
+		}
+	}
+}

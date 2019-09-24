@@ -1,0 +1,48 @@
+/**
+ * Symphony Buttons
+ *
+ * This file contains basic styles for submits
+ * and buttons that are shared across the system. 
+ *
+ * @since Symphony 4.0.0
+ */
+
+ /*--------------------------------------------------------------------------
+ 	Buttons
+ --------------------------------------------------------------------------*/
+ 
+ input[type=button],
+ input[type=submit],
+ button,
+ .button {
+ 	cursor: pointer;
+ 	background-image: linear-gradient(to bottom, var(--color-main-dark), transparent 40%);
+ 	background-size: calc(100% - 4px);
+ 	background-repeat: no-repeat;
+ 	background-position: 2px 2px;
+ 	background-color: var(--color-main);
+ 	border: 0;
+ 	padding: var(--spacing-thinnest);
+ 	border-radius: var(--radius-small);
+ 	color: var(--color-clear);
+ 	box-shadow: 0px 2px 1px var(--color-main-dark);
+ 	position: relative;
+ 	outline: 0;
+ 	font-size: var(--standard-button-font-size);
+ 	line-height: 1.1em;
+
+ 	&:hover {
+ 		background-color: var(--color-accent);
+ 		background-image: linear-gradient(to top, rgba(0,0,0,.1) 10%, transparent 100%);
+ 	}
+
+ 	&.selected, &.selected:before {
+ 		background-color: var(--color-accent-alt-light);
+ 	}
+
+ 	&:active {
+ 		box-shadow: 0px -1px 1px var(--color-ui), inset 0px 1px 1px var(--color-main-dark);
+ 		top: 2px;
+ 		outline: 0;
+ 	}
+ }
