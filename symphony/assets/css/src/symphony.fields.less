@@ -1,0 +1,163 @@
+/**
+ * Symphony Fields
+ *
+ * This file contains styles for the widespread field component
+ * and its elements (inputs of all sorts, labels and legends, etc.)
+ *
+ * @since Symphony 4.0.0
+ */
+
+ /*-----------------------------------------------------------------------------
+ 	LESS — Variables Importing
+ -----------------------------------------------------------------------------*/
+
+ @import "variables";
+
+ /*--------------------------------------------------------------------------
+ 	Buttons
+ --------------------------------------------------------------------------*/
+
+ .field {
+ 	box-sizing: border-box;
+ 	display: flex;
+ 	align-items: baseline;
+ 	flex-wrap: wrap;
+ 	position: relative;
+ 	color: var(--color-main);
+ 	min-height: var(--standard-field-height);
+ 	--multiplier: calc(var(--dimension-tinier) - 100%);
+
+ 	&>*:first-child {
+ 		order: 0;
+ 	}
+
+
+ 	&>*:first-child, &:after {
+ 		flex-basis: var(--standard-label-min-width);
+ 		flex-shrink: 0;
+ 		box-sizing: border-box;
+ 	}
+
+ 	&>*+* {
+ 		flex-basis: calc(var(--multiplier) * 999);
+ 		flex-grow: 10;
+ 		min-width: var(--dimension-tiniest);
+ 		flex-shrink: 1;
+ 		order: 1;
+ 		margin-right: auto;
+ 	}
+
+ 	&>*+*~* {
+ 		order: 3;
+ 		max-width: var(--dimension-tiny);
+ 		margin-right: auto;
+ 		margin-top: var(--spacing-nano);
+ 	}
+
+ 	[type="hidden"]~a {
+ 		display: block;
+ 		color: inherit;
+ 	}
+
+ 	[type="hidden"]~a:hover {
+ 		color: var(--color-accent);
+ 	}
+
+ 	&:not(:hover) {
+ 		label {
+ 			color: var(--standard-label-color);
+ 			&:before, &:after {
+ 				opacity: .4;
+ 			}
+ 		}
+ 	}
+
+ 	label+span {
+ 		display: flex;
+
+ 		a, input {
+ 			flex-grow: 1;
+
+ 			~* {
+ 				margin-left: var(--standard-inner-rhythm);
+ 			}
+ 		}
+
+ 		button:not(:hover) {
+ 			opacity: .5;
+ 		}
+ 	}
+
+ 	&:hover {
+ 		color: var(--color-accent);
+
+ 		input:not([type=checkbox]):not(:focus), select:not(:focus), textarea:not(:focus) {
+ 			border-bottom-color: var(--color-accent);
+ 		}
+ 	}
+
+ 	&:not(:hover) {
+ 		color: var(--standard-field-color);
+ 	}
+
+ 	&.required label:before {
+ 			color: var(--color-error);
+ 	}
+
+ 	&.required:not(:hover) label:before {
+ 		opacity: .6;
+ 	}
+
+ 	&.field-checkbox,
+ 	&.field-upload {
+ 		align-items: center;
+ 	}
+
+ 	&:not(:hover) select:not(:focus),
+ 	&:not(:hover) textarea:not(:focus),
+ 	&:not(:hover) input:not([type=checkbox]):not(:focus) {
+ 		border-style: dotted;
+ 	}
+
+ 	input:not([type=checkbox]),
+ 	textarea,
+ 	select {
+ 		min-height: var(--standard-field-height);
+ 		margin-left: calc(-1 *  var(--standard-label-min-width));
+ 		margin-right: 0;
+ 		padding-left: calc(var(--standard-label-min-width) + var(--standard-inner-rhythm));
+ 		transition: all 200ms var(--ease-current);
+ 	}
+
+ 	select:focus,
+ 	textarea:focus,
+ 	input:not([type=checkbox]):focus,
+ 	&:hover select,
+ 	&:hover textarea,
+ 	&:hover input:not([type=checkbox]) {
+ 		margin-left: calc(-1 *  var(--standard-label-min-width) - var(--standard-container-rhythm));
+ 		margin-right: calc(-1 *  var(--standard-container-rhythm));
+ 		padding-left: calc(var(--standard-label-min-width) + var(--standard-inner-rhythm) + var(--standard-container-rhythm));
+ 	}
+
+ 	&:hover select:not([multiple]),
+ 	select:not([multiple]):focus {
+		padding-right: calc(0.65em + var(--spacing-thinnest) * 2 + var(--standard-container-rhythm));
+		background-position: right calc(.7em + var(--standard-container-rhythm)) top 50%;
+ 	}
+
+
+ 	.tags {
+ 		position: absolute;
+ 		bottom: var(--spacing-thinnest);
+ 		margin-left: var(--standard-label-min-width);
+ 		left: var(--spacing-thinnest);
+ 	}
+
+ 	.invalid label~* {
+ 		position: absolute;
+ 		bottom: -1.5em;
+ 		min-width: max-content;
+ 		z-index: 1;
+ 	}
+ }
