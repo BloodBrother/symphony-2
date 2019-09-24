@@ -1830,7 +1830,7 @@ class contentPublish extends AdministrationPage
         $parent_associations = SectionManager::fetchParentAssociations($section->get('id'), true);
         $child_associations = SectionManager::fetchChildAssociations($section->get('id'), true);
         $content = null;
-        $drawer_position = 'horizontal';
+        $drawer_position = 'vertical-right';
 
         /**
          * Prepare Associations Drawer from an Extension
@@ -1872,8 +1872,9 @@ class contentPublish extends AdministrationPage
 
             // Process Parent Associations
             if (!is_null($parent_associations) && !empty($parent_associations)) {
-                $title = new XMLElement('h2', __('Linked to') . ':', array('class' => 'association-title'));
+                $title = new XMLElement('h2', __('Outgoing associations'), array('class' => 'association-title'));
                 $content->appendChild($title);
+                
 
                 foreach ($parent_associations as $as) {
                     if (empty($as['parent_section_field_id'])) {
@@ -1884,6 +1885,9 @@ class contentPublish extends AdministrationPage
                         ->field($as['parent_section_field_id'])
                         ->execute()
                         ->next();
+
+                        
+
                     if ($field) {
                         // Get the related section
                         $parent_section = (new SectionManager)
@@ -1958,7 +1962,8 @@ class contentPublish extends AdministrationPage
 
                         $element = new XMLElement('section', null, array('class' => 'association parent'));
                         $header = new XMLElement('header');
-                        $header->appendChild(new XMLElement('p', $a->generate()));
+                        $header->appendChild(new XMLElement('p', 'Links to ' . $a->generate()));
+                        $header->appendChild(new XMLElement('p', ' through ' . $relation_field->get('label')));
                         $element->appendChild($header);
 
                         $ul = new XMLElement('ul', null, array(
@@ -1983,8 +1988,9 @@ class contentPublish extends AdministrationPage
 
             // Process Child Associations
             if (!is_null($child_associations) && !empty($child_associations)) {
-                $title = new XMLElement('h2', __('Links in') . ':', array('class' => 'association-title'));
+                $title = new XMLElement('h2', __('Incoming associations'), array('class' => 'association-title'));
                 $content->appendChild($title);
+                
 
                 foreach ($child_associations as $as) {
                     // Get the related section
@@ -2070,14 +2076,14 @@ class contentPublish extends AdministrationPage
                     ));
 
                     // Create new entries
-                    $create = new XMLElement('a', __('New'), array(
-                        'class' => 'button association-new',
+                    $create = new XMLElement('a', __('+'), array(
+                        'class' => 'association-new',
                         'href' => SYMPHONY_URL . '/publish/' . $as['handle'] . '/new/' . $prepopulate
                     ));
 
                     // Display existing entries
                     if ($has_entries) {
-                        $header->appendChild(new XMLElement('p', $a->generate()));
+                        $header->appendChild(new XMLElement('p', 'Links in ' . $a->generate()));
 
                         $ul = new XMLElement('ul', null, array(
                             'class' => 'association-links',
@@ -2123,6 +2129,7 @@ class contentPublish extends AdministrationPage
                         $header->appendChild(new XMLElement('p', __('No links in %s', array($a->generate()))));
                     }
 
+                    $header->appendChild(new XMLElement('p', ' through ' . $relation_field->get('label')));
                     $header->appendChild($create);
                     $element->prependChild($header);
                     $content->appendChild($element);
