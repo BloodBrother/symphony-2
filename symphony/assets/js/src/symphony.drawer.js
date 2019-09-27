@@ -22,7 +22,7 @@
 	 */
 	$.fn.symphonyDrawer = function(options) {
 		var objects = this,
-			wrapper = $('#wrapper'),
+			wrapper = Symphony.Elements.body,
 			contents = $('#contents'),
 			form = contents.find('> form'),
 			settings = {

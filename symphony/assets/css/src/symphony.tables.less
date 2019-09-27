@@ -16,8 +16,8 @@ table {
 	display: block;
 	width: auto;
 	background-color: var(--color-main-lightest);
-	border-radius: var(--radius-big);
-	margin: var(--standard-container-rhythm);
+	// border-radius: var(--radius-big);
+	// margin: var(--standard-container-rhythm);
 
 	thead, tbody, th, tr {
 		display: block;
@@ -42,6 +42,10 @@ table {
 		font-size: var(--text-smaller);
 		line-height: 1.2em;
 		max-height: 4.2rem;
+
+		#publish &:not([id]) {
+			display: none;
+		}
 		
 		&:after {
 			content: "";
@@ -58,6 +62,7 @@ table {
 			flex: 15% 1 1;
 			max-width: var(--dimension-tiniest);
 		}
+
 	}
 
 	thead {
@@ -124,6 +129,10 @@ table {
 			text-overflow: ellipsis;
 			overflow: hidden;
 			white-space: nowrap;
+
+			#publish &:not([class]):not(:first-child) {
+				display: none;
+			}
 
 			&.inactive {
 				color: var(--color-main-light);
@@ -216,7 +225,7 @@ table.selectable td:not(.inactive) {
 	cursor: copy;
 }
 
-table.selectable tr {
+table.selectable tbody tr {
 	&:hover:not(.selected) {
 		z-index: 2;
 		background-color: var(--color-clear);
@@ -281,5 +290,6 @@ tr.status-error:not(.selected) {
 }
 
 tr.inactive:not(.selected) {
+	pointer-events: none;
 	opacity: 0.5;
 }

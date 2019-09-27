@@ -27,7 +27,7 @@ class AdministrationPage extends HTMLPage
      * `$Contents` and `$Footer`.
      * @var XMLElement
      */
-    public $Wrapper = null;
+    // public $Wrapper = null;
 
     /**
      * A `<div>` that contains the header of a Symphony backend page, which
@@ -349,7 +349,7 @@ class AdministrationPage extends HTMLPage
                     ($icon === '') ? $drawer->getAttribute('data-label') : $icon,
                     '#' . $drawer->getAttribute('id'),
                     null,
-                    'button drawer ' . $position,
+                    'button drawer',
                     null,
                     array(
                         'title' => $drawer->getAttribute('data-label'),
@@ -450,16 +450,17 @@ class AdministrationPage extends HTMLPage
         $this->addScriptToHead(ASSETS_URL . '/js/symphony.min.js', 6, false);
 
         // Initialise page containers
-        $this->Wrapper = new XMLElement('div', null, array('id' => 'wrapper'));
+        // $this->Wrapper = new XMLElement('div', null, array('id' => 'wrapper'));
         $this->Header = new XMLElement('header', null, array('id' => 'header'));
-        $this->Session = new XMLElement('div', null, array('class' => 'session'));
-        $this->Context = new XMLElement('div', null, array('id' => 'context'));
+        $this->Footer = new XMLElement('footer', null, array('id' => 'footer'));
+        $this->Session = new XMLElement('div', null, array('id' => 'session'));
+        $this->Context = new XMLElement('aside', null, array('id' => 'context'));
         $this->Breadcrumbs = new XMLElement('div', null, array('id' => 'breadcrumbs'));
-        $this->Contents = new XMLElement('div', null, array('id' => 'contents', 'role' => 'main'));
+        $this->Contents = new XMLElement('main', null, array('id' => 'contents', 'role' => 'main'));
         $this->ContentsActions = new XMLElement('div', null, array('id' => 'contents-actions'));
         $this->Controls = new XMLElement('div', null, array('id' => 'controls'));
         $this->Form = Widget::Form(Administration::instance()->getCurrentPageURL(), 'post', null, null, array('role' => 'form'));
-        $this->Tools = new XMLElement('div', null, array('id' => 'tools'));
+        // $this->Tools = new XMLElement('div', null, array('id' => 'tools'));
 
         /**
          * Allows developers to insert items into the page HEAD. Use
@@ -518,7 +519,7 @@ class AdministrationPage extends HTMLPage
         $h1 = new XMLElement('h1');
         $h1->appendChild(
             Widget::Anchor(
-                '<div class="sun"><div class="layer layer-1"></div><div class="layer layer-2"></div><div class="layer layer-3"></div><div class="layer layer-4"></div></div>',
+                '<div class="sun"><div class="layer layer-1"></div><div class="layer layer-2"></div><div class="layer layer-3"></div><div class="layer layer-4"></div></div><span>Index</span>',
                 $home_url,
                 Symphony::Configuration()->get('sitename', 'general')
             )
@@ -533,17 +534,17 @@ class AdministrationPage extends HTMLPage
             )
         );
 
-        $scrollCtn = new XMLElement('div', null, array('class' => 'scroll-ctn'));
+        // $scrollCtn = new XMLElement('div', null, array('class' => 'scroll-ctn'));
 
-        $scrollCtn->appendChild(Widget::Anchor(__('Index'), rtrim(URL, '/') . '/', __('Go to index page'), 'index-btn'));
+        // $scrollCtn->appendChild(Widget::Anchor(__('Index'), rtrim(URL, '/') . '/', __('Go to index page'), 'index-btn'));
 
         $this->appendUserLinks();
-        $scrollCtn->appendChild($this->appendNavigation());
 
-        $this->Tools->appendChild($this->Session);
-        $scrollCtn->appendChild($this->Session); // For mobile
-        $scrollCtn->appendChild($version);
-        $this->Header->appendChild($scrollCtn);
+        // $this->Tools->appendChild($this->Session);
+        // $scrollCtn->appendChild($this->Session); // For mobile
+        // $scrollCtn->appendChild($version);
+        $this->Header->appendChild($this->Session);
+        $this->Footer->appendChild($version);
 
         // Add Breadcrumbs
         $this->Context->appendChild($this->Breadcrumbs);
@@ -699,7 +700,7 @@ class AdministrationPage extends HTMLPage
 
     /**
      * Appends the `$this->Header`, `$this->Context` and `$this->Contents`
-     * to `$this->Wrapper` before adding the ID and class attributes for
+     * to `$this->Body` before adding the ID and class attributes for
      * the `<body>` element. This function will also place any Drawer elements
      * in their relevant positions in the page. After this has completed the
      * parent `generate()` is called which will convert the `XMLElement`'s
@@ -711,12 +712,9 @@ class AdministrationPage extends HTMLPage
      */
     public function generate($page = null)
     {
-        $this->Wrapper->appendChild($this->Header);
+        $this->Body->appendChild($this->Header);
 
-        $this->Wrapper->appendChild(new XMLElement('div', null, array(
-            'class' => 'js-symphony-close-header',
-            'id' => 'mobile-bg-menu-toggler',
-        )));
+        
 
         $mobileNavToggler = new XMLElement('a', Widget::SVGIcon('burger'));
         $mobileNavToggler->setAttribute('id', 'btn-toggle-header-mobile');
@@ -728,12 +726,14 @@ class AdministrationPage extends HTMLPage
             $this->Context->appendChildArray($this->Drawer['horizontal']);
         }
 
-        $contextWrap = new XMLElement('div', null, array('class' => 'context-wrap'));
+        // $contextWrap = new XMLElement('div', null, array('class' => 'context-wrap'));
 
-        $contextWrap->appendChild($this->Context);
-        $contextWrap->appendChild($this->Tools);
+        // $contextWrap->appendChild($this->Context);
+        // $contextWrap->appendChild($this->Tools);
 
-        $this->Wrapper->appendChild($contextWrap);
+        $this->Body->appendChild($this->appendNavigation());
+        $this->Body->appendChild($this->Context);
+        // $this->Body->appendChild($this->Tools);
 
         // Add vertical-left drawers (between #context and #contents)
         if (isset($this->Drawer['vertical-left'])) {
@@ -745,12 +745,16 @@ class AdministrationPage extends HTMLPage
             $this->Contents->appendChildArray($this->Drawer['vertical-right']);
         }
 
-        $this->Wrapper->appendChild($this->Contents);
+        $this->Body->appendChild($this->Contents);
 
         $this->Body->setAttribute('data-version', Symphony::Configuration()->get('version', 'symphony'));
+        // $this->Body->appendChild($this->Wrapper);
+        $this->Body->appendChild($this->Footer);
         $this->Body->appendChild(new XMLElement('div', null, array('id' => 'loading')));
-        $this->Body->appendChild($this->Wrapper);
-
+        $this->Body->appendChild(new XMLElement('div', null, array(
+            'class' => 'js-symphony-close-header',
+            'id' => 'mobile-bg-menu-toggler',
+        )));
         $this->appendBodyId();
         $this->appendBodyAttributes($this->_context);
 
@@ -923,7 +927,7 @@ class AdministrationPage extends HTMLPage
         $this->Alert = array_reverse($this->Alert);
 
         foreach ($this->Alert as $alert) {
-            $this->Wrapper->appendChild($alert->asXML());
+            $this->Footer->appendChild($alert->asXML());
         }
     }
 

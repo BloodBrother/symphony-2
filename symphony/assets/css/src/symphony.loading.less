@@ -1,0 +1,34 @@
+/**
+* Symphony Loading
+*
+* This file contains the loading veil container and its states
+*
+* @since Symphony 4.0.0
+*/
+
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
+
+@import "variables";
+
+/*--------------------------------------------------------------------------
+	Loading
+--------------------------------------------------------------------------*/
+
+#loading {
+	display: block;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background-color: var(--backframe-background-color);
+	z-index: 200;
+}
+
+#loading.hidden {
+	transition: ease-out 200ms opacity;
+	opacity: 0;
+	pointer-events: none;
+}

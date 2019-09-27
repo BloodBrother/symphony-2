@@ -57,7 +57,7 @@ select,
 	padding: var(--spacing-thinnest);
 	width: 100%;
 	border: 0;
-	border-bottom: 2px solid var(--color-ui);
+	border-bottom: 1px solid var(--color-ui);
 
 	&:placeholder-shown:not(:focus) {
 		.required &,
@@ -70,7 +70,6 @@ select,
 	&:focus {
 		border-bottom-color: var(--color-accent-alt);
 		background-color: var(--color-accent-alt-light);
-		outline: none;
 	}
 
 	&:hover:not(:focus) {
@@ -320,19 +319,9 @@ legend {
 	font-size: var(--standard-label-font-size);
 
 	>i:not(:empty) {
-		display: block;
 		font-size: var(--text-smaller);
 		font-style: normal;
-		opacity: 0;
-		height: 0;
-		line-height: 0;
-		top: var(--spacing-nano);
-		position: relative;
 		color: var(--color-main-light);
-
-		.field:hover & {
-			opacity: 1;
-		}
 	}
 }
 

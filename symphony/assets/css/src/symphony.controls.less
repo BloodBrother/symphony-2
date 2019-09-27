@@ -1,0 +1,99 @@
+/**
+* Symphony Controls
+*
+* This file contains styles for the
+* publishing controls of the main contents container
+*
+* @since Symphony 4.0.0
+*/
+
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
+
+@import "variables";
+
+/*--------------------------------------------------------------------------
+	Controls
+--------------------------------------------------------------------------*/
+
+#controls {
+	display: flex;
+	align-items: center;
+	padding: var(--spacing-micro) var(--standard-container-rhythm);
+	position: sticky;
+	top: 0;
+	background-color: var(--frontframe-background-color);
+	z-index: 10;
+	border-bottom: 1px solid var(--color-ui);
+	border-top-left-radius: var(--radius-big);
+	border-top-right-radius: var(--radius-big);
+
+	body.page-index & {
+		border-top-left-radius: var(--radius-big);
+		border-top-right-radius: var(--radius-big);
+	}
+
+	&:empty {
+		padding: 0;
+		margin: 0;
+		height: var(--spacing-thin);
+
+		@media (max-width: (@sm - 1)) {
+			display: none;
+		}
+	}
+
+	.actions {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		margin: 0;
+
+		a, button {
+			background: transparent;
+			box-shadow: initial;
+		}
+
+
+		a, >button {
+			display: flex;
+			margin-right: var(--spacing-micro);
+			color: var(--color-main);
+			position: relative;
+			border-radius: 100%;
+			svg {
+				width: 20px;
+				height: 20px;
+				position: relative;
+
+				
+			}
+
+			&:before {
+				content: "";
+				position: absolute;
+				width: 20px;
+				height: 20px;
+				padding: var(--spacing-thinnest);
+				border-radius: 100%;
+				// background-color: transparent;
+				right: 0;
+				top: 0;
+			}
+
+			&:hover:before {
+				background-color: var(--color-main-lighter);
+			}
+
+			&:active {
+				// box-shadow: initial;
+			}
+		}
+
+		.modal-trigger {
+			margin-right: 0;
+		}
+	}
+
+}

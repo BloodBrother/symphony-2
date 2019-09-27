@@ -1,0 +1,114 @@
+/**
+* Symphony Navigation
+*
+* This file contains styles for the navigation menu
+*
+* @since Symphony 4.0.0
+*/
+
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
+
+@import "variables";
+
+/*--------------------------------------------------------------------------
+	Navigation
+--------------------------------------------------------------------------*/
+
+#nav {
+	font-size: var(--text-small);
+
+	/* Titles */
+
+	> span {
+		display: block;
+		font-size: var(--text-smaller);
+		text-transform: uppercase;
+		line-height: 1.4em;
+		margin-bottom: var(--spacing-thinnest);
+	}
+
+	/* First Level */
+
+	> ul {
+		color: var(--color-main);
+		margin: 0;
+		padding: 0;
+
+		a {
+			display: inline-block;
+		}
+
+		> li {
+			display: block;
+			position: relative;
+			font-weight: 300;
+			line-height: 2rem;
+			cursor: pointer;
+
+			> span {
+				position: relative;
+
+				svg {
+					.transitioned(~'transform',~'0.15s');
+					position: absolute;
+					left: calc(var(--spacing-thinner) * -1);
+					top: 6px;
+					color: currentColor;
+					opacity: 0.5;
+				}
+			}
+
+			&:not(.opened) > span svg {
+				transform: rotateZ(-90deg);
+			}
+
+			&.opened, &.active, &:hover {
+				color: var(--color-accent);
+			}
+
+			& + li {
+				padding-top: var(--spacing-thinnest);
+
+				@media (max-width: (@sm - 1)) {
+					padding-top: var(--spacing-thinner);
+				}
+			}
+
+			/* Second Level */
+
+			ul {
+				display: none;
+				margin: var(--spacing-thinnest) 0 0;
+				padding: 0 0 0 var(--spacing-thinner);
+				background: url(../img/bullet.png) repeat-y 0 0;
+
+				a {
+					color: var(--color-main);
+					max-width: 100%;
+					line-height: 1.25em;
+					font-weight: 450;
+				}
+
+				li.active {
+					a {
+						color: var(--color-accent);
+					}
+				}
+
+				a:hover {
+					color: var(--color-accent);
+				}
+
+				li + li {
+					margin-top: var(--spacing-micro);
+				}
+			}
+		}
+
+		& + span {
+			padding-top: var(--spacing-broad);
+		}
+	}
+}

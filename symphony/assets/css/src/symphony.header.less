@@ -1,0 +1,44 @@
+/**
+* Symphony Header
+*
+* This file contains styles for the master header
+*
+* @since Symphony 4.0.0
+*/
+
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
+
+@import "variables";
+
+/*--------------------------------------------------------------------------
+	Controls
+--------------------------------------------------------------------------*/
+
+#header {
+
+	h1 {
+		font-size: var(--text-current);
+		font-weight: 300;
+
+		a {
+			display: inline-flex;
+			flex-direction: column;
+			align-items: center;
+			color: var(--color-main-light);
+			font-size: var(--text-current);
+			line-height: 1.2em;
+
+			>*+* {
+				margin-top: var(--standard-inner-rhythm);
+			}
+		}
+	}
+
+	&:not(.opened) {
+		@media (max-width: (@sm - 1)){
+			transform: translateX(-100%);
+		}
+	}
+}
