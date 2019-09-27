@@ -74,8 +74,8 @@ class contentSystemExtensions extends AdministrationPage
         if (!is_array($extensions) || empty($extensions)) {
             $aTableBody = array(
                 Widget::TableRow(array(
-                    Widget::TableData(__('None found.'), 'inactive', null, count($aTableHead))
-                ), 'odd')
+                    Widget::TableData(__('None found.'), null, null, count($aTableHead))
+                ), 'odd inactive')
             );
         } else {
             foreach ($extensions as $name => $about) {

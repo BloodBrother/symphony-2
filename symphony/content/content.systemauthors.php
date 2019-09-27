@@ -142,7 +142,7 @@ class contentSystemAuthors extends AdministrationPage
 
         if (!is_array($authors) || empty($authors)) {
             $aTableBody = array(
-                Widget::TableRow(array(Widget::TableData(__('None found.'), 'inactive', null, count($aTableHead))), 'odd')
+                Widget::TableRow(array(Widget::TableData(__('None found.'), null, null, count($aTableHead))), 'odd inactive')
             );
         } else {
             foreach ($authors as $a) {
