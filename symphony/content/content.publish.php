@@ -705,7 +705,7 @@ class contentPublish extends AdministrationPage
 
         if (empty($entries)) {
             $aTableBody = array(
-                Widget::TableRow(array(Widget::TableData(__('None found.'), 'inactive', null, count($aTableHead))), 'odd')
+                Widget::TableRow(array(Widget::TableData(__('None found.'), null, null, count($aTableHead))), 'odd inactive')
             );
         } else {
             $field_pool = array();

@@ -73,7 +73,7 @@ class contentBlueprintsSections extends AdministrationPage
 
         if (!is_array($sections) || empty($sections)) {
             $aTableBody = array(
-                Widget::TableRow(array(Widget::TableData(__('None found.'), 'inactive', null, count($aTableHead))), 'odd')
+                Widget::TableRow(array(Widget::TableData(__('None found.'), null, null, count($aTableHead))), 'odd inactive')
             );
         } else {
             foreach ($sections as $s) {

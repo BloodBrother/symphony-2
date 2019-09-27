@@ -138,8 +138,8 @@ class contentBlueprintsPages extends AdministrationPage
 
         if (empty($pages)) {
             $aTableBody = array(Widget::TableRow(array(
-                Widget::TableData(__('None found.'), 'inactive', null, count($aTableHead))
-            ), 'odd'));
+                Widget::TableData(__('None found.'), null, null, count($aTableHead))
+            ), 'odd inactive'));
         } else {
             foreach ($pages as $page) {
                 $class = array();
