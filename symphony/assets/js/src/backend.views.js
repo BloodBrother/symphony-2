@@ -17,10 +17,10 @@ Symphony.View.add('/:context*:', function() {
 	Symphony.Elements.contents.find('select.picker[data-interactive]').symphonyPickable();
 	Symphony.Elements.contents.find('ul.orderable[data-interactive]').symphonyOrderable();
 	Symphony.Elements.contents.find('table.selectable[data-interactive]').symphonySelectable();
-	Symphony.Elements.wrapper.find('.filters-duplicator[data-interactive]').symphonyDuplicator();
-	Symphony.Elements.wrapper.find('.tags[data-interactive]').symphonyTags();
-	Symphony.Elements.wrapper.find('div.drawer').symphonyDrawer();
-	Symphony.Elements.wrapper.symphonyNotify();
+	Symphony.Elements.body.find('.filters-duplicator[data-interactive]').symphonyDuplicator();
+	Symphony.Elements.body.find('.tags[data-interactive]').symphonyTags();
+	Symphony.Elements.body.find('div.drawer').symphonyDrawer();
+	Symphony.Elements.body.symphonyNotify();
 
 	// Fix for Webkit browsers to initially show the options. #2127
 	$('select[multiple=multiple]').scrollTop(0);
@@ -51,7 +51,7 @@ Symphony.View.add('/:context*:', function() {
 
 	// Notifier sizing
 	Symphony.Elements.window.on('resize.admin', function() {
-		Symphony.Elements.wrapper.find('.notifier').trigger('resize.notify');
+		Symphony.Elements.body.find('.notifier').trigger('resize.notify');
 	});
 
 	// Orderable tables
@@ -181,7 +181,7 @@ Symphony.View.add('/:context*:', function() {
 	});
 
 	// Timestamp validation overwrite
-	Symphony.Elements.header.find('.notifier .js-tv-overwrite').on('click.admin', function (e){
+	Symphony.Elements.body.find('.notifier .js-tv-overwrite').on('click.admin', function (e){
 		var action = $(this).attr('data-action') || 'save';
 		var hidden = Symphony.Elements.contents.find('input[name="action[ignore-timestamp]"]');
 		hidden.prop('checked', true);
@@ -521,7 +521,7 @@ Symphony.View.add('/blueprints/sections/:action:/:id:/:status:', function(action
 			id = new Date().getTime();
 
 		// Offer undo option after removing a field
-		Symphony.Elements.wrapper.find('div.notifier').trigger('attach.notify', [
+		Symphony.Elements.body.find('div.notifier').trigger('attach.notify', [
 			Symphony.Language.get('The field “{$title}” ({$type}) has been removed.', {
 				title: title,
 				type: type
@@ -551,7 +551,7 @@ Symphony.View.add('/blueprints/sections/:action:/:id:/:status:', function(action
 
 	// Discard undo options because the field context changed
 	duplicator.on('orderstop.orderable', function() {
-		Symphony.Elements.header.find('.undo').trigger('detach.notify');
+		Symphony.Elements.body.find('.undo').trigger('detach.notify');
 	});
 
 	// Highlight instances with the same location when ordering fields

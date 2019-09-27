@@ -27,6 +27,10 @@
  	min-height: var(--standard-field-height);
  	--multiplier: calc(var(--dimension-tinier) - 100%);
 
+ 	&+& {
+ 		margin-top: -2px;
+ 	}
+
  	&>*:first-child {
  		order: 0;
  	}
@@ -66,10 +70,23 @@
  	&:not(:hover) {
  		label {
  			color: var(--standard-label-color);
+
  			&:before, &:after {
  				opacity: .4;
  			}
+
+ 			>i {
+ 				opacity: 0;
+ 			}
  		}
+ 	}
+
+ 	label>i:not(:empty) {
+ 		display: block;
+ 		height: 0;
+ 		line-height: 0;
+ 		top: var(--spacing-nano);
+ 		position: relative;
  	}
 
  	label+span {
@@ -111,12 +128,6 @@
  	&.field-checkbox,
  	&.field-upload {
  		align-items: center;
- 	}
-
- 	&:not(:hover) select:not(:focus),
- 	&:not(:hover) textarea:not(:focus),
- 	&:not(:hover) input:not([type=checkbox]):not(:focus) {
- 		border-style: dotted;
  	}
 
  	input:not([type=checkbox]),

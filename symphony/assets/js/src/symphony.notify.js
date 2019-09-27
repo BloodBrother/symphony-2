@@ -262,7 +262,7 @@
 
 			// Update relative times in system messages
 			setInterval(function updateRelativeTimes() {
-				$('#wrapper p.notice').symphonyTimeAgo();
+				$('p.notice').symphonyTimeAgo();
 			}, 60000);
 		});
 

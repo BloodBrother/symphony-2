@@ -1,0 +1,98 @@
+/**
+* Symphony Breadcrumbs
+*
+* This file contains styles for the breadcrumbs
+*
+* @since Symphony 4.0.0
+*/
+
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
+
+@import "variables";
+
+/*--------------------------------------------------------------------------
+	Breadcrumbs
+--------------------------------------------------------------------------*/
+
+#breadcrumbs {
+	display: flex;
+	align-items: baseline;
+	flex-grow: 1;
+	max-width: var(--dimension-smaller);
+
+	@media (max-width: (@sm - 1)) {
+		width: 100%;
+		padding: 0 var(--spacing-thin) 0 0;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	nav {
+		@media (max-width: (@xs - 1)) {
+			display: none;
+		}
+
+		flex-shrink: 0;
+		flex-grow: 0;
+		box-sizing: border-box;
+		margin-right: var(--standard-inner-rhythm);
+		
+		p {
+			display: contents;
+
+			a {
+
+				color: var(--color-main-light);
+				font-size: var(--text-small);
+				display: flex;
+				align-items: center;
+
+				margin-left: var(--spacing-thinnest);
+
+				&:first-of-type {
+					margin-left: 0;
+				}
+
+				svg {
+					margin-right: var(--standard-inner-rhythm);
+				}
+
+				&:hover {
+					color: var(--color-accent);
+				}
+			}
+
+			.sep {
+				display: none;
+			}
+		}
+	}
+
+	nav+h2 {
+		flex-grow: 10;
+		max-width: var(--dimension-smallest);
+	}
+
+
+	h2 {
+		font-size: var(--text-big);
+
+		img {
+			display: none;
+		}
+	}
+
+	p.inactive {
+		display: inline-block;
+		margin: 0;
+		margin-left: var(--spacing-thinnest);
+
+		span {
+			color: var(--color-accent);
+			font-size: var(--text-current);
+		}
+	}
+}
