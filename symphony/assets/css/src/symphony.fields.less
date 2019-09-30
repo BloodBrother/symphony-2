@@ -67,6 +67,11 @@
  		color: var(--color-accent);
  	}
 
+ 	label>span {
+ 		line-height: 1.1em;
+ 		display: inline-block;
+ 	}
+
  	&:not(:hover) {
  		label {
  			color: var(--standard-label-color);
@@ -96,7 +101,7 @@
  			flex-grow: 1;
 
  			~* {
- 				margin-left: var(--standard-inner-rhythm);
+ 				margin-left: var(--standard-container-rhythm);
  			}
  		}
 
@@ -136,7 +141,7 @@
  		min-height: var(--standard-field-height);
  		margin-left: calc(-1 *  var(--standard-label-min-width));
  		margin-right: 0;
- 		padding-left: calc(var(--standard-label-min-width) + var(--standard-inner-rhythm));
+ 		padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm));
  		transition: all 200ms var(--ease-current);
  	}
 
@@ -148,7 +153,8 @@
  	&:hover input:not([type=checkbox]) {
  		margin-left: calc(-1 *  var(--standard-label-min-width) - var(--standard-container-rhythm));
  		margin-right: calc(-1 *  var(--standard-container-rhythm));
- 		padding-left: calc(var(--standard-label-min-width) + var(--standard-inner-rhythm) + var(--standard-container-rhythm));
+ 		padding-right: calc(var(--standard-field-padding) + var(--standard-container-rhythm));
+ 		padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm) + var(--standard-container-rhythm));
  	}
 
  	&:hover select:not([multiple]),
@@ -159,10 +165,7 @@
 
 
  	.tags {
- 		position: absolute;
- 		bottom: var(--spacing-thinnest);
- 		margin-left: var(--standard-label-min-width);
- 		left: var(--spacing-thinnest);
+ 		margin-top: calc(-1 * var(--spacing-thinnest));
  	}
 
  	.invalid label~* {
