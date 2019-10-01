@@ -74,9 +74,7 @@
 		}
 
 		doc.on('click', '.js-symphony-close-header', function () {
-			canAnimate = true;
-			updatePos(currentPos === header.outerWidth() * -1 ? 0 : header.outerWidth() * -1);
-			canAnimate = false;
+			window.Symphony.Elements.nav.toggleClass('is-opened');
 		});
 	};
 	
