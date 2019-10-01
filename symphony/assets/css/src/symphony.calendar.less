@@ -13,13 +13,17 @@
 --------------------------------------------------------------------------*/
 
 .field-date .suggestions {
-	.transitioned(~'border-color');
-	border-radius: 0 0 var(--radius-current) var(--radius-current);
+	// .transitioned(~'border-color');
+	// border-radius: 0 0 var(--radius-current) var(--radius-current);
 	overflow: visible!important;
-	margin-top: ~'calc(var(--radius-current) * -1)'!important;
-	border-top: none;
-	background: var(--color-main-light);
-	width: 100%;
+	// margin-top: ~'calc(var(--radius-current) * -1)'!important;
+	// border-top: none;
+	// background: var(--color-main-light);
+	// width: 100%;
+	top: 100%;
+	// display: block !important;
+	position: relative;
+	// z-index: 11;
 
 	li {
 		padding: var(--spacing-thinner);
@@ -27,8 +31,8 @@
 }
 
 .field-date input:focus + .suggestions {
-	.transitioned(~'border-color');
-	border-color: var(--color-accent);
+	// .transitioned(~'border-color');
+	// border-color: var(--color-accent);
 }
 
 .calendar {
@@ -92,7 +96,7 @@
 		margin: 0 0 0 -9rem;
 		border: none;
 		border-radius: var(--radius-current);
-		background: var(--color-accent);
+		background: var(--color-main-light);
 		width: 18rem;
 		height: 2.4rem;
 		cursor: pointer;
@@ -161,11 +165,11 @@
 		}
 
 		&:not(.select) li {
-			color: var(--color-clear)!important;
+			color: var(--color-clear);
 		}
 
 		&.select {
-			box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.2);
+			box-shadow: var(--shadow);
 			overflow: visible;
 			top: calc(-2.4rem * 6 + 0.3rem);
 			height: auto;
@@ -182,10 +186,13 @@
 				li {
 					border-radius: 0;
 
-					&:hover,
-					&:nth-child(7) {
+					&:hover:not(:nth-child(7)) {
 						color: var(--color-clear);
 						background: var(--color-accent);
+					}
+
+					&:nth-child(7) {
+						background: var(--color-accent-alt-light);
 					}
 				}
 
@@ -195,7 +202,7 @@
 			}
 
 			.months {
-				border-color: var(--color-main-light);
+				border-color: var(--color-ui);
 				border-radius: var(--radius-current) 0 0 var(--radius-current);
 			}
 
@@ -212,21 +219,11 @@
 
 .calendar {
 	table {
-		border-radius: 0px;
+		width: 100%;
 		border-collapse: collapse;
-		background: var(--color-clear);
-
-		thead {
-			display: table-header-group!important;
-		}
-
-		tr {
-			display: table-row!important;
-		}
 
 		td {
-			display: table-cell!important;
-			color: var(--color-accent);
+			// color: var(--color-clear);
 			text-align: center;
 			padding: 0!important;
 			width: 14.28%;
@@ -237,17 +234,19 @@
 		thead td,
 		thead td:first-child,
 		thead td:last-child {
-			color: var(--color-accent);
+			color: var(--color-main-light);
 		}
 
 		tbody td {
-			border: 1px solid var(--color-main-light);
+			border: 1px solid var(--color-ui);
 			cursor: pointer;
+			background: var(--color-main-lighter);
+			color: var(--color-main);
 		}
 
 		td:first-child,
 		td:last-child {
-			background: none;
+			// background: none;
 		}
 
 		.adjacent-month {
@@ -260,13 +259,18 @@
 			width: 100%;
 			height: 100%;
 
-			&.today {
+			&.today:not(.active) {
 				background: var(--color-main-light);
+				color: var(--color-clear);
 			}
 
-			&:hover, &.active, .today {
-				color: var(--color-clear);
+			&.active {
+				background: var(--color-accent-alt-light);
+			}
+
+			&:hover:not(.active) {
 				background: var(--color-accent);
+				color: var(--color-clear);
 			}
 		}
 	}
