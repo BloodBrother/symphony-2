@@ -25,7 +25,7 @@ table {
 		font-weight: inherit;
 	}
 
-	td {
+	&[role="directory"] td {
 		&:first-child {
 			font-size: var(--text-current);
 		}
@@ -34,9 +34,9 @@ table {
 
 
 /*-----------------------------------------------------------------------------
-	Table Rhythm & Skin
+	Directory table Rhythm & Skin
 -----------------------------------------------------------------------------*/
-table {
+table[role="directory"] {
 	background-color: var(--standard-table-background-color);
 	padding: var(--standard-inner-rhythm);
 	border-spacing: 0 2px;
@@ -112,12 +112,13 @@ table {
 }
 
 /*-----------------------------------------------------------------------------
-	Table Layout
+	Directory table Layout
 -----------------------------------------------------------------------------*/
-table {
+table[role="directory"] {
 	display: block;
 	overflow: auto;
 	max-height: calc(100vh - var(--dimension-tiniest));
+	position: relative;
 
 	&::-webkit-scrollbar {
 		background-color: transparent;
