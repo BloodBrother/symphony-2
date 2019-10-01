@@ -81,8 +81,16 @@ h1, h2, h3, h4, h5, h6 {
 -----------------------------------------------------------------------------*/
 
 html {
-	font-size: 62.5%;
+	font-size: 50%;
 	min-height: 100%;
+
+	@media (min-width: @xs) {
+		font-size: 56.25%;
+	}
+
+	@media (min-width: @xl) {
+		font-size: 62.5%;
+	}
 }
 
 body {
@@ -91,14 +99,12 @@ body {
 	font-weight: 400;
 	line-height: 1.4em;
 	background-color: var(--backframe-background-color);
-	padding: var(--standard-container-rhythm);
-	min-width: var(--xxs);
-	min-height: 100%;
 
-	@media (max-width: (@sm - 1)){
-		padding-left: 0;
-		font-size: var(--text-big);
-	}
+
+	// @media (max-width: (@sm - 1)){
+	// 	padding-left: 0;
+	// 	font-size: var(--text-big);
+	// }
 }
 
 a, button, input, li {
@@ -114,8 +120,8 @@ a, button {
 
 /* Paragraphs */
 
-p {
-	margin-bottom: var(--spacing-thinnest);
+p+p {
+	margin-top: var(--spacing-thinnest);
 }
 
 p.label {

@@ -23,22 +23,15 @@
 		font-weight: 300;
 
 		a {
-			display: inline-flex;
-			flex-direction: column;
-			align-items: center;
 			color: var(--color-main-light);
 			font-size: var(--text-current);
 			line-height: 1.2em;
-
-			>*+* {
-				margin-top: var(--standard-inner-rhythm);
-			}
 		}
 	}
 
-	&:not(.opened) {
-		@media (max-width: (@sm - 1)){
-			transform: translateX(-100%);
-		}
-	}
+	// &:not(.opened) {
+	// 	@media (max-width: (@sm - 1)){
+	// 		transform: translateX(-100%);
+	// 	}
+	// }
 }

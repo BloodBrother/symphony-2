@@ -57,6 +57,7 @@ select,
 	padding: var(--standard-field-padding);
 	width: 100%;
 	border: 0;
+	border-top: 1px solid transparent;
 	border-bottom: 1px solid var(--color-ui);
 
 	&:placeholder-shown:not(:focus) {
@@ -253,7 +254,7 @@ select {
 	&+select,
 	&+textarea,
 	&+.frame {
-		border-color: var(--color-error);
+		border-bottom-color: var(--color-error);
 	}
 
 	label~* {
@@ -380,47 +381,6 @@ legend {
 		
 		>* {
 			pointer-events: none;
-		}
-	}
-}
-
-
-
-/*--------------------------------------------------------------------------
-	Tags
---------------------------------------------------------------------------*/
-
-ul.tags {
-	color: var(--color-main-light);
-	font-size: var(--text-smallest);
-	font-weight: 600;
-	color: var(--color-main-dark);
-	list-style: none;
-	line-height: 1.4em;
-	margin-top: var(--spacing-thinnest);
-
-	>* {
-		display: inline-block;
-		cursor: pointer;
-		margin-right: var(--spacing-micro);
-		background-color: var(--color-accent-light);
-		border-radius: var(--radius-small);
-		padding: var(--spacing-pico);
-		line-height: 1.2em;
-		border: 1px solid var(--color-ui);
-	}
-
-	li:hover {
-		color: var(--color-accent);
-	}
-
-	li.more {
-		color: var(--color-accent);
-		border-bottom: 1px solid currentColor;
-
-		&:hover {
-			color: var(--color-main-light);
-			border-bottom-color: currentColor;
 		}
 	}
 }

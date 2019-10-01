@@ -7,171 +7,191 @@
  * @since Symphony 4.0.0
  */
 
- /*-----------------------------------------------------------------------------
- 	LESS — Variables Importing
- -----------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
 
- @import "variables";
+@import "variables";
+
+/*--------------------------------------------------------------------------
+	Field Basic styles
+--------------------------------------------------------------------------*/
+
+.field {
+	box-sizing: border-box;
+	position: relative;
+	color: var(--color-main);
+	min-height: var(--standard-field-height);
+
+	&,>* {
+		margin-top: var(--standard-inner-rhythm);
+	}
+
+
+	[type="hidden"]~a {
+		display: block;
+		color: inherit;
+	}
+
+	[type="hidden"]~a:hover {
+		color: var(--color-accent);
+	}
+
+	label>span {
+		line-height: 1.1em;
+		display: inline-block;
+	}
+
+// interactive styles
+	&:not(:hover) { 
+		color: var(--standard-field-color);
+
+		label {
+			color: var(--standard-label-color);
+
+			&:before, &:after {
+				opacity: .4;
+			}
+
+			>i {
+				opacity: 0;
+			}
+		}
+	}
+
+	&:hover {
+		color: var(--color-accent);
+
+		input:not([type=checkbox]):not(:focus), select:not(:focus), textarea:not(:focus) {
+			border-bottom-color: var(--color-accent);
+		}
+	}
+
+// special case for uploaded file input
+	label+span {
+		display: flex;
+
+		a, input {
+			flex-grow: 1;
+
+			~* {
+				margin-left: var(--standard-container-rhythm);
+			}
+		}
+
+		button:not(:hover) {
+			opacity: .25;
+		}
+	}
+
+
+	&.field-checkbox,
+	&.field-upload {
+		align-items: center;
+	}
+
+	&.field-date .suggestions,
+	.tags {
+		max-width: initial;
+		flex: 100% 0 0;
+	}
+
+
+	.invalid label~* {
+		position: absolute;
+		bottom: -1em;
+		min-width: max-content;
+		z-index: 1;
+	}
+ }
+
 
  /*--------------------------------------------------------------------------
- 	Buttons
+	LAYOUT MODEL - horizontal with label inside inputs 
  --------------------------------------------------------------------------*/
+@media (min-width: @xs) {
+	.field {
+		&,>* {
+			margin-top: initial;
+		}
 
- .field {
- 	box-sizing: border-box;
- 	display: flex;
- 	align-items: baseline;
- 	flex-wrap: wrap;
- 	position: relative;
- 	color: var(--color-main);
- 	min-height: var(--standard-field-height);
- 	--multiplier: calc(var(--dimension-tinier) - 100%);
+		& {
+			display: flex;
+			align-items: baseline;
+			flex-wrap: wrap;
+		}
 
- 	&+& {
- 		margin-top: -2px;
- 	}
-
- 	&>*:first-child {
- 		order: 0;
- 	}
+		&+& {
+			margin-top: -2px;
+		}
+		
+		&>*:first-child {
+			order: 0;
+		}
 
 
- 	&>*:first-child, &:after {
- 		flex-basis: var(--standard-label-min-width);
- 		flex-shrink: 0;
- 		box-sizing: border-box;
- 	}
+		&>*:first-child, &:after {
+			flex-basis: var(--standard-label-min-width);
+			flex-shrink: 0;
+			box-sizing: border-box;
+		}
 
- 	&>*+* {
- 		flex-basis: calc(var(--multiplier) * 999);
- 		flex-grow: 10;
- 		min-width: var(--dimension-tiniest);
- 		flex-shrink: 1;
- 		order: 1;
- 		margin-right: auto;
- 	}
+		&>*+* {
+			flex-basis: 0;
+			flex-grow: 10;
+			min-width: var(--dimension-tiniest);
+			flex-shrink: 1;
+			order: 1;
+			margin-right: auto;
+		}
 
- 	&>*+*~* {
- 		order: 3;
- 		max-width: var(--dimension-tiny);
- 		margin-right: auto;
- 		margin-top: var(--spacing-nano);
- 	}
+		&>*+*~* {
+			order: 3;
+			max-width: var(--dimension-tiny);
+			margin-right: auto;
+			margin-top: var(--spacing-nano);
+		}
 
- 	[type="hidden"]~a {
- 		display: block;
- 		color: inherit;
- 	}
+		input:not([type=checkbox]),
+		textarea,
+		select {
+			min-height: var(--standard-field-height);
+			margin-left: calc(-1 *  var(--standard-label-min-width));
+			margin-right: 0;
+			padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm));
+			transition: all 200ms var(--ease-current);
+		}
 
- 	[type="hidden"]~a:hover {
- 		color: var(--color-accent);
- 	}
+		select:focus,
+		textarea:focus,
+		input:not([type=checkbox]):focus {
+			border-color: var(--color-accent-alt);
+		}
 
- 	label>span {
- 		line-height: 1.1em;
- 		display: inline-block;
- 	}
+		select:focus,
+		textarea:focus,
+		input:not([type=checkbox]):focus,
+		&:hover select,
+		&:hover textarea,
+		&:hover input:not([type=checkbox]) {
+			margin-left: calc(-1 *  var(--standard-label-min-width) - var(--standard-container-rhythm));
+			margin-right: calc(-1 *  var(--standard-container-rhythm));
+			padding-right: calc(var(--standard-field-padding) + var(--standard-container-rhythm));
+			padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm) + var(--standard-container-rhythm));
+		}
 
- 	&:not(:hover) {
- 		label {
- 			color: var(--standard-label-color);
-
- 			&:before, &:after {
- 				opacity: .4;
- 			}
-
- 			>i {
- 				opacity: 0;
- 			}
- 		}
- 	}
-
- 	label>i:not(:empty) {
- 		display: block;
- 		height: 0;
- 		line-height: 0;
- 		top: var(--spacing-nano);
- 		position: relative;
- 	}
-
- 	label+span {
- 		display: flex;
-
- 		a, input {
- 			flex-grow: 1;
-
- 			~* {
- 				margin-left: var(--standard-container-rhythm);
- 			}
- 		}
-
- 		button:not(:hover) {
- 			opacity: .5;
- 		}
- 	}
-
- 	&:hover {
- 		color: var(--color-accent);
-
- 		input:not([type=checkbox]):not(:focus), select:not(:focus), textarea:not(:focus) {
- 			border-bottom-color: var(--color-accent);
- 		}
- 	}
-
- 	&:not(:hover) {
- 		color: var(--standard-field-color);
- 	}
-
- 	&.required label:before {
- 			color: var(--color-error);
- 	}
-
- 	&.required:not(:hover) label:before {
- 		opacity: .6;
- 	}
-
- 	&.field-checkbox,
- 	&.field-upload {
- 		align-items: center;
- 	}
-
- 	input:not([type=checkbox]),
- 	textarea,
- 	select {
- 		min-height: var(--standard-field-height);
- 		margin-left: calc(-1 *  var(--standard-label-min-width));
- 		margin-right: 0;
- 		padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm));
- 		transition: all 200ms var(--ease-current);
- 	}
-
- 	select:focus,
- 	textarea:focus,
- 	input:not([type=checkbox]):focus,
- 	&:hover select,
- 	&:hover textarea,
- 	&:hover input:not([type=checkbox]) {
- 		margin-left: calc(-1 *  var(--standard-label-min-width) - var(--standard-container-rhythm));
- 		margin-right: calc(-1 *  var(--standard-container-rhythm));
- 		padding-right: calc(var(--standard-field-padding) + var(--standard-container-rhythm));
- 		padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm) + var(--standard-container-rhythm));
- 	}
-
- 	&:hover select:not([multiple]),
- 	select:not([multiple]):focus {
+		&:hover select:not([multiple]),
+		select:not([multiple]):focus {
 		padding-right: calc(0.65em + var(--spacing-thinnest) * 2 + var(--standard-container-rhythm));
 		background-position: right calc(.7em + var(--standard-container-rhythm)) top 50%;
- 	}
+		}
 
-
- 	.tags {
- 		margin-top: calc(-1 * var(--spacing-thinnest));
- 	}
-
- 	.invalid label~* {
- 		position: absolute;
- 		bottom: -1.5em;
- 		min-width: max-content;
- 		z-index: 1;
- 	}
- }
+		label>i:not(:empty) {
+			display: block;
+			height: 0;
+			line-height: 0;
+			top: var(--spacing-nano);
+			position: relative;
+		}
+	}
+}
