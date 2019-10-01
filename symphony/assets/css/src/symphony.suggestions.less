@@ -23,8 +23,8 @@
 	box-sizing: border-box;
 	overflow: hidden;
 	position: absolute;
-	margin: var(--spacing-micro) 0 0!important;
-	background: var(--color-clear);
+	margin: var(--spacing-micro) 0 0;
+	// background: var(--color-clear);
 	width: calc(~'100% - var(--spacing-broad)');
 	max-height: 0;
 	min-height: 3.6rem;
@@ -71,6 +71,13 @@
 /*-----------------------------------------------------------------------------
 	Special Cases
 -----------------------------------------------------------------------------*/
+
+input:not(:focus) ~ .suggestions:not(:empty),
+textarea:not(:focus) ~ .suggestions:not(:empty) {
+	&, & * {
+		display: none;
+	}
+}
 
 input:focus ~ .suggestions:not(:empty),
 textarea:focus ~ .suggestions:not(:empty) {
