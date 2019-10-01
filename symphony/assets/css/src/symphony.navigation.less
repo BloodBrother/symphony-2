@@ -19,14 +19,22 @@
 #nav {
 	font-size: var(--text-small);
 
+	@media (max-width: @sm) {
+		font-size: var(--text-big);
+	}
+
 	/* Titles */
 
 	> span {
 		display: block;
-		font-size: var(--text-smaller);
 		text-transform: uppercase;
 		line-height: 1.4em;
 		margin-bottom: var(--spacing-thinnest);
+		font-size: var(--text-smaller);
+
+		@media (max-width: @sm) {
+			font-size: var(--text-small);
+		}
 	}
 
 	/* First Level */
@@ -71,9 +79,9 @@
 			& + li {
 				padding-top: var(--spacing-thinnest);
 
-				@media (max-width: (@sm - 1)) {
-					padding-top: var(--spacing-thinner);
-				}
+				// @media (max-width: (@sm - 1)) {
+				// 	padding-top: var(--spacing-thinner);
+				// }
 			}
 
 			/* Second Level */

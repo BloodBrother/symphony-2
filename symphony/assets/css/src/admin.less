@@ -13,46 +13,127 @@
 --------------------------------------------------------------------------*/
 
 body {
-	>header {
-		display: contents;
-		
-		h1 {
-			float: left;
-			width: var(--navigation-sidebar-width);
-			height: var(--spacing-large);
-			top: var(--standard-container-rhythm);
-			position: sticky;
-		}
-
-		>div {
-			float: right;
-		}
-	}
+	min-width: var(--xxs);
+	min-height: 100%;
 	
 	>nav {
-		float: left;
-		clear: left;
-		position: sticky;
-		width: var(--navigation-sidebar-width);
-		box-sizing: border-box;
-		margin-top: var(--standard-container-rhythm);
-		top: calc(var(--spacing-large) + var(--standard-container-rhythm) * 2);
+		max-width: 100%;
+	}
+
+	>header {
+		margin: var(--standard-container-rhythm);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		h1 {
+			// margin-right: auto;
+			a {
+				display: inline-flex;
+				flex-direction: column;
+				align-items: center;
+				
+				>*+* {
+					margin-top: var(--standard-inner-rhythm);
+				}
+			}
+		}
 	}
 	
-	>main {
-		margin-left: var(--navigation-sidebar-width);
-		clear: right;
+	@media (max-width: @sm) {
+		>nav {
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-color: var(--backframe-background-color);
+			padding: var(--standard-container-rhythm);
+			display: flex;
+			flex-direction: column;
+			padding-top: var(--spacing-larger);
+			// align-items: center;
+			// justify-content: center;
+			z-index: 11;
+
+			&:not(.is-opened) {
+				opacity: 0;
+				pointer-events: none;
+			}
+		}
+		>header {
+			position: relative;
+			z-index: 12;
+			// h1>a {
+			// 	>*+* {
+			// 		margin-left: var(--standard-inner-rhythm);
+			// 	}
+			// }
+		}
+		>aside {
+			clear: both;
+			margin-top: var(--standard-container-rhythm);
+			margin-bottom: var(--standard-container-rhythm);
+		}
 	}
 
-	>aside {
-		position: sticky;
-		top: var(--standard-container-rhythm);
+	@media (min-width: @sm) {
+		padding: var(--standard-container-rhythm);
+
+		>header {
+			display: contents;
+			
+			h1 {
+				float: left;
+				width: var(--navigation-sidebar-width);
+				max-width: var(--navigation-sidebar-max-width);
+				height: var(--spacing-large);
+				top: var(--standard-container-rhythm);
+				position: sticky;
+			}
+
+			>div {
+				float: right;
+			}
+		}
+		
+		>nav {
+			margin-top: var(--standard-container-rhythm);
+			margin-bottom: var(--standard-container-rhythm);
+			float: left;
+			clear: left;
+			position: sticky;
+			box-sizing: border-box;
+			width: var(--navigation-sidebar-width);
+			max-width: var(--navigation-sidebar-max-width);
+			padding-right: var(--standard-container-rhythm);
+			top: calc(var(--spacing-large) + var(--standard-container-rhythm) * 2);
+		}
+		
+		>main {
+			// margin-left: var(--navigation-sidebar-max-width);
+			overflow: auto;
+			clear: right;
+		}
+
+		>aside {
+			position: sticky;
+			top: var(--standard-container-rhythm);
+		}
+
+		>footer {
+			position: sticky;
+			bottom: var(--standard-container-rhythm);
+			clear: left;
+		}
 	}
 
-	>footer {
-		position: sticky;
-		bottom: var(--standard-container-rhythm);
+	@media (min-width: @lg) {
+		>main {
+			padding-right: var(--spacing-broader);
+		}
 	}
+	
 }
 
 #mobile-bg-menu-toggler {
@@ -76,14 +157,14 @@ body {
 }
 
 #btn-toggle-header-mobile {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-sizing: border-box;
+	// display: flex;
+	// align-items: center;
+	// justify-content: center;
+	// box-sizing: border-box;
 	color: var(--color-main-dark);
-	width: var(--spacing-broadest);
-	height: var(--spacing-broadest);
-	flex: none;
+	// width: var(--spacing-broadest);
+	// height: var(--spacing-broadest);
+	// flex: none;
 
 	&:hover {
 		color: var(--color-accent);
@@ -122,18 +203,22 @@ body {
 		}
 
 		.column {
-			padding: 0 var(--standard-container-rhythm);
-			
-			&.primary {
-				flex-grow: 1;
+			padding: var(--standard-container-rhythm);
 
-				&:not(:last-of-type) {
-					width: calc(100% - var(--spacing-thinner) - var(--dimension-tiny));
-					margin-right: auto;
-				}
+			@media (min-width: @xs) {
+				padding: 0 var(--standard-container-rhythm);
+				
+				&.primary {
+					flex-grow: 1;
 
-				&:last-of-type {
-					max-width: var(--dimension-smaller);
+					&:not(:last-of-type) {
+						width: calc(100% - var(--spacing-thinner) - var(--dimension-tiny));
+						margin-right: auto;
+					}
+
+					&:last-of-type {
+						max-width: var(--dimension-smaller);
+					}
 				}
 			}
 	
