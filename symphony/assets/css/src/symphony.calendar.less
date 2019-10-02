@@ -14,15 +14,20 @@
 
 .field-date .suggestions {
 	// .transitioned(~'border-color');
-	// border-radius: 0 0 var(--radius-current) var(--radius-current);
-	overflow: visible!important;
+	border-bottom-right-radius: var(--radius-current);
+	border-bottom-left-radius: var(--radius-current);
+	overflow: visible;
 	// margin-top: ~'calc(var(--radius-current) * -1)'!important;
-	// border-top: none;
+	border: 1px solid var(--color-accent-alt);
+	border-top: none;
 	// background: var(--color-main-light);
 	// width: 100%;
-	top: 100%;
+	top: 85%;
+	left: auto;
+	background-color: var(--standard-field-focus-background-color);
 	// display: block !important;
-	position: relative;
+	color: var(--color-main);
+	position: absolute;
 	// z-index: 11;
 
 	li {
@@ -38,8 +43,9 @@
 .calendar {
 	position: relative;
 	margin: 0 auto;
-	max-width: 30rem;
+	width: 26rem;
 	z-index: 20;
+	// margin-top: calc(-1 * var(--standard-field-height) * .75);
 
 	&.hidden {
 		display: none;
@@ -96,7 +102,7 @@
 		margin: 0 0 0 -9rem;
 		border: none;
 		border-radius: var(--radius-current);
-		background: var(--color-main-light);
+		background: var(--color-main-lighter);
 		width: 18rem;
 		height: 2.4rem;
 		cursor: pointer;
@@ -165,7 +171,7 @@
 		}
 
 		&:not(.select) li {
-			color: var(--color-clear);
+			// color: var(--color-clear);
 		}
 
 		&.select {
@@ -174,14 +180,13 @@
 			top: calc(-2.4rem * 6 + 0.3rem);
 			height: auto;
 			border-radius: var(--radius-current);
-			background: var(--color-clear);
 			z-index: 12000;
 
 			.months,
 			.years {
 				overflow: hidden;
-				margin: 0;
-				background: var(--color-clear);
+				// margin: 0;
+				background: var(--color-main-lightest);
 
 				li {
 					border-radius: 0;
@@ -192,7 +197,7 @@
 					}
 
 					&:nth-child(7) {
-						background: var(--color-accent-alt-light);
+						background: var(--color-main-lighter);
 					}
 				}
 
@@ -225,7 +230,6 @@
 		td {
 			// color: var(--color-clear);
 			text-align: center;
-			padding: 0!important;
 			width: 14.28%;
 			height: var(--spacing-broad);
 			vertical-align: middle;
