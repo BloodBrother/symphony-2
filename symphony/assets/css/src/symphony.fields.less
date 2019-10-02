@@ -20,21 +20,10 @@
 .field {
 	box-sizing: border-box;
 	position: relative;
-	color: var(--color-main);
 	min-height: var(--standard-field-height);
 
 	&,>* {
 		margin-top: var(--standard-inner-rhythm);
-	}
-
-
-	[type="hidden"]~a {
-		display: block;
-		color: inherit;
-	}
-
-	[type="hidden"]~a:hover {
-		color: var(--color-accent);
 	}
 
 	label>span {
@@ -60,16 +49,17 @@
 	}
 
 	&:hover {
-		color: var(--color-accent);
+		color: var(--standard-field-hover-color);
 
 		input:not([type=checkbox]):not(:focus), select:not(:focus), textarea:not(:focus) {
-			border-bottom-color: var(--color-accent);
+			border-bottom-color: var(--standard-field-hover-border-color);
+			color: var(--standard-field-hover-color);
 		}
 	}
 
 // special case for uploaded file input
 	label+span {
-		display: flex;
+		display: contents;
 
 		a, input {
 			flex-grow: 1;
@@ -79,11 +69,26 @@
 			}
 		}
 
-		button:not(:hover) {
-			opacity: .25;
+		button {
+			&:not(:hover) {
+				opacity: .25;
+			}
+		}
+
+		[type="hidden"]~a {
+			display: block;
+			color: inherit;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			flex-shrink: 1;
+			flex-basis: 0;
+		}
+
+		[type="hidden"]~a:hover {
+			color: var(--standard-field-hover-color);
 		}
 	}
-
 
 	&.field-checkbox,
 	&.field-upload {
@@ -162,12 +167,17 @@
 			transition: all 200ms var(--ease-current);
 		}
 
+		&.field-date .suggestions {
+			left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm));
+		}
+
 		select:focus,
 		textarea:focus,
 		input:not([type=checkbox]):focus {
-			border-color: var(--color-accent-alt);
+			border-color: var(--standard-field-focus-border-color);
 		}
 
+		input:-webkit-autofill,
 		select:focus,
 		textarea:focus,
 		input:not([type=checkbox]):focus,
@@ -182,8 +192,8 @@
 
 		&:hover select:not([multiple]),
 		select:not([multiple]):focus {
-		padding-right: calc(0.65em + var(--spacing-thinnest) * 2 + var(--standard-container-rhythm));
-		background-position: right calc(.7em + var(--standard-container-rhythm)) top 50%;
+			padding-right: calc(0.65em + var(--spacing-thinnest) * 2 + var(--standard-container-rhythm));
+			background-position: right calc(.7em + var(--standard-container-rhythm)) top 50%;
 		}
 
 		label>i:not(:empty) {
@@ -194,4 +204,5 @@
 			position: relative;
 		}
 	}
+
 }
