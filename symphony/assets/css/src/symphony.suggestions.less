@@ -25,10 +25,10 @@
 	position: absolute;
 	margin: var(--spacing-micro) 0 0;
 	// background: var(--color-clear);
-	width: calc(~'100% - var(--spacing-broad)');
-	max-height: 0;
-	min-height: 3.6rem;
-	z-index: -1;
+	// width: calc(~'100% - var(--spacing-broad)');
+	// max-height: 0;
+	// min-height: 3.6rem;
+	// z-index: -1;
 	opacity: 0;
 
 	.help {
@@ -48,24 +48,10 @@
 		background-color: var(--color-accent-alt-light);
 		cursor: pointer;
 	}
-
-	li:not(.calendar) {
-		box-sizing: border-box;
-		padding: 0.5rem 0.8rem;
-		border-bottom: 0.1rem solid var(--color-main-lighter);
-	}
-
-	.calendar + li {
-		border-top: 0.1rem solid var(--color-main-lighter);
-	}
-
-	li:last-of-type {
-		border-bottom: none;
-	}
 }
 
 .frame .content .suggestions .help {
-	margin-top: 0!important;
+	margin-top: 0;
 }
 
 /*-----------------------------------------------------------------------------
@@ -81,9 +67,9 @@ textarea:not(:focus) ~ .suggestions:not(:empty) {
 
 input:focus ~ .suggestions:not(:empty),
 textarea:focus ~ .suggestions:not(:empty) {
-	max-height: 35rem;
+	max-height: auto;
 	transition: opacity 0s ease-out var(--duration-shortest), max-height 0s ease-out 0s;
 	opacity: 1;
-	overflow: auto;
+	overflow: visible;
 	z-index: 10000;
 }

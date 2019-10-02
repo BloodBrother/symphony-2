@@ -22,17 +22,36 @@ input,
 textarea,
 select {
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	background-color: transparent;
 	outline: none;
 	transition-property: background-color, color, border-width, border-color;
-	transition-duration: var(--duration-shorter);
+	transition-duration: var(--duration-shortest);
 	transition-timing-function: var(--ease-current);
 	box-sizing: border-box;
-	border-radius: var(--radius-smallest);
-	color: var(--color-main);
+	border-radius: var(--standard-field-radius);
+	color: var(--standard-field-color);
 	line-height: 1.2em;
 	font-size: var(--standard-field-font-size);
+
+	&::-webkit-scrollbar {
+		background-color: var(--scrollbar-background-color);
+		height: var(--scrollbar-height);
+		width: var(--scrollbar-width);
+	}
+
+	&:hover::-webkit-scrollbar {
+		&-thumb {
+			background-color: var(--scrollbar-thumb-background-color);
+			border-radius: var(--scrollbar-thumb-border-radius);
+		}
+	}
 }
 
+
+textarea {
+	line-height: 1.6em;
+	resize: vertical;
+}
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -58,45 +77,42 @@ select,
 	width: 100%;
 	border: 0;
 	border-top: 1px solid transparent;
-	border-bottom: 1px solid var(--color-ui);
+	border-bottom: 1px solid var(--standard-field-border-color);
 
 	&:placeholder-shown:not(:focus) {
+
+		&:not(:hover) {
+			border-style: dashed;
+		}
+
 		.required &,
 		.invalid & {
 			border-color: var(--color-error-light);
-			mix-blend-mode: initial;
 		}
 	}
 
 	&:focus {
-		border-bottom-color: var(--color-accent-alt);
-		background-color: var(--color-accent-alt-light);
+		border-bottom-color: var(--standard-field-focus-border-color);
+		background-color: var(--standard-field-focus-background-color);
 	}
 
 	&:hover:not(:focus) {
-		border-bottom-color: var(--color-main-lighter);
+		border-bottom-color: var(--standard-field-hover-border-color);
 	}
 }
+
 
 input[type="text"],
 input[type="input"],
 input[type="password"],
 textarea,
-select,
 .field-value-readonly {
-	background-color: transparent;
+	&:not(:placeholder-shown):not(:focus):not(:hover) {
+		border-color: transparent;
+	}
 }
 
-input[readonly="readonly"],
-textarea[readonly="readonly"] {
-	border-color: var(--color-main-light)!important;
-}
-
-textarea {
-	line-height: 1.6em;
-	resize: vertical;
-}
-
+/*-----------------------------------------*/
 input[type='checkbox'] {
 	-webkit-appearance: none;
 	appearance: none;
@@ -175,77 +191,66 @@ input[type='checkbox'] {
 	}
 }
 
+/*-----------------------------------------*/
 input[type=file] {
 	font-size: var(--text-small);
 	height: var(--standard-field-height);
 	padding-top: calc(var(--standard-field-height) / 2  - .6em);
 }
 
-
+/*-----------------------------------------*/
 select {
 	-webkit-appearance: none;
-	color: var(--color-main-dark);
-	background-color: transparent;
 
 	.disabled {
 		display: none;
 	}
+}
 
-	&:not([multiple]) {
-		cursor: pointer;
-		padding-right: calc(.65em + var(--spacing-thinnest) * 2);
-		background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23172D4D%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-		background-repeat: no-repeat;
-		background-position: right .7em top 50%;
-		background-size: .65em auto;
+select:not([multiple]) {
+	cursor: pointer;
+	padding-right: calc(.65em + var(--spacing-thinnest) * 2);
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23172D4D%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+	background-repeat: no-repeat;
+	background-position: right .7em top 50%;
+	background-size: .65em auto;
+}
+
+select[multiple] {
+	option, optgroup {
+		padding: var(--spacing-pico) var(--standard-inner-rhythm);
+		margin-left: calc(-1 * var(--standard-inner-rhythm));
 	}
 
-	&[multiple] {
-		display: block;
-		-webkit-appearance: none;
-
-		&::-webkit-scrollbar {
-			display: none;
-		}
-
-		option, optgroup {
-			padding: var(--spacing-pico) var(--standard-inner-rhythm);
-			margin-left: calc(-1 * var(--standard-inner-rhythm));
-		}
-
-		option {
-			color: var(--color-main-light);
-			&:checked {
-				background: var(--frontframe-background-color) -webkit-linear-gradient(bottom, var(--frontframe-background-color) 0%, var(--frontframe-background-color) 100%);
-				&:before {
-					content: "▶";
-					margin-right: var(--spacing-micro);
-					font-size: var(--text-smaller);
-					vertical-align: middle;
-					position: relative;
-					top: -.09125em;
-					margin-left: -.125em;
-				}
+	option {
+		color: var(--color-main-light);
+		&:checked {
+			background: var(--frontframe-background-color) -webkit-linear-gradient(bottom, var(--frontframe-background-color) 0%, var(--frontframe-background-color) 100%);
+			&:before {
+				content: "▶";
+				margin-right: var(--spacing-micro);
+				font-size: var(--text-smaller);
+				vertical-align: middle;
+				position: relative;
+				top: -.09125em;
+				margin-left: -.125em;
 			}
 		}
+	}
 
-		&:focus {
-			option {
-				&:checked {
-					background: var(--color-main) -webkit-linear-gradient(bottom, var(--color-main) 0%, var(--color-main) 100%);
-					&:before {
-						color: var(--color-clear);
-					}
+	&:focus {
+		option {
+			&:checked {
+				background: var(--color-main) -webkit-linear-gradient(bottom, var(--color-main) 0%, var(--color-main) 100%);
+				&:before {
+					color: var(--color-clear);
 				}
 			}
 		}
 	}
 }
 
-/*--------------------------------------------------------------------------
-	Input States
---------------------------------------------------------------------------*/
-
+/*-----------------------------------------*/
 .invalid {
 	color: var(--color-error);
 	font-weight: 500;
@@ -267,6 +272,7 @@ select {
 	}
 }
 
+/*-----------------------------------------*/
 .field-value-readonly {
 	display: block;
 	color: var(--color-main-light);
@@ -277,6 +283,7 @@ select {
 	opacity: 1;
 }
 
+/*-----------------------------------------*/
 input:disabled,
 textarea:disabled,
 textarea:disabled:hover,
@@ -294,7 +301,7 @@ input[readonly=readonly]:hover,
 input[readonly=readonly]:active,
 input[readonly=readonly]:focus {
 	opacity: 0.5;
-	cursor: not-allowed!important;
+	cursor: not-allowed;
 	background-color: var(--color-main-lighter);
 	color: var(--color-main);
 }
@@ -308,15 +315,12 @@ button:disabled:focus {
 	pointer-events: none;
 }
 
-/*--------------------------------------------------------------------------
-	Labels and Legends
---------------------------------------------------------------------------*/
-
+/*-----------------------------------------*/
 label,
 legend {
 	position: relative;
 	display: block;
-	color: inherit;
+	// color: inherit;
 	font-size: var(--standard-label-font-size);
 
 	>i:not(:empty) {
@@ -342,20 +346,13 @@ label {
 			margin-top: var(--spacing-thinnest);
 		}
 		~select[multiple] {
-			border-top-color: var(--color-main-light);
+			// border-top-color: var(--color-main-light);
 		}
 	}
 }
 
-legend {
-	color: var(--color-main-dark);
-}
 
-
-/*--------------------------------------------------------------------------
-	Apply
---------------------------------------------------------------------------*/
-
+/*-----------------------------------------*/
 .apply {
 	>* {
 		max-width: max-content;
