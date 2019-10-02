@@ -32,7 +32,6 @@ body {
 				display: inline-flex;
 				flex-direction: column;
 				align-items: center;
-				
 				>*+* {
 					margin-top: var(--standard-inner-rhythm);
 				}
@@ -64,11 +63,7 @@ body {
 		>header {
 			position: relative;
 			z-index: 12;
-			// h1>a {
-			// 	>*+* {
-			// 		margin-left: var(--standard-inner-rhythm);
-			// 	}
-			// }
+			
 		}
 		>aside {
 			clear: both;
@@ -90,6 +85,10 @@ body {
 				height: var(--spacing-large);
 				top: var(--standard-container-rhythm);
 				position: sticky;
+				
+				>a {
+					align-items: flex-start;
+				}
 			}
 
 			>div {
@@ -108,17 +107,18 @@ body {
 			max-width: var(--navigation-sidebar-max-width);
 			padding-right: var(--standard-container-rhythm);
 			top: calc(var(--spacing-large) + var(--standard-container-rhythm) * 2);
+			background-color: var(--backframe-background-color);
 		}
 		
 		>main {
-			// margin-left: var(--navigation-sidebar-max-width);
-			overflow: auto;
+			// overflow: auto;
+			margin-left: var(--navigation-sidebar-width);
 			clear: right;
 		}
 
 		>aside {
-			position: sticky;
-			top: var(--standard-container-rhythm);
+			// position: sticky;
+			// top: var(--standard-container-rhythm);
 		}
 
 		>footer {
@@ -136,25 +136,25 @@ body {
 	
 }
 
-#mobile-bg-menu-toggler {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	z-index: 100;
-	background-color: var(--color-accent-lighter);
-	opacity: 0;
-	pointer-events: none;
+// #mobile-bg-menu-toggler {
+// 	position: fixed;
+// 	top: 0;
+// 	bottom: 0;
+// 	left: 0;
+// 	right: 0;
+// 	z-index: 100;
+// 	background-color: var(--color-accent-lighter);
+// 	opacity: 0;
+// 	pointer-events: none;
 
-	body.is-header-opened & {
-		pointer-events: all;
-	}
+// 	body.is-header-opened & {
+// 		pointer-events: all;
+// 	}
 
-	@media (min-width: @sm) {
-		display: none;
-	}
-}
+// 	@media (min-width: @sm) {
+// 		display: none;
+// 	}
+// }
 
 #btn-toggle-header-mobile {
 	// display: flex;
@@ -207,7 +207,8 @@ body {
 
 			@media (min-width: @xs) {
 				padding: 0 var(--standard-container-rhythm);
-				
+				padding-bottom: var(--radius-big);
+
 				&.primary {
 					flex-grow: 1;
 
@@ -217,7 +218,7 @@ body {
 					}
 
 					&:last-of-type {
-						max-width: var(--dimension-smaller);
+						// max-width: var(--dimension-smaller);
 					}
 				}
 			}
