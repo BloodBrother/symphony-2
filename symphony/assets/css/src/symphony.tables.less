@@ -123,7 +123,7 @@ table[role="directory"] {
 	&::-webkit-scrollbar {
 		background-color: transparent;
 		height: var(--spacing-nano);
-		
+		width: var(--spacing-nano);
 	}
 
 	&:hover::-webkit-scrollbar {
@@ -133,21 +133,23 @@ table[role="directory"] {
 		}
 	}
 
-	td, th {
-		&:first-child {
-			position: sticky;
-			left: calc(-1 * var(--standard-inner-rhythm) - var(--radius-current));
-			padding-left: calc(var(--standard-inner-rhythm) + var(--radius-current));
+	@media (min-width: @xs) {
+		td, th {
+			&:first-child {
+				position: sticky;
+				left: calc(-1 * var(--standard-inner-rhythm) - var(--radius-current));
+				padding-left: calc(var(--standard-inner-rhythm) + var(--radius-current));
+			}
 		}
-	}
 
-	td {
+		td {
 
-		&:first-child {
-			background: linear-gradient(to right, var(--standard-table-background-color) 80%, transparent 100%);
-			background-size: 100% 1.3em;
-			background-position: center center;
-			background-repeat: no-repeat;
+			&:first-child {
+				background: linear-gradient(to right, var(--standard-table-background-color) 80%, transparent 100%);
+				background-size: 100% 1.3em;
+				background-position: center center;
+				background-repeat: no-repeat;
+			}
 		}
 	}
 
@@ -175,6 +177,14 @@ table.selectable {
 		cursor: copy;
 	}
 
+	&.orderable td:not(.inactive) {
+		cursor: -webkit-grab;
+	}
+
+	tr.ordering td:not(.inactive) {
+		cursor: -webkit-grabbing;
+	}
+
 	tbody {
 		tr {
 			td:first-child {
@@ -189,7 +199,7 @@ table.selectable {
 				border-bottom-right-radius: var(--radius-current);
 			}
 
-			&:hover:not(.selected) {
+			&:hover:not(.selected):not(.ordering) {
 				background-color: var(--standard-hover-row-background-color);
 				td {
 					z-index: 2;
@@ -207,7 +217,7 @@ table.selectable {
 				border-top-color: var(--color-ui);
 			}
 
-			&.selected {
+			&.selected, &.ordering {
 				background-color: var(--standard-selected-row-background-color);
 				border-color: var(--color-ui);
 				filter: drop-shadow(var(--shadow-small));
@@ -229,14 +239,6 @@ table.selectable {
 -----------------------------------------------------------------------------*/
 
 tr {
-	&.ordering {
-		cursor: move;
-	}
-
-	&.ordering {
-		background-color: var(--color-accent-alt-light);
-	}
-
 	&.status-ok:not(.selected) {
 		color: var(--color-accent);
 	}
