@@ -534,15 +534,8 @@ class AdministrationPage extends HTMLPage
             )
         );
 
-        // $scrollCtn = new XMLElement('div', null, array('class' => 'scroll-ctn'));
-
-        // $scrollCtn->appendChild(Widget::Anchor(__('Index'), rtrim(URL, '/') . '/', __('Go to index page'), 'index-btn'));
-
         $this->appendUserLinks();
 
-        // $this->Tools->appendChild($this->Session);
-        // $scrollCtn->appendChild($this->Session); // For mobile
-        // $scrollCtn->appendChild($version);
         $this->Header->appendChild($this->Session);
         $this->Footer->appendChild($version);
 
@@ -719,21 +712,15 @@ class AdministrationPage extends HTMLPage
         $mobileNavToggler = new XMLElement('a', Widget::SVGIcon('burger'));
         $mobileNavToggler->setAttribute('id', 'btn-toggle-header-mobile');
         $mobileNavToggler->setAttribute('class', 'js-symphony-close-header');
-        $this->Context->prependChild($mobileNavToggler);
+        $this->Header->prependChild($mobileNavToggler);
 
         // Add horizontal drawers (inside #context)
         if (isset($this->Drawer['horizontal'])) {
             $this->Context->appendChildArray($this->Drawer['horizontal']);
         }
 
-        // $contextWrap = new XMLElement('div', null, array('class' => 'context-wrap'));
-
-        // $contextWrap->appendChild($this->Context);
-        // $contextWrap->appendChild($this->Tools);
-
         $this->Body->appendChild($this->appendNavigation());
         $this->Body->appendChild($this->Context);
-        // $this->Body->appendChild($this->Tools);
 
         // Add vertical-left drawers (between #context and #contents)
         if (isset($this->Drawer['vertical-left'])) {
@@ -748,13 +735,8 @@ class AdministrationPage extends HTMLPage
         $this->Body->appendChild($this->Contents);
 
         $this->Body->setAttribute('data-version', Symphony::Configuration()->get('version', 'symphony'));
-        // $this->Body->appendChild($this->Wrapper);
         $this->Body->appendChild($this->Footer);
         $this->Body->appendChild(new XMLElement('div', null, array('id' => 'loading')));
-        $this->Body->appendChild(new XMLElement('div', null, array(
-            'class' => 'js-symphony-close-header',
-            'id' => 'mobile-bg-menu-toggler',
-        )));
         $this->appendBodyId();
         $this->appendBodyAttributes($this->_context);
 
