@@ -1,0 +1,52 @@
+/**
+ * Symphony Tags
+ *
+ * This file contains basic styles for tag lists and their items.
+ *
+ * @since Symphony 2.3
+ */
+
+/*-----------------------------------------------------------------------------
+	LESS — Variables Importing
+-----------------------------------------------------------------------------*/
+
+@import "variables";
+
+/*--------------------------------------------------------------------------
+	Tags
+--------------------------------------------------------------------------*/
+
+ul.tags {
+	color: var(--color-main-light);
+	font-size: var(--text-smallest);
+	font-weight: 600;
+	color: var(--color-main-dark);
+	list-style: none;
+	line-height: 1.4em;
+	margin-top: var(--spacing-thinnest);
+
+	>* {
+		display: inline-block;
+		cursor: pointer;
+		margin-right: var(--spacing-micro);
+		background-color: var(--color-accent-light);
+		border-radius: var(--radius-small);
+		padding: var(--spacing-pico);
+		line-height: 1.2em;
+		border: 1px solid var(--color-ui);
+	}
+
+	li:hover {
+		color: var(--color-accent);
+	}
+
+	li.more {
+		color: var(--color-accent);
+		border-bottom: 1px solid currentColor;
+
+		&:hover {
+			color: var(--color-main-light);
+			border-bottom-color: currentColor;
+		}
+	}
+}

@@ -6,65 +6,55 @@
 * @since Symphony 4.0.0
 */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
+/* Less variables --------*/
 @import "variables";
 
-/*--------------------------------------------------------------------------
-	Navigation
---------------------------------------------------------------------------*/
-
+/* Main nav container --------*/
 #nav {
 	font-size: var(--text-small);
-
 	@media (max-width: @sm) {
 		font-size: var(--text-big);
 	}
 
-	/* Titles */
-
-	> span {
+	/* Base layout, styles and rhythm --------*/
+	a, span {
 		display: block;
-		text-transform: uppercase;
-		line-height: 1.4em;
-		margin-bottom: var(--spacing-thinnest);
-		font-size: var(--text-smaller);
-
-		@media (max-width: @sm) {
-			font-size: var(--text-small);
-		}
+		position: relative;
+		cursor: pointer;
+		color: inherit;
 	}
 
-	/* First Level */
+	span {
+		font-weight: 300;
+	}
+	
+	a {
+		font-weight: 450;
+	}
 
+	*+* {
+		margin-top: calc(var(--standard-inner-rhythm) * .5);
+	}
+
+	/* Section Titles --------*/
+	>span { 
+		color: var(--color-main-light);
+		text-transform: uppercase;
+		font-size: var(--text-smallest);
+	}
+
+	/* First Level - Drawer Triggers --------*/
 	> ul {
-		color: var(--color-main);
-		margin: 0;
-		padding: 0;
-
-		a {
-			display: inline-block;
-		}
+		margin-bottom: var(--standard-container-rhythm);
 
 		> li {
-			display: block;
-			position: relative;
-			font-weight: 300;
-			line-height: 2rem;
-			cursor: pointer;
-
 			> span {
-				position: relative;
-
 				svg {
 					.transitioned(~'transform',~'0.15s');
 					position: absolute;
-					left: calc(var(--spacing-thinner) * -1);
-					top: 6px;
-					color: currentColor;
-					opacity: 0.5;
+					left: calc(var(--spacing-thin) * -1);
+					top: .59125em;
+					opacity: 0.6;
 				}
 			}
 
@@ -72,51 +62,22 @@
 				transform: rotateZ(-90deg);
 			}
 
-			&.opened, &.active, &:hover {
+			&.active>span, &:hover>span {
 				color: var(--color-accent);
-			}
-
-			& + li {
-				padding-top: var(--spacing-thinnest);
-
-				// @media (max-width: (@sm - 1)) {
-				// 	padding-top: var(--spacing-thinner);
-				// }
-			}
-
-			/* Second Level */
-
-			ul {
-				display: none;
-				margin: var(--spacing-thinnest) 0 0;
-				padding: 0 0 0 var(--spacing-thinner);
-				background: url(../img/bullet.png) repeat-y 0 0;
-
-				a {
-					color: var(--color-main);
-					max-width: 100%;
-					line-height: 1.25em;
-					font-weight: 450;
-				}
-
-				li.active {
-					a {
-						color: var(--color-accent);
-					}
-				}
-
-				a:hover {
-					color: var(--color-accent);
-				}
-
-				li + li {
-					margin-top: var(--spacing-micro);
-				}
 			}
 		}
 
-		& + span {
-			padding-top: var(--spacing-broad);
+		/* Drawers --------*/
+		ul {
+			display: none;
+			padding-left: var(--spacing-thinner);
+			margin-left: 2px;
+			border-left: 2px dotted var(--color-main-lighter);
+
+			li.active a,
+			a:hover {
+				color: var(--color-accent);
+			}
 		}
 	}
 }

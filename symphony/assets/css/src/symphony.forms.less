@@ -8,16 +8,10 @@
  * @since Symphony 2.3
  */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
+/* Less variables --------*/
 @import "variables";
 
-/*--------------------------------------------------------------------------
-	Basic Inputs Textareas and Selects
---------------------------------------------------------------------------*/
-
+/* Base styles for generic inputs --------*/
 input,
 textarea,
 select {
@@ -80,7 +74,6 @@ select,
 	border-bottom: 1px solid var(--standard-field-border-color);
 
 	&:placeholder-shown:not(:focus) {
-
 		&:not(:hover) {
 			border-style: dashed;
 		}
@@ -320,7 +313,6 @@ label,
 legend {
 	position: relative;
 	display: block;
-	// color: inherit;
 	font-size: var(--standard-label-font-size);
 
 	>i:not(:empty) {
@@ -344,9 +336,6 @@ label {
 	span {
 		~:not(i) {
 			margin-top: var(--spacing-thinnest);
-		}
-		~select[multiple] {
-			// border-top-color: var(--color-main-light);
 		}
 	}
 }

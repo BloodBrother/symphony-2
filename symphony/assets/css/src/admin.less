@@ -1,37 +1,48 @@
 /**
- * Symphony Admin Layout
+ * Symphony Admin Master Layout
  */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
+/* Less variables --------*/
 @import "variables";
 
-/*--------------------------------------------------------------------------
-	Structure
---------------------------------------------------------------------------*/
-
+/* Master Layout --------*/
 body {
 	min-width: var(--xxs);
 	min-height: 100%;
-	
+	/* Master Layout Base --------*/
 	>nav {
 		max-width: 100%;
+		overflow: auto;
+
+		&::-webkit-scrollbar {
+			background-color: var(--scrollbar-background-color);
+			height: var(--scrollbar-height);
+			width: var(--scrollbar-width);
+		}
+
+		&:hover::-webkit-scrollbar {
+			&-thumb {
+				background-color: var(--scrollbar-thumb-background-color);
+				border-radius: var(--scrollbar-thumb-border-radius);
+			}
+		}
 	}
 
 	>header {
+		/* Center elements & rhythm --------*/
 		margin: var(--standard-container-rhythm);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 
 		h1 {
-			// margin-right: auto;
+
 			a {
+				/* Center relative to sun --------*/
 				display: inline-flex;
 				flex-direction: column;
 				align-items: center;
+				/* Rhythm --------*/
 				>*+* {
 					margin-top: var(--standard-inner-rhythm);
 				}
@@ -39,7 +50,9 @@ body {
 		}
 	}
 	
+	/* Master Layout for Narrow Viewports --------*/
 	@media (max-width: @sm) {
+		/* Fix the nav and fit the screen --------*/
 		>nav {
 			position: fixed;
 			top: 0;
@@ -51,8 +64,6 @@ body {
 			display: flex;
 			flex-direction: column;
 			padding-top: var(--spacing-larger);
-			// align-items: center;
-			// justify-content: center;
 			z-index: 11;
 
 			&:not(.is-opened) {
@@ -60,11 +71,13 @@ body {
 				pointer-events: none;
 			}
 		}
+		/* Make sure the header is over the nav --------*/
 		>header {
 			position: relative;
 			z-index: 12;
 			
 		}
+		/* Make the context span its whole line --------*/
 		>aside {
 			clear: both;
 			margin-top: var(--standard-container-rhythm);
@@ -72,12 +85,14 @@ body {
 		}
 	}
 
+	/* Master Layout for Wide Viewports --------*/
 	@media (min-width: @sm) {
 		padding: var(--standard-container-rhythm);
 
 		>header {
+			/* Deploy children in the master flow --------*/
 			display: contents;
-			
+			/* Align the icon and title at the left of the content --------*/
 			h1 {
 				float: left;
 				width: var(--navigation-sidebar-width);
@@ -90,35 +105,32 @@ body {
 					align-items: flex-start;
 				}
 			}
-
+			/* Align session element to the right of the content --------*/
 			>div {
 				float: right;
 			}
 		}
-		
+		/* Align the nav at the left of the content --------*/
 		>nav {
 			margin-top: var(--standard-container-rhythm);
 			margin-bottom: var(--standard-container-rhythm);
+			margin-left: calc(-1 * var(--standard-container-rhythm));
 			float: left;
 			clear: left;
 			position: sticky;
 			box-sizing: border-box;
 			width: var(--navigation-sidebar-width);
 			max-width: var(--navigation-sidebar-max-width);
+			padding-left: var(--standard-container-rhythm);
 			padding-right: var(--standard-container-rhythm);
 			top: calc(var(--spacing-large) + var(--standard-container-rhythm) * 2);
 			background-color: var(--backframe-background-color);
+			max-height: calc(100vh - calc(var(--spacing-large) + var(--standard-container-rhythm) * 4));
 		}
 		
 		>main {
-			// overflow: auto;
 			margin-left: var(--navigation-sidebar-width);
 			clear: right;
-		}
-
-		>aside {
-			// position: sticky;
-			// top: var(--standard-container-rhythm);
 		}
 
 		>footer {
@@ -133,39 +145,11 @@ body {
 			padding-right: var(--spacing-broader);
 		}
 	}
-	
 }
 
-// #mobile-bg-menu-toggler {
-// 	position: fixed;
-// 	top: 0;
-// 	bottom: 0;
-// 	left: 0;
-// 	right: 0;
-// 	z-index: 100;
-// 	background-color: var(--color-accent-lighter);
-// 	opacity: 0;
-// 	pointer-events: none;
-
-// 	body.is-header-opened & {
-// 		pointer-events: all;
-// 	}
-
-// 	@media (min-width: @sm) {
-// 		display: none;
-// 	}
-// }
-
+/* Minimal styles for the burger button --------*/
 #btn-toggle-header-mobile {
-	// display: flex;
-	// align-items: center;
-	// justify-content: center;
-	// box-sizing: border-box;
 	color: var(--color-main-dark);
-	// width: var(--spacing-broadest);
-	// height: var(--spacing-broadest);
-	// flex: none;
-
 	&:hover {
 		color: var(--color-accent);
 	}
@@ -175,106 +159,8 @@ body {
 	}
 }
 
-
-
-/* Version */
-
+/* Version element --------*/
 #version {
 	font-size: var(--text-smaller);
 	color: var(--color-main-light);
-}
-
-
-#contents-actions {
-	display: flex;
-	margin-left: auto;
-	align-items: center;
-}
-
-
-/*--------------------------------------------------------------------------
-	Publish
---------------------------------------------------------------------------*/
-#publish.page-single {
-	#contents {
-
-		.columns {
-			margin-left: 0;
-		}
-
-		.column {
-			padding: var(--standard-container-rhythm);
-
-			@media (min-width: @xs) {
-				padding: 0 var(--standard-container-rhythm);
-				padding-bottom: var(--radius-big);
-
-				&.primary {
-					flex-grow: 1;
-
-					&:not(:last-of-type) {
-						width: calc(100% - var(--spacing-thinner) - var(--dimension-tiny));
-						margin-right: auto;
-					}
-
-					&:last-of-type {
-						// max-width: var(--dimension-smaller);
-					}
-				}
-			}
-	
-			&.secondary {
-				background-color: var(--sidebar-background-color);
-			}
-		}
-	}
-}
-
-/*--------------------------------------------------------------------------
-	Pagination
---------------------------------------------------------------------------*/
-
-ul.page {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: var(--standard-container-rhythm);
-	box-sizing: border-box;
-	margin: 0;
-	color: var(--color-main-dark);
-	cursor: default;
-	background-color: var(--color-accent-lighter);
-	width: 100%;
-
-	a {
-		color: var(--color-accent);
-
-		&:hover {
-			color: var(--color-main-dark)
-		}
-	}
-
-	input {
-		border-radius: var(--radius-current);
-		color: var(--color-main-dark);
-		font-size: var(--text-short);
-		text-align: center!important;
-		line-height: 1em;
-		padding: var(--spacing-thinnest) var(--spacing-thinner);
-		border: 1px solid var(--color-main-light);
-		box-shadow: none;
-		outline: none;
-	}
-
-	form.invalid input {
-		border-color: var(--color-error);
-	}
-
-	li {
-		font-size: var(--text-current);
-
-		& + li {
-			margin-left: var(--spacing-thinner);
-		}
-	}
 }
