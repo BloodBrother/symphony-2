@@ -82,4 +82,33 @@
 		}
 	}
 
+	#publish.page-single & {
+		.columns {
+			margin-left: 0;
+		}
+
+		.column {
+			padding: var(--standard-container-rhythm);
+
+			@media (min-width: @xs) {
+				padding: 0 var(--standard-container-rhythm);
+				padding-bottom: var(--radius-big);
+
+				&.primary {
+					flex-grow: 1;
+
+					&:not(:last-of-type) {
+						width: calc(100% - var(--spacing-thinner) - var(--dimension-tiny));
+						margin-right: auto;
+					}
+				}
+			}
+	
+			&.secondary {
+				background-color: var(--sidebar-background-color);
+			}
+		}
+	}
+
 }
+
