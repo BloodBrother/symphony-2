@@ -5,17 +5,3 @@
 @lg: 1440px;
 @xl: 1640px;
 @xxl: 1920px;
-
-.transitioned(@transProperty: color, @transDuration: var(--duration-shorter), @transDelay: 0s) {
-	transition-duration: @transDuration;
-	transition-property: @transProperty;
-	transition-delay: @transDelay;
-	transition-timing-function: var(--ease-current);
-}
-
-.flex(@direction: row, @align: flex-start, @justify: space-between){
-	display: flex;
-	flex-direction: @direction;
-	align-items: @align;
-	justify-content: @justify;
-}
