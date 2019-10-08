@@ -80,6 +80,13 @@ h1, h2, h3, h4, h5, h6 {
 	Basic styles
 -----------------------------------------------------------------------------*/
 
+* {
+	transition-duration: 0ms;
+	transition-property: color, background, border, opacity, transform, fill;
+	transition-delay: 0ms;
+	transition-timing-function: var(--ease-current);
+}
+
 html {
 	font-size: 50%;
 	min-height: 100%;
@@ -108,7 +115,7 @@ body {
 }
 
 a, button, input, li {
-	.transitioned(~'color, background, border');
+	transition-duration: var(--duration-shorter);
 }
 
 a, button {
