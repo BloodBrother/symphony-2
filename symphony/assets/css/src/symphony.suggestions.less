@@ -18,7 +18,8 @@
 }
 
 .suggestions {
-	.transitioned(~'opacity, max-height');
+	transition-property: opacity, max-height;
+	transition-duration: var(--duration-shorter);
 	border-radius: var(--radius-small);
 	box-sizing: border-box;
 	overflow: hidden;

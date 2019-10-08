@@ -69,7 +69,8 @@
 
 	.clndr-previous-button,
 	.clndr-next-button {
-		.transitioned(~'opacity');
+		transition-duration: var(--duration-shorter);
+
 		position: absolute;
 		top: 0.2rem;
 		left: 0.4rem;
@@ -258,8 +259,10 @@
 		}
 
 		.day {
-			.transitioned(~'color, background');
-			.flex(~'row',~'center',~'center');
+			transition-duration: var(--duration-shorter);
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			width: 100%;
 			height: 100%;
 

@@ -52,8 +52,7 @@
 	cursor: pointer;
 
 	> div {
-		.transitioned(~'background');
-		.flex(~'row', ~'center', ~'space-between');
+		transition-duration: var(--duration-shorter);
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -73,7 +72,7 @@
 
 		> svg {
 			margin-left: var(--spacing-thinnest);
-			.transitioned(~'transform');
+			transition-duration: var(--duration-shorter);
 			transform: none;
 		}
 
@@ -83,7 +82,7 @@
 	}
 
 	> ul {
-		.transitioned(~'opacity');
+		transition-duration: var(--duration-shorter);
 		border-radius: var(--radius-current);
 		position: absolute;
 		right: 0;
@@ -101,7 +100,7 @@
 
 		> li {
 			> a {
-				.transitioned(~'color');
+				transition-duration: var(--duration-shorter);
 				display: flex;
 				align-items: center;
 				justify-content: flex-start;
