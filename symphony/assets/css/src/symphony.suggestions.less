@@ -2,59 +2,57 @@
  * Symphony Suggestions
  */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
+/* Less variables --------*/
 @import "variables";
 
-/*-----------------------------------------------------------------------------
-	Suggestions
------------------------------------------------------------------------------*/
 
-.frame.suggests,
-.suggests {
-	overflow: visible;
-}
 
+/* Suggestions main container styles --------*/
 .suggestions {
+	position: absolute;
+
+	/* Graphical styles --------*/
 	transition-property: opacity, max-height;
 	transition-duration: var(--duration-shorter);
 	border-radius: var(--radius-small);
-	box-sizing: border-box;
-	overflow: hidden;
-	position: absolute;
-	margin: var(--spacing-micro) 0 0;
 	background: var(--color-main-lightest);
 	box-shadow: var(--shadow);
-	// width: calc(~'100% - var(--spacing-broad)');
-	// max-height: 0;
-	// min-height: 3.6rem;
-	// z-index: -1;
+
+	/* Outer rhythm --------*/
+	margin: var(--spacing-micro) 0 0;
+
+	/* Hide panel by default --------*/
 	opacity: 0;
+	overflow: hidden;
+	box-sizing: border-box;
 
-	.help {
-		display: none;
 
-		&.active {
-			display: block;
+	>* {
+		padding: var(--spacing-micro) var(--standard-inner-rhythm);
+
+		/* Javascript mouseover on suggested items */
+		&:not(.help).active {
+			color: var(--color-main);
+			background-color: var(--color-accent-alt-light);
+			cursor: pointer;
+		}
+
+		&.help {
+		/* Help notice graphical styles --------*/
 			color: var(--color-main-dark);
 			border-bottom: none;
-			background-color: var(--color-main-lightest);
+			background-color: var(--color-main-lighter);
 			cursor: default;
+			padding: var(--standard-inner-rhythm);
+
+		/* Hide notice while not active --------*/
+			&:not(.active) {
+				display: none;
+			}
 		}
 	}
-
-	.active {
-		color: var(--color-main);
-		background-color: var(--color-accent-alt-light);
-		cursor: pointer;
-	}
 }
 
-.frame .content .suggestions .help {
-	margin-top: 0;
-}
 
 /*-----------------------------------------------------------------------------
 	Special Cases

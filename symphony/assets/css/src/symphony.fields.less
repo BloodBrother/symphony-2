@@ -177,7 +177,11 @@
 			border-color: var(--standard-field-focus-border-color);
 		}
 
+		/* Enlarged style for states filling container padding --------*/
 		input:-webkit-autofill,
+		select:not(:placeholder-shown),
+		textarea:not(:placeholder-shown),
+		input:not([type=checkbox]):not(:placeholder-shown),
 		select:focus,
 		textarea:focus,
 		input:not([type=checkbox]):focus,
@@ -189,8 +193,10 @@
 			padding-right: calc(var(--standard-field-padding) + var(--standard-container-rhythm));
 			padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm) + var(--standard-container-rhythm));
 		}
-
+		
+		/* Prevent icon from jumping around --------*/
 		&:hover select:not([multiple]),
+		select:not(:placeholder-shown),
 		select:not([multiple]):focus {
 			padding-right: calc(0.65em + var(--spacing-thinnest) * 2 + var(--standard-container-rhythm));
 			background-position: right calc(.7em + var(--standard-container-rhythm)) top 50%;

@@ -6,47 +6,53 @@
  * @since Symphony 2.3
  */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
+/* Less variables --------*/
 @import "variables";
 
-/*--------------------------------------------------------------------------
-	Tags
---------------------------------------------------------------------------*/
-
+/* Input Tags container --------*/
 ul.tags {
+	
+	/* Graphical heritage styles --------*/
 	color: var(--color-main-light);
 	font-size: var(--text-smallest);
 	font-weight: 600;
 	color: var(--color-main-dark);
-	list-style: none;
-	line-height: 1.4em;
-	margin-top: var(--spacing-thinnest);
-
+	
+	/* Outer rhythm --------*/
+	*+& {
+		margin-top: var(--spacing-thinnest);
+	}
+	
+	/* Individual Tag --------*/
 	>* {
+		/* Inline items with unilateral right rhythm --------*/
 		display: inline-block;
-		cursor: pointer;
 		margin-right: var(--spacing-micro);
-		background-color: var(--color-accent-light);
+		
+		/* Graphical individual styles --------*/
 		border-radius: var(--radius-small);
 		padding: var(--spacing-pico);
 		line-height: 1.2em;
+		background-color: var(--color-accent-light);
 		border: 1px solid var(--color-ui);
-	}
+		cursor: pointer;
 
-	li:hover {
-		color: var(--color-accent);
-	}
-
-	li.more {
-		color: var(--color-accent);
-		border-bottom: 1px solid currentColor;
-
+		/* Interactive styles --------*/
 		&:hover {
-			color: var(--color-main-light);
-			border-bottom-color: currentColor;
+			color: var(--color-accent);
+			background-color: var(--color-accent-alt-light);
+			border-color: transparent;
+		}
+
+		/* Special « see more » item --------*/
+		&.more {
+			color: var(--color-accent);
+			border-bottom: 1px solid currentColor;
+
+			&:hover {
+				color: var(--color-main-light);
+				border-bottom-color: currentColor;
+			}
 		}
 	}
 }
