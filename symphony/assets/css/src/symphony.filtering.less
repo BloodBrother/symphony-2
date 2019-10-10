@@ -17,6 +17,12 @@
 	align-items: baseline;
 	font-size: var(--text-small);
 	color: var(--color-main-light);
+	flex-wrap: wrap;
+
+	@media (max-width: @xxs) {
+		margin-left: calc(-1 * var(--standard-container-rhythm));
+		margin-right: calc(-1 * var(--standard-container-rhythm));
+	}
 
 	.frame-header {
 		display: contents;
@@ -24,6 +30,13 @@
 
 	ol {
 		flex-grow: 1;
+
+		@media (max-width: @md) {
+			margin-top: var(--standard-inner-rhythm);
+			order: 4;
+			flex-basis: 100%;
+			flex-shrink: 0;
+		}
 	}
 
 	&.collapsible > * > li,
@@ -37,13 +50,11 @@
 	}
 
 	.columns.two {
-		margin: 0 0 0 calc(var(--spacing-broad) * -1) !important;
+		margin: 0;
 
 		.column {
-			margin: 0!important;
-			padding: 0 0 0 var(--spacing-broad)!important;
-			border: none!important;
-			width: 50%!important;
+			padding: 0;
+			width: 50%;
 		}
 	}
 
@@ -58,6 +69,7 @@
 		display: flex;
 		align-items: baseline;
 		box-sizing: border-box;
+
 
 		input, select {
 			border-color: transparent;
