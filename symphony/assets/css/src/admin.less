@@ -127,9 +127,14 @@ body {
 			background-color: var(--backframe-background-color);
 			max-height: calc(100vh - calc(var(--spacing-large) + var(--standard-container-rhythm) * 4));
 		}
-		
-		>main {
+
+		/* Force alignment / prevent background bleeding --------*/
+		>aside, >main {
 			margin-left: var(--navigation-sidebar-width);
+		}
+		
+		/* Clear the floating session widget */
+		>main {
 			clear: right;
 		}
 
