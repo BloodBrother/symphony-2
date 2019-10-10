@@ -14,87 +14,49 @@
 	Error messages
 --------------------------------------------------------------------------*/
 
-body#error {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	box-sizing: border-box;
-	padding: var(--spacing-broad);
-	width: 100%;
-	min-height: 100vh;
-}
-
 .frame.error {
-	padding: var(--spacing-thinnest);
-	overflow: hidden;
-	background: var(--color-clear);
-	width: @sm;
-	max-width: 100%;
-	box-shadow: var(--shadow);
+
+	.error>code {
+		color: var(--color-error);
+	}
 
 	h1 {
-		margin: calc(var(--spacing-thinnest) * -1) calc(var(--spacing-thinnest) * -1) 0;
-		font-size: var(--text-bigger);
-	}
+		padding-left: var(--standard-container-rhythm);
+		padding-right: var(--standard-container-rhythm);
+		margin-bottom: var(--standard-container-rhythm);
 
-	p {
-		margin-top: 1rem;
-		margin-bottom: 0;
-	}
-
-	.error {
-		color: var(--color-error);
-	}
-
-	.error.full {
-		color: var(--color-error);
-	}
-
-	a {
-		color: var(--color-accent);
-
-		&:hover {
-			color: currentColor;
-		}
-	}
-
-	> ul {
-		margin: 0;
-
-		p, h1 {
-			padding: var(--spacing-thinnest) var(--spacing-thinner);
-			margin: 0;
-		}
-
-		> li > ul {
-			border-top: 1px solid var(--color-main-light);
-			padding: var(--spacing-micro) 0;
-	
-			li {
-				color: var(--color-main-dark);
-				font-size: var(--text-small);
-				margin: 0;
-				padding: 0 var(--spacing-thinner);
-			}
+		+p {
+			color: var(--color-main-light);
+			margin-left: var(--standard-container-rhythm);
 		}
 	}
 
 	.content {
-		padding: 0 var(--spacing-thinner);
-		box-sizing: border-box;
-		overflow-x: auto;
+		padding: var(--standard-inner-rhythm);
+		margin: var(--standard-container-rhythm);
+		border-radius: var(--radius-current);
+		background-color: var(--frontframe-background-color);
+		
+		@media (min-width: @md) {
 
-		ul {
-			padding: var(--spacing-micro) 0;
-			margin: 0;
-		}
+			code {
+				vertical-align: bottom;
+			}
 
-		li {
-			color: var(--color-main-dark);
-			font-size: var(--text-small);
-			margin: 0;
-			padding: 0 var(--spacing-thinner);
+			em {
+				color: var(--color-main-light);
+				font-style: normal;
+				float: left;
+				clear: left;
+				margin-right: -2em;
+
+			}
+
+			a {
+				font-size: var(--text-smaller);
+				line-height: 1.2em;
+				float: right;
+			}
 		}
 	}
 }
