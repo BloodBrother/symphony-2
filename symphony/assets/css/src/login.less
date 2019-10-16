@@ -1,12 +1,4 @@
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
 @import "variables";
-
-/*--------------------------------------------------------------------------
-	Login
---------------------------------------------------------------------------*/
 
 #login {
 	display: flex;
@@ -61,103 +53,8 @@
 			display: block;
 			font-size: var(--text-biggest);
 			font-weight: 400;
-			margin-bottom: var(--spacing-broad);
+			margin: var(--spacing-broad) 0;
 		}
-
-		.sun {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 6rem;
-			height: 6rem;
-			transform: scale(2);
-			margin: 0 auto;
-			margin-bottom: var(--spacing-large);
-		}
-		.sun .layer {
-			position: absolute;
-			background-color: var(--color-accent-alt);
-			border-radius: 100%;
-			opacity: 0.4;
-			-webkit-animation: Wave 1200ms cubic-bezier(0.19, 1, 0.22, 1) 1 both;
-					animation: Wave 1200ms cubic-bezier(0.19, 1, 0.22, 1) 1 both;
-		}
-		.sun .layer-1 {
-			width: 2rem;
-			height: 2rem;
-			opacity: 1;
-		}
-		.sun .layer-2 {
-			width: 4rem;
-			height: 4rem;
-			-webkit-animation-delay: 50ms;
-					animation-delay: 50ms;
-		}
-		.sun .layer-3 {
-			width: 6rem;
-			height: 6rem;
-			-webkit-animation-delay: 100ms;
-					animation-delay: 100ms;
-		}
-		.sun .layer-4 {
-			width: 8rem;
-			height: 8rem;
-			-webkit-animation-name: WaveFade;
-					animation-name: WaveFade;
-			-webkit-animation-duration: 1200ms;
-					animation-duration: 1200ms;
-			-webkit-animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
-					animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
-			-webkit-animation-delay: 150ms;
-					animation-delay: 150ms;
-			-webkit-animation-iteration-count: 1;
-					animation-iteration-count: 1;
-			-webkit-animation-fill-mode: both;
-					animation-fill-mode: both;
-		}
-		@-webkit-keyframes Wave {
-			0% {
-			  -webkit-transform: scale(0);
-					  transform: scale(0);
-			}
-			100% {
-			  -webkit-transform: scale(1);
-					  transform: scale(1);
-			}
-		}
-		@keyframes Wave {
-			0% {
-			  -webkit-transform: scale(0);
-					  transform: scale(0);
-			}
-			100% {
-			  -webkit-transform: scale(1);
-					  transform: scale(1);
-			}
-		}
-		@-webkit-keyframes WaveFade {
-			0% {
-			  -webkit-transform: scale(0);
-					  transform: scale(0);
-			}
-			100% {
-			  -webkit-transform: scale(1);
-					  transform: scale(1);
-			  opacity: 0;
-			}
-		}
-		@keyframes WaveFade {
-			0% {
-				-webkit-transform: scale(0);
-				transform: scale(0);
-			}
-			100% {
-			  -webkit-transform: scale(1);
-				transform: scale(1);
-				opacity: 0;
-			}
-		}
-		
 	}
 
 	.actions {
@@ -165,8 +62,8 @@
 		flex-direction: row-reverse;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0 var(--spacing-smallerish) var(--spacing-thinner);
-		margin: 0;
+		padding: var(--standard-inner-rhythm);
+
 
 		.action-link {
 			transition-duration: var(--duration-shorter);

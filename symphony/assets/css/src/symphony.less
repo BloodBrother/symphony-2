@@ -6,34 +6,24 @@
  * notifications and by the backend itself.
  */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
 @import "variables";
+@import "theme";
+@import "language";
 
-/*-----------------------------------------------------------------------------
-	Font importing — Inter
------------------------------------------------------------------------------*/
+
+/* Import and set fonts --------*/
 @import url('https://rsms.me/inter/inter.css');
+
 html { 
 	font-family: 'Inter', sans-serif; 
 	-webkit-font-smoothing: subpixel-antialiased;
 }
+
 @supports (font-variation-settings: normal) {
   html { font-family: 'Inter var', sans-serif; }
 }
 
-/*-----------------------------------------------------------------------------
-	Language and Theme importing
------------------------------------------------------------------------------*/
-@import "language";
-
-
-/*-----------------------------------------------------------------------------
-	Reset – based on http://meyerweb.com/eric/tools/css/reset/
------------------------------------------------------------------------------*/
-
+/* Reset | based on http://meyerweb.com/eric/tools/css/reset/ --------*/
 html, body, div, span, applet, object, iframe,
 header, nav, section, aside, footer,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -73,10 +63,7 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 1.2em;
 }
 
-/*-----------------------------------------------------------------------------
-	Basic styles
------------------------------------------------------------------------------*/
-
+/* Basic & universal transition styles --------*/
 * {
 	transition-duration: 0ms;
 	transition-property: color, background, border, opacity, transform, fill;
@@ -84,6 +71,9 @@ h1, h2, h3, h4, h5, h6 {
 	transition-timing-function: var(--ease-current);
 }
 
+
+
+/* Basic typographic scale --------*/
 html {
 	font-size: 50%;
 	min-height: 100%;
@@ -105,10 +95,13 @@ body {
 	background-color: var(--backframe-background-color);
 }
 
+
+/* Apply base transition-duration to interactive elements --------*/
 a, button, input, li {
 	transition-duration: var(--duration-shorter);
 }
 
+/* Prevent selection of interface elements --------*/
 a, button {
 	user-select: none;
 	-moz-user-select: none;
@@ -116,25 +109,17 @@ a, button {
 	-ms-user-select: none;
 }
 
-/* Paragraphs */
-
+/* Basic paragraph rhythm --------*/
 p+p {
-	margin-top: var(--spacing-thinnest);
+	margin-top: var(--standard-inner-rhythm);
 }
 
-p.label {
-	position: relative;
-	margin: 0 0 var(--spacing-micro);
-}
-
-/* Links */
-
+/* Make sure interactive elements have pointer --------*/
 a, input[type="submit"], button {
 	cursor: pointer;
 }
 
-/* Code */
-
+/* Basic code styles --------*/
 code,
 .code {
 	tab-size: 4;
@@ -156,7 +141,7 @@ pre:last-child {
 pre code {
 	display: block;
 	overflow: auto;
-	font-size: var(--text-short);
+	font-size: var(--text-small);
 	font-family: inherit;
 	line-height: 1.4em;
 	padding: var(--spacing-thinner);
@@ -174,8 +159,7 @@ i, var {
 	text-shadow: none;
 }
 
-/* States */
-
+/* Basic states styles --------*/
 .busy,
 .busy * {
 	cursor: wait;
@@ -197,14 +181,11 @@ i, var {
 	color: var(--color-main-light);
 }
 
+/* Special elements --------*/
 .help {
 	color: var(--color-main-dark);
 	font-size: var(--text-small);
 	text-transform: none;
-}
-
-.centered {
-	text-align: center;
 }
 
 .accessible {

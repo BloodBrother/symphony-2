@@ -4,16 +4,9 @@
  * @since: Symphony 2.3
  */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
 @import "variables";
 
-/*-----------------------------------------------------------------------------
-	General column definitions
------------------------------------------------------------------------------*/
-
+/* Generic grid definition --------*/
 .columns {
 	display: flex;
 	flex-wrap: wrap;
@@ -28,46 +21,13 @@
 	> .invalid {
 		box-sizing: border-box;
 		padding: 0 0 0 var(--standard-container-rhythm);
-
-		&.primary,
-		&.secondary {
-			width: 100%;
-		}
-
-		&.justified {
-			padding-top: 2.1rem;
-		}
 	}
 
-	> .invalid > .column {
-		padding-left: 0;
-		width: 100%!important;
-	}
-
-	&.two .column,
-	&.two > .invalid {
+	&.two .column {
 		width: 50%;
 
 		@media (max-width: (@xs - 1)){
 			width: 100%;
-		}
-
-		&.primary {
-			width: calc(~'100% - var(--dimension-tiny)');
-
-			@media (max-width: (@md - 1)){
-				width: 100%;
-				max-width: 100%;
-			}
-		}
-
-		&.secondary {
-			padding-left: var(--spacing-broadest);
-			width: var(--sidebar-width);
-
-			@media (max-width: (@md - 1)){
-				width: 100%;
-			}
 		}
 	}
 

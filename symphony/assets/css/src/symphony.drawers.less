@@ -8,49 +8,51 @@
  * @since Symphony 2.3
  */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
 @import "variables";
 
-/*-----------------------------------------------------------------------------
-	Horizontal drawers
------------------------------------------------------------------------------*/
 
-div.drawer.horizontal {
-	max-width: 100%;
-	flex: 100% 0 0;
-	margin-top: var(--standard-container-rhythm);
-	margin-bottom: var(--standard-inner-rhythm);
-	z-index: 11;
-}
+/* The div tag prevents leaking to drawer trigger --------*/
+div.drawer {
+		background: var(--sidebar-background-color);
 
-/*-----------------------------------------------------------------------------
-	Vertical drawers
------------------------------------------------------------------------------*/
-
-#contents {
-	div.drawer {
 		&::-webkit-scrollbar {
 			display: none;
 		}
 
+		&.horizontal {
+			flex: 100% 0 0;
+			z-index: 11;
+			border-radius: var(--radius-current);
+
+			/* Outer rhythm --------*/
+			margin-top: var(--standard-container-rhythm);
+			margin-bottom: var(--standard-inner-rhythm);
+		}
+
 		&:not(.horizontal) {
+			
+			/* Transition styles --------*/
 			transition-timing-function: var(--ease-current);
 			transition-delay: 0ms, var(--duration-shortest);
-			transition-duration: var(--duration-longest), var(--duration-short);
+			transition-duration: var(--duration-long), var(--duration-short);
 			transition-property: bottom, opacity;
-			overflow: scroll;
-			-webkit-overflow-scrolling: touch;
+			
+			/* Layout and scrolling behavior --------*/
+			width: var(--sidebar-width);
+			padding-top: var(--spacing-broad);
 			position: absolute;
 			top: var(--spacing-thinner);
 			bottom: 0;
-			background: var(--sidebar-background-color);
-			width: var(--dimension-tinier);
-			max-width: 100%;
-			opacity: 1;
-			z-index: 1;
+			overflow-x: hidden;
+			overflow-y: auto;
+			-webkit-overflow-scrolling: touch;
+
+			/* Mask and prevent interaction when not opened --------*/
+			&:not(.opened) {
+				opacity: 0;
+				bottom: 100%;
+				pointer-events: none;
+			}
 
 			.contents {
 				padding: 0 0 var(--spacing-broadest);
@@ -58,34 +60,19 @@ div.drawer.horizontal {
 		}
 
 		.close-btn {
-			position: absolute;
-			right: var(--spacing-broad);
-			top: auto;
+			margin-left: var(--standard-container-rhythm);
 		}
 
+		/* Position and style vertical variants --------*/
 		&.vertical-left {
 			left: 0;
-			border-right: 1px solid var(--color-main-light);
-			transform: translateX(-100%);
-
-			&.opened {
-				transform: none;
-			}
 		}
 
 		&.vertical-right {
 			right: var(--spacing-broader);
-			overflow-x: hidden;
-			overflow-y: auto;
-			width: var(--sidebar-width);
-			border-radius: var(--radius-duller);
-			padding-top: var(--spacing-broad);
-
-			&:not(.opened) {
-				opacity: 0;
-				bottom: 100%;
-				pointer-events: none;
-			}
+			border-bottom-right-radius: var(--radius-big);
+			border-bottom: 1px solid var(--color-ui);
+			border-right: 1px solid var(--color-ui);
 		}
 	}
-}
+// }

@@ -22,9 +22,9 @@
 	margin: var(--spacing-micro) 0 0;
 
 	/* Hide panel by default --------*/
-	opacity: 0;
-	overflow: hidden;
-	box-sizing: border-box;
+	// opacity: 0;
+	// overflow: hidden;
+	// box-sizing: border-box;
 
 
 	>* {
@@ -57,6 +57,16 @@
 /*-----------------------------------------------------------------------------
 	Special Cases
 -----------------------------------------------------------------------------*/
+
+.field-date .suggestions {
+	// overflow: visible;
+	top: 85%;
+	left: auto;
+	
+	>* {
+		padding: 0;
+	}
+}
 
 input:not(:focus) ~ .suggestions:not(:empty),
 textarea:not(:focus) ~ .suggestions:not(:empty) {
