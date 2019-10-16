@@ -2,15 +2,7 @@
  * Symphony Installer
  */
 
-/*-----------------------------------------------------------------------------
- 	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
 @import "variables";
-
-/*-----------------------------------------------------------------------------
-	General
------------------------------------------------------------------------------*/
 
 body {
 	padding: 0 !important;
@@ -24,10 +16,7 @@ form {
 	max-width: 90rem;
 }
 
-/*-----------------------------------------------------------------------------
-	Sidebar
------------------------------------------------------------------------------*/
-
+/* Sidebar --------*/
 h1 {
 	color: var(--color-accent);
 	font-size: var(--text-current);
@@ -42,7 +31,7 @@ h1 {
 	em {
 		display: block;
 		color: var(--color-main);
-		font-size: var(--text-shorter);
+		font-size: var(--text-smaller);
 		font-style: normal;
 		text-transform: uppercase;
 		margin-top: var(--spacing-micro);
@@ -57,10 +46,7 @@ h1 {
 	}
 }
 
-/*-----------------------------------------------------------------------------
-	Content
------------------------------------------------------------------------------*/
-
+/* Content --------*/
 h2 {
 	color: var(--color-accent);
 	font-size: var(--text-bigger);
@@ -97,7 +83,7 @@ form > fieldset {
 	}
 
 	.frame {
-		margin-bottom: var(--spacing-broad)!important;
+		margin-bottom: var(--spacing-broad);
 		padding: var(--spacing-broad) var(--spacing-thinner) var(--spacing-thinner);
 		background: var(--color-clear);
 
@@ -106,12 +92,12 @@ form > fieldset {
 			left: var(--spacing-thinner);
 			top: var(--spacing-thinner);
 			color: var(--color-main);
-			font-size: var(--text-shorter);
+			font-size: var(--text-smaller);
 			text-transform: uppercase;
 
 			& + p {
 				color: var(--color-main);
-				font-size: var(--text-short);
+				font-size: var(--text-small);
 				margin-top: var(--spacing-micro);
 			}
 		}

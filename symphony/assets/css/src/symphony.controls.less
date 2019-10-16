@@ -7,42 +7,21 @@
 * @since Symphony 4.0.0
 */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
 @import "variables";
 
-/*--------------------------------------------------------------------------
-	Controls
---------------------------------------------------------------------------*/
-
-#controls {
-	display: flex;
-	align-items: center;
-	padding: var(--spacing-micro) var(--standard-container-rhythm);
-	position: sticky;
-	top: 0;
+[id="controls"] {
 	background-color: var(--frontframe-background-color);
-	z-index: 10;
+	padding: var(--spacing-micro) var(--standard-container-rhythm);
 	border-bottom: 1px solid var(--color-ui);
 	border-top-left-radius: var(--radius-big);
 	border-top-right-radius: var(--radius-big);
 
-	body.page-index & {
-		border-top-left-radius: var(--radius-big);
-		border-top-right-radius: var(--radius-big);
-	}
+	display: flex;
+	align-items: center;
 
-	&:empty {
-		padding: 0;
-		margin: 0;
-		height: var(--spacing-thin);
-
-		@media (max-width: (@sm - 1)) {
-			display: none;
-		}
-	}
+	position: sticky;
+	top: 0;
+	z-index: 10;
 
 	.actions {
 		display: flex;
@@ -63,15 +42,17 @@
 			position: relative;
 			border-radius: 100%;
 
+			/* Size icons --------*/
 			svg {
 				width: 20px;
 				height: 20px;
-				position: relative;
 			}
 
+			/* Pseudo background circle --------*/
 			&:before {
 				content: "";
 				position: absolute;
+				z-index: -1;
 				width: 20px;
 				height: 20px;
 				padding: var(--spacing-thinnest);
@@ -90,7 +71,7 @@
 		}
 	}
 
-/* Push #content-actions to right on #controls --------*/
+/* Push to right --------*/
 	#contents-actions {
 		display: flex;
 		margin-left: auto;

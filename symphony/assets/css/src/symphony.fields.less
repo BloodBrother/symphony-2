@@ -7,22 +7,15 @@
  * @since Symphony 4.0.0
  */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
 @import "variables";
-
-/*--------------------------------------------------------------------------
-	Field Basic styles
---------------------------------------------------------------------------*/
 
 .field {
 	box-sizing: border-box;
 	position: relative;
 	min-height: var(--standard-field-height);
+	margin-top: var(--standard-container-rhythm);
 
-	&,>* {
+	>* {
 		margin-top: var(--standard-inner-rhythm);
 	}
 
@@ -31,7 +24,7 @@
 		display: inline-block;
 	}
 
-// interactive styles
+/* Interactive styles --------*/
 	&:not(:hover) { 
 		color: var(--standard-field-color);
 
@@ -57,7 +50,7 @@
 		}
 	}
 
-// special case for uploaded file input
+/* Special case for uploaded file input --------*/
 	label+span {
 		display: contents;
 
@@ -101,7 +94,7 @@
 		flex: 100% 0 0;
 	}
 
-
+	/* Position error message --------*/
 	.invalid label~* {
 		position: absolute;
 		bottom: -1em;
@@ -110,30 +103,20 @@
 	}
  }
 
-
- /*--------------------------------------------------------------------------
-	LAYOUT MODEL - horizontal with label inside inputs 
- --------------------------------------------------------------------------*/
+/* Layout model - horizontal with label inside inputs --------*/
 @media (min-width: @xs) {
 	.field {
+		display: flex;
+		align-items: baseline;
+		flex-wrap: wrap;
+
 		&,>* {
 			margin-top: initial;
-		}
-
-		& {
-			display: flex;
-			align-items: baseline;
-			flex-wrap: wrap;
 		}
 
 		&+& {
 			margin-top: -2px;
 		}
-		
-		&>*:first-child {
-			order: 0;
-		}
-
 
 		&>*:first-child, &:after {
 			flex-basis: var(--standard-label-min-width);
@@ -146,12 +129,10 @@
 			flex-grow: 10;
 			min-width: var(--dimension-tiniest);
 			flex-shrink: 1;
-			order: 1;
 			margin-right: auto;
 		}
 
 		&>*+*~* {
-			order: 3;
 			max-width: var(--dimension-tiny);
 			margin-right: auto;
 			margin-top: var(--spacing-nano);
@@ -165,10 +146,6 @@
 			margin-right: 0;
 			padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm));
 			transition: all 200ms var(--ease-current);
-		}
-
-		&.field-date .suggestions {
-			left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm));
 		}
 
 		select:focus,
@@ -193,7 +170,7 @@
 			padding-right: calc(var(--standard-field-padding) + var(--standard-container-rhythm));
 			padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm) + var(--standard-container-rhythm));
 		}
-		
+
 		/* Prevent icon from jumping around --------*/
 		&:hover select:not([multiple]),
 		select:not(:placeholder-shown),
@@ -208,6 +185,10 @@
 			line-height: 0;
 			top: var(--spacing-nano);
 			position: relative;
+		}
+
+		&.field-date .suggestions {
+			left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm));
 		}
 	}
 
