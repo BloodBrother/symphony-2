@@ -11,7 +11,8 @@
 
 /* Main nav container --------*/
 #nav {
-	font-size: var(--text-small);
+	// font-size: var(--text-small);
+	font-size: var(--text-big);
 	@media (max-width: @sm) {
 		font-size: var(--text-big);
 	}
@@ -22,18 +23,19 @@
 		position: relative;
 		cursor: pointer;
 		color: inherit;
+		font-weight: 780;
 	}
 
-	span {
-		font-weight: 300;
-	}
+	// span {
+	// 	font-weight: 300;
+	// }
 	
-	a {
-		font-weight: 450;
-	}
+	// a {
+	// 	font-weight: 450;
+	// }
 
 	*+* {
-		margin-top: calc(var(--standard-inner-rhythm) * .5);
+		margin-top: calc(var(--standard-inner-rhythm));
 	}
 
 	/* Section Titles --------*/
