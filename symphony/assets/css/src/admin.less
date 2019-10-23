@@ -87,7 +87,7 @@ body {
 
 	/* Master Layout for Wide Viewports --------*/
 	@media (min-width: @sm) {
-		padding: var(--standard-container-rhythm);
+		// padding: var(--standard-container-rhythm);
 
 		>header {
 			/* Deploy children in the master flow --------*/
@@ -100,7 +100,8 @@ body {
 				height: var(--spacing-large);
 				top: var(--standard-container-rhythm);
 				position: sticky;
-				
+				left: var(--standard-container-rhythm);
+
 				>a {
 					align-items: flex-start;
 				}
@@ -108,13 +109,14 @@ body {
 			/* Align session element to the right of the content --------*/
 			>div {
 				float: right;
+				margin-right: var(--standard-container-rhythm);
 			}
 		}
 		/* Align the nav at the left of the content --------*/
 		>nav {
 			margin-top: var(--standard-container-rhythm);
 			margin-bottom: var(--standard-container-rhythm);
-			margin-left: calc(-1 * var(--standard-container-rhythm));
+			// margin-left: calc(-1 * var(--standard-container-rhythm));
 			float: left;
 			clear: left;
 			position: sticky;
@@ -128,20 +130,28 @@ body {
 			max-height: calc(100vh - calc(var(--spacing-large) + var(--standard-container-rhythm) * 4));
 		}
 
+		>aside {
+			padding: var(--standard-inner-rhythm) var(--standard-container-rhythm);
+			border-left: 1px solid var(--color-ui);
+		}
+
 		/* Force alignment / prevent background bleeding --------*/
 		>aside, >main {
-			margin-left: var(--navigation-sidebar-width);
+			// margin-left: var(--navigation-sidebar-width);
 		}
 		
 		/* Clear the floating session widget */
 		>main {
 			clear: right;
+			overflow: auto;
 		}
 
 		>footer {
-			position: sticky;
-			bottom: var(--standard-container-rhythm);
+			// position: sticky;
+			// bottom: var(--standard-container-rhythm);
 			clear: left;
+			float: left;
+			height: 0;
 		}
 	}
 

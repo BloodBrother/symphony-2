@@ -52,7 +52,7 @@
 
 /* Special case for uploaded file input --------*/
 	label+span {
-		display: contents;
+		display: flex;
 
 		a, input {
 			flex-grow: 1;
@@ -103,93 +103,110 @@
 	}
  }
 
+
+
 /* Layout model - horizontal with label inside inputs --------*/
-@media (min-width: @xs) {
-	.field {
-		display: flex;
-		align-items: baseline;
-		flex-wrap: wrap;
+// @media (min-width: @xs) {
+// 	.field {
+// 		display: flex;
+// 		align-items: baseline;
+// 		flex-wrap: wrap;
 
-		&,>* {
-			margin-top: initial;
-		}
+// 		&,>* {
+// 			margin-top: initial;
+// 		}
 
-		&+& {
-			margin-top: -2px;
-		}
+// 		&+& {
+// 			margin-top: -2px;
+// 		}
 
-		&>*:first-child, &:after {
-			flex-basis: var(--standard-label-min-width);
-			flex-shrink: 0;
-			box-sizing: border-box;
-		}
+// 		&>*:first-child, &:after {
+// 			flex-basis: var(--standard-label-min-width);
+// 			flex-shrink: 0;
+// 			box-sizing: border-box;
+// 		}
 
-		&>*+* {
-			flex-basis: 0;
-			flex-grow: 10;
-			min-width: var(--dimension-tiniest);
-			flex-shrink: 1;
-			margin-right: auto;
-		}
+// 		&>*+* {
+// 			flex-basis: 0;
+// 			flex-grow: 10;
+// 			min-width: var(--dimension-tiniest);
+// 			flex-shrink: 1;
+// 			margin-right: auto;
+// 		}
 
-		&>*+*~* {
-			max-width: var(--dimension-tiny);
-			margin-right: auto;
-			margin-top: var(--spacing-nano);
-		}
+// 		&>*+*~* {
+// 			max-width: var(--dimension-tiny);
+// 			margin-right: auto;
+// 			margin-top: var(--spacing-nano);
+// 		}
 
-		input:not([type=checkbox]),
-		textarea,
-		select {
-			min-height: var(--standard-field-height);
-			margin-left: calc(-1 *  var(--standard-label-min-width));
-			margin-right: 0;
-			padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm));
-			transition: all 200ms var(--ease-current);
-		}
+// 		input:not([type=checkbox]),
+// 		textarea,
+// 		select {
+// 			min-height: var(--standard-field-height);
+// 			margin-left: calc(-1 *  var(--standard-label-min-width));
+// 			margin-right: 0;
+// 			padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm));
+// 			transition: all 200ms var(--ease-current);
+// 		}
 
-		select:focus,
-		textarea:focus,
-		input:not([type=checkbox]):focus {
-			border-color: var(--standard-field-focus-border-color);
-		}
+// 		select:focus,
+// 		textarea:focus,
+// 		input:not([type=checkbox]):focus {
+// 			border-color: var(--standard-field-focus-border-color);
+// 		}
 
-		/* Enlarged style for states filling container padding --------*/
-		input:-webkit-autofill,
-		select:not(:placeholder-shown),
-		textarea:not(:placeholder-shown),
-		input:not([type=checkbox]):not(:placeholder-shown),
-		select:focus,
-		textarea:focus,
-		input:not([type=checkbox]):focus,
-		&:hover select,
-		&:hover textarea,
-		&:hover input:not([type=checkbox]) {
-			margin-left: calc(-1 *  var(--standard-label-min-width) - var(--standard-container-rhythm));
-			margin-right: calc(-1 *  var(--standard-container-rhythm));
-			padding-right: calc(var(--standard-field-padding) + var(--standard-container-rhythm));
-			padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm) + var(--standard-container-rhythm));
-		}
+//			input[type="text"],
+//			input[type="input"],
+//			input[type="password"],
+//			textarea,
+//			.field-value-readonly {
+//				&:not(:placeholder-shown):not(:focus):not(:hover) {
+//					border-color: transparent;
+//				}
+//			}
 
-		/* Prevent icon from jumping around --------*/
-		&:hover select:not([multiple]),
-		select:not(:placeholder-shown),
-		select:not([multiple]):focus {
-			padding-right: calc(0.65em + var(--spacing-thinnest) * 2 + var(--standard-container-rhythm));
-			background-position: right calc(.7em + var(--standard-container-rhythm)) top 50%;
-		}
+// 		/* Enlarged style for states filling container padding --------*/
+// 		input:-webkit-autofill,
+// 		select:not(:placeholder-shown),
+// 		textarea:not(:placeholder-shown),
+// 		input:not([type=checkbox]):not(:placeholder-shown),
+// 		select:focus,
+// 		textarea:focus,
+// 		input:not([type=checkbox]):focus,
+// 		&:hover select,
+// 		&:hover textarea,
+// 		&:hover input:not([type=checkbox]) {
+// 			margin-left: calc(-1 *  var(--standard-label-min-width) - var(--standard-container-rhythm));
+// 			margin-right: calc(-1 *  var(--standard-container-rhythm));
+// 			padding-right: calc(var(--standard-field-padding) + var(--standard-container-rhythm));
+// 			padding-left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm) + var(--standard-container-rhythm));
+// 		}
 
-		label>i:not(:empty) {
-			display: block;
-			height: 0;
-			line-height: 0;
-			top: var(--spacing-nano);
-			position: relative;
-		}
+// 		/* Prevent icon from jumping around --------*/
+// 		&:hover select:not([multiple]),
+// 		select:not(:placeholder-shown),
+// 		select:not([multiple]):focus {
+// 			padding-right: calc(0.65em + var(--spacing-thinnest) * 2 + var(--standard-container-rhythm));
+// 			background-position: right calc(.7em + var(--standard-container-rhythm)) top 50%;
+// 		}
 
-		&.field-date .suggestions {
-			left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm));
-		}
-	}
+// 		label>i:not(:empty) {
+// 			display: block;
+// 			height: 0;
+// 			line-height: 0;
+// 			top: var(--spacing-nano);
+// 			position: relative;
+// 		}
 
-}
+// 		&.field-date .suggestions {
+// 			left: calc(var(--standard-label-min-width) + var(--standard-container-rhythm));
+// 		}
+
+//			/* Special case for upload field --------*/
+//			label+span {
+//				display: contents;
+//			}
+// 	}
+
+// }
