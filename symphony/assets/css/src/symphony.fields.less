@@ -10,18 +10,58 @@
 @import "variables";
 
 .field {
-	box-sizing: border-box;
-	position: relative;
-	min-height: var(--standard-field-height);
-	margin-top: var(--standard-container-rhythm);
 
+	/* Layout model - enclosed fields, piling without margins --------*/
 	>* {
-		margin-top: var(--standard-inner-rhythm);
+		display: block;
 	}
 
-	label>span {
-		line-height: 1.1em;
-		display: inline-block;
+	--standard-field-border-color: transparent;
+
+	border: 1px solid var(--color-ui);
+	margin-bottom: -1px;
+
+	&:first-of-type {
+		&, input:not([type=checkbox]), select, textarea {
+			border-top-left-radius: var(--radius-current);
+			border-top-right-radius: var(--radius-current);
+		}
+	}
+
+	&:last-of-type {
+		&, input:not([type=checkbox]), select, textarea {
+			border-bottom-left-radius: var(--radius-current);
+			border-bottom-right-radius: var(--radius-current);
+			border-bottom-color: var(--color-ui);
+		}
+
+		input:not([type=checkbox]), select, textarea {
+			margin-bottom: -1px;
+		}
+	}
+	
+	>*:first-child {
+		margin-left: var(--standard-inner-rhythm);
+
+		&+*~* {
+			margin-left: var(--standard-inner-rhythm);
+			margin-bottom: var(--standard-inner-rhythm);
+		}
+	}
+
+	&:not(.field-checkbox)>*:first-child {
+		top: var(--standard-inner-rhythm);
+		height: 0;
+
+		&+input:not([type=checkbox]), 
+		&+select, 
+		&+textarea,
+		&+* input:not([type=checkbox]),
+		&+* select,
+		&+* textarea {
+			margin-top: 0;
+			padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
+		}
 	}
 
 /* Interactive styles --------*/
@@ -53,13 +93,19 @@
 /* Special case for uploaded file input --------*/
 	label+span {
 		display: flex;
+		align-items: center;
+		padding-top: 0;
 
 		a, input {
 			flex-grow: 1;
 
 			~* {
-				margin-left: var(--standard-container-rhythm);
+				margin: 0 var(--standard-inner-rhythm);
 			}
+		}
+
+		input[type=file] {
+			padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
 		}
 
 		button {
@@ -76,6 +122,8 @@
 			text-overflow: ellipsis;
 			flex-shrink: 1;
 			flex-basis: 0;
+			padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
+			padding-bottom: var(--standard-inner-rhythm);
 		}
 
 		[type="hidden"]~a:hover {
@@ -101,4 +149,4 @@
 		min-width: max-content;
 		z-index: 1;
 	}
- }
+}
