@@ -10,15 +10,13 @@
 
 [id="breadcrumbs"] {
 	display: flex;
-	align-items: baseline;
+	align-items: center;
 	flex-grow: 1;
-	max-width: var(--dimension-smaller);
 
 	nav {
 		flex-shrink: 0;
 		flex-grow: 0;
 		box-sizing: border-box;
-		margin-right: var(--standard-inner-rhythm);
 		
 		p {
 			display: contents;
@@ -27,8 +25,11 @@
 
 				color: var(--color-main-light);
 				font-size: var(--text-small);
-				display: flex;
-				align-items: center;
+				display: block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				max-width: 100%;
 
 				margin-left: var(--spacing-thinnest);
 
@@ -38,6 +39,7 @@
 
 				svg {
 					margin-right: var(--standard-inner-rhythm);
+					flex-shrink: 0;
 				}
 
 				&:hover {
@@ -51,16 +53,11 @@
 		}
 	}
 
-	nav+h2 {
-		flex-grow: 10;
-		max-width: var(--dimension-smallest);
-		margin-left: var(--spacing-broad);
-	}
-
 
 	h2 {
 		font-size: var(--text-bigger);
 		font-weight: 760;
+		padding-left: var(--standard-inner-rhythm);
 
 		img {
 			display: none;
