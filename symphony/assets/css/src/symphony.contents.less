@@ -10,13 +10,12 @@
 
 [role="main"] {
 	position: relative;
-	// border-radius: var(--radius-big);
-	height: calc(100vh - var(--text-bigger) - var(--standard-inner-rhythm) * 2 - var(--spacing-micro));
 
 	> form {
+		border-left: 1px solid var(--color-ui);
+		border-top: 1px solid var(--color-ui);
 		overflow: auto;
 		background-color: var(--frontframe-background-color);
-		// border-radius: var(--radius-big);
 		border: 1px solid var(--color-ui);
 		height: 100%;
 		box-sizing: border-box;
@@ -44,178 +43,6 @@
 			font-size: var(--text-small);
 		}
 	}
-
-	/* Content publishing interface specifics --------*/
-	#publish.page-single & {
-
-
-		
-		.columns {
-			margin-left: 0;
-			height: 100%;
-
-		}
-
-
-	// 	.column {
-	// 		padding: var(--standard-container-rhythm);
-
-	// 		@media (min-width: @xs) {
-
-	// 			/* Reset base padding to stick inputs to vertical edges  --------*/
-	// 			padding: 0 var(--standard-container-rhythm);
-
-	// 			/* Clear the radius to prevent non-radii input bleeding  --------*/
-	// 			padding-bottom: var(--radius-big);
-
-	// 			&.primary {
-	// 				/* Make sure to give space to associations in low content entries --------*/
-	// 				min-height: 78vh;
-	// 				/* Take all space available when side-by-side --------*/
-	// 				flex-grow: 999;
-	// 			}
-
-	// 			&.secondary {
-	// 				/* Take all space available when only child on line */
-	// 				flex-grow: 1;
-	// 				flex-basis: var(--sidebar-width); 
-	// 			}
-	// 		}
-
-	// 		&.secondary {
-	// 			background-color: var(--sidebar-background-color);
-	// 		}
-	// 	}
-
-	// 	/* Follow container radius and prevent bleeding */
-	// 	.drawer-vertical, 
-	// 	.column.secondary {
-	// 		border-bottom-right-radius: var(--radius-big);
-	// 	}
-
-		>form {
-			background-color: transparent;
-			border-radius: 0;
-
-			&::-webkit-scrollbar {
-				background-color: var(--scrollbar-background-color);
-				height: var(--scrollbar-height);
-				width: var(--scrollbar-width);
-			}
-
-			&:hover::-webkit-scrollbar {
-				&-thumb {
-					background-color: var(--scrollbar-thumb-background-color);
-					border-radius: var(--scrollbar-thumb-border-radius);
-				}
-			}
-			// max-height: 100%;
-		}
-		
-		[id="controls"] {
-			background-color: var(--backframe-background-color);
-		}
-		
-		.column {
-			margin: 0;
-			padding: var(--spacing-broader);
-
-			max-height: 100%;
-			overflow: auto;
-			box-sizing: border-box;
-
-
-			&.primary {
-				background-color: var(--frontframe-background-color);
-				flex-grow: 999;
-
-				.field {
-					background-color: var(--color-clear);
-					max-width: var(--dimension-smallest);
-					margin-left: auto;
-					margin-right: auto;
-					// filter: drop-shadow(var(--shadow-small));
-				}
-			}
-
-			textarea {
-				display: block;
-			}
-
-			&.secondary {
-				flex-grow: 1;
-				flex-basis: var(--sidebar-width);
-
-				.field {
-					background-color: var(--sidebar-background-color);
-				}
-			}
-		}
-
-		/* Layout model - enclosed fields without rhythm --------*/
-		.field {
-
-			--standard-field-border-color: transparent;
-
-			margin: 0;
-
-			border-top: 1px solid var(--color-ui);
-			border-left: 1px solid var(--color-ui);
-			border-right: 1px solid var(--color-ui);
-			border-bottom: 1px solid transparent;
-			margin-bottom: -1px;
-
-			&:first-of-type {
-				&, input:not([type=checkbox]), select, textarea {
-					border-top-left-radius: var(--radius-current);
-					border-top-right-radius: var(--radius-current);
-				}
-
-				
-			}
-
-			&:last-of-type {
-				&, input:not([type=checkbox]), select, textarea {
-					border-bottom-left-radius: var(--radius-current);
-					border-bottom-right-radius: var(--radius-current);
-				}
-
-				// input:not([type=checkbox]), select, textarea {
-				// 	// margin-bottom: 1px;
-				// }
-			}
-			
-			>*:first-child {
-				margin-top: 0;
-				margin-left: var(--standard-inner-rhythm);
-				font-weight: 600;
-				color: var(--color-main) !important;
-
-				&+* {
-					font-weight: 350;
-					font-size: var(--text-small);
-
-					~* {
-						margin-left: var(--standard-inner-rhythm);
-						margin-bottom: var(--standard-inner-rhythm);
-					}
-				}
-			}
-
-			&:not(.field-checkbox)>*:first-child {
-				top: var(--standard-inner-rhythm);
-				// margin-bottom: -1.5em;
-				height: 0;
-
-				&+:not([type=checkbox]) {
-					margin-top: 0;
-					padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
-				}
-			}
-		}
-	}
-
-
 
 }
 

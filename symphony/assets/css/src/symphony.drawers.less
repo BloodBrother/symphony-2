@@ -40,9 +40,7 @@ div.drawer {
 			/* Layout and scrolling behavior --------*/
 			width: var(--sidebar-width);
 			padding-top: var(--spacing-broad);
-			position: absolute;
-			top: var(--spacing-thinner);
-			bottom: 0;
+			z-index: 1;
 			overflow-x: hidden;
 			overflow-y: auto;
 			-webkit-overflow-scrolling: touch;
@@ -69,8 +67,8 @@ div.drawer {
 		}
 
 		&.vertical-right {
-			right: var(--spacing-broader);
-			border-bottom-right-radius: var(--radius-big);
+			// right: var(--spacing-broader);
+			// border-bottom-right-radius: var(--radius-big);
 			border-bottom: 1px solid var(--color-ui);
 			border-right: 1px solid var(--color-ui);
 		}

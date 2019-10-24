@@ -10,13 +10,7 @@
 @import "variables";
 
 [id="controls"] {
-	// background-color: var(--frontframe-background-color);
 	padding: var(--spacing-micro) var(--standard-inner-rhythm);
-	// border-left: 1px solid var(--color-ui);
-	// border-top-left-radius: var(--radius-big);
-	// border-top-right-radius: var(--radius-big);
-	border-left: 1px solid var(--color-ui);
-
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -31,101 +25,66 @@
 		display: contents !important;
 	}
 
-	// .actions {
-		// display: flex;
-		// flex-direction: column;
-		// align-items: center;
-		// justify-content: flex-end;
-		// margin: 0;
 
-		a, button {
-			background: transparent;
-			box-shadow: initial;
-		}
-
-
-		a, button {
-			display: flex;
-			// margin-right: var(--spacing-micro);
-			color: var(--color-main);
-			position: relative;
-			border-radius: 100%;
-
-			/* Size icons --------*/
-			svg {
-				width: 20px;
-				height: 20px;
-			}
-
-			/* Pseudo background circle --------*/
-			&:before {
-				content: "";
-				position: absolute;
-				z-index: -1;
-				width: 20px;
-				height: 20px;
-				padding: var(--spacing-micro);
-				border-radius: 100%;
-				right: 0;
-				top: 0;
-			}
-
-			&:after {
-				content: attr(title);
-				position: absolute;
-				right: 100%;
-				margin-right: var(--spacing-micro);
-				font-size: var(--text-smaller);
-				white-space: nowrap;
-				padding: var(--spacing-nano);
-				background-color: inherit;
-				color: var(--color-main-lightest);
-				font-weight: 500;
-				border-radius: var(--radius-small);
-				box-shadow: var(--shadow-small);
-				pointer-events: none;
-			}
-
-			&:not(:hover):not(:focus):after {
-				opacity: 0;
-			}
-
-			&:hover {
-				color: var(--color-main-lighter);
-				background-color: var(--color-main);
-
-				&:before {
-					background-color: var(--color-main-lighter);
-				}
-			}
-
-			&:active {
-				background-color: var(--color-accent);
-			}
-		}
-
-		.delete {
-			margin-top: auto;
-		}
-
-		[name="action[save]"] {
-			order: -1;
-			margin-bottom: var(--standard-inner-rhythm);
-		}
-
-		.modal-trigger {
-			// margin-right: 0;
-		}
-	// }
-
-/* Push to right --------*/
-	#contents-actions {
-		// align-items: center;
-		// display: flex;
-		// flex-direction: column;
-		// margin-left: auto;
-		// align-items: center;
+	a, button {
+		background: transparent;
+		box-shadow: initial;
 	}
 
+
+	a, button {
+		display: flex;
+		color: var(--color-main);
+		position: relative;
+		border-radius: 100%;
+
+		/* Size icons --------*/
+		svg {
+			width: 20px;
+			height: 20px;
+		}
+
+		&:after {
+			content: attr(title);
+			position: absolute;
+			right: 100%;
+			margin-right: var(--spacing-micro);
+			font-size: var(--text-smaller);
+			white-space: nowrap;
+			padding: var(--spacing-nano);
+			background-color: inherit;
+			color: var(--color-main-lightest);
+			font-weight: 500;
+			border-radius: var(--radius-small);
+			box-shadow: var(--shadow-small);
+			pointer-events: none;
+		}
+
+		&:not(:hover):not(:focus):after {
+			opacity: 0;
+		}
+
+		&:hover {
+			color: var(--color-main-lighter);
+			background-color: var(--color-main);
+
+			&:before {
+				background-color: var(--color-main-lighter);
+			}
+		}
+
+		&:active {
+			background-color: var(--color-accent);
+		}
+	}
+
+	.delete {
+		margin-top: auto;
+	}
+
+	[name="action[save]"] {
+		order: -1;
+		margin-bottom: var(--standard-inner-rhythm);
+	}
 }
 
