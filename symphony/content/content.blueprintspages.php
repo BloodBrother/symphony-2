@@ -226,8 +226,13 @@ class contentBlueprintsPages extends AdministrationPage
             Widget::TableBody($aTableBody), 'orderable selectable',
             null, array('role' => 'directory', 'aria-labelledby' => 'symphony-subheading', 'data-interactive' => 'data-interactive')
         );
+        
+        $primary = new XMLElement('div');
+        $primary->setAttribute('class', 'primary');
 
-        $this->Form->appendChild($table);
+        $this->Form->prependChild($primary);
+        
+        $primary->appendChild($table);
 
         $tableActions = new XMLElement('div');
         $tableActions->setAttribute('class', 'actions');
@@ -259,7 +264,7 @@ class contentBlueprintsPages extends AdministrationPage
 
         if (!empty($options)) {
             $tableActions->appendChild(Widget::Apply($options));
-            $this->Form->appendChild($tableActions);
+            $primary->appendChild($tableActions);
         }
     }
 
@@ -507,10 +512,15 @@ class contentBlueprintsPages extends AdministrationPage
             $tags->appendChild(new XMLElement('li', General::sanitize($type)));
         }
 
+        $primary = new XMLElement('div');
+        $primary->setAttribute('class', 'primary');
+
+        $this->Form->prependChild($primary);
+
         $column->appendChild($tags);
         $group->appendChild($column);
         $fieldset->appendChild($group);
-        $this->Form->appendChild($fieldset);
+        $primary->appendChild($fieldset);
 
         // Events -------------------------------------------------------------
 
@@ -565,7 +575,7 @@ class contentBlueprintsPages extends AdministrationPage
         $label->appendChild(Widget::Select('fields[data_sources][]', $options, array('multiple' => 'multiple')));
         $group->appendChild($label);
         $fieldset->appendChild($group);
-        $this->Form->appendChild($fieldset);
+        $primary->appendChild($fieldset);
 
         // Controls -----------------------------------------------------------
 
@@ -592,7 +602,6 @@ class contentBlueprintsPages extends AdministrationPage
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');
-        // $this->Form->appendChild($formInner);
 
         if (isset($_REQUEST['parent']) && is_numeric($_REQUEST['parent'])) {
             $this->Form->appendChild(new XMLElement('input', null, array('type' => 'hidden', 'name' => 'parent', 'value' => $_REQUEST['parent'])));

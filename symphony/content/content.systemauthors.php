@@ -78,6 +78,11 @@ class contentSystemAuthors extends AdministrationPage
             $this->appendSubheading(__('Authors'));
         }
 
+
+        $primary = new XMLElement('div');
+        $primary->setAttribute('class', 'primary');
+        $this->Form->prependChild($primary);
+
         Sortable::initialize($this, $authors, $sort, $order);
 
         $columns = array(
@@ -241,7 +246,7 @@ class contentSystemAuthors extends AdministrationPage
             array('role' => 'directory', 'aria-labelledby' => 'symphony-subheading')
         );
 
-        $this->Form->appendChild($table);
+        $primary->appendChild($table);
     }
 
     // Both the Edit and New pages need the same form
@@ -388,7 +393,7 @@ class contentSystemAuthors extends AdministrationPage
         $label->appendChild(Widget::Input('fields[email]', $author->get('email'), 'text', array('autocomplete' => 'off')));
         $group->appendChild((isset($this->_errors['email']) ? Widget::Error($label, $this->_errors['email']) : $label));
 
-        $this->Form->appendChild($group);
+        $primary->appendChild($group);
 
         // Login Details
         $group = new XMLElement('fieldset');
@@ -557,7 +562,7 @@ class contentSystemAuthors extends AdministrationPage
         $label->appendChild(Widget::Select('fields[default_area]', $options));
         $group->appendChild($label);
 
-        $this->Form->appendChild($group);
+        $primary->appendChild($group);
 
         // Custom Language Selection
         $languages = Lang::getAvailableLanguages();
@@ -582,7 +587,7 @@ class contentSystemAuthors extends AdministrationPage
             $label->appendChild($select);
             $group->appendChild($label);
 
-            $this->Form->appendChild($group);
+            $primary->appendChild($group);
         }
 
         // Administration password double check
@@ -602,7 +607,7 @@ class contentSystemAuthors extends AdministrationPage
                 isset($this->_errors['confirm-change-password']) ? Widget::Error($label, $this->_errors['confirm-change-password']) : $label
             );
 
-            $this->Form->appendChild($group);
+            $primary->appendChild($group);
         }
 
         // Actions

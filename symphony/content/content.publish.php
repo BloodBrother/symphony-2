@@ -850,7 +850,10 @@ class contentPublish extends AdministrationPage
             array('role' => 'directory', 'aria-labelledby' => 'symphony-subheading', 'data-interactive' => 'data-interactive')
         );
 
-        $this->Form->appendChild($table);
+        $primary = new XMLElement('div');
+        $primary->setAttribute('class', 'primary');
+        $primary->appendChild($table);
+        $this->Form->appendChild($primary);
 
         $tableActions = new XMLElement('div');
         $tableActions->setAttribute('class', 'actions');
@@ -902,7 +905,7 @@ class contentPublish extends AdministrationPage
 
         if (!empty($options)) {
             $tableActions->appendChild(Widget::Apply($options));
-            $this->Form->appendChild($tableActions);
+            $primary->appendChild($tableActions);
         }
 
         if ($pagination->totalPages() > 1) {
@@ -1129,13 +1132,13 @@ class contentPublish extends AdministrationPage
         $sidebar_fields = $section->fetchFields(null, 'sidebar');
         $main_fields = $section->fetchFields(null, 'main');
 
-        $fields_ctn = new XMLElement('div');
+        // $fields_ctn = new XMLElement('div');
 
-        if (!empty($sidebar_fields) && !empty($main_fields)) {
-            $fields_ctn->setAttribute('class', 'two columns');
-        } else {
-            $fields_ctn->setAttribute('class', 'columns');
-        }
+        // if (!empty($sidebar_fields) && !empty($main_fields)) {
+        //     $fields_ctn->setAttribute('class', 'two columns');
+        // } else {
+        //     $fields_ctn->setAttribute('class', 'columns');
+        // }
 
         // Only show the Edit Section button if the Author is a developer. #938 ^BA
         if (Symphony::Author()->isDeveloper()) {
@@ -1208,8 +1211,8 @@ class contentPublish extends AdministrationPage
             }
         }
 
-        $primary = new XMLElement('fieldset');
-        $primary->setAttribute('class', 'primary column');
+        $primary = new XMLElement('div');
+        $primary->setAttribute('class', 'primary');
 
         if ((!is_array($main_fields) || empty($main_fields)) && (!is_array($sidebar_fields) || empty($sidebar_fields))) {
             $message = __('Fields must be added to this section before an entry can be created.');
@@ -1227,23 +1230,23 @@ class contentPublish extends AdministrationPage
                     $primary->appendChild($this->__wrapFieldWithDiv($field, $entry));
                 }
 
-                $fields_ctn->appendChild($primary);
+                $this->Form->appendChild($primary);
             }
 
             if (is_array($sidebar_fields) && !empty($sidebar_fields)) {
-                $sidebar = new XMLElement('fieldset');
+                $sidebar = new XMLElement('div');
                 $sidebar->setAttribute('class', 'secondary column');
 
                 foreach ($sidebar_fields as $field) {
                     $sidebar->appendChild($this->__wrapFieldWithDiv($field, $entry));
                 }
 
-                $fields_ctn->appendChild($sidebar);
+                $this->Form->appendChild($sidebar);
             }
 
             $this->Header->setAttribute('class', 'spaced-bottom');
 
-            $this->Form->appendChild($fields_ctn);
+            // $this->Form->appendChild($fields_ctn);
 
             // Create a Drawer for Associated Sections
             $this->prepareAssociationsDrawer($section);
@@ -1529,13 +1532,13 @@ class contentPublish extends AdministrationPage
         $sidebar_fields = $section->fetchFields(null, 'sidebar');
         $main_fields = $section->fetchFields(null, 'main');
 
-        $fields_ctn = new XMLElement('div');
+        // $fields_ctn = new XMLElement('div');
 
-        if (!empty($sidebar_fields) && !empty($main_fields)) {
-            $fields_ctn->setAttribute('class', 'two columns');
-        } else {
-            $fields_ctn->setAttribute('class', 'columns');
-        }
+        // if (!empty($sidebar_fields) && !empty($main_fields)) {
+        //     $fields_ctn->setAttribute('class', 'two columns');
+        // } else {
+        //     $fields_ctn->setAttribute('class', 'columns');
+        // }
 
         // Only show the Edit Section button if the Author is a developer. #938 ^BA
         if (Symphony::Author()->isDeveloper()) {
@@ -1561,8 +1564,8 @@ class contentPublish extends AdministrationPage
 
         $this->Form->appendChild(Widget::Input('MAX_FILE_SIZE', Symphony::Configuration()->get('max_upload_size', 'admin'), 'hidden'));
 
-        $primary = new XMLElement('fieldset');
-        $primary->setAttribute('class', 'primary column');
+        $primary = new XMLElement('div');
+        $primary->setAttribute('class', 'primary');
 
         if ((!is_array($main_fields) || empty($main_fields)) && (!is_array($sidebar_fields) || empty($sidebar_fields))) {
             $message = __('Fields must be added to this section before an entry can be created.');
@@ -1582,9 +1585,10 @@ class contentPublish extends AdministrationPage
             $saveBtn->setAttributeArray(array('name' => 'action[save]', 'class' => 'button', 'title' => __('Save this entry'), 'type' => 'submit', 'accesskey' => 's'));
             $div->appendChild($saveBtn);
 
-            $deleteBtn = new XMLElement('button', Widget::SVGIcon('delete') . __('Delete'));
+            $deleteBtn = new XMLElement('button', Widget::SVGIcon('delete'));
             $deleteBtn->setAttributeArray(array('name' => 'action[delete]', 'class' => 'button confirm delete', 'title' => __('Delete this entry'), 'type' => 'submit', 'accesskey' => 'd', 'data-message' => __('Are you sure you want to delete this entry?')));
-            $div->appendChild(Widget::Modal([$deleteBtn], 'top right'));
+            $div->appendChild(Widget::Modal([], 'top right'));
+            $div->appendChild($deleteBtn);
 
             $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
             $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));
@@ -1595,23 +1599,23 @@ class contentPublish extends AdministrationPage
                     $primary->appendChild($this->__wrapFieldWithDiv($field, $entry));
                 }
 
-                $fields_ctn->appendChild($primary);
+                $this->Form->appendChild($primary);
             }
 
             if (is_array($sidebar_fields) && !empty($sidebar_fields)) {
-                $sidebar = new XMLElement('fieldset');
-                $sidebar->setAttribute('class', 'secondary column');
+                $sidebar = new XMLElement('div');
+                $sidebar->setAttribute('class', 'secondary');
 
                 foreach ($sidebar_fields as $field) {
                     $sidebar->appendChild($this->__wrapFieldWithDiv($field, $entry));
                 }
 
-                $fields_ctn->appendChild($sidebar);
+                $this->Form->appendChild($sidebar);
             }
 
             $this->Header->setAttribute('class', 'spaced-bottom');
 
-            $this->Form->appendChild($fields_ctn);
+            // $this->Form->appendChild($fields_ctn);
 
             // Create a Drawer for Associated Sections
             $this->prepareAssociationsDrawer($section);
