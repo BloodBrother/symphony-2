@@ -10,29 +10,20 @@
 @import "variables";
 
 [id="controls"] {
-	padding: var(--spacing-micro) var(--standard-inner-rhythm);
+	
+	/* Necessary to align the delete button at the bottom --------*/
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	float: right;
-	position: sticky;
-	top: 0;
-	z-index: 10;
-	height: 100%;
-	box-sizing: border-box;
 
-	div, ul {
-		display: contents !important;
+	/* Zap strutural elements so we can order buttons directly --------*/
+	div, ul, li {
+		display: contents;
 	}
-
 
 	a, button {
 		background: transparent;
 		box-shadow: initial;
-	}
-
-
-	a, button {
 		display: flex;
 		color: var(--color-main);
 		position: relative;
@@ -44,6 +35,7 @@
 			height: 20px;
 		}
 
+		/* Interactive title tooltip --------*/
 		&:after {
 			content: attr(title);
 			position: absolute;
@@ -53,17 +45,18 @@
 			white-space: nowrap;
 			padding: var(--spacing-nano);
 			background-color: inherit;
-			color: var(--color-main-lightest);
+			color: inherit;
 			font-weight: 500;
 			border-radius: var(--radius-small);
 			box-shadow: var(--shadow-small);
 			pointer-events: none;
 		}
 
-		&:not(:hover):not(:focus):after {
+		&:not(:hover):after {
 			opacity: 0;
 		}
 
+		/* Interactive styles --------*/
 		&:hover {
 			color: var(--color-main-lighter);
 			background-color: var(--color-main);
@@ -80,11 +73,28 @@
 
 	.delete {
 		margin-top: auto;
+		order: 2;
+
+		&:hover {
+			background-color: var(--color-error-light);
+			color: var(--color-error-dark);
+		}
 	}
 
-	[name="action[save]"] {
+	a[href*="blueprints"] {
+		order: 1;
+		// margin-top: auto;
+	}
+
+	[name="action[save]"],
+	.create {
 		order: -1;
-		margin-bottom: var(--standard-inner-rhythm);
+		margin-bottom: var(--standard-container-rhythm);
+
+		&:hover {
+			background-color: var(--color-success-light);
+			color: var(--color-success-dark);
+		}
 	}
 }
 

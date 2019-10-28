@@ -8,34 +8,11 @@
 
 @import "variables";
 
-[role="main"] {
-	position: relative;
-
-	> form {
-		border-left: 1px solid var(--color-ui);
-		border-top: 1px solid var(--color-ui);
-		overflow: auto;
-		background-color: var(--frontframe-background-color);
-		border: 1px solid var(--color-ui);
-		height: 100%;
-		box-sizing: border-box;
-
-		&::-webkit-scrollbar {
-			background-color: var(--scrollbar-background-color);
-			height: var(--scrollbar-height);
-			width: var(--scrollbar-width);
-		}
-
-		&:hover::-webkit-scrollbar {
-			&-thumb {
-				background-color: var(--scrollbar-thumb-background-color);
-				border-radius: var(--scrollbar-thumb-border-radius);
-			}
-		}
-
-	}
+[id="contents"] {
 
 	.actions {
+		position: sticky;
+		bottom: 0;
 		margin: var(--standard-inner-rhythm);
 		
 		/* Set smaller than standard font-size on form elements --------*/

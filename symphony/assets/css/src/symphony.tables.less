@@ -24,9 +24,8 @@ table {
 /* Directory table graphical styles --------*/
 table[role="directory"] {
 	background-color: var(--standard-table-background-color);
-	padding: var(--standard-inner-rhythm);
+
 	border-spacing: 0 2px;
-	border-radius: var(--radius-current);
 
 	td, th {
 		padding: var(--standard-inner-rhythm) var(--standard-container-rhythm);
@@ -110,7 +109,7 @@ table[role="directory"] {
 	/* Make the table scrollable and enable stickiness --------*/
 	display: block;
 	overflow: auto;
-	max-height: calc(100vh - var(--dimension-tiniest));
+	max-height: 100%;
 	position: relative;
 
 	/* Facilitate interactive states styling of sticky elements --------*/
@@ -119,7 +118,7 @@ table[role="directory"] {
 	}
 
 	/* Outer rhythm --------*/
-	margin: var(--standard-inner-rhythm);
+	// margin: var(--standard-inner-rhythm);
 
 	/* Scrollbars standard styling --------*/
 	&::-webkit-scrollbar {
@@ -140,8 +139,8 @@ table[role="directory"] {
 			&:first-child {
 				/* Make titles and related column header stick to the table's edges --------*/
 				position: sticky;
-				left: calc(-1 * var(--standard-inner-rhythm) - var(--radius-current));
-				padding-left: calc(var(--standard-inner-rhythm) + var(--radius-current));
+				left: 0;
+				padding-left: calc(var(--standard-container-rhythm));
 			}
 		}
 
@@ -158,7 +157,7 @@ table[role="directory"] {
 
 /* Make headers stick to table top for large sets of entries --------*/
 	th {
-		top: calc(-1 * var(--standard-inner-rhythm));
+		top: 0;
 		position: sticky;
 		z-index: 1;
 		
@@ -195,19 +194,6 @@ table.selectable {
 	tbody {
 		tr {
 
-			/* Rounded graphical style --------*/
-			td:first-child {
-				border-left: 1px solid transparent;
-				border-top-left-radius: var(--radius-current);
-				border-bottom-left-radius: var(--radius-current);
-			}
-
-			td:last-child {
-				border-right: 1px solid transparent;
-				border-top-right-radius: var(--radius-current);
-				border-bottom-right-radius: var(--radius-current);
-			}
-
 			/* Interaction styles --------*/
 			&:hover:not(.selected):not(.ordering) {
 				background-color: var(--standard-hover-row-background-color);
@@ -222,9 +208,8 @@ table.selectable {
 				}
 			}
 
-			/* Separate non-hovered entries by straight border --------*/
+			/* Separate non-hovered entries by border --------*/
 			&:not(:hover):not(.selected)+*:not(:hover):not(.selected) td {
-				border-radius: 0;
 				border-top-color: var(--color-ui);
 			}
 

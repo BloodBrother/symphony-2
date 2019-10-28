@@ -13,7 +13,7 @@
 	position: relative;
 	margin: 0;
 	background-color: var(--standard-frame-background-color);
-	padding: var(--standard-inner-rhythm);
+	// padding: var(--standard-inner-rhythm);
 
 	h1 {
 		padding: var(--spacing-thinnest);
@@ -56,7 +56,7 @@
 
 		&:not(.collapsed) {
 			border-radius: var(--radius-big);
-			background-color: var(--color-clear);
+			background-color: var(--color-accent-lighter);
 			border-color: var(--color-ui);
 
 			&:not(:first-of-type) {
@@ -283,16 +283,9 @@ fieldset.frame,
 	padding-right: 0.5rem;
 }
 
-.collapsed.js-animate,
-.destructed.js-animate {
-	transition: max-height var(--duration-short) var(--ease-current);
-}
-
 .collapsible .js-animate {
 	overflow: hidden;
 }
-
-
 
 .collapsible .field-publishnotes {
 	margin-top: 0;
@@ -300,7 +293,6 @@ fieldset.frame,
 
 .frame .js-animate {
 	overflow: hidden;
-	transition: max-height var(--duration-short) var(--ease-current);
 }
 
 /*-----------------------------------------------------------------------------
