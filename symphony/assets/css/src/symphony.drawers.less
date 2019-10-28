@@ -13,7 +13,7 @@
 
 /* The div tag prevents leaking to drawer trigger --------*/
 div.drawer {
-		background: var(--sidebar-background-color);
+		background: var(--backframe-background-color);
 
 		&::-webkit-scrollbar {
 			display: none;
@@ -21,24 +21,28 @@ div.drawer {
 
 		&.horizontal {
 			flex: 100% 0 0;
-			z-index: 11;
+			z-index: 2;
 			border-radius: var(--radius-current);
 
 			/* Outer rhythm --------*/
 			margin-top: var(--standard-container-rhythm);
 			margin-bottom: var(--standard-inner-rhythm);
+
+
+			body:not(.drawer-horizontal) & {
+				display: none;
+			}
 		}
 
 		&:not(.horizontal) {
 			
 			/* Transition styles --------*/
-			transition-timing-function: var(--ease-current);
-			transition-delay: 0ms, var(--duration-shortest);
-			transition-duration: var(--duration-long), var(--duration-short);
-			transition-property: bottom, opacity;
+			// transition-timing-function: var(--ease-current);
+			// transition-delay: 0ms, var(--duration-shortest);
+			// transition-duration: var(--duration-long), var(--duration-short);
+			// transition-property: bottom, opacity;
 			
 			/* Layout and scrolling behavior --------*/
-			width: var(--sidebar-width);
 			padding-top: var(--spacing-broad);
 			z-index: 1;
 			overflow-x: hidden;
@@ -47,9 +51,10 @@ div.drawer {
 
 			/* Mask and prevent interaction when not opened --------*/
 			&:not(.opened) {
-				opacity: 0;
-				bottom: 100%;
+				// opacity: 0;
+				// bottom: 100%;
 				pointer-events: none;
+				width: 0;
 			}
 
 			.contents {
@@ -69,8 +74,8 @@ div.drawer {
 		&.vertical-right {
 			// right: var(--spacing-broader);
 			// border-bottom-right-radius: var(--radius-big);
-			border-bottom: 1px solid var(--color-ui);
-			border-right: 1px solid var(--color-ui);
+			// border-bottom: 1px solid var(--color-ui);
+			// border-right: 1px solid var(--color-ui);
 		}
 	}
 // }

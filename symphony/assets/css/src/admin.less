@@ -9,6 +9,10 @@
 body {
 	min-width: var(--xxs);
 	min-height: 100%;
+
+	/* Make sure the scrollbar space is always occupied for stability reasons --------*/
+	overflow-y: scroll;
+	
 	/* Master Layout Base --------*/
 	>nav {
 		max-width: 100%;
@@ -89,16 +93,16 @@ body {
 	@media (min-width: @sm) {
 		height: 100vh;
 		display: grid;
-		grid-template-rows: auto 1fr min-content;
-		grid-template-columns: auto 1fr auto max-content;
+		grid-template-rows: auto auto 1fr min-content;
+		grid-template-columns: auto minmax(0, 1fr) auto max-content;
 		grid-template-areas:
 			"header context secondary controls" 
+			"nav context secondary controls"
 			"nav primary secondary controls"
 			"session primary secondary controls"
 			"footer primary secondary controls";
 
-		>main, >header, >header>h1, 
-		&[id="publish"].page-single>main>form {
+		>main, >header, >header>h1, >main>form {
 			display: contents;
 		}
 
@@ -129,29 +133,63 @@ body {
 			margin: var(--standard-container-rhythm);
 		}
 
-		>main>aside {
+		>aside {
 			grid-area: context;
 			border-left: 1px solid var(--color-ui);
 			padding: var(--standard-inner-rhythm);
 		}
 
-		>main>form>.secondary, >main>form+div {
+		>main>form>* {
+			position: relative;
+		}
+
+		>main>form>[class] {
+			// box-sizing: border-box;
+			max-height: 100%;
+			overflow: auto;
+
+			&::-webkit-scrollbar {
+				background-color: var(--scrollbar-background-color);
+				height: var(--scrollbar-height);
+				width: var(--scrollbar-width);
+			}
+
+			&:hover::-webkit-scrollbar {
+				&-thumb {
+					background-color: var(--scrollbar-thumb-background-color);
+					border-radius: var(--scrollbar-thumb-border-radius);
+				}
+			}
+
+		}
+
+		>main>form>.secondary,
+		>main>form~* {
 			grid-area: secondary;
-			border-top: 1px solid var(--color-ui);
-			// align-self: center;
 			border-left: 1px solid var(--color-ui);
 		}
 		
-		>main>form>.primary, >main>form {
+		>main>form>.primary {
 			grid-area: primary;
 			border-top: 1px solid var(--color-ui);
 			border-left: 1px solid var(--color-ui);
+			background-color: var(--frontframe-background-color);
+
+			display: flex;
+			flex-direction: column;
+
 		}
 
-		[id="controls"] {
+		>main>form>.primary>table {
+			flex-grow: 1;
+		}
+
+		>main>form>[id="controls"] {
 			grid-area: controls;
-			border-top: 1px solid var(--color-ui);
 			border-left: 1px solid var(--color-ui);
+			padding: var(--standard-inner-rhythm);
+			padding-top: var(--standard-container-rhythm);
+			z-index: 2;
 		}
 	}
 
@@ -159,6 +197,7 @@ body {
 	/* Content publishing interface specifics --------*/
 	&[id="publish"].page-single {
 		
+		/* Align page title with primary fields --------*/
 		[id="breadcrumbs"] {
 			&:after {
 				content: "";
@@ -175,35 +214,39 @@ body {
 			}
 		}
 
-		fieldset {
-			// margin: 0;
-			padding: var(--standard-container-rhythm);
-			max-height: 100%;
-			overflow: auto;
-			box-sizing: border-box;
-
-			&::-webkit-scrollbar {
-				background-color: var(--scrollbar-background-color);
-				height: var(--scrollbar-height);
-				width: var(--scrollbar-width);
-			}
-
-			&:hover::-webkit-scrollbar {
-				&-thumb {
-					background-color: var(--scrollbar-thumb-background-color);
-					border-radius: var(--scrollbar-thumb-border-radius);
+		main>form>div {
+			
+			&.primary,
+			&.secondary {
+				padding: 0 var(--standard-container-rhythm);
+				
+				/* Forced vertical spacing in scrolling parent --------*/
+				&:before, &:after {
+					content: "";
+					display: block;
+					height: var(--standard-container-rhythm);
+					flex-shrink: 0;
 				}
 			}
 
 			&.primary {
-				background-color: var(--frontframe-background-color);
-				padding: var(--standard-container-rhythm);
 
 				.field {
 					background-color: var(--color-clear);
 					max-width: var(--dimension-smallest);
+					width: 100%;
+					
+					/* Center fields in parent if in small quantities --------*/
 					margin-left: auto;
 					margin-right: auto;
+
+					&:first-child {
+						margin-top: auto;
+					}
+
+					&:last-child {
+						margin-bottom: auto;
+					}
 				}
 
 			}
@@ -212,7 +255,7 @@ body {
 				width: var(--sidebar-width);
 
 				.field {
-					background-color: var(--sidebar-background-color);
+					background-color: var(--sidebar-field-background-color);
 				}
 
 			}
