@@ -236,6 +236,11 @@ class contentBlueprintsDatasources extends ResourcesPage
         $this->ContentsActions->appendChild($div);
 
         // Source
+        $primary = new XMLElement('div');
+        $primary->setAttribute('class', 'primary');
+
+        $this->Form->prependChild($primary);
+        
         $fieldset = new XMLElement('fieldset');
         $fieldset->setAttribute('class', 'settings');
         $fieldset->appendChild(new XMLElement('legend', __('Essentials')));
@@ -295,7 +300,7 @@ class contentBlueprintsDatasources extends ResourcesPage
         }
 
         $fieldset->appendChild($group);
-        $this->Form->appendChild($fieldset);
+        $primary->appendChild($fieldset);
 
         // Conditions
         $fieldset = new XMLElement('fieldset');
@@ -332,7 +337,7 @@ class contentBlueprintsDatasources extends ResourcesPage
 
         $fieldset->appendChild($group);
 
-        $this->Form->appendChild($fieldset);
+        $primary->appendChild($fieldset);
 
         $fieldset = new XMLElement('fieldset');
         $this->setContext($fieldset, array('sections', 'system'));
@@ -353,7 +358,7 @@ class contentBlueprintsDatasources extends ResourcesPage
 
         $fieldset->appendChild($group);
 
-        $this->Form->appendChild($fieldset);
+        $primary->appendChild($fieldset);
 
         // Filters
         $fieldset = new XMLElement('fieldset');
@@ -609,7 +614,7 @@ class contentBlueprintsDatasources extends ResourcesPage
         $div->appendChild($ol);
 
         $fieldset->appendChild($div);
-        $this->Form->appendChild($fieldset);
+        $primary->appendChild($fieldset);
 
         // Sorting
         $fieldset = new XMLElement('fieldset');
@@ -694,7 +699,7 @@ class contentBlueprintsDatasources extends ResourcesPage
         $div->appendChild($orders);
 
         $fieldset->appendChild($div);
-        $this->Form->appendChild($fieldset);
+        $primary->appendChild($fieldset);
 
         // Grouping
         $fieldset = new XMLElement('fieldset');
@@ -725,7 +730,7 @@ class contentBlueprintsDatasources extends ResourcesPage
         $label->appendChild(Widget::Select('fields[group]', $options));
         $fieldset->appendChild($label);
 
-        $this->Form->appendChild($fieldset);
+        $primary->appendChild($fieldset);
 
         // Pagination
         $fieldset = new XMLElement('fieldset');
@@ -775,7 +780,7 @@ class contentBlueprintsDatasources extends ResourcesPage
 
         $label = Widget::Checkbox('fields[paginate_results]', isset($fields['paginate_results']) ? $fields['paginate_results'] : null, __('Enable pagination'));
         $fieldset->appendChild($label);
-        $this->Form->appendChild($fieldset);
+        $primary->appendChild($fieldset);
 
         // Content
         $fieldset = new XMLElement('fieldset');
@@ -944,7 +949,7 @@ class contentBlueprintsDatasources extends ResourcesPage
         $group->appendChild($col);
         $fieldset->appendChild($group);
 
-        $this->Form->appendChild($fieldset);
+        $primary->appendChild($fieldset);
 
         // Static XML
         if (!isset($fields['static_xml'])) {
@@ -972,7 +977,7 @@ class contentBlueprintsDatasources extends ResourcesPage
             $fieldset->appendChild($label);
         }
 
-        $this->Form->appendChild($fieldset);
+        $primary->appendChild($fieldset);
 
         // Connections
         $fieldset = new XMLElement('fieldset');
@@ -1008,7 +1013,7 @@ class contentBlueprintsDatasources extends ResourcesPage
         $div->appendChild($label);
 
         $fieldset->appendChild($div);
-        $this->Form->appendChild($fieldset);
+        $primary->appendChild($fieldset);
 
 
         // Call the provided datasources to let them inject their filters
@@ -1101,7 +1106,7 @@ class contentBlueprintsDatasources extends ResourcesPage
 
             if ($fieldset) {
                 $fieldset->setAttribute('class', 'settings');
-                $this->Form->appendChild($fieldset);
+                $primary->appendChild($fieldset);
             }
         }
 
@@ -1119,7 +1124,7 @@ class contentBlueprintsDatasources extends ResourcesPage
             $pre->appendChild($code);
 
             $fieldset->appendChild($pre);
-            $this->Form->appendChild($fieldset);
+            $primary->appendChild($fieldset);
         }
     }
 

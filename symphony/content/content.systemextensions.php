@@ -28,6 +28,12 @@ class contentSystemExtensions extends AdministrationPage
         )));
         $this->appendSubheading(__('Extensions'));
 
+
+        $primary = new XMLElement('div');
+        $primary->setAttribute('class', 'primary');
+        
+        $this->Form->prependChild($primary);
+        
         $this->Form->setAttribute('action', SYMPHONY_URL . $canonical_link);
 
         Sortable::initialize($this, $extensions, $sort, $order);
@@ -310,7 +316,7 @@ class contentSystemExtensions extends AdministrationPage
             array('role' => 'directory', 'aria-labelledby' => 'symphony-subheading', 'data-interactive' => 'data-interactive')
         );
 
-        $this->Form->appendChild($table);
+        $primary->appendChild($table);
 
         $tableActions = new XMLElement('div');
         $tableActions->setAttribute('class', 'actions');
@@ -344,7 +350,7 @@ class contentSystemExtensions extends AdministrationPage
 
         if (!empty($options)) {
             $tableActions->appendChild(Widget::Apply($options));
-            $this->Form->appendChild($tableActions);
+            $primary->appendChild($tableActions);
         }
     }
 

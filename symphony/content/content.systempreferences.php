@@ -40,6 +40,12 @@ class contentSystemPreferences extends AdministrationPage
 
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
+
+        $primary = new XMLElement('div');
+        $primary->setAttribute('class', 'primary');
+
+        $this->Form->prependChild($primary);
+
         $saveAttr = array(
             'accesskey' => 's',
             'name' => 'action[save]',
@@ -79,7 +85,7 @@ class contentSystemPreferences extends AdministrationPage
             $group->appendChild($label);
             $group->appendChild(new XMLElement('p', __('Authors can set up a differing language in their profiles.'), array('class' => 'help')));
             // Append language selection
-            $this->Form->appendChild($group);
+            $primary->appendChild($group);
         }
 
         // Get available EmailGateways
@@ -106,14 +112,14 @@ class contentSystemPreferences extends AdministrationPage
             $label->appendChild($select);
             $group->appendChild($label);
             // Append email gateway selection
-            $this->Form->appendChild($group);
+            $primary->appendChild($group);
         }
 
         foreach ($email_gateways as $gateway) {
             $gateway_settings = EmailGatewayManager::create($gateway['handle'])->getPreferencesPane();
 
             if (is_a($gateway_settings, 'XMLElement')) {
-                $this->Form->appendChild($gateway_settings);
+                $primary->appendChild($gateway_settings);
             }
         }
 
@@ -157,7 +163,7 @@ class contentSystemPreferences extends AdministrationPage
                 'errors' => $this->_errors
             ));
 
-            $this->Form->appendChild($group);
+            $primary->appendChild($group);
         }
 
         /**
