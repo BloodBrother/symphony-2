@@ -19,6 +19,21 @@
 			font-size: var(--text-small);
 			line-height: 1.2em;
 			font-weight: 500;
+
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			align-self: start;
+
+			>*+* {
+				margin-left: var(--standard-inner-rhythm);
+			}
+
+			@media (max-width: @xs) {
+				span {
+					display: none;
+				}
+			}
 		}
 	}
 }

@@ -5,57 +5,105 @@
 /* Less variables --------*/
 @import "variables";
 
-/* Master Layout --------*/
-body {
-	min-width: var(--xxs);
+/* Master grid layout --------*/
+html {
+	height: 100%;
 	min-height: 100%;
+}
+body {
+	min-height: 100%;
+	display: grid;
+	grid-template-areas: 
+		"header context context session"
+		"primary primary primary primary"
+		"secondary secondary secondary secondary"
+		"footer footer footer footer"
+		"nav nav controls controls";
+		grid-template-rows: 
+			var(--spacing-broadest) 
+			minmax(calc(100vh - var(--spacing-broadest) * 2), auto) 
+			auto 
+			auto 
+			var(--spacing-broadest);
+		grid-template-columns: min-content auto minmax(0, 1fr) auto;
 
 	/* Make sure the scrollbar space is always occupied for stability reasons --------*/
 	overflow-y: scroll;
+
+/* Zap structural elements to get children on master grid --------*/
+	>main, >header, >header>h1, >main>form {
+		display: contents;
+	}
 	
 	/* Master Layout Base --------*/
 	>nav {
 		max-width: 100%;
 		overflow: auto;
-
-		&::-webkit-scrollbar {
-			background-color: var(--scrollbar-background-color);
-			height: var(--scrollbar-height);
-			width: var(--scrollbar-width);
-		}
-
-		&:hover::-webkit-scrollbar {
-			&-thumb {
-				background-color: var(--scrollbar-thumb-background-color);
-				border-radius: var(--scrollbar-thumb-border-radius);
-			}
-		}
 	}
 
-	>header {
-		/* Center elements & rhythm --------*/
+	>header>h1>a {
+		grid-area: header;
+		padding: var(--standard-inner-rhythm);
+	}
+
+	[id="session"] {
+		grid-area: session;
+	}
+
+	>nav {
+		grid-area: nav;
+		padding: var(--standard-container-rhythm);
+		padding-top: var(--spacing-large);
+		padding-left: calc(var(--standard-container-rhythm) + var(--standard-inner-rhythm));
+	}
+
+	>footer {
+		grid-area: footer;
 		margin: var(--standard-container-rhythm);
+	}
+
+	>aside {
+		grid-area: context;
+		padding: var(--standard-inner-rhythm);
+	}
+
+	>main>form>* {
+		position: relative;
+	}
+
+	>main>form>.primary,
+	>main>form>.secondary {
 		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		flex-direction: column;
+	}
 
-		h1 {
+	>main>form>.secondary,
+	>main>form~* {
+		grid-area: secondary;
+		border-left: 1px solid var(--color-ui);
+	}
+	
+	>main>form>.primary {
+		grid-area: primary;
+		background-color: var(--frontframe-background-color);
+	}
 
-			a {
-				/* Center relative to sun --------*/
-				display: inline-flex;
-				flex-direction: column;
-				align-items: center;
-				/* Rhythm --------*/
-				>*+* {
-					margin-left: var(--standard-inner-rhythm);
-				}
-			}
-		}
+
+	>main>form>.primary>[role="directory"] {
+		flex-grow: 1;
+	}
+
+	[id="controls"] {
+		grid-area: controls;
+		z-index: 2;
+	}
+
+	#btn-toggle-header-mobile {
+		grid-area: nav;
 	}
 	
 	/* Master Layout for Narrow Viewports --------*/
-	@media (max-width: @sm) {
+	@media (max-width: @md) {
 		/* Fix the nav and fit the screen --------*/
 		>nav {
 			position: fixed;
@@ -75,26 +123,73 @@ body {
 				pointer-events: none;
 			}
 		}
-		/* Make sure the header is over the nav --------*/
-		>header {
-			position: relative;
-			z-index: 12;
-			
+
+		/* Create top bar --------*/
+		>header>h1>a,
+		[id="session"],
+		[id="context"] {
+			background-color: var(--backframe-background-color);
+			z-index: 1;
 		}
-		/* Make the context span its whole line --------*/
-		>aside {
-			clear: both;
-			margin-top: var(--standard-container-rhythm);
-			margin-bottom: var(--standard-container-rhythm);
+
+		/* Create bottom bar --------*/
+		[id="controls"],
+		#btn-toggle-header-mobile {
+			background-color: var(--backframe-background-color);
+			padding: var(--standard-inner-rhythm) var(--standard-container-rhythm);
+			border-top: 1px solid var(--color-ui);
+			position: sticky;
+			bottom: 0;
+			display: flex;
+			align-items: center;
+			/* Make sure it's above the nav --------*/
+			z-index: 12;
+		}
+
+		#btn-toggle-header-mobile {
+			border-right: 1px solid var(--color-ui);
+		}
+
+		main>form>.primary {
+			overflow: auto;
+		}
+
+		[id="controls"],
+		[id="session"] {
+			display: flex;
+			justify-content: flex-end;
+		}
+
+		[id="session"]>ul {
+			z-index: 2;
+			bottom: auto;
+			top: 100%;
+		}
+
+		>footer {
+			position: absolute;
+			bottom: var(--spacing-broad);
 		}
 	}
 
-	/* Master Grid Layout — ignoring containers  --------*/
-	@media (min-width: @sm) {
+	@media (min-width: @xs) {
+		grid-template-areas: 
+			"header header context session"
+			"primary primary primary primary"
+			"secondary secondary secondary secondary"
+			"footer footer footer footer"
+			"nav controls controls controls";
+	}
+
+	/* Deployed grid layout for larger windows  --------*/
+	@media (min-width: @md) {
 		height: 100vh;
-		display: grid;
 		grid-template-rows: auto auto 1fr min-content;
-		grid-template-columns: auto minmax(0, 1fr) auto max-content;
+		grid-template-columns: 
+			minmax(var(--navigation-sidebar-width), var(--navigation-sidebar-max-width))
+			minmax(0, 1fr)
+			auto
+			max-content;
 		grid-template-areas:
 			"header context secondary controls" 
 			"nav context secondary controls"
@@ -102,94 +197,37 @@ body {
 			"session primary secondary controls"
 			"footer primary secondary controls";
 
-		>main, >header, >header>h1, >main>form {
-			display: contents;
-		}
-
-		>header>h1>a {
-			grid-area: header;
-			margin: var(--standard-inner-rhythm);
-			flex-direction: row;
-			align-items: center;
-			align-self: start;
+		>main>form>[class] {
+			max-height: 100%;
+			overflow: auto;
 		}
 
 		>header [id="session"] {
-			grid-area: session;
 			margin-left: var(--standard-container-rhythm);
 		}
 
-		>nav {
-			grid-area: nav;
-			padding: var(--standard-container-rhythm);
-			padding-top: var(--spacing-large);
-			margin-left: var(--standard-inner-rhythm);
-			width: var(--navigation-sidebar-width);
-			max-width: var(--navigation-sidebar-max-width);
-		}
-
-		>footer {
-			grid-area: footer;
-			margin: var(--standard-container-rhythm);
-		}
-
 		>aside {
-			grid-area: context;
 			border-left: 1px solid var(--color-ui);
-			padding: var(--standard-inner-rhythm);
-		}
-
-		>main>form>* {
-			position: relative;
-		}
-
-		>main>form>[class] {
-			// box-sizing: border-box;
-			max-height: 100%;
-			overflow: auto;
-
-			&::-webkit-scrollbar {
-				background-color: var(--scrollbar-background-color);
-				height: var(--scrollbar-height);
-				width: var(--scrollbar-width);
-			}
-
-			&:hover::-webkit-scrollbar {
-				&-thumb {
-					background-color: var(--scrollbar-thumb-background-color);
-					border-radius: var(--scrollbar-thumb-border-radius);
-				}
-			}
-
 		}
 
 		>main>form>.secondary,
 		>main>form~* {
-			grid-area: secondary;
 			border-left: 1px solid var(--color-ui);
+			
+			width: var(--sidebar-width);
+			max-width: var(--sidebar-max-width);
 		}
 		
 		>main>form>.primary {
-			grid-area: primary;
 			border-top: 1px solid var(--color-ui);
 			border-left: 1px solid var(--color-ui);
-			background-color: var(--frontframe-background-color);
+		}
 
-			display: flex;
+		[id="controls"] {
 			flex-direction: column;
-
-		}
-
-		>main>form>.primary>table {
-			flex-grow: 1;
-		}
-
-		>main>form>[id="controls"] {
-			grid-area: controls;
 			border-left: 1px solid var(--color-ui);
 			padding: var(--standard-inner-rhythm);
 			padding-top: var(--standard-container-rhythm);
-			z-index: 2;
 		}
 	}
 
@@ -227,19 +265,25 @@ body {
 					height: var(--standard-container-rhythm);
 					flex-shrink: 0;
 				}
+
+				.field {
+					max-width: var(--dimension-smallest);
+					width: 100%;
+					margin-left: auto;
+					margin-right: auto;
+				}
+
+				@media (max-width: @sm) {
+					min-height: 100%;
+				}
 			}
 
 			&.primary {
 
 				.field {
 					background-color: var(--color-clear);
-					max-width: var(--dimension-smallest);
-					width: 100%;
 					
-					/* Center fields in parent if in small quantities --------*/
-					margin-left: auto;
-					margin-right: auto;
-
+					/* Center fields vertically if in small quantities --------*/
 					&:first-child {
 						margin-top: auto;
 					}
@@ -249,13 +293,34 @@ body {
 					}
 				}
 
+				@media (max-width: @sm) {
+					z-index: 1;
+				}
+
 			}
 
 			&.secondary {
-				width: var(--sidebar-width);
 
 				.field {
 					background-color: var(--sidebar-field-background-color);
+				}
+
+				@media (max-width: @sm) {
+					min-height: calc(100vh - var(--spacing-broadest));
+					box-sizing: border-box;
+					position: sticky;
+					bottom: var(--spacing-broadest);
+
+					.field {
+						/* Center fields vertically if in small quantities --------*/
+						&:first-child {
+							margin-top: auto;
+						}
+
+						&:last-child {
+							margin-bottom: auto;
+						}
+					}
 				}
 
 			}

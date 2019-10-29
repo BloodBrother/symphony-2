@@ -11,10 +11,9 @@
 
 [id="controls"] {
 	
-	/* Necessary to align the delete button at the bottom --------*/
+	/* Necessary to align items precisely --------*/
 	display: flex;
 	align-items: center;
-	flex-direction: column;
 
 	/* Zap strutural elements so we can order buttons directly --------*/
 	div, ul, li {
@@ -72,7 +71,6 @@
 	}
 
 	.delete {
-		margin-top: auto;
 		order: 2;
 
 		&:hover {
@@ -83,17 +81,33 @@
 
 	a[href*="blueprints"] {
 		order: 1;
-		// margin-top: auto;
 	}
 
 	[name="action[save]"],
 	.create {
 		order: -1;
-		margin-bottom: var(--standard-container-rhythm);
 
 		&:hover {
 			background-color: var(--color-success-light);
 			color: var(--color-success-dark);
+		}
+	}
+
+	@media (max-width: @md) {
+		[name="action[save]"],
+		.create {
+			margin-right: auto;
+		}
+	}
+
+	@media (min-width: @md) {
+		.delete {
+			margin-top: auto;
+		}
+
+		[name="action[save]"],
+		.create {
+			margin-bottom: var(--standard-container-rhythm);
 		}
 	}
 }

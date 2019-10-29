@@ -27,19 +27,7 @@ select {
 	line-height: 1.2em;
 	font-size: var(--standard-field-font-size);
 	font-weight: 350;
-
-	&::-webkit-scrollbar {
-		background-color: var(--scrollbar-background-color);
-		height: var(--scrollbar-height);
-		width: var(--scrollbar-width);
-	}
-
-	&:hover::-webkit-scrollbar {
-		&-thumb {
-			background-color: var(--scrollbar-thumb-background-color);
-			border-radius: var(--scrollbar-thumb-border-radius);
-		}
-	}
+	font-family: inherit;
 }
 
 
@@ -75,10 +63,6 @@ select,
 	border-bottom: 1px solid var(--standard-field-border-color);
 
 	&:placeholder-shown:not(:focus) {
-		&:not(:hover) {
-			border-style: dashed;
-		}
-
 		.required &,
 		.invalid & {
 			border-bottom-color: var(--color-error);
