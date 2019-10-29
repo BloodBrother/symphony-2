@@ -6,6 +6,12 @@
 
 @import "variables";
 
+/* Make sure grid won't affect --------*/
+body[id="error"] {
+	display: block;
+	padding: var(--standard-container-rhythm);
+}
+
 .frame.error {
 
 	.error>code {
@@ -25,7 +31,7 @@
 	}
 
 	
-	.content {
+	.content, ul {
 		padding: var(--standard-inner-rhythm);
 		margin: var(--standard-inner-rhythm);
 		border-radius: var(--radius-current);
@@ -44,7 +50,10 @@
 				font-style: normal;
 				float: left;
 				clear: left;
-				margin-right: -2em;
+			}
+
+			strong, em {
+				margin-right: var(--spacing-micro);
 			}
 
 			/* Push right debug view link to enhance lisibilty --------*/

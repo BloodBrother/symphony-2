@@ -11,13 +11,13 @@
 
 .field {
 
-	/* Layout model - enclosed fields, piling without margins --------*/
-	>* {
+	/* Prevent line-height in containers by setting all to block --------*/
+	>textarea, select {
 		display: block;
 	}
 
+	/* Layout model - enclosed fields, piling without margins --------*/
 	--standard-field-border-color: transparent;
-
 	border: 1px solid var(--color-ui);
 	margin-bottom: -1px;
 
@@ -49,9 +49,22 @@
 		}
 	}
 
+	/* Position field titles/labels as if in input --------*/
 	&:not(.field-checkbox)>*:first-child {
 		top: var(--standard-inner-rhythm);
 		height: 0;
+		background-color: inherit;
+
+		>* {
+			position: relative;
+			display: inline-block;
+			background-color: inherit;
+			padding: 0 var(--spacing-nano);
+			margin-left: calc(-1 * var(--spacing-nano));
+			height: 1.5rem;
+			line-height: 1.5rem;
+		}
+		
 
 		&+input:not([type=checkbox]), 
 		&+select, 
@@ -71,10 +84,6 @@
 		label {
 			color: var(--standard-label-color);
 
-			&:before, &:after {
-				opacity: .4;
-			}
-
 			>i {
 				opacity: 0;
 			}
@@ -90,44 +99,47 @@
 		}
 	}
 
+
 /* Special case for uploaded file input --------*/
-	label+span {
-		display: flex;
-		align-items: center;
-		padding-top: 0;
+	&.field-upload {
+		label+span {
+			display: flex;
+			align-items: center;
+			padding-top: 0;
 
-		a, input {
-			flex-grow: 1;
+			a, input {
+				flex-grow: 1;
 
-			~* {
-				margin: 0 var(--standard-inner-rhythm);
+				~* {
+					margin: 0 var(--standard-inner-rhythm);
+				}
+			}
+
+			input[type=file] {
+				padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
+			}
+
+			[type="hidden"]~a {
+				display: block;
+				color: inherit;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				flex-shrink: 1;
+				flex-basis: 0;
+				padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
+				padding-bottom: var(--standard-inner-rhythm);
+			}
+
+			[type="hidden"]~a:hover {
+				color: var(--standard-field-hover-color);
 			}
 		}
 
-		input[type=file] {
-			padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
-		}
-
-		button {
-			&:not(:hover) {
+		&:not(:hover) {
+			button {
 				opacity: .25;
 			}
-		}
-
-		[type="hidden"]~a {
-			display: block;
-			color: inherit;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			flex-shrink: 1;
-			flex-basis: 0;
-			padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
-			padding-bottom: var(--standard-inner-rhythm);
-		}
-
-		[type="hidden"]~a:hover {
-			color: var(--standard-field-hover-color);
 		}
 	}
 
@@ -146,11 +158,26 @@
 		flex: 100% 0 0;
 	}
 
+	/* Special treatment for checkbox field --------*/
+	&.field-checkbox {
+		label {
+			margin-top: var(--standard-inner-rhythm);
+		}
+
+		input {
+			margin-left: var(--standard-inner-rhythm);
+		}
+	}
+
 	/* Position error message --------*/
-	.invalid label~* {
-		position: absolute;
-		bottom: -1em;
-		min-width: max-content;
-		z-index: 1;
+	.invalid { 
+		position: relative;
+		label+p {
+			position: absolute;
+			top: -.25em;
+			right: 1em;
+			min-width: max-content;
+			z-index: 1;
+		}
 	}
 }
