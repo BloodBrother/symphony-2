@@ -109,10 +109,21 @@
 			}
 		});
 
+		// 
+
 		// Show Associations button prevent default
 		$('[href="#drawer-section-associations"]', '.contents-actions').on('click', function(){
 			return false;
 		});
+
+		function storePanelDisplayState() {
+			var panelSwitches = $('.js-panel-switch').map(function() {
+				return this.checked;
+			}).get();
+			localStorage.setItem('checked', JSON.stringify(panelSwitches));
+		}
+
+		$('.js-panel-switch').on('click', storePanelDisplayState);
 	});
 
 })(window.jQuery, window.Symphony);
