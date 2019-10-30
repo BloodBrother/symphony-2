@@ -397,7 +397,6 @@ class AdministrationPage extends HTMLPage
         $this->addElementToHead(new XMLElement('meta', null, array('name' => 'theme-color', 'content' => '#FFF7D9')), 0);
         $this->addElementToHead(new XMLElement('meta', null, array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge,chrome=1')), 1);
         $this->addElementToHead(new XMLElement('meta', null, array('name' => 'viewport', 'content' => 'width=device-width, initial-scale=1')), 2);
-
         // Add styles
         $this->addStylesheetToHead(ASSETS_URL . '/css/symphony.min.css', 'screen', 2, false);
 
@@ -707,8 +706,6 @@ class AdministrationPage extends HTMLPage
     {
         $this->Body->appendChild($this->Header);
 
-        
-
         $mobileNavToggler = new XMLElement('a', Widget::SVGIcon('burger'));
         $mobileNavToggler->setAttribute('id', 'btn-toggle-header-mobile');
         $mobileNavToggler->setAttribute('class', 'js-symphony-close-header');
@@ -720,6 +717,7 @@ class AdministrationPage extends HTMLPage
         }
 
         $this->Body->appendChild($this->appendNavigation());
+        $this->Body->appendChild($secondaryPanelSwitch);
         $this->Body->appendChild($this->Context);
 
         // Add vertical-left drawers (between #context and #contents)
@@ -736,6 +734,18 @@ class AdministrationPage extends HTMLPage
 
         $this->Body->setAttribute('data-version', Symphony::Configuration()->get('version', 'symphony'));
         $this->Body->appendChild($this->Footer);
+        $this->Body->appendChild(new XMLElement('script', "
+            (function () {
+                'use strict';
+
+                var switchStates = JSON.parse(localStorage.getItem('checked')) || [];
+                switchStates.forEach(function(checked, i) {
+                    document.getElementsByClassName('js-panel-switch')[i].checked = checked;
+                });
+            
+            })();
+        "));
+    
         $this->Body->appendChild(new XMLElement('div', null, array('id' => 'loading')));
         $this->appendBodyId();
         $this->appendBodyAttributes($this->_context);
@@ -963,6 +973,11 @@ class AdministrationPage extends HTMLPage
         $navElement = new XMLElement('nav', null, array('id' => 'nav', 'role' => 'navigation'));
         $contentNav = new XMLElement('ul', null, array('class' => 'content', 'role' => 'menubar'));
         $structureNav = new XMLElement('ul', null, array('class' => 'structure', 'role' => 'menubar'));
+        $navSwitch = new XMLElement('input');
+        $navSwitch->setAttribute('type', 'checkbox');
+        $navSwitch->setAttribute('class', 'js-panel-switch nav-panel-switch');
+        $navSwitch->setAttribute('checked', 'checked');
+        $this->Body->prependChild($navSwitch);
 
         foreach ($nav as $n) {
             if (isset($n['visible']) && $n['visible'] === 'no') {
