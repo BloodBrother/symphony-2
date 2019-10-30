@@ -1214,6 +1214,11 @@ class contentPublish extends AdministrationPage
         $primary = new XMLElement('div');
         $primary->setAttribute('class', 'primary');
 
+        $secondaryPanelSwitch = new XMLElement('input');
+        $secondaryPanelSwitch->setAttribute('type', 'checkbox');
+        $secondaryPanelSwitch->setAttribute('class', 'js-panel-switch secondary-panel-switch');
+        $secondaryPanelSwitch->setAttribute('checked', 'checked');
+
         if ((!is_array($main_fields) || empty($main_fields)) && (!is_array($sidebar_fields) || empty($sidebar_fields))) {
             $message = __('Fields must be added to this section before an entry can be created.');
 
@@ -1235,12 +1240,14 @@ class contentPublish extends AdministrationPage
 
             if (is_array($sidebar_fields) && !empty($sidebar_fields)) {
                 $sidebar = new XMLElement('div');
-                $sidebar->setAttribute('class', 'secondary column');
+                $sidebar->setAttribute('class', 'secondary');
+                $sidebar->setAttribute('id', 'secondary');
 
                 foreach ($sidebar_fields as $field) {
                     $sidebar->appendChild($this->__wrapFieldWithDiv($field, $entry));
                 }
-
+                
+                $this->Form->appendChild($secondaryPanelSwitch);
                 $this->Form->appendChild($sidebar);
             }
 
@@ -1567,6 +1574,11 @@ class contentPublish extends AdministrationPage
         $primary = new XMLElement('div');
         $primary->setAttribute('class', 'primary');
 
+        $secondaryPanelSwitch = new XMLElement('input');
+        $secondaryPanelSwitch->setAttribute('type', 'checkbox');
+        $secondaryPanelSwitch->setAttribute('class', 'js-panel-switch secondary-panel-switch');
+        $secondaryPanelSwitch->setAttribute('checked', 'checked');
+
         if ((!is_array($main_fields) || empty($main_fields)) && (!is_array($sidebar_fields) || empty($sidebar_fields))) {
             $message = __('Fields must be added to this section before an entry can be created.');
 
@@ -1610,6 +1622,7 @@ class contentPublish extends AdministrationPage
                     $sidebar->appendChild($this->__wrapFieldWithDiv($field, $entry));
                 }
 
+                $this->Form->appendChild($secondaryPanelSwitch);
                 $this->Form->appendChild($sidebar);
             }
 
