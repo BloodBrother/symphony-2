@@ -71,22 +71,30 @@ h1, h2, h3, h4, h5, h6 {
 	transition-timing-function: var(--ease-current);
 }
 
-
-
 /* Basic typographic scale --------*/
 html {
-	font-size: 50%;
-	min-height: 100%;
-
-	@media (min-width: @xs) {
-		font-size: 56.25%;
-	}
+	font-size: 56.25%;
 
 	@media (min-width: @xl) {
 		font-size: 62.5%;
 	}
 }
 
+/* Make sure the page is always at least the height of the window --------*/
+html {
+	height: 100%;
+}
+
+html, body {
+	min-height: 100%;
+}
+
+/* Make sure the scrollbar space is always occupied for stability reasons --------*/
+body {
+	overflow-y: scroll;
+}
+
+/* Graphical & typographic base styles --------*/
 body {
 	color: var(--color-main-dark);
 	font-size: var(--text-current);

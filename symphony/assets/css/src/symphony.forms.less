@@ -82,80 +82,83 @@ select,
 
 /*-----------------------------------------*/
 input[type='checkbox'] {
-	-webkit-appearance: none;
-	appearance: none;
-	position: relative;
-	cursor: pointer;
-	align-self: center;
-	vertical-align: middle;
-
-	&:before {
-		width: var(--spacing-broader);
-		flex-grow: 0;
-		flex-shrink: 0;
-		height: var(--spacing-thin);
-		left: initial;
-		border: initial;
-		margin-left: auto;
-		content: '';
+	/* Scope the style to fields and settings to prevent leaking --------*/
+	.field &, .settings & {
+		-webkit-appearance: none;
+		appearance: none;
 		position: relative;
-		display: block;
-		border-radius: 20px;
-		transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
-		transition-duration: var(--duration-short);
+		cursor: pointer;
+		align-self: center;
+		vertical-align: middle;
 
-		background-color: var(--color-main-light);
-		box-shadow: inset 0px 0px 1px 2px rgba(0,0,0,0.08), 0px 0px 0px 2px var(--color-main-lighter);
-		margin-top: var(--spacing-thinnest);
-		margin-bottom: var(--spacing-thinnest);
-	}
+		&:before {
+			width: var(--spacing-broader);
+			flex-grow: 0;
+			flex-shrink: 0;
+			height: var(--spacing-thin);
+			left: initial;
+			border: initial;
+			margin-left: auto;
+			content: '';
+			position: relative;
+			display: block;
+			border-radius: 20px;
+			transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+			transition-duration: var(--duration-short);
 
-	&:after{
-		content: '';
-		position: absolute;
-		top: 3px;
-		margin-top: var(--spacing-thinnest);
-		margin-left: 1px;
-		right: calc(var(--spacing-broader) - var(--spacing-thin) + 3px);
-		width: calc(var(--spacing-thin) - 6px);
-		height: calc(var(--spacing-thin) - 6px);
-		border-radius: 50%;
-		background: var(--color-main-lighter);
-		transform-origin: center center;
-		transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
-		transition-duration: var(--duration-short);
+			background-color: var(--color-main-light);
+			box-shadow: inset 0px 0px 1px 2px rgba(0,0,0,0.08), 0px 0px 0px 2px var(--color-main-lighter);
+			margin-top: var(--spacing-thinnest);
+			margin-bottom: var(--spacing-thinnest);
+		}
 
-		box-sizing: border-box;
-	}
+		&:after{
+			content: '';
+			position: absolute;
+			top: 3px;
+			margin-top: var(--spacing-thinnest);
+			margin-left: 1px;
+			right: calc(var(--spacing-broader) - var(--spacing-thin) + 3px);
+			width: calc(var(--spacing-thin) - 6px);
+			height: calc(var(--spacing-thin) - 6px);
+			border-radius: 50%;
+			background: var(--color-main-lighter);
+			transform-origin: center center;
+			transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+			transition-duration: var(--duration-short);
 
-	&:hover:before,
-	&:focus:before {
-		box-shadow: inset 0px 0px 1px 2px rgba(0,0,0,0.1), 0px 0px 0px 2px var(--color-accent);
-	}
+			box-sizing: border-box;
+		}
 
-	&:checked:after {
-		transform: translateX(calc(var(--spacing-broader) - 100% - 7px));
-	}
+		&:hover:before,
+		&:focus:before {
+			box-shadow: inset 0px 0px 1px 2px rgba(0,0,0,0.1), 0px 0px 0px 2px var(--color-accent);
+		}
 
-	&:checked:before {
-		background: var(--color-success);
-	}
+		&:checked:after {
+			transform: translateX(calc(var(--spacing-broader) - 100% - 7px));
+		}
 
-	&:checked:after {
-		background: var(--color-clear);
-	}
+		&:checked:before {
+			background: var(--color-success);
+		}
 
-	&:hover:after,
-	&:focus:after {
-		background-color: var(--color-accent-alt-light);
-		transform: scale(1.5);
-		box-shadow: 1px 1px 2px rgba(0,0,0,.4);
-	}
-	
-	&:checked:hover:after,
-	&:checked:focus:after {
-		transform: translateX(calc(var(--spacing-broader) - 100% - 7px)) scale(1.5);
-		box-shadow: -1px 1px 2px rgba(0,0,0,.4);
+		&:checked:after {
+			background: var(--color-clear);
+		}
+
+		&:hover:after,
+		&:focus:after {
+			background-color: var(--color-accent-alt-light);
+			transform: scale(1.5);
+			box-shadow: 1px 1px 2px rgba(0,0,0,.4);
+		}
+		
+		&:checked:hover:after,
+		&:checked:focus:after {
+			transform: translateX(calc(var(--spacing-broader) - 100% - 7px)) scale(1.5);
+			box-shadow: -1px 1px 2px rgba(0,0,0,.4);
+		}
 	}
 }
 
