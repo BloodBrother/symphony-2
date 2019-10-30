@@ -49,8 +49,11 @@ div.drawer {
 			&:not(.opened) {
 				// opacity: 0;
 				// bottom: 100%;
+				padding: 0;
 				pointer-events: none;
 				width: 0;
+				height: 0;
+				overflow: hidden;
 			}
 
 			.contents {
@@ -60,6 +63,7 @@ div.drawer {
 
 		.close-btn {
 			margin-left: var(--standard-container-rhythm);
+			margin-bottom: var(--standard-container-rhythm);
 		}
 
 		/* Position and style vertical variants --------*/

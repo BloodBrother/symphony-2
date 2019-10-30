@@ -6,12 +6,7 @@
 @import "variables";
 
 /* Master grid layout --------*/
-html {
-	height: 100%;
-	min-height: 100%;
-}
 body {
-	min-height: 100%;
 	display: grid;
 	grid-template-areas: 
 		"header context context session"
@@ -21,14 +16,11 @@ body {
 		"nav nav controls controls";
 		grid-template-rows: 
 			var(--spacing-broadest) 
-			minmax(calc(100vh - var(--spacing-broadest) * 2), auto) 
-			auto 
+			minmax(0, 1fr)
+			auto
 			auto 
 			var(--spacing-broadest);
 		grid-template-columns: min-content auto minmax(0, 1fr) auto;
-
-	/* Make sure the scrollbar space is always occupied for stability reasons --------*/
-	overflow-y: scroll;
 
 /* Zap structural elements to get children on master grid --------*/
 	>main, >header, >header>h1, >main>form {
@@ -59,7 +51,7 @@ body {
 
 	>footer {
 		grid-area: footer;
-		margin: var(--standard-container-rhythm);
+		padding: var(--standard-container-rhythm);
 	}
 
 	>aside {
@@ -81,6 +73,7 @@ body {
 	>main>form~* {
 		grid-area: secondary;
 		border-left: 1px solid var(--color-ui);
+		padding: 0 var(--standard-container-rhythm);
 	}
 	
 	>main>form>.primary {
@@ -104,17 +97,19 @@ body {
 	
 	/* Master Layout for Narrow Viewports --------*/
 	@media (max-width: @md) {
-		/* Fix the nav and fit the screen --------*/
 		>nav {
+			/* Fix the nav and fit the screen --------*/
 			position: fixed;
 			top: 0;
 			right: 0;
 			bottom: 0;
 			left: 0;
+			/* Graphics --------*/
 			background-color: var(--backframe-background-color);
 			padding: var(--standard-container-rhythm);
-			display: flex;
-			flex-direction: column;
+
+			// display: flex;
+			// flex-direction: column;
 			padding-top: var(--spacing-larger);
 			z-index: 11;
 
@@ -132,14 +127,18 @@ body {
 			z-index: 1;
 		}
 
-		/* Create bottom bar --------*/
+		/* Create bottom bar with grid-area items --------*/
 		[id="controls"],
 		#btn-toggle-header-mobile {
+
+			/* Graphics --------*/
 			background-color: var(--backframe-background-color);
 			padding: var(--standard-inner-rhythm) var(--standard-container-rhythm);
 			border-top: 1px solid var(--color-ui);
+			/* Make it stick to the bottom of the window --------*/
 			position: sticky;
 			bottom: 0;
+			/* Make sure we can align items --------*/
 			display: flex;
 			align-items: center;
 			/* Make sure it's above the nav --------*/
@@ -186,28 +185,36 @@ body {
 		height: 100vh;
 		grid-template-rows: auto auto 1fr min-content;
 		grid-template-columns: 
-			minmax(var(--navigation-sidebar-width), var(--navigation-sidebar-max-width))
+			auto
+			auto 
 			minmax(0, 1fr)
+			auto
 			auto
 			max-content;
 		grid-template-areas:
-			"header context secondary controls" 
-			"nav context secondary controls"
-			"nav primary secondary controls"
-			"session primary secondary controls"
-			"footer primary secondary controls";
+			"header context context context secondary controls" 
+			"nav context context context secondary controls"
+			"nav nav-panel-switch primary secondary-panel-switch secondary controls"
+			"session nav-panel-switch primary secondary-panel-switch secondary controls"
+			"footer nav-panel-switch primary secondary-panel-switch secondary controls";
 
 		>main>form>[class] {
 			max-height: 100%;
 			overflow: auto;
 		}
 
+		>nav {
+			width: var(--navigation-sidebar-width);
+			max-width: var(--navigation-sidebar-max-width);
+		}
+
 		>header [id="session"] {
-			margin-left: var(--standard-container-rhythm);
+			padding-left: var(--standard-container-rhythm);
 		}
 
 		>aside {
 			border-left: 1px solid var(--color-ui);
+			border-bottom: 1px solid var(--color-ui);
 		}
 
 		>main>form>.secondary,
@@ -219,8 +226,7 @@ body {
 		}
 		
 		>main>form>.primary {
-			border-top: 1px solid var(--color-ui);
-			border-left: 1px solid var(--color-ui);
+			// border-left: 1px solid var(--color-ui);
 		}
 
 		[id="controls"] {
@@ -256,7 +262,6 @@ body {
 			
 			&.primary,
 			&.secondary {
-				padding: 0 var(--standard-container-rhythm);
 				
 				/* Forced vertical spacing in scrolling parent --------*/
 				&:before, &:after {
@@ -273,16 +278,15 @@ body {
 					margin-right: auto;
 				}
 
-				@media (max-width: @sm) {
-					min-height: 100%;
-				}
 			}
 
 			&.primary {
+				padding: 0 var(--standard-container-rhythm);
 
 				.field {
 					background-color: var(--color-clear);
 					
+
 					/* Center fields vertically if in small quantities --------*/
 					&:first-child {
 						margin-top: auto;
@@ -295,6 +299,10 @@ body {
 
 				@media (max-width: @sm) {
 					z-index: 1;
+
+					&:last-of-type {
+						min-height: 100%;
+					}
 				}
 
 			}
@@ -306,10 +314,10 @@ body {
 				}
 
 				@media (max-width: @sm) {
-					min-height: calc(100vh - var(--spacing-broadest));
+					// min-height: calc(100vh - var(--spacing-broadest));
 					box-sizing: border-box;
-					position: sticky;
-					bottom: var(--spacing-broadest);
+					// position: sticky;
+					// bottom: var(--spacing-broadest);
 
 					.field {
 						/* Center fields vertically if in small quantities --------*/
@@ -327,6 +335,94 @@ body {
 		}
 	}
 }
+
+/* Panel display switches --------*/
+input.nav-panel-switch,
+input.secondary-panel-switch {
+	-webkit-appearance: none;
+	appearance: none;
+	display: flex;
+	width: var(--spacing-thin);
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	align-self: stretch;
+	color: var(--color-main-lighter);
+	font-size: var(--text-small);
+	background-color: var(--frontframe-background-color);
+	// box-shadow: inset var(--shadow-small);
+
+	&:hover {
+		background-color: var(--color-accent-light);
+	}
+
+	&:not(:checked) {
+		background-color: var(--color-accent-lighter);
+	}
+
+	@media (max-width: @sm) {
+		display: none;
+	}
+}
+
+input.nav-panel-switch {
+	grid-area: nav-panel-switch;
+	border-left: 1px solid var(--color-ui);
+
+	&:checked:before {
+		content: "◀";
+	}
+
+	&:not(:checked):before {
+		content: "▶";
+	}
+}
+
+input.secondary-panel-switch {
+	grid-area: secondary-panel-switch;
+	border-left: 1px solid var(--color-ui);
+	&:checked:before {
+		content: "▶";
+	}
+
+	&:not(:checked):before {
+		content: "◀";
+	}
+}
+
+@media (min-width: @sm) {
+	input.secondary-panel-switch:not(:checked)~.secondary,
+	input.nav-panel-switch:not(:checked)~nav,
+	input.nav-panel-switch:not(:checked)~footer,
+	input.nav-panel-switch:not(:checked)~header [id="session"],
+	input.nav-panel-switch:not(:checked)~header h1>a, {
+		width: 0;
+		padding: 0;
+		overflow: hidden;
+		border: initial;
+		opacity: 0;
+		display: none;
+	}
+}
+
+a[href="#secondary"] {
+	display: none;
+}
+
+// @media (max-width: @sm) {
+// 	a[href="#secondary"] {
+// 		display: block;
+// 		position: fixed;
+// 		bottom: var(--spacing-broadest);
+// 		width: 100%;
+// 		background-color: var(--color-accent);
+// 		height: var(--spacing-thin);
+// 		&:after {
+// 			content: "Contenu secondaire";
+// 		}
+// 		z-index: 10;
+// 	}
+// }
 
 /* Minimal styles for the burger button --------*/
 #btn-toggle-header-mobile {
