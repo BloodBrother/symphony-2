@@ -49,7 +49,7 @@
 				ignore: '.ignore',
 				save_state: true,
 				storage: 'symphony.collapsible.' + Symphony.Context.get('context-id'),
-				delay: 250
+				delay: 0
 			};
 
 		$.extend(settings, options);
@@ -130,7 +130,7 @@
 						$(window).scrollTop(scrollTop + (first.offset().top - firstOffset));
 					}
 					invisibles.trigger('animationend.collapsible');
-				}, settings.delay + 100);
+				}, settings.delay);
 			});
 
 			// Expand item
@@ -185,7 +185,7 @@
 						// which is last scroll position + delta of first visible item
 						$(window).scrollTop(scrollTop + (first.offset().top - firstOffset));
 					}
-				}, settings.delay + 100);
+				}, settings.delay);
 			});
 
 			// Finish animations
