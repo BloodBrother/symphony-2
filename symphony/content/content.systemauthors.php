@@ -393,6 +393,10 @@ class contentSystemAuthors extends AdministrationPage
         $label->appendChild(Widget::Input('fields[email]', $author->get('email'), 'text', array('autocomplete' => 'off')));
         $group->appendChild((isset($this->_errors['email']) ? Widget::Error($label, $this->_errors['email']) : $label));
 
+        $primary = new XMLElement('div');
+        $primary->setAttribute('class', 'primary');
+        $this->Form->prependChild($primary);
+
         $primary->appendChild($group);
 
         // Login Details
