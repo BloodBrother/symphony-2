@@ -315,8 +315,8 @@ Symphony.View.add('/publish/:context*:', function() {
 	});
 });
 
-Symphony.View.add('/:context*:/new', function() {
-	Symphony.Elements.contents.find('input[type="text"], textarea').first().focus();
+Symphony.View.add('/:context*:', function() {
+	Symphony.Elements.contents.find('input[type="text"], textarea, select').first().focus();
 });
 
 /*--------------------------------------------------------------------------
