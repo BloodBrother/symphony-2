@@ -739,8 +739,12 @@ class AdministrationPage extends HTMLPage
                 'use strict';
 
                 var switchStates = JSON.parse(localStorage.getItem('checked')) || [];
+                var panel_switches = document.getElementsByClassName('js-panel-switch');
+                var trigger_length = panel_switches.length;
                 switchStates.forEach(function(checked, i) {
-                    document.getElementsByClassName('js-panel-switch')[i].checked = checked;
+                    if(i <= trigger_length - 1) {
+                        panel_switches[i].checked = checked;
+                    }
                 });
             
             })();
