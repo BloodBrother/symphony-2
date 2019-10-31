@@ -178,7 +178,7 @@ class contentSystemPreferences extends AdministrationPage
          *  An array of errors
          */
         Symphony::ExtensionManager()->notifyMembers('AddCustomPreferenceFieldsets', '/system/preferences/', array(
-            'wrapper' => &$this->Form,
+            'wrapper' => &$primary,
             'errors' => $this->_errors
         ));
 
