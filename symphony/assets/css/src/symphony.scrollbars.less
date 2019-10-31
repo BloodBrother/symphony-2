@@ -1,0 +1,41 @@
+/**
+ * Symphony Scrollbars
+ *
+ * This file contains unified styles for scrollbars.
+ * Each element necessitating should have its selector added 
+ * to the following list.
+ *
+ * @since Symphony 4.0.0
+ */
+
+@import "variables";
+
+
+body>nav,
+body>main>form>[class],
+div.drawer,
+textarea,
+select,
+table[role="directory"] {
+	
+	/* Scrollbars standard styling --------*/
+	scrollbar-color: transparent transparent;
+	scrollbar-width: var(--scrollbar-width);
+	
+	&::-webkit-scrollbar {
+		background-color: var(--scrollbar-background-color);
+		height: var(--scrollbar-height);
+		width: var(--scrollbar-width);
+	}
+
+	&:hover {
+		scrollbar-color: var(--scrollbar-thumb-background-color) transparent;
+
+		&::-webkit-scrollbar {
+			&-thumb {
+				background-color: var(--scrollbar-thumb-background-color);
+				border-radius: var(--scrollbar-thumb-border-radius);
+			}
+		}
+	}
+}
