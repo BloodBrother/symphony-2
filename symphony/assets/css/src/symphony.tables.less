@@ -227,9 +227,7 @@ tr {
 		color: var(--color-error);
 	}
 
-	&.inactive:not(.selected) {
-		pointer-events: none;
+	&.inactive:not(.selected):not(:hover) {
 		opacity: 0.5;
-		color: var(--color-main-light);
 	}
 }
