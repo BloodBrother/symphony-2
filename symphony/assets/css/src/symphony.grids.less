@@ -10,34 +10,32 @@
 .columns {
 	display: flex;
 	flex-wrap: wrap;
-	margin-left: ~'calc(var(--standard-container-rhythm) * -1)';
+	// margin-left: ~'calc(var(--standard-container-rhythm) * -1)';
+	justify-content: space-between;
 
 	legend {
 		margin: 0 0 0 ~'calc(var(--spacing-thin) * -1)';
 		padding: 0 0.5rem 0 var(--spacing-thin);
 	}
 
-	.column,
-	> .invalid {
-		box-sizing: border-box;
-		padding: 0 0 0 var(--standard-container-rhythm);
+	.column {
+		// box-sizing: border-box;
+		// padding: 0 0 0 var(--standard-container-rhythm);
 	}
 
 	&.two .column {
-		width: 50%;
+		width: calc(50% - var(--standard-container-rhythm) / 2);
 
 		@media (max-width: (@xs - 1)){
 			width: 100%;
 		}
 	}
 
-	&.three .column,
-	&.three > .invalid {
-		width: 33.33%;
+	&.three .column {
+		width: calc(33.33% - var(--standard-container-rhythm) / 3);
 	}
 
-	&.four .column,
-	&.four > .invalid {
-		width: 25%;
+	&.four .column {
+		width: calc(25% - var(--standard-container-rhythm) / 4);
 	}
 }
