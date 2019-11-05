@@ -11,67 +11,169 @@
 
 .field {
 
+	/* Set context for possible absolutely positioned elements --------*/
+	position: relative;
+
 	/* Prevent line-height in containers by setting all to block --------*/
 	>textarea, select {
 		display: block;
 	}
 
 	/* Layout model - enclosed fields, piling without margins --------*/
-	--standard-field-border-color: transparent;
 	border: 1px solid var(--color-ui);
 	margin-bottom: -1px;
 
+	>input, >textarea, >select {
+		--standard-field-border-color: transparent;
+	}
+
 	&:first-of-type {
-		&, input:not([type=checkbox]), select, textarea {
+		&, 
+		input[type=text]:last-of-type, 
+		input[type=email]:last-of-type, 
+		input[type=file]:last-of-type, 
+		input[type=number]:last-of-type, 
+		input[type=password]:last-of-type, 
+		input[type=search]:last-of-type, 
+		input[type=url]:last-of-type, 
+		input[type=tel]:last-of-type, 
+		select:last-of-type, 
+		textarea:last-of-type {
 			border-top-left-radius: var(--radius-current);
 			border-top-right-radius: var(--radius-current);
 		}
 	}
 
 	&:last-of-type {
-		&, input:not([type=checkbox]), select, textarea {
+		&, 
+		input[type=text]:last-of-type, 
+		input[type=email]:last-of-type, 
+		input[type=file]:last-of-type, 
+		input[type=number]:last-of-type, 
+		input[type=password]:last-of-type, 
+		input[type=search]:last-of-type, 
+		input[type=url]:last-of-type, 
+		input[type=tel]:last-of-type, 
+		select:last-of-type, 
+		textarea:last-of-type {
 			border-bottom-left-radius: var(--radius-current);
 			border-bottom-right-radius: var(--radius-current);
 			border-bottom-color: var(--color-ui);
 		}
 
-		input:not([type=checkbox]), select, textarea {
+		input[type=text], 
+		input[type=email], 
+		input[type=file], 
+		input[type=number], 
+		input[type=password], 
+		input[type=search], 
+		input[type=url], 
+		input[type=tel], 
+		select, 
+		textarea {
 			margin-bottom: -1px;
 		}
 	}
 	
-	>*:first-child {
+	label, legend {
 		margin-left: var(--standard-inner-rhythm);
 		margin-right: var(--standard-inner-rhythm);
+	}
 
-		&+*~* {
-			margin: var(--standard-inner-rhythm);
+	label {
+		>* {
+			background-color: inherit;
+			padding: 0 var(--spacing-nano);
+			line-height: 1.1em;
+		}
+
+		>span {
+			top: var(--standard-inner-rhythm);
+			position: relative;
+			border-radius: var(--radius-small);
+			display: inline-block;
+			margin-left: calc(-1 * var(--spacing-nano));
+			// height: 1.5rem;
+			// line-height: 1.5rem;
+		}
+
+		>i {
+			bottom: 100%;
+			// margin-bottom: -.5em;
+			position: absolute;
+			right: -1px;
+			max-width: 100%;
+			padding-top: var(--spacing-pico);
+			margin-right: var(--standard-inner-rhythm);
+			border-top: 1px solid var(--color-ui);
+			border-left: 1px solid var(--color-ui);
+			border-right: 1px solid var(--color-ui);
+			box-shadow: var(--shadow-up-smaller);
+			font-size: var(--text-smallest);
+			border-radius: var(--radius-small) var(--radius-small) 0 0;
+		}
+
+		p {
+			top: 100%;
+			position: absolute;
+			left: -1px;
+			max-width: 100%;
+			margin-top: -.5em;
+			font-size: var(--text-smallest);
+			padding-bottom: var(--spacing-pico);
+			margin-left: var(--standard-inner-rhythm);
+			border-bottom: 1px solid currentColor;
+			border-left: 1px solid currentColor;
+			border-right: 1px solid currentColor;
+			border-radius: 0 0 var(--radius-small) var(--radius-small);
+
+			/* Make sure its over the following field --------*/
+			z-index: 1;
+			br {
+				display: none;
+			}
 		}
 	}
 
+	/* Give rhythm to basic elements --------*/
+	button, ul {
+		margin: var(--standard-inner-rhythm);
+	}
+
+	/* Give security spacing while still using 100% width --------*/
+	img {
+		padding: var(--standard-inner-rhythm);
+		box-sizing: border-box;
+	}
+
 	/* Position field titles/labels as if in input --------*/
-	&:not(.field-checkbox)>*:first-child {
-		top: var(--standard-inner-rhythm);
+	&:not(.field-checkbox) label {
 		height: 0;
 		background-color: inherit;
-
-		>* {
-			position: relative;
-			display: inline-block;
-			background-color: inherit;
-			padding: 0 var(--spacing-nano);
-			margin-left: calc(-1 * var(--spacing-nano));
-			height: 1.5rem;
-			line-height: 1.5rem;
-		}
 		
+		/* Important for the positioning of errors --------*/
+		position: static;
 
-		&+input:not([type=checkbox]), 
-		&+select, 
-		&+textarea,
-		&+* input:not([type=checkbox]),
-		&+* select,
-		&+* textarea {
+		&~input[type=text], 
+		&~input[type=email], 
+		&~input[type=file], 
+		&~input[type=number], 
+		&~input[type=password], 
+		&~input[type=search], 
+		&~input[type=url], 
+		&~input[type=tel], 
+		&~select, 
+		&~textarea,
+		&~* input[type=text], 
+		&~* input[type=email], 
+		&~* input[type=file], 
+		&~* input[type=number], 
+		&~* input[type=password], 
+		&~* input[type=search], 
+		&~* input[type=url], 
+		&~* input[type=tel], 
+		&~* select,
+		&~* textarea {
 			margin-top: 0;
 			padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
 		}
@@ -79,11 +181,9 @@
 
 /* Interactive styles --------*/
 	&:not(:hover) { 
-		color: var(--standard-field-color);
+		color: var(--standard-label-color);
 
 		label {
-			color: var(--standard-label-color);
-
 			>i {
 				opacity: 0;
 			}
@@ -93,7 +193,16 @@
 	&:hover {
 		color: var(--standard-field-hover-color);
 
-		input:not([type=checkbox]):not(:focus), select:not(:focus), textarea:not(:focus) {
+		input[type=text]:hover:not(:focus), 
+		input[type=email]:hover:not(:focus), 
+		input[type=file]:hover:not(:focus), 
+		input[type=number]:hover:not(:focus), 
+		input[type=password]:hover:not(:focus), 
+		input[type=search]:hover:not(:focus), 
+		input[type=url]:hover:not(:focus), 
+		input[type=tel]:hover:not(:focus), 
+		select:hover:not(:focus), 
+		textarea:hover:not(:focus) {
 			border-bottom-color: var(--standard-field-hover-border-color);
 			color: var(--standard-field-hover-color);
 		}

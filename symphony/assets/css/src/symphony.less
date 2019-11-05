@@ -12,15 +12,29 @@
 
 
 /* Import and set fonts --------*/
-@import url('https://rsms.me/inter/inter.css');
-
-html { 
-	font-family: 'Inter', sans-serif; 
-	-webkit-font-smoothing: auto;
+@font-face {
+  font-family: 'Inter var';
+  font-weight: 100 900;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  font-display: swap;
+  src: url("../fonts/Inter-roman.woff2") format("woff2");
+  unicode-range: U+000-5FF; /* Latin glyphs */
 }
 
-@supports (font-variation-settings: normal) {
-  html { font-family: 'Inter var', sans-serif; }
+@font-face {
+  font-family: 'Inter var';
+  font-weight: 100 900;
+  font-style: italic;
+  font-named-instance: 'Italic';
+  font-display: swap;
+  src: url("../fonts/Inter-italic.woff2") format("woff2");
+  unicode-range: U+000-5FF; /* Latin glyphs */
+}
+
+html { 
+	-webkit-font-smoothing: auto;
+	font-family: 'Inter var', 'Helvetica', 'Arial', sans-serif; 
 }
 
 /* Reset | based on http://meyerweb.com/eric/tools/css/reset/ --------*/
@@ -191,9 +205,10 @@ i, var {
 
 /* Special elements --------*/
 .help {
-	color: var(--color-main-dark);
-	font-size: var(--text-small);
+	color: var(--color-main);
+	font-size: var(--text-smaller);
 	text-transform: none;
+	font-weight: 400;
 }
 
 .accessible {
