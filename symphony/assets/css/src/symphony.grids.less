@@ -10,7 +10,7 @@
 .columns {
 	display: flex;
 	flex-wrap: wrap;
-	// margin-left: ~'calc(var(--standard-container-rhythm) * -1)';
+	// margin-left: ~'calc(var(--standard-outer-rhythm) * -1)';
 	justify-content: space-between;
 
 	legend {
@@ -20,11 +20,11 @@
 
 	.column {
 		// box-sizing: border-box;
-		// padding: 0 0 0 var(--standard-container-rhythm);
+		// padding: 0 0 0 var(--standard-outer-rhythm);
 	}
 
 	&.two .column {
-		width: calc(50% - var(--standard-container-rhythm) / 2);
+		width: calc(50% - var(--standard-outer-rhythm) / 2);
 
 		@media (max-width: (@xs - 1)){
 			width: 100%;
@@ -32,10 +32,10 @@
 	}
 
 	&.three .column {
-		width: calc(33.33% - var(--standard-container-rhythm) / 3);
+		width: calc(33.33% - var(--standard-outer-rhythm) / 3);
 	}
 
 	&.four .column {
-		width: calc(25% - var(--standard-container-rhythm) / 4);
+		width: calc(25% - var(--standard-outer-rhythm) / 4);
 	}
 }
