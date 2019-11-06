@@ -44,14 +44,14 @@ body {
 
 	>nav {
 		grid-area: nav;
-		padding: var(--standard-container-rhythm);
+		padding: var(--standard-outer-rhythm);
 		padding-top: var(--spacing-large);
-		padding-left: calc(var(--standard-container-rhythm) + var(--standard-inner-rhythm));
+		padding-left: calc(var(--standard-outer-rhythm) + var(--standard-inner-rhythm));
 	}
 
 	>footer {
 		grid-area: footer;
-		padding: var(--standard-container-rhythm);
+		padding: var(--standard-outer-rhythm);
 	}
 
 	>aside {
@@ -73,7 +73,7 @@ body {
 	>main>form~* {
 		grid-area: secondary;
 		border-left: 1px solid var(--color-ui);
-		padding: 0 var(--standard-container-rhythm);
+		padding: 0 var(--standard-outer-rhythm);
 	}
 	
 	>main>form>.primary {
@@ -106,7 +106,7 @@ body {
 			left: 0;
 			/* Graphics --------*/
 			background-color: var(--backframe-background-color);
-			padding: var(--standard-container-rhythm);
+			padding: var(--standard-outer-rhythm);
 
 			// display: flex;
 			// flex-direction: column;
@@ -133,7 +133,7 @@ body {
 
 			/* Graphics --------*/
 			background-color: var(--backframe-background-color);
-			padding: var(--standard-inner-rhythm) var(--standard-container-rhythm);
+			padding: var(--standard-inner-rhythm) var(--standard-outer-rhythm);
 			border-top: 1px solid var(--color-ui);
 			/* Make it stick to the bottom of the window --------*/
 			position: sticky;
@@ -209,7 +209,7 @@ body {
 		}
 
 		>header [id="session"] {
-			padding-left: var(--standard-container-rhythm);
+			padding-left: var(--standard-outer-rhythm);
 		}
 
 		>aside {
@@ -233,7 +233,7 @@ body {
 			flex-direction: column;
 			border-left: 1px solid var(--color-ui);
 			padding: var(--standard-inner-rhythm);
-			padding-top: var(--standard-container-rhythm);
+			padding-top: var(--standard-outer-rhythm);
 		}
 	}
 
@@ -267,7 +267,7 @@ body {
 				&:before, &:after {
 					content: "";
 					display: block;
-					height: var(--standard-container-rhythm);
+					height: var(--standard-outer-rhythm);
 					flex-shrink: 0;
 				}
 
@@ -281,7 +281,7 @@ body {
 			}
 
 			&.primary {
-				padding: 0 var(--standard-container-rhythm);
+				padding: 0 var(--standard-outer-rhythm);
 
 				.field {
 					background-color: var(--color-clear);

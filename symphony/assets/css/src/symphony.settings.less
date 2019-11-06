@@ -18,10 +18,10 @@
 --------------------------------------------------------------------------*/
 
 fieldset.settings {
-	padding: var(--standard-container-rhythm);
-	margin-bottom: var(--standard-container-rhythm);
+	padding: var(--standard-outer-rhythm);
+	margin-bottom: var(--standard-outer-rhythm);
 	box-sizing: content-box;
-	margin-top: var(--standard-container-rhythm);
+	margin-top: var(--standard-outer-rhythm);
 
 	label {
 		cursor: pointer;
@@ -70,14 +70,14 @@ fieldset.settings {
 				margin-right: auto;
 
 				&.frame {
-					max-width: calc(var(--dimension-smaller) + var(--standard-container-rhythm) * 2);
+					max-width: calc(var(--dimension-smaller) + var(--standard-outer-rhythm) * 2);
 				}
 			}
 		}
 
 		@media (max-width: (@md - 1)){
 			font-size: var(--text-big);
-			margin-top: var(--standard-container-rhythm);
+			margin-top: var(--standard-outer-rhythm);
 		}
 	}
 
