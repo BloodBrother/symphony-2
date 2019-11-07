@@ -262,20 +262,27 @@ body {
 			
 			&.primary,
 			&.secondary {
-				
-				/* Forced vertical spacing in scrolling parent --------*/
-				&:before, &:after {
-					content: "";
-					display: block;
-					height: var(--standard-outer-rhythm);
+
+				>* {
 					flex-shrink: 0;
 				}
+
 
 				.field {
 					max-width: var(--dimension-smallest);
 					width: 100%;
 					margin-left: auto;
 					margin-right: auto;
+
+
+					/* Center fields vertically if in small quantities --------*/
+					&:first-child {
+						margin-top: var(--standard-outer-rhythm);
+					}
+
+					&:last-child {
+						margin-bottom: var(--standard-outer-rhythm);
+					}
 				}
 
 			}
@@ -283,18 +290,19 @@ body {
 			&.primary {
 				padding: 0 var(--standard-outer-rhythm);
 
+
+				/* Forced vertical spacing in scrolling parent --------*/
+				&:before, &:after {
+					content: "";
+					display: block;
+					height: 0;
+					margin: auto;
+				}
+
 				.field {
 					background-color: var(--color-clear);
 					
 
-					/* Center fields vertically if in small quantities --------*/
-					&:first-child {
-						margin-top: auto;
-					}
-
-					&:last-child {
-						margin-bottom: auto;
-					}
 				}
 
 				@media (max-width: @sm) {
