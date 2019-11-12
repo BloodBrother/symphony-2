@@ -41,11 +41,6 @@ class contentSystemPreferences extends AdministrationPage
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
 
-        $primary = new XMLElement('div');
-        $primary->setAttribute('class', 'primary');
-
-        $this->Form->prependChild($primary);
-
         $saveAttr = array(
             'accesskey' => 's',
             'name' => 'action[save]',
@@ -85,7 +80,7 @@ class contentSystemPreferences extends AdministrationPage
             $group->appendChild($label);
             $group->appendChild(new XMLElement('p', __('Authors can set up a differing language in their profiles.'), array('class' => 'help')));
             // Append language selection
-            $primary->appendChild($group);
+            $this->Primary->appendChild($group);
         }
 
         // Get available EmailGateways
@@ -112,14 +107,14 @@ class contentSystemPreferences extends AdministrationPage
             $label->appendChild($select);
             $group->appendChild($label);
             // Append email gateway selection
-            $primary->appendChild($group);
+            $this->Primary->appendChild($group);
         }
 
         foreach ($email_gateways as $gateway) {
             $gateway_settings = EmailGatewayManager::create($gateway['handle'])->getPreferencesPane();
 
             if (is_a($gateway_settings, 'XMLElement')) {
-                $primary->appendChild($gateway_settings);
+                $this->Primary->appendChild($gateway_settings);
             }
         }
 
@@ -163,7 +158,7 @@ class contentSystemPreferences extends AdministrationPage
                 'errors' => $this->_errors
             ));
 
-            $primary->appendChild($group);
+            $this->Primary->appendChild($group);
         }
 
         /**
@@ -178,7 +173,7 @@ class contentSystemPreferences extends AdministrationPage
          *  An array of errors
          */
         Symphony::ExtensionManager()->notifyMembers('AddCustomPreferenceFieldsets', '/system/preferences/', array(
-            'wrapper' => &$primary,
+            'wrapper' => &$this->Primary,
             'errors' => $this->_errors
         ));
 

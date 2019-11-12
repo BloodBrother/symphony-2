@@ -850,10 +850,7 @@ class contentPublish extends AdministrationPage
             array('role' => 'directory', 'aria-labelledby' => 'symphony-subheading', 'data-interactive' => 'data-interactive')
         );
 
-        $primary = new XMLElement('div');
-        $primary->setAttribute('class', 'primary');
-        $primary->appendChild($table);
-        $this->Form->appendChild($primary);
+        $this->Primary->appendChild($table);
 
         $tableActions = new XMLElement('div');
         $tableActions->setAttribute('class', 'actions');
@@ -905,7 +902,7 @@ class contentPublish extends AdministrationPage
 
         if (!empty($options)) {
             $tableActions->appendChild(Widget::Apply($options));
-            $primary->appendChild($tableActions);
+            $this->Primary->appendChild($tableActions);
         }
 
         if ($pagination->totalPages() > 1) {
@@ -1211,9 +1208,6 @@ class contentPublish extends AdministrationPage
             }
         }
 
-        $primary = new XMLElement('div');
-        $primary->setAttribute('class', 'primary');
-
         $secondaryPanelSwitch = new XMLElement('input');
         $secondaryPanelSwitch->setAttribute('type', 'checkbox');
         $secondaryPanelSwitch->setAttribute('class', 'js-panel-switch secondary-panel-switch');
@@ -1232,10 +1226,8 @@ class contentPublish extends AdministrationPage
         } else {
             if (is_array($main_fields) && !empty($main_fields)) {
                 foreach ($main_fields as $field) {
-                    $primary->appendChild($this->__wrapFieldWithDiv($field, $entry));
+                    $this->Primary->appendChild($this->__wrapFieldWithDiv($field, $entry));
                 }
-
-                $this->Form->appendChild($primary);
             }
 
             if (is_array($sidebar_fields) && !empty($sidebar_fields)) {
@@ -1571,9 +1563,6 @@ class contentPublish extends AdministrationPage
 
         $this->Form->appendChild(Widget::Input('MAX_FILE_SIZE', Symphony::Configuration()->get('max_upload_size', 'admin'), 'hidden'));
 
-        $primary = new XMLElement('div');
-        $primary->setAttribute('class', 'primary');
-
         $secondaryPanelSwitch = new XMLElement('input');
         $secondaryPanelSwitch->setAttribute('type', 'checkbox');
         $secondaryPanelSwitch->setAttribute('class', 'js-panel-switch secondary-panel-switch');
@@ -1608,10 +1597,8 @@ class contentPublish extends AdministrationPage
             
             if (is_array($main_fields) && !empty($main_fields)) {
                 foreach ($main_fields as $field) {
-                    $primary->appendChild($this->__wrapFieldWithDiv($field, $entry));
+                    $this->Primary->appendChild($this->__wrapFieldWithDiv($field, $entry));
                 }
-
-                $this->Form->appendChild($primary);
             }
 
             if (is_array($sidebar_fields) && !empty($sidebar_fields)) {

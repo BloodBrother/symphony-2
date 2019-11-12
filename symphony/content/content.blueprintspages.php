@@ -227,12 +227,7 @@ class contentBlueprintsPages extends AdministrationPage
             null, array('role' => 'directory', 'aria-labelledby' => 'symphony-subheading', 'data-interactive' => 'data-interactive')
         );
         
-        $primary = new XMLElement('div');
-        $primary->setAttribute('class', 'primary');
-
-        $this->Form->prependChild($primary);
-        
-        $primary->appendChild($table);
+        $this->Primary->appendChild($table);
 
         $tableActions = new XMLElement('div');
         $tableActions->setAttribute('class', 'actions');
@@ -264,7 +259,7 @@ class contentBlueprintsPages extends AdministrationPage
 
         if (!empty($options)) {
             $tableActions->appendChild(Widget::Apply($options));
-            $primary->appendChild($tableActions);
+            $this->Primary->appendChild($tableActions);
         }
     }
 
@@ -512,15 +507,10 @@ class contentBlueprintsPages extends AdministrationPage
             $tags->appendChild(new XMLElement('li', General::sanitize($type)));
         }
 
-        $primary = new XMLElement('div');
-        $primary->setAttribute('class', 'primary');
-
-        $this->Form->prependChild($primary);
-
-        $column->appendChild($tags);
+        $label->appendChild($tags);
         $group->appendChild($column);
         $fieldset->appendChild($group);
-        $primary->appendChild($fieldset);
+        $this->Primary->appendChild($fieldset);
 
         // Events -------------------------------------------------------------
 
@@ -575,7 +565,7 @@ class contentBlueprintsPages extends AdministrationPage
         $label->appendChild(Widget::Select('fields[data_sources][]', $options, array('multiple' => 'multiple')));
         $group->appendChild($label);
         $fieldset->appendChild($group);
-        $primary->appendChild($fieldset);
+        $this->Primary->appendChild($fieldset);
 
         // Controls -----------------------------------------------------------
 

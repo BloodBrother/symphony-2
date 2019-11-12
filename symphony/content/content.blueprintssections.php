@@ -120,13 +120,7 @@ class contentBlueprintsSections extends AdministrationPage
             array('role' => 'directory', 'aria-labelledby' => 'symphony-subheading', 'data-interactive' => 'data-interactive')
         );
 
-
-        $primary = new XMLElement('div');
-        $primary->setAttribute('class', 'primary');
-
-        $this->Form->prependChild($primary);
-
-        $primary->appendChild($table);
+        $this->Primary->appendChild($table);
 
         $tableActions = new XMLElement('div');
         $tableActions->setAttribute('class', 'actions');
@@ -179,7 +173,7 @@ class contentBlueprintsSections extends AdministrationPage
 
         if (!empty($options)) {
             $tableActions->appendChild(Widget::Apply($options));
-            $primary->appendChild($tableActions);
+            $this->Primary->appendChild($tableActions);
         }
     }
 
@@ -288,18 +282,13 @@ class contentBlueprintsSections extends AdministrationPage
                 $groups[] = $s->get('navigation_group');
             }
 
-            $navgroupdiv->appendChild($ul);
+            $label->appendChild($ul);
         }
-
-        $primary = new XMLElement('div');
-        $primary->setAttribute('class', 'primary');
-
-        $this->Form->prependChild($primary);
 
         $div->appendChild($navgroupdiv);
         $fieldset->appendChild($div);
-        $primary->appendChild($fieldset);
-        $primary->appendChild($this->addSectionOptions($meta));
+        $this->Primary->appendChild($fieldset);
+        $this->Primary->appendChild($this->addSectionOptions($meta));
 
         $fieldset = new XMLElement('fieldset');
         $fieldset->setAttribute('class', 'settings');
@@ -357,7 +346,7 @@ class contentBlueprintsSections extends AdministrationPage
         $div->appendChild($ol);
         $fieldset->appendChild($div);
 
-        $primary->appendChild($fieldset);
+        $this->Primary->appendChild($fieldset);
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');
@@ -462,11 +451,6 @@ class contentBlueprintsSections extends AdministrationPage
             )
         );
 
-        $primary = new XMLElement('div');
-        $primary->setAttribute('class', 'primary');
-
-        $this->Form->prependChild($primary);
-
         $div = new XMLElement('div');
         $div->setAttribute('class', 'actions');
 
@@ -484,7 +468,7 @@ class contentBlueprintsSections extends AdministrationPage
         $div->appendChild(Widget::Input('action[timestamp]', $timestamp, 'hidden'));
         $div->appendChild(Widget::Input('action[ignore-timestamp]', 'yes', 'checkbox', array('class' => 'irrelevant')));
 
-        $primary->appendChild($div);
+        $this->Primary->appendChild($div);
 
         $fieldset = new XMLElement('fieldset');
         $fieldset->setAttribute('class', 'settings');
@@ -543,14 +527,14 @@ class contentBlueprintsSections extends AdministrationPage
                 $groups[] = $s->get('navigation_group');
             }
 
-            $navgroupdiv->appendChild($ul);
+            $label->appendChild($ul);
         }
 
         $div->appendChild($navgroupdiv);
         $fieldset->appendChild($div);
-        $primary->appendChild($fieldset);
+        $this->Primary->appendChild($fieldset);
 
-        $primary->appendChild($this->addSectionOptions($meta));
+        $this->Primary->appendChild($this->addSectionOptions($meta));
 
         $fieldset = new XMLElement('fieldset');
         $fieldset->setAttribute('class', 'settings');
@@ -606,7 +590,7 @@ class contentBlueprintsSections extends AdministrationPage
         $div->appendChild($ol);
         $fieldset->appendChild($div);
 
-        $primary->appendChild($fieldset);
+        $this->Primary->appendChild($fieldset);
 
         $this->Header->setAttribute('class', 'spaced-bottom');
         $this->Contents->setAttribute('class', 'centered-content');
