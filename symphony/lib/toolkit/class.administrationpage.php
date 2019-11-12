@@ -460,7 +460,6 @@ class AdministrationPage extends HTMLPage
         $this->ContentsActions = new XMLElement('div', null, array('id' => 'contents-actions'));
         $this->Controls = new XMLElement('div', null, array('id' => 'controls'));
         $this->Form = Widget::Form(Administration::instance()->getCurrentPageURL(), 'post', null, null, array('role' => 'form'));
-        // $this->Tools = new XMLElement('div', null, array('id' => 'tools'));
 
         /**
          * Allows developers to insert items into the page HEAD. Use
