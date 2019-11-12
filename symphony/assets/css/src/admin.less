@@ -63,26 +63,26 @@ body {
 		position: relative;
 	}
 
-	>main>form>.primary,
-	>main>form>.secondary {
+	[id="primary"],
+	[id="secondary"] {
 		display: flex;
 		flex-direction: column;
 	}
 
-	>main>form>.secondary,
+	[id="secondary"],
 	>main>form~* {
 		grid-area: secondary;
 		border-left: 1px solid var(--color-ui);
 		padding: 0 var(--standard-outer-rhythm);
 	}
 	
-	>main>form>.primary {
+	[id="primary"] {
 		grid-area: primary;
 		background-color: var(--frontframe-background-color);
 	}
 
 
-	>main>form>.primary>[role="directory"] {
+	[id="primary"]>[role="directory"] {
 		flex-grow: 1;
 	}
 
@@ -149,7 +149,7 @@ body {
 			border-right: 1px solid var(--color-ui);
 		}
 
-		main>form>.primary {
+		main>form>[id="primary"] {
 			overflow: auto;
 		}
 
@@ -198,7 +198,7 @@ body {
 			"session nav-panel-switch primary secondary-panel-switch secondary controls"
 			"footer nav-panel-switch primary secondary-panel-switch secondary controls";
 
-		>main>form>[class] {
+		>main>form>[id] {
 			max-height: 100%;
 			overflow: auto;
 		}
@@ -217,7 +217,7 @@ body {
 			border-bottom: 1px solid var(--color-ui);
 		}
 
-		>main>form>.secondary,
+		[id="secondary"],
 		>main>form~* {
 			border-left: 1px solid var(--color-ui);
 			
@@ -225,7 +225,7 @@ body {
 			max-width: var(--sidebar-max-width);
 		}
 		
-		>main>form>.primary {
+		[id="primary"] {
 			// border-left: 1px solid var(--color-ui);
 		}
 
@@ -258,86 +258,83 @@ body {
 			}
 		}
 
-		main>form>div {
-			
-			&.primary,
-			&.secondary {
+		
+		[id="primary"],
+		[id="secondary"] {
 
-				>* {
-					flex-shrink: 0;
+			>* {
+				flex-shrink: 0;
+
+				/* Center fields vertically if in small quantities --------*/
+				&:first-child {
+					margin-top: var(--standard-outer-rhythm);
 				}
 
-
-				.field {
-					max-width: var(--dimension-smallest);
-					width: 100%;
-					margin-left: auto;
-					margin-right: auto;
-
-
-					/* Center fields vertically if in small quantities --------*/
-					&:first-child {
-						margin-top: var(--standard-outer-rhythm);
-					}
-
-					&:last-child {
-						margin-bottom: var(--standard-outer-rhythm);
-					}
+				&:last-child {
+					margin-bottom: var(--standard-outer-rhythm);
 				}
+			}
+
+
+			.field {
+				max-width: var(--dimension-smallest);
+				width: 100%;
+				margin-left: auto;
+				margin-right: auto;
 
 			}
 
-			&.primary {
-				padding: 0 var(--standard-outer-rhythm);
+		}
 
+		[id="primary"] {
+			padding: 0 var(--standard-outer-rhythm);
 
-				/* Forced vertical spacing in scrolling parent --------*/
-				&:before, &:after {
-					content: "";
-					display: block;
-					height: 0;
-					margin: auto;
-				}
+			/* Forced vertical spacing in scrolling parent --------*/
+			&:before, &:after {
+				content: "";
+				display: block;
+				height: 0;
+				margin: auto;
+			}
 
-				.field {
-					background-color: var(--color-clear);
-					
-
-				}
-
-				@media (max-width: @sm) {
-					&:last-of-type {
-						min-height: 100%;
-					}
-				}
+			.field {
+				background-color: var(--primary-field-background-color);
+				
 
 			}
 
-			&.secondary {
-
-				.field {
-					background-color: var(--sidebar-field-background-color);
+			@media (max-width: @sm) {
+				&:last-of-type {
+					min-height: 100%;
 				}
-
-				@media (max-width: @sm) {
-					// min-height: calc(100vh - var(--spacing-broadest));
-					box-sizing: border-box;
-					// position: sticky;
-					// bottom: var(--spacing-broadest);
-
-					.field {
-						/* Center fields vertically if in small quantities --------*/
-						&:first-child {
-							margin-top: auto;
-						}
-
-						&:last-child {
-							margin-bottom: auto;
-						}
-					}
-				}
-
 			}
+
+		}
+
+		[id="secondary"] {
+
+			.field {
+				background-color: var(--secondary-field-background-color);
+			}
+
+			@media (max-width: @sm) {
+				// min-height: calc(100vh - var(--spacing-broadest));
+				box-sizing: border-box;
+				// position: sticky;
+				// bottom: var(--spacing-broadest);
+
+				// .field {
+				// 	/* Center fields vertically if in small quantities --------*/
+				// 	&:first-child {
+				// 		margin-top: auto;
+				// 	}
+
+				// 	&:last-child {
+				// 		margin-bottom: auto;
+				// 	}
+				// }
+			}
+
 		}
 	}
 }
@@ -397,7 +394,7 @@ input.secondary-panel-switch {
 }
 
 @media (min-width: @sm) {
-	input.secondary-panel-switch:not(:checked)~.secondary,
+	input.secondary-panel-switch:not(:checked)~[id="secondary"],
 	input.nav-panel-switch:not(:checked)~nav,
 	input.nav-panel-switch:not(:checked)~footer,
 	input.nav-panel-switch:not(:checked)~header [id="session"],
