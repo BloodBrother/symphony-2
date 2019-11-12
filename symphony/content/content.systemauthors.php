@@ -79,10 +79,6 @@ class contentSystemAuthors extends AdministrationPage
         }
 
 
-        $primary = new XMLElement('div');
-        $primary->setAttribute('class', 'primary');
-        $this->Form->prependChild($primary);
-
         Sortable::initialize($this, $authors, $sort, $order);
 
         $columns = array(
@@ -246,7 +242,7 @@ class contentSystemAuthors extends AdministrationPage
             array('role' => 'directory', 'aria-labelledby' => 'symphony-subheading')
         );
 
-        $primary->appendChild($table);
+        $this->Primary->appendChild($table);
     }
 
     // Both the Edit and New pages need the same form
@@ -393,11 +389,7 @@ class contentSystemAuthors extends AdministrationPage
         $label->appendChild(Widget::Input('fields[email]', $author->get('email'), 'text', array('autocomplete' => 'off')));
         $group->appendChild((isset($this->_errors['email']) ? Widget::Error($label, $this->_errors['email']) : $label));
 
-        $primary = new XMLElement('div');
-        $primary->setAttribute('class', 'primary');
-        $this->Form->prependChild($primary);
-
-        $primary->appendChild($group);
+        $this->Primary->appendChild($group);
 
         // Login Details
         $group = new XMLElement('fieldset');
@@ -566,7 +558,7 @@ class contentSystemAuthors extends AdministrationPage
         $label->appendChild(Widget::Select('fields[default_area]', $options));
         $group->appendChild($label);
 
-        $primary->appendChild($group);
+        $this->Primary->appendChild($group);
 
         // Custom Language Selection
         $languages = Lang::getAvailableLanguages();
@@ -591,7 +583,7 @@ class contentSystemAuthors extends AdministrationPage
             $label->appendChild($select);
             $group->appendChild($label);
 
-            $primary->appendChild($group);
+            $this->Primary->appendChild($group);
         }
 
         // Administration password double check
@@ -611,7 +603,7 @@ class contentSystemAuthors extends AdministrationPage
                 isset($this->_errors['confirm-change-password']) ? Widget::Error($label, $this->_errors['confirm-change-password']) : $label
             );
 
-            $primary->appendChild($group);
+            $this->Primary->appendChild($group);
         }
 
         // Actions
