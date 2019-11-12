@@ -397,6 +397,7 @@ class AdministrationPage extends HTMLPage
         $this->addElementToHead(new XMLElement('meta', null, array('name' => 'theme-color', 'content' => '#FFF7D9')), 0);
         $this->addElementToHead(new XMLElement('meta', null, array('http-equiv' => 'X-UA-Compatible', 'content' => 'IE=edge,chrome=1')), 1);
         $this->addElementToHead(new XMLElement('meta', null, array('name' => 'viewport', 'content' => 'width=device-width, initial-scale=1')), 2);
+        $this->addElementToHead(new XMLElement('link', null, array('rel' => 'preload', 'href' => ASSETS_URL . '/fonts/Inter-roman.woff2', 'as' => 'font', 'crossorigin' => 'anonymous')), 2);
         // Add styles
         $this->addStylesheetToHead(ASSETS_URL . '/css/symphony.min.css', 'screen', 2, false);
 
@@ -449,7 +450,7 @@ class AdministrationPage extends HTMLPage
         $this->addScriptToHead(ASSETS_URL . '/js/symphony.min.js', 6, false);
 
         // Initialise page containers
-        // $this->Wrapper = new XMLElement('div', null, array('id' => 'wrapper'));
+        $this->Primary = new XMLElement('div', null, array('id' => 'primary', 'class' => 'primary'));
         $this->Header = new XMLElement('header', null, array('id' => 'header'));
         $this->Footer = new XMLElement('footer', null, array('id' => 'footer'));
         $this->Session = new XMLElement('div', null, array('id' => 'session'));
@@ -540,7 +541,8 @@ class AdministrationPage extends HTMLPage
 
         // Add Breadcrumbs
         $this->Context->appendChild($this->Breadcrumbs);
-        $this->Controls->appendChild($this->ContentsActions);        
+        $this->Controls->appendChild($this->ContentsActions);
+        $this->Form->appendChild($this->Primary);
         $this->Form->appendChild($this->Controls);
         $this->Contents->appendChild($this->Form);
 
