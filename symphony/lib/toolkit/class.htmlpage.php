@@ -57,6 +57,28 @@ class HTMLPage extends Page
     }
 
     /**
+     * This holds all the elements that will eventually be in the `$Body`.
+     * This allows extensions to add elements at certain indexes so
+     * resource dependancies can be met, and duplicates can be removed.
+     * Defaults to an empty array.
+     * @var array
+     */
+    protected $_body = array();
+
+    /**
+     * Accessor function for `$this->_body`. Returns all the XMLElements that are
+     * about to be added to `$this->Body`.
+     *
+     * @since Symphony 4.0.0
+     * @return array
+     */
+    public function Body()
+    {
+        return $this->_body;
+    }
+
+
+    /**
      * Constructor for the HTMLPage. Intialises the class variables with
      * empty instances of XMLElement
      */
@@ -113,6 +135,7 @@ class HTMLPage extends Page
     protected function __build()
     {
         $this->__generateHead();
+        $this->__generateBody();
         $this->Html->appendChild($this->Head);
         $this->Html->appendChild($this->Body);
     }
@@ -128,6 +151,21 @@ class HTMLPage extends Page
         foreach ($this->_head as $position => $obj) {
             if (is_object($obj)) {
                 $this->Head->appendChild($obj);
+            }
+        }
+    }
+
+    /**
+     * Sorts the `$this->_body` elements by key, then appends them to the
+     * `$Head` XMLElement in order.
+     */
+    protected function __generateBody()
+    {
+        ksort($this->_body);
+
+        foreach ($this->_body as $position => $obj) {
+            if (is_object($obj)) {
+                $this->Body->appendChild($obj);
             }
         }
     }
@@ -169,6 +207,47 @@ class HTMLPage extends Page
 
         // append new element
         $this->_head[$position] = $object;
+
+        return $position;
+    }
+
+    /**
+     * Adds an XMLElement to the `$this->_body` array at a desired position.
+     * If no position is given, the object will be added to the end
+     * of the `$this->_body` array. If that position is already taken, it will
+     * add the object at the next available position.
+     *
+     * @see toolkit.General#array_find_available_index()
+     * @param XMLElement $object
+     * @param integer $position
+     *  Defaults to null which will put the `$object` at the end of the
+     *  `$this->_body`.
+     * @param boolean $allowDuplicate
+     *  If set to false, make this function check if there is already an XMLElement that as the same name in the head.
+     *  Defaults to true. @since Symphony 2.3.2
+     * @return integer
+     *  Returns the position that the `$object` has been set in the `$this->_body`
+     */
+    public function addElementToBody(XMLElement $object, $position = null, $allowDuplicate = true)
+    {
+        // find the right position
+        if (($position && isset($this->_body[$position]))) {
+            $position = General::array_find_available_index($this->_body, $position);
+        } elseif (is_null($position)) {
+            if (count($this->_body) > 0) {
+                $position = max(array_keys($this->_body))+1;
+            } else {
+                $position = 0;
+            }
+        }
+
+        // check if we allow duplicate
+        if (!$allowDuplicate && !empty($this->_body)) {
+            $this->removeFromBody($object->getName());
+        }
+
+        // append new element
+        $this->_body[$position] = $object;
 
         return $position;
     }
@@ -224,6 +303,56 @@ class HTMLPage extends Page
     }
 
     /**
+     * Given an elementName, this function will remove the corresponding
+     * XMLElement from the `$this->_body`
+     *
+     * @param string $elementName
+     */
+    public function removeFromBody($elementName)
+    {
+        foreach ($this->_body as $position => $element) {
+            if ($element->getName() !== $elementName) {
+                continue;
+            }
+
+            $this->removeFromBodyByPosition($position);
+        }
+    }
+
+    /**
+     * Removes an item from `$this->_head` by it's index.
+     *
+     * @since Symphony 2.3.3
+     * @param integer $position
+     */
+    public function removeFromBodyByPosition($position)
+    {
+        if (isset($position, $this->_body[$position])) {
+            unset($this->_body[$position]);
+        }
+    }
+
+    /**
+     * Determines if two elements are duplicates based on an attribute and value
+     *
+     * @param string $path
+     *  The value of the attribute
+     * @param string $attribute
+     *  The attribute to check
+     * @return boolean
+     */
+    public function checkElementsInBody($path, $attribute)
+    {
+        foreach ($this->_body as $element) {
+            if (basename($element->getAttribute($attribute)) == basename($path)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Convenience function to add a `<script>` element to the `$this->_head`. By default
      * the function will allow duplicates to be added to the `$this->_head`. A duplicate
      * is determined by if the `$path` is unique.
@@ -247,6 +376,33 @@ class HTMLPage extends Page
             $script->setAttributeArray(array('type' => 'text/javascript', 'src' => $path));
 
             return $this->addElementToHead($script, $position);
+        }
+    }
+
+    /**
+     * Convenience function to add a `<script>` element to the `$this->_body`. By default
+     * the function will allow duplicates to be added to the `$this->_body`. A duplicate
+     * is determined by if the `$path` is unique.
+     *
+     * @param string $path
+     *  The path to the script file
+     * @param integer $position
+     *  The desired position that the resulting XMLElement will be placed
+     *  in the `$this->_body`. Defaults to null which will append to the end.
+     * @param boolean $duplicate
+     *  When set to false the function will only add the script if it doesn't
+     *  already exist. Defaults to true which allows duplicates.
+     * @return integer
+     *  Returns the position that the script has been set in the `$this->_head`
+     */
+    public function addScriptToBody($path, $position = null, $duplicate = true)
+    {
+        if ($duplicate === true || ($duplicate === false && $this->checkElementsInHead($path, 'src') === false)) {
+            $script = new XMLElement('script');
+            $script->setSelfClosingTag(false);
+            $script->setAttributeArray(array('type' => 'text/javascript', 'src' => $path));
+
+            return $this->addElementToBody($script, $position);
         }
     }
 
