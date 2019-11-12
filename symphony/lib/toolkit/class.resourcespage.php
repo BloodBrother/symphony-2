@@ -193,7 +193,7 @@ abstract class ResourcesPage extends AdministrationPage
         $aTableBody = array();
 
         if (!is_array($resources) || empty($resources)) {
-            $aTableBody = array(Widget::TableRow(array(Widget::TableData(__('None found.'), 'inactive', null, count($aTableHead))), 'odd'));
+            $aTableBody = array(Widget::TableRow(array(Widget::TableData(__('None found.'), null, null, count($aTableHead))), 'odd inactive'));
         } else {
             foreach ($resources as $r) {
                 $action = 'edit';
@@ -333,7 +333,7 @@ abstract class ResourcesPage extends AdministrationPage
             array('role' => 'directory', 'aria-labelledby' => 'symphony-subheading', 'data-interactive' => 'data-interactive')
         );
 
-        $this->Form->appendChild($table);
+        $this->Primary->appendChild($table);
 
         $tableActions = new XMLElement('div');
         $tableActions->setAttribute('class', 'actions');
@@ -379,7 +379,7 @@ abstract class ResourcesPage extends AdministrationPage
 
         if (!empty($options)) {
             $tableActions->appendChild(Widget::Apply($options));
-            $this->Form->appendChild($tableActions);
+            $this->Primary->appendChild($tableActions);
         }
     }
 
