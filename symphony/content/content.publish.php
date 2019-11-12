@@ -1231,8 +1231,7 @@ class contentPublish extends AdministrationPage
             }
 
             if (is_array($sidebar_fields) && !empty($sidebar_fields)) {
-                $sidebar = new XMLElement('div');
-                $sidebar->setAttribute('class', 'secondary');
+                $sidebar = new XMLElement('section');
                 $sidebar->setAttribute('id', 'secondary');
 
                 foreach ($sidebar_fields as $field) {
@@ -1602,8 +1601,8 @@ class contentPublish extends AdministrationPage
             }
 
             if (is_array($sidebar_fields) && !empty($sidebar_fields)) {
-                $sidebar = new XMLElement('div');
-                $sidebar->setAttribute('class', 'secondary');
+                $sidebar = new XMLElement('section');
+                $sidebar->setAttribute('id', 'secondary');
 
                 foreach ($sidebar_fields as $field) {
                     $sidebar->appendChild($this->__wrapFieldWithDiv($field, $entry));

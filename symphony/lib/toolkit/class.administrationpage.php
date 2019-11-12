@@ -450,7 +450,7 @@ class AdministrationPage extends HTMLPage
         $this->addScriptToHead(ASSETS_URL . '/js/symphony.min.js', 6, false);
 
         // Initialise page containers
-        $this->Primary = new XMLElement('div', null, array('id' => 'primary', 'class' => 'primary'));
+        $this->Primary = new XMLElement('div', null, array('id' => 'primary'));
         $this->Header = new XMLElement('header', null, array('id' => 'header'));
         $this->Footer = new XMLElement('footer', null, array('id' => 'footer'));
         $this->Session = new XMLElement('div', null, array('id' => 'session'));
