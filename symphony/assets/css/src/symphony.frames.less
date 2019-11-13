@@ -8,11 +8,16 @@
 @import "variables";
 
 .frame {
+	/* Assign standard theme values --------*/
+	--frame-background-color: var(--standard-frame-background-color);
+	--frame-instance-background-color: var(--standard-frame-instance-background-color);
+	--frame-instance-opened-background-color: var(--standard-frame-instance-opened-background-color);
+
 	box-sizing: border-box;
 	border-radius: var(--radius-big);
 	position: relative;
 	margin: 0;
-	background-color: var(--standard-frame-background-color);
+	background-color: var(--frame-background-color);
 	// padding: var(--standard-inner-rhythm);
 
 	h1 {
@@ -50,13 +55,13 @@
 	}
 
 	.instance {
-		background-color: var(--color-main-lightest);
+		background-color: var(--frame-instance-background-color);
 		border: 1px solid transparent;
 		border-radius: var(--radius-current);
 
 		&:not(.collapsed) {
 			border-radius: var(--radius-big);
-			background-color: var(--color-accent-lighter);
+			background-color: var(--frame-instance-opened-background-color);
 			border-color: var(--color-ui);
 
 			&:not(:first-of-type) {
@@ -114,7 +119,6 @@
 
 	:not(.collapsed)>& {
 		border-top-color: transparent;
-		top: var(--spacing-micro);
 	}
 
 	&:hover {

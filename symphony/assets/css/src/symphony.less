@@ -104,17 +104,21 @@ html, body {
 }
 
 /* Make sure the scrollbar space is always occupied for stability reasons --------*/
-body {
+html {
 	overflow-y: scroll;
 }
 
-/* Graphical & typographic base styles --------*/
-body {
+/* Basic color styles --------*/
+html {
+	background-color: var(--backframe-background-color);
 	color: var(--color-main-dark);
+}
+
+/* Basic typographic styles --------*/
+body {
 	font-size: var(--text-current);
 	font-weight: 400;
 	line-height: 1.4em;
-	background-color: var(--backframe-background-color);
 }
 
 
