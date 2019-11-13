@@ -138,6 +138,7 @@ body {
 			/* Make it stick to the bottom of the window --------*/
 			position: sticky;
 			bottom: 0;
+			order: 3;
 			/* Make sure we can align items --------*/
 			display: flex;
 			align-items: center;
@@ -254,7 +255,7 @@ body {
 
 			h2 {
 				margin: 0 auto;
-				flex-basis: var(--dimension-smallest);
+				flex-basis: var(--standard-field-max-width);
 			}
 		}
 
@@ -277,7 +278,7 @@ body {
 
 
 			.field {
-				max-width: var(--dimension-smallest);
+				max-width: var(--standard-field-max-width);
 				width: 100%;
 				margin-left: auto;
 				margin-right: auto;
