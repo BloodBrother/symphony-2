@@ -88,7 +88,16 @@ body {
 
 	[id="controls"] {
 		grid-area: controls;
+	}
+
+	[id="controls"],
+	[id="context"],
+	[id="nav"],
+	[id="footer"],
+	[id="session"],
+	[id="header"] {
 		z-index: 2;
+		background-color: var(--backframe-background-color);
 	}
 
 	#btn-toggle-header-mobile {

@@ -12,9 +12,10 @@
 	--frame-background-color: var(--standard-frame-background-color);
 	--frame-instance-background-color: var(--standard-frame-instance-background-color);
 	--frame-instance-opened-background-color: var(--standard-frame-instance-opened-background-color);
+	--frame-border-radius: var(--standard-frame-border-radius);
 
 	box-sizing: border-box;
-	border-radius: var(--radius-big);
+	border-radius: var(--frame-border-radius);
 	position: relative;
 	margin: 0;
 	background-color: var(--frame-background-color);
@@ -90,7 +91,7 @@
 		flex-grow: 1;
 		
 		strong {
-			font-weight: inherit;
+			font-weight: 740;
 		}
 
 		span, & + span {

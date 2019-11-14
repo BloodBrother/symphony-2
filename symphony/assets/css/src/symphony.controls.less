@@ -35,7 +35,7 @@
 		}
 
 		/* Interactive title tooltip --------*/
-		&:after {
+		&[title]:after {
 			content: attr(title);
 			position: absolute;
 			right: 100%;
@@ -51,7 +51,7 @@
 			pointer-events: none;
 		}
 
-		&:not(:hover):after {
+		&[title]:not(:hover):after {
 			opacity: 0;
 		}
 
