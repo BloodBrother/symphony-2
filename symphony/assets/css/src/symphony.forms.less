@@ -49,10 +49,14 @@ select:-webkit-autofill:focus {
     transition: background-color 5000s ease-in-out 0s;
 }
 
-input[type="text"],
-input[type="input"],
-input[type="file"],
-input[type="password"],
+input[type=text], 
+input[type=email], 
+input[type=file], 
+input[type=number], 
+input[type=password], 
+input[type=search], 
+input[type=url], 
+input[type=tel], 
 textarea,
 select,
 .field-value-readonly {
@@ -189,7 +193,7 @@ select[multiple] {
 	option {
 		color: var(--color-main-light);
 		&:checked {
-			background: var(--frontframe-background-color) -webkit-linear-gradient(bottom, var(--frontframe-background-color) 0%, var(--frontframe-background-color) 100%);
+			background: var(--standard-select-checked-background-color) -webkit-linear-gradient(bottom, var(--standard-select-checked-background-color) 0%, var(--standard-select-checked-background-color) 100%);
 			&:before {
 				content: "▶";
 				margin-right: var(--spacing-micro);

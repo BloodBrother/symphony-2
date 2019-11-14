@@ -27,18 +27,54 @@
 		--standard-field-border-color: transparent;
 	}
 
+	label {
+		&+input[type=text], 
+		&+input[type=email], 
+		&+input[type=file], 
+		&+input[type=number], 
+		&+input[type=password], 
+		&+input[type=search], 
+		&+input[type=url], 
+		&+input[type=tel], 
+		&+select, 
+		&+textarea,
+		&+* input[type=text], 
+		&+* input[type=email], 
+		&+* input[type=file], 
+		&+* input[type=number], 
+		&+* input[type=password], 
+		&+* input[type=search], 
+		&+* input[type=url], 
+		&+* input[type=tel], 
+		&+* select,
+		&+* textarea {
+			margin-top: 0;
+			padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
+		}
+	}
+
 	&:first-of-type {
-		&, 
-		input[type=text]:last-of-type, 
-		input[type=email]:last-of-type, 
-		input[type=file]:last-of-type, 
-		input[type=number]:last-of-type, 
-		input[type=password]:last-of-type, 
-		input[type=search]:last-of-type, 
-		input[type=url]:last-of-type, 
-		input[type=tel]:last-of-type, 
-		select:last-of-type, 
-		textarea:last-of-type {
+		&,
+		label+input[type=text]:first-of-type, 
+		label+input[type=email]:first-of-type, 
+		label+input[type=file]:first-of-type, 
+		label+input[type=number]:first-of-type, 
+		label+input[type=password]:first-of-type, 
+		label+input[type=search]:first-of-type, 
+		label+input[type=url]:first-of-type, 
+		label+input[type=tel]:first-of-type, 
+		label+select:first-of-type, 
+		label+textarea:first-of-type,
+		label+* input[type=text]:first-of-type, 
+		label+* input[type=email]:first-of-type, 
+		label+* input[type=file]:first-of-type, 
+		label+* input[type=number]:first-of-type, 
+		label+* input[type=password]:first-of-type, 
+		label+* input[type=search]:first-of-type, 
+		label+* input[type=url]:first-of-type, 
+		label+* input[type=tel]:first-of-type, 
+		label+* select:first-of-type,
+		label+* textarea:first-of-type {
 			border-top-left-radius: var(--radius-current);
 			border-top-right-radius: var(--radius-current);
 		}
@@ -46,31 +82,29 @@
 
 	&:last-of-type {
 		&, 
-		input[type=text]:last-of-type, 
-		input[type=email]:last-of-type, 
-		input[type=file]:last-of-type, 
-		input[type=number]:last-of-type, 
-		input[type=password]:last-of-type, 
-		input[type=search]:last-of-type, 
-		input[type=url]:last-of-type, 
-		input[type=tel]:last-of-type, 
-		select:last-of-type, 
-		textarea:last-of-type {
+		label+input[type=text]:last-of-type, 
+		label+input[type=email]:last-of-type, 
+		label+input[type=file]:last-of-type, 
+		label+input[type=number]:last-of-type, 
+		label+input[type=password]:last-of-type, 
+		label+input[type=search]:last-of-type, 
+		label+input[type=url]:last-of-type, 
+		label+input[type=tel]:last-of-type, 
+		label+select:last-of-type, 
+		label+textarea:last-of-type,
+		label+* input[type=text]:last-of-type, 
+		label+* input[type=email]:last-of-type, 
+		label+* input[type=file]:last-of-type, 
+		label+* input[type=number]:last-of-type, 
+		label+* input[type=password]:last-of-type, 
+		label+* input[type=search]:last-of-type, 
+		label+* input[type=url]:last-of-type, 
+		label+* input[type=tel]:last-of-type, 
+		label+* select:last-of-type,
+		label+* textarea:last-of-type {
 			border-bottom-left-radius: var(--radius-current);
 			border-bottom-right-radius: var(--radius-current);
 			border-bottom-color: var(--color-ui);
-		}
-
-		input[type=text], 
-		input[type=email], 
-		input[type=file], 
-		input[type=number], 
-		input[type=password], 
-		input[type=search], 
-		input[type=url], 
-		input[type=tel], 
-		select, 
-		textarea {
 			margin-bottom: -1px;
 		}
 	}
@@ -78,6 +112,14 @@
 	label, legend {
 		margin-left: var(--standard-inner-rhythm);
 		margin-right: var(--standard-inner-rhythm);
+	}
+
+	ul:not(:hover),
+	li:not(:hover),
+	div:not(:hover),
+	section:not(:hover),
+	footer:not(:hover) {
+		color: var(--standard-label-color);
 	}
 
 	label {
@@ -153,30 +195,6 @@
 		
 		/* Important for the positioning of errors --------*/
 		position: static;
-
-		&~input[type=text], 
-		&~input[type=email], 
-		&~input[type=file], 
-		&~input[type=number], 
-		&~input[type=password], 
-		&~input[type=search], 
-		&~input[type=url], 
-		&~input[type=tel], 
-		&~select, 
-		&~textarea,
-		&~* input[type=text], 
-		&~* input[type=email], 
-		&~* input[type=file], 
-		&~* input[type=number], 
-		&~* input[type=password], 
-		&~* input[type=search], 
-		&~* input[type=url], 
-		&~* input[type=tel], 
-		&~* select,
-		&~* textarea {
-			margin-top: 0;
-			padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
-		}
 	}
 
 /* Interactive styles --------*/
