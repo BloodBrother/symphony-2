@@ -308,7 +308,7 @@ body {
 			}
 
 			.field {
-				background-color: var(--primary-field-background-color);
+				--standard-field-background-color: var(--primary-field-background-color);
 				
 
 			}
@@ -323,8 +323,8 @@ body {
 
 		[id="secondary"] {
 
-			.field {
-				background-color: var(--secondary-field-background-color);
+			.field:not(:focus-within) {
+				--standard-field-background-color: var(--secondary-field-background-color);
 			}
 
 			@media (max-width: @sm) {
