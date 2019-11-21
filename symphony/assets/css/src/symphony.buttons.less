@@ -18,13 +18,11 @@ button,
 	padding: var(--spacing-thinnest);
 	border-radius: var(--radius-small);
 	color: var(--color-clear);
-	position: relative;
 	outline: 0;
 	font-size: var(--standard-button-font-size);
 	line-height: 1.1em;
 
 	/* Give affordance --------*/
-	box-shadow: 0px 2px 1px var(--color-main-dark);
 	background-image: linear-gradient(to bottom, var(--color-main-dark), transparent 40%);
 	background-size: calc(100% - 4px);
 	background-repeat: no-repeat;
@@ -33,6 +31,11 @@ button,
 	&:hover {
 		background-color: var(--color-accent);
 		background-image: linear-gradient(to top, rgba(0,0,0,.1) 10%, transparent 100%);
+	}
+
+	&:focus {
+		box-shadow: 0 0 0 2px var(--color-accent),
+						0 0 6px 0 var(--color-accent);
 	}
 
 	&.selected, &.selected:before {

@@ -208,6 +208,16 @@
 				opacity: 0;
 			}
 		}
+
+		input[type=button],
+		input[type=submit],
+		button,
+		.button  {
+			&:not(:focus) {
+				background: initial;
+				color: inherit;
+			}
+		}
 	}
 
 	&:hover {
@@ -230,6 +240,15 @@
 
 	&:focus-within {
 		background-color: var(--standard-field-focus-background-color);
+	}
+
+/* Primary and secondary style variants --------*/
+	[id="primary"] & {
+		--standard-field-background-color: var(--primary-field-background-color);
+	}
+
+	[id="secondary"] & {
+		--standard-field-background-color: var(--secondary-field-background-color);
 	}
 
 

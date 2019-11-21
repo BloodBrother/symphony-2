@@ -143,7 +143,7 @@
 				var active = item || notifier.find('.active:not(:animated)');
 
 				notifier.show().animate({
-					height: active.innerHeight() || 0
+					height: active.outerHeight() || 0
 				}, 100);
 			}
 		});
@@ -244,7 +244,7 @@
 
 			// Construct notifier
 			notifier.addClass('constructing');
-			notifier.height(items.last().innerHeight());
+			notifier.height(items.last().outerHeight());
 			items.each(function buildMessages() {
 				var item = $(this).remove(),
 					message = item.html(),
