@@ -50,14 +50,14 @@
 		Symphony.Elements.html = $('html').addClass('js-active');
 		Symphony.Elements.body = $('body');
 		Symphony.Elements.loading = $('#loading');
-		// Symphony.Elements.wrapper = $('#wrapper');
+		Symphony.Elements.primary = $('#primary');
 		Symphony.Elements.header = $('#header');
 		Symphony.Elements.nav = $('#nav');
 		Symphony.Elements.session = $('#session');
 		Symphony.Elements.context = $('#context');
 		Symphony.Elements.breadcrumbs = $('#breadcrumbs');
 		Symphony.Elements.contents = $('#contents');
-		// Symphony.Elements.tools = $('#tools');
+		Symphony.Elements.controls = $('#controls');
 
 		// Create context id
 		var path = Symphony.Context.get('path');
@@ -77,7 +77,9 @@
 		if (window.history.replaceState) {
 			var replaceState = function () {
 				$('head > link[rel="canonical"][href]').eq(0).each(function () {
-					var href = $(this).attr('href');
+					var hash = window.location.hash;
+					var href = $(this).attr('href') + hash;
+
 					if (href) {
 						window.history.replaceState(document.title, null, href);
 					}

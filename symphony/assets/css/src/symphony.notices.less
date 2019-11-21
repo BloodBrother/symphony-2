@@ -15,19 +15,20 @@
 -----------------------------------------------------------------------------*/
 
 .notifier {
-	position: fixed;
-	bottom: var(--spacing-thin);
-	left: auto;
-	right: var(--spacing-broadest);
+	// position: fixed;
+	// bottom: var(--spacing-thin);
+	// left: auto;
+	// right: var(--spacing-broadest);
 	color: var(--color-main-dark);
 	font-size: var(--text-small);
-	z-index: 110;
+	// z-index: 110;
 	pointer-events: none;
+	// padding: 1px;
 
-	@media (max-width: (@sm - 1)) {
-		left: 0;
-		right: 0;
-	}
+	// @media (max-width: (@sm - 1)) {
+	// 	left: 0;
+	// 	right: 0;
+	// }
 
 	nav {
 		top: 0;
@@ -50,14 +51,16 @@
 	color: var(--color-accent-alt-dark);
 	font-size: var(--text-small);
 	margin: 0;
-	padding: var(--spacing-thinnest) var(--spacing-thinner);
+	padding: var(--standard-inner-rhythm);
 	background: var(--color-accent-alt-light);
-	border: 1px solid var(--color-accent-alt);
+	border-left: 1px solid var(--color-accent-alt);
+	border-right: 1px solid var(--color-accent-alt);
 	pointer-events: all;
 	line-height: 1.4em;
-	border-radius: var(--radius-current);
-	box-shadow: var(--shadow-up);
-	max-width: var(--dimension-tiny);
+	box-sizing: border-box;
+	// border-radius: var(--radius-current);
+	// box-shadow: var(--shadow-up);
+	// max-width: var(--dimension-tiny);
 
 	a {
 		color: currentColor;

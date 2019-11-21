@@ -812,13 +812,13 @@ class Widget
             'message' => array('var' => $message, 'type' => 'string')
         ));
 
-        $div = new XMLElement('div');
-        $div->setAttributeArray(array('class' => 'invalid'));
+        // $div = new XMLElement('div');
+        $element->addClass('invalid');
 
-        $div->appendChild($element);
-        $div->appendChild(new XMLElement('p', $message));
+        // $div->appendChild($element);
+        $element->appendChild(new XMLElement('p', $message));
 
-        return $div;
+        return $element;
     }
 
     /**

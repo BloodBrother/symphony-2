@@ -10,12 +10,14 @@ body {
 	display: grid;
 	grid-template-areas: 
 		"header context context session"
+		"notifier notifier notifier notifier"
 		"primary primary primary primary"
 		"secondary secondary secondary secondary"
 		"footer footer footer footer"
 		"nav nav controls controls";
 		grid-template-rows: 
 			var(--spacing-broadest) 
+			auto
 			minmax(0, 1fr)
 			auto
 			auto 
@@ -31,6 +33,10 @@ body {
 	>nav {
 		max-width: 100%;
 		overflow: auto;
+	}
+
+	>.notifier {
+		grid-area: notifier;
 	}
 
 	>header>h1>a {
@@ -184,6 +190,7 @@ body {
 	@media (min-width: @xs) {
 		grid-template-areas: 
 			"header header context session"
+			"notifier notifier notifier notifier"
 			"primary primary primary primary"
 			"secondary secondary secondary secondary"
 			"footer footer footer footer"
@@ -193,7 +200,7 @@ body {
 	/* Deployed grid layout for larger windows  --------*/
 	@media (min-width: @md) {
 		height: 100vh;
-		grid-template-rows: auto auto 1fr min-content;
+		grid-template-rows: auto auto auto 1fr min-content;
 		grid-template-columns: 
 			auto
 			auto 
@@ -204,6 +211,7 @@ body {
 		grid-template-areas:
 			"header context context context secondary controls" 
 			"nav context context context secondary controls"
+			"nav nav-panel-switch notifier secondary-panel-switch secondary controls"
 			"nav nav-panel-switch primary secondary-panel-switch secondary controls"
 			"session nav-panel-switch primary secondary-panel-switch secondary controls"
 			"footer nav-panel-switch primary secondary-panel-switch secondary controls";
@@ -307,11 +315,11 @@ body {
 				margin: auto;
 			}
 
-			.field {
-				--standard-field-background-color: var(--primary-field-background-color);
+			// .field {
+			// 	--standard-field-background-color: var(--primary-field-background-color);
 				
 
-			}
+			// }
 
 			@media (max-width: @sm) {
 				&:last-of-type {
@@ -323,9 +331,9 @@ body {
 
 		[id="secondary"] {
 
-			.field:not(:focus-within) {
-				--standard-field-background-color: var(--secondary-field-background-color);
-			}
+			// .field {
+			// 	--standard-field-background-color: var(--secondary-field-background-color);
+			// }
 
 			@media (max-width: @sm) {
 				// min-height: calc(100vh - var(--spacing-broadest));
