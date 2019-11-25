@@ -25,27 +25,12 @@ module.exports = function (grunt) {
                     'symphony/assets/css/symphony.min.css': [
                         'symphony/assets/css/src/symphony.less',
                         'symphony/assets/css/src/symphony.affix.less',
-                        'symphony/assets/css/src/symphony.graphics.less',
-                        'symphony/assets/css/src/symphony.buttons.less',
-                        'symphony/assets/css/src/symphony.fields.less',
-                        'symphony/assets/css/src/symphony.scrollbars.less',
-                        'symphony/assets/css/src/symphony.settings.less',
                         'symphony/assets/css/src/symphony.grids.less',
                         'symphony/assets/css/src/symphony.forms.less',
-                        'symphony/assets/css/src/symphony.loading.less',
-                        'symphony/assets/css/src/symphony.session.less',
-                        'symphony/assets/css/src/symphony.navigation.less',
-                        'symphony/assets/css/src/symphony.contents.less',
-                        'symphony/assets/css/src/symphony.context.less',
-                        'symphony/assets/css/src/symphony.controls.less',
-                        'symphony/assets/css/src/symphony.header.less',
-                        'symphony/assets/css/src/symphony.breadcrumbs.less',
-                        'symphony/assets/css/src/symphony.pagination.less',
                         'symphony/assets/css/src/symphony.tables.less',
                         'symphony/assets/css/src/symphony.frames.less',
                         'symphony/assets/css/src/symphony.errors.less',
                         'symphony/assets/css/src/symphony.drawers.less',
-                        'symphony/assets/css/src/symphony.tags.less',
                         'symphony/assets/css/src/symphony.associations.less',
                         'symphony/assets/css/src/symphony.notices.less',
                         'symphony/assets/css/src/symphony.suggestions.less',
@@ -57,8 +42,6 @@ module.exports = function (grunt) {
                     ],
                     'symphony/assets/css/installer.min.css': [
                         'symphony/assets/css/src/symphony.less',
-                        'symphony/assets/css/src/symphony.buttons.less',
-                        'symphony/assets/css/src/symphony.fields.less',
                         'symphony/assets/css/src/symphony.grids.less',
                         'symphony/assets/css/src/symphony.forms.less',
                         'symphony/assets/css/src/symphony.frames.less',
@@ -178,12 +161,6 @@ module.exports = function (grunt) {
             php: {
                 files: ['symphony/**/*.php', 'install/**/*.php'],
                 tasks: ['php']
-            },
-            extensions: {
-                files: ['extensions/**/*.js', 'extensions/**/*.css']
-            },
-            options: {
-                livereload: true
             }
         },
 
