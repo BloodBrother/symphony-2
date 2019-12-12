@@ -1018,7 +1018,7 @@ class contentBlueprintsDatasources extends ResourcesPage
         // creating a 'big' page and then hiding the fields with JS
         if (!empty($providers)) {
             foreach ($providers as $providerClass => $provider) {
-                call_user_func_array(array($providerClass, 'buildEditor'), array($this->Form, &$this->_errors, $fields, $handle));
+                call_user_func_array(array($providerClass, 'buildEditor'), array($this->Primary, &$this->_errors, $fields, $handle));
             }
         }
 

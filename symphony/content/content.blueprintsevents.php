@@ -327,7 +327,7 @@ class contentBlueprintsEvents extends ResourcesPage
                         continue;
                     }
 
-                    call_user_func_array(array($providerClass, 'buildEditor'), array($this->Form, &$this->_errors, $fields, $handle));
+                    call_user_func_array(array($providerClass, 'buildEditor'), array($this->Primary, &$this->_errors, $fields, $handle));
                 }
             }
         } else {
