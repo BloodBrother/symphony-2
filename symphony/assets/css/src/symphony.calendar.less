@@ -8,7 +8,7 @@
 
 .calendar {
 	padding: var(--spacing-thinner);
-	background-color: var(--standard-field-focus-background-color);
+	background-color: var(--color-main-light);
 	position: relative;
 	margin: 0 auto;
 	min-width: var(--dimension-tiniest);
@@ -16,17 +16,18 @@
 
 	border: 1px solid var(--color-accent-alt);
 	border-top: none;
-	border-bottom-right-radius: var(--radius-current);
-	border-bottom-left-radius: var(--radius-current);
+	// border-bottom-right-radius: var(--radius-current);
+	// border-bottom-left-radius: var(--radius-current);
+	border-radius: inherit;
+	--standard-label-color: var(--color-main-lighter);
 
 	&.hidden {
 		display: none;
 	}
 
-	/* Minimal height and positioning context --------*/
+	/* Positioning context --------*/
 	nav {
 		position: relative;
-		height: var(--spacing-broad);
 		display: flex;
 		justify-content: space-between;
 	}
@@ -57,12 +58,16 @@
 	.switch {
 		/* Graphical styles --------*/
 		border-radius: var(--radius-current);
-		// background: var(--standard-field-focus-background-color);
+		background-color: var(--color-main);
 		font-size: var(--text-smaller);
 
 		/* Force dimensions in all states --------*/
 		height: 3rem;
 		width: var(--spacing-larger);
+
+		/* Outer rhythm --------*/
+		margin-top: var(--standard-inner-rhythm);
+		margin-bottom: var(--standard-inner-rhythm);
 
 		/* Treat as a trigger --------*/
 		cursor: pointer;
@@ -74,11 +79,11 @@
 		/* Give the illusion that the two lists are one container with radius --------*/
 		overflow: hidden;
 		
-		&:first-child {
+		:first-child {
 			border-radius: var(--radius-current) 0 0 var(--radius-current);
 		}
 
-		&:last-child {
+		:last-child {
 			border-radius: 0 var(--radius-current) var(--radius-current) 0;
 		}
 
@@ -87,8 +92,8 @@
 			/* Side-by-side lists that overflow their container --------*/
 			float: left;
 			
-			/* Position the current month (the seventh one) inside the trigger --------*/
-			margin-top: calc(-3rem * 6);
+			/* Position the current month (the sixth one) inside the trigger --------*/
+			margin-top: calc(-3rem * 5);
 			
 			/* Emulate centered behavior for selection lists --------*/
 			&:first-child {
@@ -142,21 +147,27 @@
 		}
 
 		/* The month/year selection interface is opened --------*/
-		&.select {
+		&.select, &.active {
 			overflow: visible;
 			filter: drop-shadow(var(--shadow));
 
 			>ul {
-				background: var(--color-main-lightest);
+				background: var(--color-accent-lighter);
 
 				li {
-					&:hover:not(:nth-child(7)) {
+					// &:not(:nth-child(6)) {
+						color: var(--color-main);
+					// }
+
+					&:hover:not(:nth-child(6)) {
 						color: var(--color-clear);
 						background: var(--color-accent);
 					}
 
-					&:nth-child(7) {
-						background: var(--color-main-lighter);
+					&:nth-child(6) {
+						background: var(--color-accent-light);
+						color: var(--color-main-dark);
+
 					}
 				}
 
@@ -171,7 +182,6 @@
 	table {
 		width: 100%;
 		border-collapse: collapse;
-		color: var(--color-main);
 
 		td {
 			text-align: center;
@@ -180,38 +190,43 @@
 			vertical-align: middle;
 		}
 
-		tbody td {
-			border: 1px solid transparent;
+		thead td {
+			color: var(--color-main-dark);
+			font-weight: 700;
 		}
 
-		.adjacent-month {
+		tbody td {
+			border: 1px solid transparent;
+			cursor: pointer;
+		}
+
+		.adjacent-month, .next, .previous {
 			color: var(--color-main-lighter);
 		}
 
-		.day {
+		span {
 			/* Fill the table cell and center everything --------*/
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			width: 100%;
 			height: 100%;
+			font-weight: 500;
 			box-sizing: border-box;
+			background: var(--color-main);
+			color: var(--color-main-lightest);
 
-			border: 1px solid transparent;
-			cursor: pointer;
-			background: var(--color-main-lightest);
-
-			&.today:not(.active) {
+			&.today:not(.active):not(.selected) {
 				border-color: var(--color-main-lighter);
 			}
 
-			&.active {
+			&.active, &.selected {
 				background: var(--color-accent-alt-light);
 				color: var(--color-main-dark);
 			}
 
-			&:hover:not(.active) {
-				border-color: var(--color-accent);
+			&:hover:not(.active):not(.selected) {
+				background-color: var(--color-accent);
 			}
 		}
 	}
