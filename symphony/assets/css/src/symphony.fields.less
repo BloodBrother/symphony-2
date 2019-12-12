@@ -10,6 +10,7 @@
 @import "variables";
 
 .field {
+	--standard-frame-border-radius: 0;
 
 	/* Set context for possible absolutely positioned elements --------*/
 	position: relative;
@@ -180,7 +181,7 @@
 	}
 
 	/* Give rhythm to basic elements --------*/
-	button, ul {
+	button {
 		margin: var(--standard-inner-rhythm);
 	}
 
@@ -309,6 +310,7 @@
 	.tags {
 		max-width: initial;
 		flex: 100% 0 0;
+		position: static;
 	}
 
 	/* Special treatment for checkbox field --------*/
