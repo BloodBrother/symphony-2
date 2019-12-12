@@ -1238,7 +1238,7 @@ class contentPublish extends AdministrationPage
                     $sidebar->appendChild($this->__wrapFieldWithDiv($field, $entry));
                 }
                 
-                $this->Form->appendChild($secondaryPanelSwitch);
+                $this->Form->prependChild($secondaryPanelSwitch);
                 $this->Form->appendChild($sidebar);
             }
 
@@ -1608,7 +1608,7 @@ class contentPublish extends AdministrationPage
                     $sidebar->appendChild($this->__wrapFieldWithDiv($field, $entry));
                 }
 
-                $this->Form->appendChild($secondaryPanelSwitch);
+                $this->Form->prependChild($secondaryPanelSwitch);
                 $this->Form->appendChild($sidebar);
             }
 
