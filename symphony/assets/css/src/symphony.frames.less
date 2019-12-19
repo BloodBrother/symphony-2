@@ -63,14 +63,6 @@
 		&:not(.collapsed) {
 			background-color: var(--frame-instance-opened-background-color);
 			border-color: var(--color-ui);
-
-			&:not(:first-of-type) {
-				margin-top: var(--standard-inner-rhythm);
-			}
-
-			&:not(:last-of-type) {
-				margin-bottom: var(--standard-inner-rhythm);
-			}
 		}
 	}
 }
@@ -82,9 +74,10 @@
 	align-items: baseline;
 	position: relative;
 	border: 1px solid transparent;
-	padding: var(--spacing-thinner) var(--standard-outer-rhythm);
 
 	h4 {
+		padding-top: var(--standard-inner-rhythm);
+		padding-bottom: var(--standard-inner-rhythm);
 		display: flex;
 		align-items: baseline;
 		flex-grow: 1;
@@ -130,14 +123,14 @@
 		content: "〈";
 		writing-mode: vertical-lr;
 		font-weight: 900;
-		margin-right: var(--spacing-thinner);
-		margin-left: calc(-1 * var(--spacing-nano));
+		margin: var(--standard-inner-rhythm);
 		font-size: var(--text-current);
 		color: inherit;
-		height: 0;
+		height: 1.5em;
+		display: block;
 
 		.collapsed & {
-			transform: scaleY(-1) translateY(3px);
+			transform: scaleY(-1);
 			align-self: flex-end;
 		}
 	}
@@ -172,17 +165,13 @@ fieldset.frame,
 
 .frame .destructor,
 .frame .debug {
-	color: var(--color-main-light);
-	font-size: var(--text-small)!important;
-	margin: 0 0 0 var(--spacing-thinner);
+	color: inherit;
+	font-size: var(--standard-button-font-size);
+	margin: 0 var(--standard-inner-rhythm);
 }
 
 .frame .destructor {
 	margin-left: auto;
-
-	a {
-		padding: 0 0 0 var(--spacing-thinnest);
-	}
 }
 
 .frame .disabled {
