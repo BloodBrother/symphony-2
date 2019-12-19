@@ -8,6 +8,9 @@
 	<script type='text/javascript'>Symphony.Context.add('root', '{URL}');Symphony.Context.add('env', {});</script>
 </head>
 <body id="error">
+	<div id="controls">
+		<ul class="actions"></ul>
+	</div>
 	<div class="frame error">
 		<ul>
 			<li>
