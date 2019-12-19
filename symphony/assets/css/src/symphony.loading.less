@@ -26,6 +26,10 @@
 	opacity: 0;
 }
 
+html:not(.js-active) [id="loading"] {
+	pointer-events: none;
+}
+
 #loading.hidden {
 	transition: opacity 100ms ease-out 100ms;
 	opacity: 0;
