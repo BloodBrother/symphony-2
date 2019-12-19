@@ -50,8 +50,16 @@ fieldset.settings {
 		margin-left: var(--standard-inner-rhythm);
 	}
 
-	.frame:not(.collapsed) .frame-header {
-		top: var(--spacing-micro);
+	.frame .instance {
+		&:not(.collapsed) {
+			&:not(:first-of-type) {
+				margin-top: var(--standard-inner-rhythm);
+			}
+
+			&:not(:last-of-type) {
+				margin-bottom: var(--standard-inner-rhythm);
+			}
+		}
 	}
 
 
