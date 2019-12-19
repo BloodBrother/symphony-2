@@ -15,67 +15,46 @@
 div.drawer {
 		background: var(--backframe-background-color);
 
-		&.horizontal {
-			flex: 100% 0 0;
-			z-index: 2;
-			border-radius: var(--radius-current);
+	&.horizontal {
+		flex: 100% 0 0;
+		z-index: 2;
+		border-radius: var(--radius-current);
 
-			/* Outer rhythm --------*/
-			margin-top: var(--standard-outer-rhythm);
-			margin-bottom: var(--standard-inner-rhythm);
+		/* Outer rhythm --------*/
+		margin-top: var(--standard-outer-rhythm);
+		margin-bottom: var(--standard-inner-rhythm);
 
 
-			body:not(.drawer-horizontal) & {
-				display: none;
-			}
-		}
-
-		&:not(.horizontal) {
-			
-			/* Transition styles --------*/
-			// transition-timing-function: var(--ease-current);
-			// transition-delay: 0ms, var(--duration-shortest);
-			// transition-duration: var(--duration-long), var(--duration-short);
-			// transition-property: bottom, opacity;
-			
-			/* Layout and scrolling behavior --------*/
-			padding-top: var(--spacing-broad);
-			z-index: 1;
-			overflow-x: hidden;
-			overflow-y: auto;
-			-webkit-overflow-scrolling: touch;
-
-			/* Mask and prevent interaction when not opened --------*/
-			&:not(.opened) {
-				// opacity: 0;
-				// bottom: 100%;
-				padding: 0;
-				pointer-events: none;
-				width: 0;
-				height: 0;
-				overflow: hidden;
-			}
-
-			.contents {
-				padding: 0 0 var(--spacing-broadest);
-			}
-		}
-
-		.close-btn {
-			margin-left: var(--standard-outer-rhythm);
-			margin-bottom: var(--standard-outer-rhythm);
-		}
-
-		/* Position and style vertical variants --------*/
-		&.vertical-left {
-			left: 0;
-		}
-
-		&.vertical-right {
-			// right: var(--spacing-broader);
-			// border-bottom-right-radius: var(--radius-big);
-			// border-bottom: 1px solid var(--color-ui);
-			// border-right: 1px solid var(--color-ui);
+		body:not(.drawer-horizontal) & {
+			display: none;
 		}
 	}
-// }
+
+	&:not(.horizontal) {
+		/* Layout and scrolling behavior --------*/
+		padding-top: var(--spacing-broad);
+		z-index: 1;
+		overflow-x: hidden;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+
+		/* Mask and prevent interaction when not opened --------*/
+		&:not(.opened) {
+			padding: 0;
+			pointer-events: none;
+			width: 0;
+			height: 0;
+			overflow: hidden;
+		}
+
+		.contents {
+			padding: 0 0 var(--spacing-broadest);
+		}
+	}
+
+
+	/* Position and style vertical variants --------*/
+	&.vertical-left {
+		left: 0;
+	}
+}
