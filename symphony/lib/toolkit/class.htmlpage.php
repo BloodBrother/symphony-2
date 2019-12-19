@@ -435,6 +435,34 @@ class HTMLPage extends Page
     }
 
     /**
+     * Convenience function to add a stylesheet to the `$this->_body` in a `<link>` element.
+     * By default the function will allow duplicates to be added to the `$this->_body`.
+     * A duplicate is determined by if the `$path` is unique.
+     *
+     * @param string $path
+     *  The path to the stylesheet file
+     * @param string $type
+     *  The media attribute for this stylesheet, defaults to 'screen'
+     * @param integer $position
+     *  The desired position that the resulting XMLElement will be placed
+     *  in the `$this->_body`. Defaults to null which will append to the end.
+     * @param boolean $duplicate
+     *  When set to false the function will only add the script if it doesn't
+     *  already exist. Defaults to true which allows duplicates.
+     * @return integer
+     *  Returns the position that the stylesheet has been set in the `$this->_head`
+     */
+    public function addStylesheetToBody($path, $type = 'screen', $position = null, $duplicate = true)
+    {
+        if ($duplicate === true || ($duplicate === false && $this->checkElementsInBody($path, 'href') === false)) {
+            $link = new XMLElement('link');
+            $link->setAttributeArray(array('rel' => 'stylesheet', 'type' => 'text/css', 'media' => $type, 'href' => $path));
+
+            return $this->addElementToBody($link, $position);
+        }
+    }
+
+    /**
      * This function builds a HTTP query string from `$_GET` parameters with
      * the option to remove parameters with an `$exclude` array. Since Symphony 2.6.0
      * it is also possible to override the default filters on the resulting string.
