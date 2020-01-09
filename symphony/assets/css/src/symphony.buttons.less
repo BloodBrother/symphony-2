@@ -13,29 +13,28 @@ button,
 .button {
 	cursor: pointer;
 	box-sizing: content-box;
-	background-color: var(--color-main);
+	background-color: var(--color-main-lighter);
 	border: 0;
 	padding: var(--spacing-thinnest);
 	border-radius: var(--radius-small);
-	color: var(--color-clear);
+	color: var(--color-main-dark);
 	outline: 0;
 	font-size: var(--standard-button-font-size);
 	line-height: 1.1em;
 
 	/* Give affordance --------*/
-	background-image: linear-gradient(to bottom, var(--color-main-dark), transparent 40%);
 	background-size: calc(100% - 4px);
 	background-repeat: no-repeat;
 	background-position: 2px 2px;
 
 	&:hover {
 		background-color: var(--color-accent);
-		background-image: linear-gradient(to top, rgba(0,0,0,.1) 10%, transparent 100%);
+		color: var(--color-clear);
 	}
 
 	&:focus {
 		box-shadow: 0 0 0 2px var(--color-accent),
-						0 0 6px 0 var(--color-accent);
+						0 0 4px 0 var(--color-accent-light);
 	}
 
 	&.selected, &.selected:before {
@@ -43,9 +42,18 @@ button,
 	}
 
 	&:active {
-		box-shadow: 0px -1px 1px var(--color-ui), inset 0px 1px 1px var(--color-main-dark);
+		box-shadow: 0px -1px 1px var(--color-ui), inset 0px 0px 1px var(--color-main);
 		top: 2px;
 		outline: 0;
+	}
+
+	* {
+		vertical-align: middle;
+	}
+
+	/* Horizontal rhythm for icon and text --------*/
+	svg+* {
+		margin-left: var(--spacing-micro);
 	}
 
 	/* Limit affordance and interactivity when disabled --------*/
