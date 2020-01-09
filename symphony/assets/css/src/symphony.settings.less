@@ -65,6 +65,17 @@ fieldset.settings {
 
 	@media (min-width: @md){
 		margin-left: var(--standard-label-column-width);
+
+		>:not(legend) {
+			width: 100%;
+			max-width: var(--dimension-smaller);
+			margin-left: auto;
+			margin-right: auto;
+
+			&.frame {
+				max-width: calc(var(--dimension-smaller) + var(--standard-outer-rhythm) * 2);
+			}
+		}
 	}
 
 	> legend {
@@ -74,17 +85,6 @@ fieldset.settings {
 			float: left;
 			margin-left: calc(-1 * var(--standard-label-column-width));
 			width: var(--standard-label-column-width);
-
-			&~* {
-				width: 100%;
-				max-width: var(--dimension-smaller);
-				margin-left: auto;
-				margin-right: auto;
-
-				&.frame {
-					max-width: calc(var(--dimension-smaller) + var(--standard-outer-rhythm) * 2);
-				}
-			}
 		}
 
 		@media (max-width: (@md - 1)){
