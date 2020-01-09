@@ -449,6 +449,40 @@ a[href="#secondary"] {
 // 	}
 // }
 
+/* Actions container for directory tables in index pages --------*/
+.page-index [id="primary"] {
+	&>.insert,
+	&>.actions {
+		position: sticky;
+		bottom: 0;
+		margin: var(--standard-inner-rhythm);
+
+		// display: flex;
+
+		input, select {
+			// flex-basis: max-content;
+			// flex-grow: 0;
+			// flex-shrink: 0;
+			width: auto;
+			// display: inline-block;
+
+			+* {
+				margin-left: var(--standard-inner-rhythm);
+			}
+		}
+		
+		/* Set smaller than standard font-size on form elements --------*/
+		input, select, button {
+			font-size: var(--text-small);
+		}
+	}
+
+	.insert .actions {
+		float: right;
+	}
+}
+
+
 /* Minimal styles for the burger button --------*/
 #btn-toggle-header-mobile {
 	// color: var(--color-main-dark);
