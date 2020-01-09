@@ -8,9 +8,17 @@
 
 @import "variables";
 
-#context {
+[id="context"] {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 	position: relative;
+
+	.actions {
+		display: flex;
+
+		>li+li {
+			margin-left: var(--standard-inner-rhythm)
+		}
+	}
 }
