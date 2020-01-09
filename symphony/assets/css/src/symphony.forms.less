@@ -32,6 +32,7 @@ select {
 
 
 textarea {
+	display: block;
 	line-height: 1.6em;
 	resize: vertical;
 }
@@ -58,8 +59,7 @@ input[type=search],
 input[type=url], 
 input[type=tel], 
 textarea,
-select,
-.field-value-readonly {
+select {
 	padding: var(--standard-field-padding);
 	width: 100%;
 	border: 0;
@@ -241,17 +241,6 @@ select[multiple] {
 }
 
 /*-----------------------------------------*/
-.field-value-readonly {
-	display: block;
-	color: var(--color-main-light);
-	padding-left: 0;
-	border: none;
-	background: none;
-	min-height: 2.2rem;
-	opacity: 1;
-}
-
-/*-----------------------------------------*/
 input:disabled,
 textarea:disabled,
 textarea:disabled:hover,
@@ -268,10 +257,9 @@ input[readonly=readonly],
 input[readonly=readonly]:hover,
 input[readonly=readonly]:active,
 input[readonly=readonly]:focus {
-	opacity: 0.5;
 	cursor: not-allowed;
-	background-color: var(--color-main-lighter);
-	color: var(--color-main);
+	background-color: transparent;
+	color: var(--color-main-light);
 }
 
 button[disabled],
@@ -291,10 +279,9 @@ legend {
 	font-size: var(--standard-label-font-size);
 	font-weight: 740;
 
-	>i:not(:empty) {
+	>i {
 		font-size: var(--text-smaller);
 		font-style: normal;
-		color: var(--color-main-light);
 		font-weight: 400;
 	}
 }
@@ -306,6 +293,7 @@ label {
 	}
 
 	>input:first-child,
+	>span:first-child>input:first-child,
 	>input:first-child~input {
 		margin-right: var(--spacing-thinnest);
 	}
