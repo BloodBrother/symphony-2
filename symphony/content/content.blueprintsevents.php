@@ -280,8 +280,9 @@ class contentBlueprintsEvents extends ResourcesPage
                     'options' => &$options,
                 ]
             );
-
-            $fieldset->appendChild(Widget::Select('fields[filters][]', $options, array('multiple' => 'multiple', 'id' => 'event-filters')));
+            $div = new XMLElement('div');
+            $div->appendChild(Widget::Select('fields[filters][]', $options, array('multiple' => 'multiple', 'id' => 'event-filters')));
+            $fieldset->appendChild($div);
             $this->Primary->appendChild($fieldset);
 
             // Connections
