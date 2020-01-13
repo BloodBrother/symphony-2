@@ -132,7 +132,6 @@ table[role="directory"] {
 			&:first-child {
 				/* Mask content under titles with gradual fade --------*/
 				background: linear-gradient(to right, var(--standard-table-background-color) 80%, transparent 100%);
-				background-size: 100% 1.3em;
 				background-position: center center;
 				background-repeat: no-repeat;
 			}
@@ -157,7 +156,7 @@ table[role="directory"] {
 table.selectable {
 	/* Mask the selection checkbox; 
 		javascript applies functionality to whole row --------*/
-	input {
+	input:not([class]) {
 		display: none;
 	}
 
