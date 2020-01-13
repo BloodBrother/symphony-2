@@ -585,6 +585,7 @@ class contentBlueprintsPages extends AdministrationPage
             '/blueprints/pages/',
             [
                 'form'      => &$this->Form,
+                'primary'      => &$this->Primary,
                 'fields'    => &$fields,
                 'errors'    => $this->_errors,
             ]
