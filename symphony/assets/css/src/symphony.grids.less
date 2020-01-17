@@ -10,21 +10,23 @@
 .columns {
 	display: flex;
 	flex-wrap: wrap;
-	// margin-left: ~'calc(var(--standard-outer-rhythm) * -1)';
+	// margin-left: ~'calc(var(--standard-side-rhythm) * -1)';
 	justify-content: space-between;
 
 	legend {
-		margin: 0 0 0 ~'calc(var(--spacing-thin) * -1)';
-		padding: 0 0.5rem 0 var(--spacing-thin);
+		align-self: flex-start;
+		flex-basis: 100%;
+		flex-shrink: 0;
+		margin-bottom: 0;
 	}
 
 	.column {
 		// box-sizing: border-box;
-		// padding: 0 0 0 var(--standard-outer-rhythm);
+		// padding: 0 0 0 var(--standard-side-rhythm);
 	}
 
 	&.two .column {
-		width: calc(50% - var(--standard-outer-rhythm) / 2);
+		width: calc(50% - var(--standard-side-rhythm) / 2);
 
 		@media (max-width: (@xs - 1)){
 			width: 100%;
@@ -32,10 +34,10 @@
 	}
 
 	&.three .column {
-		width: calc(33.33% - var(--standard-outer-rhythm) / 3);
+		width: calc(33.33% - var(--standard-side-rhythm) / 3);
 	}
 
 	&.four .column {
-		width: calc(25% - var(--standard-outer-rhythm) / 4);
+		width: calc(25% - var(--standard-side-rhythm) / 4);
 	}
 }
