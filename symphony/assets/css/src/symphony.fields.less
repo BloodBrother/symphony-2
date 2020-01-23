@@ -10,7 +10,8 @@
 @import "variables";
 
 .field {
-	--standard-frame-border-radius: 0;
+	--standard-frame-border-radius: 0px;
+	--standard-side-rhythm: 0px;
 
 	/* Set context for possible absolutely positioned elements --------*/
 	position: relative;
@@ -33,7 +34,7 @@
 	label {
 		&+input[type=text], 
 		&+input[type=email], 
-		&+input[type=file], 
+		&~input[type=file], 
 		&+input[type=number], 
 		&+input[type=password], 
 		&+input[type=search], 
@@ -64,7 +65,7 @@
 		&~.tab-panel select,
 		&~.tab-panel textarea {
 			margin-top: 0;
-			padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
+			padding-top: var(--compensate-for-inner-field-label);
 		}
 	}
 
@@ -139,13 +140,17 @@
 		.tab-panel textarea:last-child {
 			border-bottom-left-radius: var(--standard-field-border-radius);
 			border-bottom-right-radius: var(--standard-field-border-radius);
-			margin-bottom: -1px;
+			// margin-bottom: -1px;
 		}
 	}
 	
 	label, legend, time {
 		margin-left: var(--standard-inner-rhythm);
 		margin-right: var(--standard-inner-rhythm);
+	}
+
+	time {
+		margin-bottom: var(--standard-inner-rhythm);
 	}
 
 	ul:not(:hover),
@@ -158,6 +163,7 @@
 
 	label {
 		background-color: inherit;
+		border-radius: inherit;
 
 		>span, >i, >p {
 			background-color: inherit;
@@ -171,6 +177,7 @@
 			border-radius: var(--radius-small);
 			display: inline-block;
 			margin-left: calc(-1 * var(--spacing-nano));
+			z-index: 1;
 			// height: 1.5rem;
 			// line-height: 1.5rem;
 		}
@@ -224,13 +231,22 @@
 		box-sizing: border-box;
 	}
 
-	/* Position field titles/labels as if in input
-		but omit checkboxes at large --------*/
-	&:not([class*="checkbox"]) label {
+	/* Position field titles/labels as if in input --------*/
+	label {
 		height: 0;
-		
+
 		/* Important for the positioning of errors --------*/
 		position: static;
+
+		/* Graphical Failsafe for fields with input inside labels --------*/
+		&:only-child {
+			height: auto;
+		}
+
+		&~input[type=checkbox] {
+			margin-top: var(--compensate-for-inner-field-label);
+			margin-left: var(--standard-inner-rhythm);
+		}
 	}
 
 /* Interactive styles --------*/
@@ -251,12 +267,15 @@
 				background-image: initial;
 				background-color: var(--standard-field-background-color);
 				color: inherit;
+				opacity: 0;
 			}
 		}
 	}
 
 	&:hover {
-		color: var(--standard-field-hover-color);
+		label {
+			color: var(--standard-field-hover-color);
+		}
 
 		input[type=text]:hover:not(:focus), 
 		input[type=email]:hover:not(:focus), 
@@ -268,7 +287,7 @@
 		input[type=tel]:hover:not(:focus), 
 		select:hover:not(:focus), 
 		textarea:hover:not(:focus) {
-			border-bottom-color: var(--standard-field-hover-border-color);
+			// border-bottom-color: var(--standard-field-hover-border-color);
 			color: var(--standard-field-hover-color);
 		}
 	}
@@ -290,6 +309,13 @@
 	&.field-value-readonly {
 		--standard-field-background-color: transparent;
 		--standard-field-border-color: transparent;
+		--standard-field-focus-background-color: transparent;
+		--standard-field-hover-border-color: transparent;
+		--standard-field-hover-color: var(--standard-label-color);
+
+		* {
+			pointer-events: none;
+		}
 	}
 
 /* Special case for upload fields at large --------*/
@@ -304,7 +330,7 @@
 			}
 
 			input[type=file] {
-				padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
+				padding-top: var(--compensate-for-inner-field-label);
 			}
 
 			[type="hidden"]~a {
@@ -315,7 +341,7 @@
 				text-overflow: ellipsis;
 				flex-shrink: 1;
 				flex-basis: 0;
-				padding-top: calc(var(--standard-inner-rhythm) + 1.5em);
+				padding-top: var(--compensate-for-inner-field-label);
 				padding-bottom: var(--standard-inner-rhythm);
 				margin: 0 var(--standard-inner-rhythm);
 			}
@@ -331,12 +357,6 @@
 
 		&[class*="upload"] button+*:not(button) {
 			clear: right;
-		}
-
-		&:not(:hover) {
-			button {
-				opacity: .25;
-			}
 		}
 	}
 
@@ -358,19 +378,19 @@
 		position: static;
 	}
 
-/* Special treatment for checkbox field --------*/
-	&.field-checkbox {
-		label {
-			padding-top: var(--standard-inner-rhythm);
-		}
+// /* Special treatment for checkbox field --------*/
+// 	&.field-checkbox {
+// 		label {
+// 			padding-top: var(--standard-inner-rhythm);
+// 		}
 
-		input {
-			margin-left: var(--standard-inner-rhythm);
-		}
-	}
+// 		input {
+// 			margin-left: var(--standard-inner-rhythm);
+// 		}
+// 	}
 
 /* Position error message --------*/
-	.invalid { 
+	&.invalid { 
 		position: relative;
 		label+p {
 			position: absolute;
