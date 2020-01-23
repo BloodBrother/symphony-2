@@ -179,10 +179,13 @@ class FieldCheckbox extends Field implements ExportableField, ImportableField
         }
 
         $label = Widget::Label();
-
+        $span = new XMLElement('span');
+        $span->setValue($this->get('label'));
+        $label->appendChild($span);
+        
         $input = Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, 'yes', 'checkbox', ($value === 'yes' ? array('checked' => 'checked') : null));
 
-        $label->setValue($this->get('label'))->setAttribute('for', $this->get('element_name'));
+        $label->setAttribute('for', $this->get('element_name'));
         
         if ($this->get('required') !== 'yes') {
             $label->appendChild(new XMLElement('i', __('Optional')));
