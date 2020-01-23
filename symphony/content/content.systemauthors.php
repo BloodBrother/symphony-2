@@ -435,10 +435,10 @@ class contentSystemAuthors extends AdministrationPage
         $group->appendChild($div);
 
         // Password
-        $fieldset = new XMLElement('fieldset', null, array('class' => 'two columns', 'id' => 'password'));
+        $div = new XMLElement('div', null, array('class' => 'two columns', 'id' => 'password'));
         $legend = new XMLElement('legend', __('Password'));
         $help = new XMLElement('p', __('Leave password fields blank to keep the current password'), array('class' => 'help'));
-        $fieldset->appendChild($legend);
+        $div->appendChild($legend);
 
         /*
             Password reset rules:
@@ -458,26 +458,26 @@ class contentSystemAuthors extends AdministrationPage
         // At this point, only developers, managers and owner are authorized
         // Make sure all users except developers needs to input the old password
         if ($isEditing && ($canEdit || $isOwner) && !Symphony::Author()->isDeveloper()) {
-            $fieldset->setAttribute('class', 'three columns');
+            $div->setAttribute('class', 'three columns');
 
             $label = Widget::Label(null, null, 'column');
             $label->appendChild(Widget::Input('fields[old-password]', null, 'password', array('placeholder' => __('Old Password'), 'autocomplete' => 'off')));
-            $fieldset->appendChild((isset($this->_errors['old-password']) ? Widget::Error($label, $this->_errors['old-password']) : $label));
+            $div->appendChild((isset($this->_errors['old-password']) ? Widget::Error($label, $this->_errors['old-password']) : $label));
         }
 
         // New password
         $placeholder = ($isEditing ? __('New Password') : __('Password'));
         $label = Widget::Label(null, null, 'column');
         $label->appendChild(Widget::Input('fields[password]', null, 'password', array('placeholder' => $placeholder, 'autocomplete' => 'off')));
-        $fieldset->appendChild((isset($this->_errors['password']) ? Widget::Error($label, $this->_errors['password']) : $label));
+        $div->appendChild((isset($this->_errors['password']) ? Widget::Error($label, $this->_errors['password']) : $label));
 
         // Confirm password
         $label = Widget::Label(null, null, 'column');
         $label->appendChild(Widget::Input('fields[password-confirmation]', null, 'password', array('placeholder' => __('Confirm Password'), 'autocomplete' => 'off')));
         $label->appendChild($help);
-        $fieldset->appendChild((isset($this->_errors['password-confirmation']) ? Widget::Error($label, $this->_errors['password']) : $label));
+        $div->appendChild((isset($this->_errors['password-confirmation']) ? Widget::Error($label, $this->_errors['password']) : $label));
 
-        $group->appendChild($fieldset);
+        $group->appendChild($div);
 
         // Auth token
         if (Symphony::Author()->isDeveloper() || Symphony::Author()->isManager() || $isOwner) {
@@ -634,6 +634,7 @@ class contentSystemAuthors extends AdministrationPage
         */
         Symphony::ExtensionManager()->notifyMembers('AddElementstoAuthorForm', '/system/authors/', array(
             'form' => &$this->Form,
+            'primary' => &$this->Primary,
             'author' => $author,
             'fields' => isset($_POST['fields']) ? $_POST['fields'] : null,
             'errors' => $this->_errors,
