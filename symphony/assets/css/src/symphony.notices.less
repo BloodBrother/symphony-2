@@ -21,8 +21,13 @@
 	// right: var(--spacing-broadest);
 	color: var(--color-main-dark);
 	font-size: var(--text-small);
-	// z-index: 110;
+	z-index: 5;
 	pointer-events: none;
+	position: relative;
+	top: calc(-1 * var(--standard-outer-rhythm));
+	right: var(--standard-outer-rhythm);
+	margin-left: auto;
+	max-width: var(--dimension-tiny);
 	// padding: 1px;
 
 	// @media (max-width: (@sm - 1)) {
@@ -49,16 +54,17 @@
 .notice {
 	position: relative;
 	color: var(--color-accent-alt-dark);
-	font-size: var(--text-small);
+	font-size: var(--text-smaller);
 	margin: 0;
 	padding: var(--standard-inner-rhythm);
 	background: var(--color-accent-alt-light);
 	// border-left: 1px solid var(--color-accent-alt);
-	border-bottom: 1px solid var(--color-accent-alt);
+	border: 1px solid var(--color-accent-alt);
 	pointer-events: all;
 	line-height: 1.4em;
 	box-sizing: border-box;
-	// border-radius: var(--radius-current);
+	border-radius: var(--radius-small);
+	font-weight: 560;
 	// box-shadow: var(--shadow-up);
 	// max-width: var(--dimension-tiny);
 
