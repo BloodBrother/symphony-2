@@ -96,7 +96,7 @@ body {
 		grid-area: controls;
 	}
 
-	[id="controls"],
+
 	[id="context"],
 	[id="nav"],
 	[id="footer"],
@@ -204,7 +204,7 @@ body {
 	/* Deployed grid layout for larger windows  --------*/
 	@media (min-width: @md) {
 		height: 100vh;
-		grid-template-rows: auto auto auto 1fr min-content;
+		grid-template-rows: auto auto 0 1fr min-content;
 		grid-template-columns: 
 			auto
 			auto 
@@ -271,7 +271,6 @@ body {
 			nav, &:after {
 				flex-basis: 0;
 				flex-grow: 1;
-				overflow: hidden;
 			}
 
 			h2 {
@@ -287,13 +286,13 @@ body {
 			>* {
 				flex-shrink: 0;
 
-				/* Center fields vertically if in small quantities --------*/
+				/* Forced vertical spacing in scrolling parent --------*/
 				&:first-child {
-					margin-top: var(--standard-outer-rhythm);
+					margin-top: calc(var(--standard-outer-rhythm) * 2);
 				}
 
 				&:last-child {
-					margin-bottom: var(--standard-outer-rhythm);
+					margin-bottom: calc(var(--standard-outer-rhythm) * 2);
 				}
 			}
 
@@ -311,7 +310,7 @@ body {
 		[id="primary"] {
 			padding: 0 var(--standard-outer-rhythm);
 
-			/* Forced vertical spacing in scrolling parent --------*/
+			/* Center fields vertically if in small quantities --------*/
 			&:before, &:after {
 				content: "";
 				display: block;
