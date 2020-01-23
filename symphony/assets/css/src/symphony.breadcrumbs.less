@@ -10,7 +10,7 @@
 
 [id="breadcrumbs"] {
 	display: flex;
-	align-items: center;
+	align-items: baseline;
 	flex-grow: 1;
 	max-width: 100%;
 
@@ -18,18 +18,45 @@
 		flex-shrink: 0;
 		flex-grow: 0;
 		box-sizing: border-box;
+		position: relative;
+		top: .25em;
+
+		&:not(:hover) {
+			a {
+				color: transparent;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				pointer-events: none;
+			}
+
+			svg {
+				color: var(--color-main-dark);
+			}
+		}
+
+		&:hover {
+			z-index: 1;
+			a, svg {
+				color: var(--color-accent);
+			}
+			&+h2 {
+				opacity: .1;
+			}
+		}
 		
 		p {
-			display: contents;
+			display: block;
+			position: absolute;
+			bottom: 0;
 
 			a {
 
-				color: var(--color-main-light);
+				// color: var(--color-main-dark);
 				font-size: var(--text-small);
+				font-weight: 760;
 				display: block;
-				overflow: hidden;
-				text-overflow: ellipsis;
 				white-space: nowrap;
+				
 				max-width: 100%;
 
 				margin-left: var(--spacing-thinnest);
@@ -44,7 +71,7 @@
 				}
 
 				&:hover {
-					color: var(--color-accent);
+					// color: var(--color-accent);
 				}
 			}
 
@@ -57,7 +84,8 @@
 
 	h2 {
 		font-size: var(--text-big);
-		font-weight: 760;
+		font-size: var(--text-big);
+		font-weight: 560;
 		padding-left: var(--standard-inner-rhythm);
 		white-space: nowrap;
 		overflow: hidden;
