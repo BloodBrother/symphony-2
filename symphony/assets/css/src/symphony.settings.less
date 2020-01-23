@@ -18,10 +18,12 @@
 --------------------------------------------------------------------------*/
 
 fieldset.settings {
+	--standard-frame-background-color: var(--color-main-lightest);
+	--standard-frame-instance-background-color: var(--color-accent-light);
+	--standard-frame-instance-opened-background-color: var(--color-accent-lighter);
+
 	padding: var(--standard-outer-rhythm);
-	margin-bottom: var(--standard-outer-rhythm);
 	box-sizing: content-box;
-	margin-top: var(--standard-outer-rhythm);
 
 	label {
 		cursor: pointer;
@@ -51,6 +53,9 @@ fieldset.settings {
 	}
 
 	.frame .instance {
+		&+.instance {
+			margin-top: 2px;
+		}
 		&:not(.collapsed) {
 			&:not(:first-of-type) {
 				margin-top: var(--standard-inner-rhythm);
@@ -177,19 +182,17 @@ fieldset.settings {
 		margin-bottom: 0;
 	}
 
-
-	fieldset.columns { // generalized special case for password in authors
-		display: block;
-		font-size: 0;
-		
-		legend {
-			margin-left: var(--standard-inner-rhythm);
-			margin-bottom: var(--spacing-micro);
-		}
+	.columns {
+		margin-bottom: calc(-1 * var(--standard-inner-rhythm));
 
 		.column {
-			display: inline-block;
-			vertical-align: top;
+			margin-bottom: var(--standard-inner-rhythm);
+		}
+	}
+
+	.group, .column {
+		label+label {
+			margin-top: var(--standard-inner-rhythm);
 		}
 	}
 }
