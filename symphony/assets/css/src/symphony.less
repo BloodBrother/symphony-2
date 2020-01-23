@@ -33,7 +33,7 @@
 }
 
 html { 
-	-webkit-font-smoothing: auto;
+	-webkit-font-smoothing: antialiased;
 	font-family: 'Inter var', 'Helvetica', 'Arial', sans-serif; 
 }
 
@@ -78,9 +78,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Basic & universal transition styles --------*/
-* {
+*, ::before, ::after {
 	transition-duration: 0ms;
-	transition-property: color, background, box-shadow, opacity, transform, fill, outline;
+	transition-property: color, background-color, box-shadow, opacity, transform, fill, outline;
 	transition-delay: 0ms;
 	transition-timing-function: var(--ease-current);
 }
