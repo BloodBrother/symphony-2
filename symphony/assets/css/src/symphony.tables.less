@@ -26,7 +26,7 @@ table[role="directory"] {
 	background-color: var(--standard-table-background-color);
 	color: var(--standard-table-color);
 
-	border-spacing: 0 2px;
+	border-spacing: 0;
 
 	td, th {
 		padding: var(--standard-inner-rhythm) var(--standard-outer-rhythm);
@@ -85,13 +85,13 @@ table[role="directory"] {
 		/* Make entry titles bigger --------*/
 		&:first-child {
 			font-size: var(--text-big);
-			font-weight: 760;
+			font-weight: 580;
 		}
 		
 		/* Limit image dimensions --------*/
 		img {
-			max-width: var(--spacing-broadest);
-			max-height: var(--spacing-broader);
+			// max-width: var(--spacing-larger);
+			// max-height: var(--spacing-larger);
 		}
 
 		/* Link graphical styles --------*/
@@ -100,6 +100,44 @@ table[role="directory"] {
 
 			&:hover {
 				color: var(--color-accent);
+			}
+		}
+
+		/* Interactive display of preview images --------*/
+		&[class*="upload"] a {
+			html.js-active &:after {
+				content: attr(href);
+			}
+
+			img {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				padding: var(--standard-inner-rhythm);
+				margin: auto;
+				pointer-events: none;
+				// transform: translateY(-50%);
+				z-index: 6;
+				transition: inherit;
+				// will-change: opacity;
+				object-fit: contain;
+				box-sizing: border-box;
+				max-width: 100%;
+				max-height: 100%;
+			}
+
+			&:not(:hover) {
+				img {
+					opacity: 0;
+				}
+			}
+
+			&:hover {
+				transition-delay: 90ms;
+				transition-duration: var(--duration-shortest);
+				color: transparent;
 			}
 		}
 	}
@@ -182,11 +220,15 @@ table.selectable {
 				background-color: var(--standard-hover-row-background-color);
 				td {
 					z-index: 2;
-
+					
 					border-color: var(--color-ui);
 
 					&:first-child {
-						background: linear-gradient(to right, var(--standard-hover-row-background-color) 80%, transparent 100%);
+						background-image: linear-gradient(to right, var(--standard-hover-row-background-color) 80%, transparent 100%);
+
+						&:hover, &:hover~td {
+							background: var(--frontframe-background-color);
+						}
 					}
 				}
 			}
