@@ -54,12 +54,13 @@
 		>li {
 			background-color: var(--frame-instance-background-color);
 			border-radius: var(--frame-border-radius);
+			transition-duration: var(--duration-shortest);
 			
 			+ li {
 				border-top: 1px dashed transparent;
 			}
 
-			&:not(.collapsed) {
+		html.js-active	&:not(.collapsed) {
 				background-color: var(--frame-instance-opened-background-color);
 				border-color: var(--color-ui);
 			}
@@ -125,14 +126,13 @@
 		margin: var(--standard-inner-rhythm);
 		font-size: var(--text-current);
 		color: inherit;
-		height: 1.5em;
 		display: block;
-
+		text-align: center;
+		transform: translateY(-.125em);
 	}
 
 	.settings .collapsible .collapsed &:before {
-		transform: scaleY(-1);
-		align-self: flex-end;
+		transform: scaleY(-1) translateY(-.4125em);
 	}
 
 	&.sidebar:before {
@@ -252,7 +252,7 @@ fieldset.frame,
 	cursor: s-resize;
 }
 
-.collapsible .collapsed .frame-header+.content {
+.collapsible .collapsed .frame-header+* {
 	position: absolute;
 	visibility: hidden;
 	opacity: 0;
@@ -315,10 +315,12 @@ fieldset.frame,
 /* Initial states to prevent interface jank --------*/
 html:not(.js-active) {
 	.frame {
+		color: transparent;
 		.frame-header {
 			cursor: wait;
 		}
-		.frame-header~*, .template {
+		.frame-header~*, .template,
+		>ol>li>header~* {
 			position: absolute;
 			visibility: hidden;
 			opacity: 0;
