@@ -153,13 +153,13 @@
 		margin-bottom: var(--standard-inner-rhythm);
 	}
 
-	ul:not(:hover),
-	li:not(:hover),
-	div:not(:hover),
-	section:not(:hover),
-	footer:not(:hover) {
-		color: var(--standard-label-color);
-	}
+	// ul:not(:hover),
+	// li:not(:hover),
+	// div:not(:hover),
+	// section:not(:hover),
+	// footer:not(:hover) {
+	// 	color: inherit;
+	// }
 
 	label {
 		background-color: inherit;
@@ -190,12 +190,13 @@
 			max-width: 100%;
 			padding-top: var(--spacing-pico);
 			margin-right: var(--standard-inner-rhythm);
-			border-top: 1px solid var(--color-ui);
-			border-left: 1px solid var(--color-ui);
-			border-right: 1px solid var(--color-ui);
+			border-top: 1px solid var(--standard-field-border-color);
+			border-left: 1px solid var(--standard-field-border-color);
+			border-right: 1px solid var(--standard-field-border-color);
 			box-shadow: var(--shadow-up-smaller);
 			font-size: var(--text-smallest);
 			border-radius: var(--radius-small) var(--radius-small) 0 0;
+			color: inherit;
 		}
 
 		p {
@@ -377,6 +378,32 @@
 		flex: 100% 0 0;
 		position: static;
 	}
+
+/* Generic tabs positioning --------*/
+	ul.tabs {
+		bottom: calc(100%);
+		margin: 0;
+		margin-left: var(--standard-inner-rhythm);
+		background-color: inherit;
+		font-size: var(--text-smaller);
+		padding-top: var(--spacing-pico);
+		z-index: 1;
+	}
+
+	ul.tabs>li {
+		background-color: inherit;
+		box-shadow: var(--shadow-up-smaller);
+		border-radius: var(--radius-small) var(--radius-small) 0 0;
+	}
+
+	&:not(:hover) ul.tabs {
+		opacity: 0;
+	}
+
+	ul.tabs>li.active {
+		border-bottom-color: transparent;
+	}
+
 
 // /* Special treatment for checkbox field --------*/
 // 	&.field-checkbox {
