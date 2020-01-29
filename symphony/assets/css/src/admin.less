@@ -84,7 +84,6 @@ body {
 	
 	[id="primary"] {
 		grid-area: primary;
-		background-color: var(--frontframe-background-color);
 	}
 
 
@@ -101,13 +100,23 @@ body {
 	[id="nav"],
 	[id="footer"],
 	[id="session"],
-	[id="header"] {
+	[id="header"],
+	[id="header"] h1>a,
+	[id="controls"],
+	[id="secondary"] {
 		background-color: var(--backframe-background-color);
 	}
 
-	[id="controls"],
 	[id="context"] {
-		z-index: 3;
+		z-index: 5;
+	}
+
+	.notifier {
+		z-index: 6;
+	}
+
+	[id="controls"] {
+		z-index: 7;
 	}
 
 	#btn-toggle-header-mobile {
@@ -309,6 +318,10 @@ body {
 
 		[id="primary"] {
 			padding: 0 var(--standard-outer-rhythm);
+
+			html:not(.not-allowed) & {
+				filter: drop-shadow(var(--shadow-smaller));
+			}
 
 			/* Center fields vertically if in small quantities --------*/
 			&:before, &:after {
