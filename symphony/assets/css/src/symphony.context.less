@@ -21,4 +21,39 @@
 			margin-left: var(--standard-inner-rhythm)
 		}
 	}
+
+	/* Master tabs in context container */
+	ul.tabs {
+		box-sizing: border-box;
+		top: 100%;
+		align-items: flex-start;
+		z-index: 2;
+	}
+
+	ul.multilingualtabs {
+		min-width: calc((100% - var(--dimension-smallest)) / 2);
+		justify-content: flex-end;
+		padding-left: var(--standard-outer-rhythm);
+		padding-right: var(--standard-outer-rhythm);
+	}
+
+	ul.tabs>li {
+		font-size: var(--text-small);
+		background-color: var(--backframe-background-color);
+		padding-bottom: var(--spacing-pico);
+		border-radius: 0 0 var(--radius-small) var(--radius-small);
+	}
+
+	ul.tabs>li:not(.active) {
+		top: 1px;
+	}
+
+	ul.tabs>li.active {
+		border-top-color: transparent;
+		padding-left: var(--spacing-micro);
+		padding-right: var(--spacing-micro);
+		padding-bottom: var(--spacing-nano);
+		box-shadow: var(--shadow-smaller);
+		padding-top: 1px;
+	}
 }
