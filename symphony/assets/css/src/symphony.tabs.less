@@ -1,0 +1,44 @@
+/**
+* Symphony Tabs
+*
+* This file contains styles for the general tab concept. 
+* Follow the structural conventions to opt in.
+*
+* @since Symphony 4.0.0
+*/
+
+ul.tabs {
+	display: flex;
+	margin-bottom: var(--standard-inner-rhythm);
+	position: absolute;
+	left: -1px;
+	
+	>li {
+		position: relative;
+		border: 1px solid var(--color-ui);
+		line-height: 1.1em;
+		cursor: pointer;
+		padding: 0 var(--spacing-nano);
+
+		+li {
+			margin-left: -2px;
+		}
+
+		&:not(.active) {
+			color: var(--color-main-light);
+		}
+
+		&:hover {
+			color: var(--color-accent);
+		}
+
+		&.active {
+			color: var(--color-main);
+			z-index: 1;
+		}
+		
+		&:not(.active) {
+			background-image: var(--veil);
+		}
+	}
+}
