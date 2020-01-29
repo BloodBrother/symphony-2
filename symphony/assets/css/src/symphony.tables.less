@@ -188,6 +188,10 @@ table[role="directory"] {
 		}
 	}
 
+	tbody td {
+		vertical-align: bottom;
+	}
+
 }
 
 /* Table with selectable rows --------*/
@@ -219,9 +223,8 @@ table.selectable {
 			&:hover:not(.selected):not(.ordering) {
 				background-color: var(--standard-hover-row-background-color);
 				td {
-					z-index: 2;
-					
-					border-color: var(--color-ui);
+
+					// border-color: var(--color-ui);
 
 					&:first-child {
 						background-image: linear-gradient(to right, var(--standard-hover-row-background-color) 80%, transparent 100%);
@@ -233,19 +236,22 @@ table.selectable {
 				}
 			}
 
-			/* Separate non-hovered entries by border --------*/
-			&:not(:hover):not(.selected)+*:not(:hover):not(.selected) td {
+			/* Separate entries by border --------*/
+			&+* td {
 				border-top-color: var(--color-ui);
+			}
+
+			&.ordering {
+				filter: drop-shadow(var(--shadow-small));
 			}
 
 			/* Hovering row graphical styles --------*/
 			&.selected, &.ordering {
 				background-color: var(--standard-selected-row-background-color);
 				border-color: var(--color-ui);
-				filter: drop-shadow(var(--shadow-small));
-				z-index: 1;
 
 				td {
+					// border-color: var(--color-ui);
 					&:first-child {
 						background: linear-gradient(to right, var(--standard-selected-row-background-color) 80%, transparent 100%);
 					}
@@ -257,19 +263,33 @@ table.selectable {
 
 /* Row states graphical styles --------*/
 tr {
-	&.status-ok:not(.selected) {
-		color: var(--color-accent);
+	&[class*="status"]>td {
+		&:first-child:before {
+			content: "•";
+			font-size: 3em;
+			margin-right: var(--spacing-thinnest);
+			margin-left: -.075em;
+			color: var(--status-color);
+			vertical-align: top;
+			top: -.025em;
+			position:relative;
+			text-shadow: 0px 2px 4px var(--color-accent-light), 0px 1px 0px var(--color-accent);
+		}
 	}
 
-	&.status-notice:not(.selected) {
-		color: var(--color-accent-alt);
+	&.status-ok {
+	--status-color: var(--color-accent);
 	}
 
-	&.status-error:not(.selected) {
-		color: var(--color-error);
+	&.status-notice {
+	--status-color: var(--color-accent-alt);
 	}
 
-	&.inactive:not(.selected):not(:hover) {
-		opacity: 0.5;
+	&.status-error {
+	--status-color: var(--color-error);
+	}
+
+	&.inactive:not(.selected):not(:hover) td:not(:first-child) {
+		color: var(--color-main-light);
 	}
 }
