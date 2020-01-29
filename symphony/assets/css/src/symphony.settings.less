@@ -57,11 +57,11 @@ fieldset.settings {
 		margin-left: var(--standard-inner-rhythm);
 	}
 
-	.frame .instance {
-		&+.instance {
+	.frame>ol>li {
+		&+li {
 			margin-top: 2px;
 		}
-		&:not(.collapsed) {
+		html.js-active &:not(.collapsed) {
 			&:not(:first-of-type) {
 				margin-top: var(--standard-inner-rhythm);
 			}
