@@ -129,6 +129,7 @@
 		display: block;
 		text-align: center;
 		transform: translateY(-.125em);
+		order: -1;
 	}
 
 	.settings .collapsible .collapsed &:before {
@@ -160,6 +161,8 @@ fieldset.frame,
 .duplicator {
 	.apply {
 		text-align: right;
+		box-shadow: var(--shadow-up-smaller);
+		border-top: 1px solid var(--color-ui);
 	}
 }
 
@@ -229,6 +232,11 @@ fieldset.frame,
 	}
 }
 
+/* DIRTY FIX for symphony.collapsible.js bad style setting behavior --------*/
+.collapsible .instance {
+	max-height: initial !important;
+}
+
 .collapsible .instance.collapsed {
 	overflow: hidden;
 
@@ -252,7 +260,7 @@ fieldset.frame,
 	cursor: s-resize;
 }
 
-.collapsible .collapsed .frame-header+* {
+.collapsible .collapsed>header+* {
 	position: absolute;
 	visibility: hidden;
 	opacity: 0;
