@@ -72,6 +72,14 @@ fieldset.settings {
 		}
 	}
 
+	[id="fields-duplicator"] .frame-header[title]:hover:after {
+		content: '#'attr(title);
+		order: -1;
+		margin-right: var(--spacing-thinnest);
+		color: var(--color-main-light);
+		font-weight: 580;
+	}
+
 
 	@media (min-width: @md){
 		margin-left: var(--standard-label-column-width);
