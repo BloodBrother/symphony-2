@@ -18,29 +18,22 @@
 	background: var(--color-main);
 	color: var(--color-main-lightest);
 	box-shadow: var(--shadow);
+	font-weight: 560;
 
 	/* Outer rhythm --------*/
 	margin: 0;
-
-	/* Hide panel by default --------*/
-	// opacity: 0;
-	// overflow: hidden;
-	// box-sizing: border-box;
-
 
 	>* {
 		padding: var(--spacing-micro) var(--standard-inner-rhythm);
 
 		/* Javascript mouseover on suggested items */
 		&:not(.help).active {
-			// color: var(--color-main);
-			background-color: var(--color-accent-alt-light);
+			background-color: var(--color-accent);
 			cursor: pointer;
 		}
 
 		&.help {
 		/* Help notice graphical styles --------*/
-			// color: var(--color-main-dark);
 			border-bottom: none;
 			background-color: var(--color-main-lighter);
 			cursor: default;
@@ -60,7 +53,6 @@
 -----------------------------------------------------------------------------*/
 
 .field-date .suggestions {
-	// overflow: visible;
 	top: 85%;
 	left: auto;
 	
