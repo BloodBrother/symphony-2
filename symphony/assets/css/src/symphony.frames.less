@@ -55,10 +55,6 @@
 			background-color: var(--frame-instance-background-color);
 			border-radius: var(--frame-border-radius);
 			transition-duration: var(--duration-shortest);
-			
-			+ li {
-				border-top: 1px dashed transparent;
-			}
 
 		html.js-active	&:not(.collapsed) {
 				background-color: var(--frame-instance-opened-background-color);
@@ -311,12 +307,7 @@ fieldset.frame,
 
 .conflict {
 	.frame-header {
-		background-color: var(--color-error)!important;
-
-		* {
-			color: var(--color-clear)!important;
-
-		}
+		color: var(--color-error);
 	}
 }
 
