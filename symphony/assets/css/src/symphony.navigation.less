@@ -11,11 +11,7 @@
 
 /* Main nav container --------*/
 [id="nav"] {
-	// font-size: var(--text-small);
 	font-size: var(--text-big);
-	@media (max-width: @sm) {
-		font-size: var(--text-big);
-	}
 
 	/* Base layout, styles and rhythm --------*/
 	a, span {
@@ -23,19 +19,12 @@
 		position: relative;
 		cursor: pointer;
 		color: inherit;
-		font-weight: 780;
+		font-weight: 740;
+		line-height: 1.125em;
 	}
 
-	// span {
-	// 	font-weight: 300;
-	// }
-	
-	// a {
-	// 	font-weight: 450;
-	// }
-
 	*+* {
-		margin-top: calc(var(--standard-inner-rhythm));
+		margin-top: calc(var(--spacing-thinnest));
 	}
 
 	/* Section Titles --------*/
@@ -51,11 +40,12 @@
 
 		> li {
 			> span {
+				color: var(--color-main);
 				svg {
 					transition-duration: var(--duration-shortest);
 					position: absolute;
 					left: calc(var(--spacing-thin) * -1);
-					top: .59125em;
+					top: .4125em;
 					opacity: 0.6;
 				}
 			}
@@ -65,7 +55,7 @@
 			}
 
 			&.active>span, &:hover>span {
-				color: var(--color-accent);
+				color: var(--color-main-dark);
 			}
 		}
 
@@ -75,6 +65,8 @@
 			padding-left: var(--standard-outer-rhythm);
 			margin-left: calc(-1 * var(--spacing-thinner) - 2px);
 			border-left: 2px dotted var(--color-main-lighter);
+
+
 
 			li.active a,
 			a:hover {
