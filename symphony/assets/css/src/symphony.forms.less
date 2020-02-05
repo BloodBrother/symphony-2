@@ -63,14 +63,16 @@ select {
 	padding: var(--standard-field-padding);
 	width: 100%;
 	border: 0;
-	border-top: 1px solid transparent;
-	border-bottom: 1px solid var(--standard-field-border-color);
 
 	&:placeholder-shown:not(:focus) {
 		.required &,
 		.invalid & {
 			border-bottom-color: var(--color-error);
 		}
+	}
+
+	&::placeholder {
+		color: inherit;
 	}
 
 	&:focus {
@@ -86,6 +88,8 @@ select {
 
 /*-----------------------------------------*/
 input[type='checkbox'] {
+	background-color: initial;
+
 	/* Scope the style to fields and settings to prevent leaking --------*/
 	.field &, .settings & {
 		-webkit-appearance: none;
@@ -153,7 +157,6 @@ input[type='checkbox'] {
 
 		&:hover:after,
 		&:focus:after {
-			background-color: var(--color-accent-alt-light);
 			transform: scale(1.5);
 			box-shadow: 1px 1px 2px rgba(0,0,0,.4);
 		}
@@ -229,15 +232,6 @@ select[multiple] {
 	&+.frame {
 		border-bottom-color: var(--color-error);
 	}
-
-	label~* {
-		font-size: var(--text-smaller);
-		background-color: var(--color-clear);
-		padding: 0 var(--spacing-nano);
-		margin-left: calc(-1 * var(--spacing-nano));
-		border-radius: var(--radius-small);
-		border-top: 2px solid rgba(255,255,255,.6);
-	}
 }
 
 /*-----------------------------------------*/
@@ -298,7 +292,13 @@ label {
 		margin-right: var(--spacing-thinnest);
 	}
 
-	span {
+	>input:not([type=checkbox]), textarea, select {
+		&:first-child {
+			margin-top: var(--spacing-thinnest);
+		}
+	}
+
+	span, em {
 		~:not(i) {
 			margin-top: var(--spacing-thinnest);
 		}
