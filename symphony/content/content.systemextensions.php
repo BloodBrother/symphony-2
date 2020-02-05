@@ -118,7 +118,7 @@ class contentSystemExtensions extends AdministrationPage
                 }
 
                 if (in_array(Extension::EXTENSION_NOT_COMPATIBLE, $about['status'])) {
-                    $tdMessage .= ',<br/>' . __('requires Symphony %s', array($about['required_version']));
+                    $tdMessage .= ', ' . __('requires Symphony %s', array($about['required_version']));
                     $trStatus = 'status-error';
                 }
 
@@ -174,7 +174,7 @@ class contentSystemExtensions extends AdministrationPage
                         if($key == 0) {
                             $dependencies_msg = $name . ' ' . $required_version . $current_status;
                         } else {
-                            $dependencies_msg .= ',<br/>' . $name . ' ' . $required_version . $current_status;
+                            $dependencies_msg .= ', ' . $name . ' ' . $required_version . $current_status;
                         }
                     }
                 }
