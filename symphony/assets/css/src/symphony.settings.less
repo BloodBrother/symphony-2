@@ -59,7 +59,7 @@ fieldset.settings {
 
 	.frame>ol>li {
 		&+li {
-			margin-top: 2px;
+			margin-top: var(--spacing-pico);
 		}
 		html.js-active &:not(.collapsed) {
 			&:not(:first-of-type) {
@@ -72,7 +72,43 @@ fieldset.settings {
 		}
 	}
 
-	[id="fields-duplicator"] .frame-header[title]:hover:after {
+	/* Special types of instances alterations --------*/
+	.instance {
+		transition-duration: var(--duration-shorter);
+		
+		&.collapsed:not(.ordering):not(:hover) {
+			&[class*="drawer"] {
+				// box-shadow: inset 0px 0px 0px 3px var(--color-main-lighter);
+				background-color: var(--color-main-lighter);
+				color: var(--color-main);
+			}
+
+			&[class*="tabs"] {
+				// box-shadow: inset 0px 0px 0px 3px var(--color-main-lighter);
+				background-color: var(--color-main);
+				color: var(--color-main-lightest);
+			}
+
+			&[class*="group"] {
+				// box-shadow: inset 0px 0px 0px 3px var(--color-main-lighter);
+				background-color: var(--color-main-lighter);
+				color: var(--color-main);
+			}
+		}
+
+		// &[class*="drawer"],
+		// &[class*="tabs"],
+		// &[class*="group"] {
+		// 	&:not(:first-child),
+		// 	&+* {
+		// 		margin-top: var(--spacing-micro);
+		// 	}
+		// }
+	}
+
+	[id="fields-duplicator"] .frame-header[title]:hover:after,
+	[id="fields-duplicator"] .instance:not(.collapsed) .frame-header[title]:after
+	[id="fields-duplicator"] .instance.ordering .frame-header[title]:after {
 		content: '#'attr(title);
 		order: -1;
 		margin-right: var(--spacing-thinnest);
