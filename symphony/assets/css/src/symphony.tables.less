@@ -105,6 +105,7 @@ table[role="directory"] {
 
 		/* Interactive display of preview images --------*/
 		&[class*="upload"] a {
+			position: relative;
 			html.js-active &:after {
 				content: attr(href);
 			}
@@ -128,6 +129,17 @@ table[role="directory"] {
 				max-height: 100%;
 			}
 
+			&:before {
+				content: "";
+				width: 0;
+				display: block;
+				position: absolute;
+				height: var(--spacing-nano);
+				border-radius: var(--radius-small);
+				background-color: var(--color-accent);
+				top: calc(50% - var(--spacing-nano) / 2);
+			}
+
 			&:not(:hover) {
 				img {
 					opacity: 0;
@@ -135,9 +147,18 @@ table[role="directory"] {
 			}
 
 			&:hover {
-				transition-delay: 90ms;
 				transition-duration: var(--duration-shortest);
 				color: transparent;
+				transition-delay: 120ms;
+
+				img {
+					transition-delay: 560ms;
+				}
+
+				&:before {
+					transition: width 360ms 120ms linear;
+					width: var(--spacing-large);
+				}
 			}
 		}
 	}
@@ -161,6 +182,7 @@ table[role="directory"] {
 			&:first-child {
 				/* Make titles and related column header stick to the table's edges --------*/
 				position: sticky;
+				z-index: 1;
 				left: 0;
 				padding-left: calc(var(--standard-inner-rhythm));
 			}
@@ -169,7 +191,7 @@ table[role="directory"] {
 		td {
 			&:first-child {
 				/* Mask content under titles with gradual fade --------*/
-				background: linear-gradient(to right, var(--standard-table-background-color) 80%, transparent 100%);
+				background: linear-gradient(to right, var(--standard-table-background-color) 80%, var(--standard-table-background-color-transparent) 100%);
 				background-position: center center;
 				background-repeat: no-repeat;
 			}
@@ -227,7 +249,7 @@ table.selectable {
 					// border-color: var(--color-ui);
 
 					&:first-child {
-						background-image: linear-gradient(to right, var(--standard-hover-row-background-color) 80%, transparent 100%);
+						background-image: linear-gradient(to right, var(--standard-hover-row-background-color) 80%, var(--standard-hover-row-background-color-transparent) 100%);
 
 						&:hover, &:hover~td {
 							background: var(--frontframe-background-color);
@@ -253,7 +275,7 @@ table.selectable {
 				td {
 					// border-color: var(--color-ui);
 					&:first-child {
-						background: linear-gradient(to right, var(--standard-selected-row-background-color) 80%, transparent 100%);
+						background: linear-gradient(to right, var(--standard-selected-row-background-color) 80%, var(--standard-selected-row-background-color-transparent) 100%);
 					}
 				}
 			}
