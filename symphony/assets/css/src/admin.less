@@ -298,11 +298,11 @@ body {
 
 				/* Forced vertical spacing in scrolling parent --------*/
 				&:first-child {
-					margin-top: calc(var(--standard-outer-rhythm) * 2);
+					margin-top: auto;
 				}
 
 				&:last-child {
-					margin-bottom: calc(var(--standard-outer-rhythm) * 2);
+					margin-bottom: auto;
 				}
 			}
 
@@ -320,16 +320,12 @@ body {
 		[id="primary"] {
 			padding: 0 var(--standard-outer-rhythm);
 
-			html:not(.not-allowed) & {
-				filter: drop-shadow(var(--shadow-smaller));
-			}
-
 			/* Center fields vertically if in small quantities --------*/
 			&:before, &:after {
 				content: "";
 				display: block;
-				height: 0;
-				margin: auto;
+				height: calc(var(--standard-outer-rhythm) * 2);
+				flex-shrink: 0;
 			}
 
 			// .field {
