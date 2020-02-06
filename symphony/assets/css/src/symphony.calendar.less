@@ -7,6 +7,8 @@
 
 
 .calendar {
+	--standard-label-color: var(--color-main-lighter);
+
 	padding: var(--spacing-thinner);
 	background-color: var(--color-main-light);
 	position: relative;
@@ -14,10 +16,8 @@
 	min-width: var(--dimension-tiniest);
 	// z-index: 20;
 	border-top: none;
-	// border-bottom-right-radius: var(--radius-current);
-	// border-bottom-left-radius: var(--radius-current);
-	border-radius: inherit;
-	--standard-label-color: var(--color-main-lighter);
+	border-bottom-right-radius: inherit;
+	border-bottom-left-radius: inherit;
 	user-select: none;
 	&.hidden {
 		display: none;
@@ -37,7 +37,7 @@
 			width: 3rem;
 			height: 3rem;
 			border-radius: var(--radius-small);
-			background: var(--color-main) url(../img/symphony.calendar.svg) no-repeat;
+			background: var(--color-main) url(/symphony/assets/img/symphony.calendar.svg) no-repeat;
 			background-size: 3rem 9rem;
 
 			&:hover {
@@ -142,7 +142,7 @@
 				position: absolute;
 				top: 50%;
 				margin-top: -1.5rem;
-				background: url(../img/symphony.calendar.svg) 0 0 no-repeat;
+				background: url(/symphony/assets/img/symphony.calendar.svg) 0 0 no-repeat;
 				width: 3rem;
 				height: 3rem;
 				opacity: 0.3;
