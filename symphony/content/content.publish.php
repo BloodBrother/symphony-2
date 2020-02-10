@@ -230,39 +230,37 @@ class contentPublish extends AdministrationPage
         $li->setAttribute('data-type', $data['type']);
 
         // Header
-        $li->appendChild(new XMLElement('header', $data['name'], array(
+        $li->appendChild(new XMLElement('header','<span>' . $data['name'] . '</span>', array(
             'data-name' => $data['name']
         )));
 
         // Settings
-        $div = new XMLElement('div', null, array('class' => 'two columns'));
+        $container = new XMLElement('div', null, array('class' => 'two columns'));
 
         // Comparisons
-        $label = Widget::Label();
-        $label->setAttribute('class', 'column secondary');
+        $div = new XMLElement('div', null, array('class' => 'column secondary'));;
 
         $select = Widget::Select($data['type'] . '-comparison', $data['comparisons'], array(
             'class' => 'comparison'
         ));
 
-        $label->appendChild($select);
-        $div->appendChild($label);
+        $div->appendChild($select);
+        $container->appendChild($div);
 
         // Query
-        $label = Widget::Label();
-        $label->setAttribute('class', 'column primary');
+        $div = new XMLElement('div', null, array('class' => 'column primary'));;
 
         $input = Widget::Input($data['type'], General::sanitize($data['query']), 'text', array(
             'placeholder' => __('Type and hit enter to apply filter…'),
             'autocomplete' => 'off'
         ));
         $input->setAttribute('class', 'filter');
-        $label->appendChild($input);
+        $div->appendChild($input);
 
-        $this->createFilterSuggestions($label, $data);
+        $this->createFilterSuggestions($div, $data);
 
-        $div->appendChild($label);
-        $li->appendChild($div);
+        $container->appendChild($div);
+        $li->appendChild($container);
         $wrapper->appendChild($li);
     }
 
@@ -1965,8 +1963,8 @@ class contentPublish extends AdministrationPage
 
                         $element = new XMLElement('section', null, array('class' => 'association parent'));
                         $header = new XMLElement('header');
-                        $header->appendChild(new XMLElement('p', 'Links to ' . $a->generate()));
-                        $header->appendChild(new XMLElement('p', ' through ' . $relation_field->get('label')));
+                        $header->appendChild(new XMLElement('span', 'Links to ' . $a->generate()));
+                        $header->appendChild(new XMLElement('span', '&nbsp;through ' . $relation_field->get('label')));
                         $element->appendChild($header);
 
                         $ul = new XMLElement('ul', null, array(
@@ -2086,7 +2084,7 @@ class contentPublish extends AdministrationPage
 
                     // Display existing entries
                     if ($has_entries) {
-                        $header->appendChild(new XMLElement('p', 'Links in ' . $a->generate()));
+                        $header->appendChild(new XMLElement('span', 'Links in ' . $a->generate()));
 
                         $ul = new XMLElement('ul', null, array(
                             'class' => 'association-links',
@@ -2129,10 +2127,10 @@ class contentPublish extends AdministrationPage
                         // No entries
                     } else {
                         $element->setAttribute('class', 'association child empty');
-                        $header->appendChild(new XMLElement('p', __('No links in %s', array($a->generate()))));
+                        $header->appendChild(new XMLElement('span', __('No links in %s', array($a->generate()))));
                     }
 
-                    $header->appendChild(new XMLElement('p', ' through ' . $relation_field->get('label')));
+                    $header->appendChild(new XMLElement('span', '&nbsp;through ' . $relation_field->get('label')));
                     $header->appendChild($create);
                     $element->prependChild($header);
                     $content->appendChild($element);
