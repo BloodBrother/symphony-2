@@ -100,14 +100,14 @@
 
 			// Open
 			if(!t.parent().hasClass('opened')) {
-				$('.opened ul', Symphony.Elements.nav).slideUp(120);
+				$('.opened ul', Symphony.Elements.nav).slideUp(0);
 				$('.opened', Symphony.Elements.nav).removeClass('opened');
 
 				t.parent().addClass('opened');
-				t.siblings('ul').slideDown(120);
+				t.siblings('ul').slideDown(0);
 			} else {
 				t.parent().removeClass('opened');
-				t.siblings('ul').slideUp(120);
+				t.siblings('ul').slideUp(0);
 			}
 		});
 
