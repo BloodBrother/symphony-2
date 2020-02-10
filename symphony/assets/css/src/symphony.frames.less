@@ -55,11 +55,6 @@
 			background-color: var(--frame-instance-background-color);
 			border-radius: var(--frame-border-radius);
 			transition-duration: var(--duration-shortest);
-
-		html.js-active	&:not(.collapsed) {
-				background-color: var(--frame-instance-opened-background-color);
-				border-color: var(--color-ui);
-			}
 		}
 	}
 }
@@ -153,14 +148,6 @@ fieldset.frame,
 /*--------------------------------------------------------------------------
 	Controls
 --------------------------------------------------------------------------*/
-
-.duplicator {
-	.apply {
-		text-align: right;
-		box-shadow: var(--shadow-up-smaller);
-		border-top: 1px solid var(--color-ui);
-	}
-}
 
 .frame .destructor,
 .frame .debug {
@@ -279,9 +266,17 @@ fieldset.frame,
 					0px 0px 1px 4px var(--color-accent-light);
 	--standard-field-border-color: transparent;
 	z-index: 1;
+	color: var(--color-accent);
 
 	&.instance {
 		background-color: var(--color-clear);
+	}
+}
+
+.orderable .is-ordering .instance {
+	transition: none;
+	&:not(.ordering) {
+		pointer-events: none;
 	}
 }
 
