@@ -216,7 +216,7 @@ Symphony.View.add('/publish/:context*:', function() {
 	Symphony.Interface.Filtering.init();
 
 	// Pagination
-	Symphony.Elements.contents.find('.page').each(function() {
+	Symphony.Elements.context.find('.page').each(function() {
 		var pagination = $(this),
 			form = pagination.find('form'),
 			jump = form.find('input'),
