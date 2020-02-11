@@ -7,20 +7,14 @@
 * @since Symphony 4.0.0
 */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
 @import "variables";
 
-/*--------------------------------------------------------------------------
-	Settings
---------------------------------------------------------------------------*/
-
 fieldset.settings {
+	/* Set specific inner theme colors --------*/
 	--standard-frame-background-color: var(--color-main-lightest);
 	--standard-frame-instance-background-color: var(--color-accent-light);
 	--standard-frame-instance-opened-background-color: var(--color-accent-lighter);
+	--standard-input-background-color: var(--color-clear);
 
 	padding: var(--standard-outer-rhythm);
 	box-sizing: content-box;
@@ -35,19 +29,6 @@ fieldset.settings {
 		}
 	}
 
-	input[type=text]:not(:focus), 
-	input[type=email]:not(:focus), 
-	input[type=file]:not(:focus), 
-	input[type=number]:not(:focus), 
-	input[type=password]:not(:focus), 
-	input[type=search]:not(:focus), 
-	input[type=url]:not(:focus), 
-	input[type=tel]:not(:focus), 
-	select:not(:focus), 
-	textarea:not(:focus) {
-		background-color: var(--color-clear);
-	}
-
 	>*:not(legend):not(.toggle)+*,
 	>div:not([class])>*+* {
 		margin-top: var(--spacing-thin);
@@ -57,23 +38,46 @@ fieldset.settings {
 		margin-left: var(--standard-inner-rhythm);
 	}
 
-	.frame>ol>li {
-		&+li {
-			margin-top: var(--spacing-pico);
-		}
-		&.instance:not(.collapsed) {
-			&:not(:first-of-type) {
-				margin-top: var(--standard-inner-rhythm);
+	.frame {
+		/* Instance generic container; selectable without JS --------*/
+		>ol>li {
+			/* Rhythm --------*/
+			&+li {
+				margin-top: var(--spacing-pico);
+			}
+			&.instance:not(.collapsed) {
+				&:not(:first-of-type) {
+					margin-top: var(--standard-inner-rhythm);
+				}
+
+				&:not(:last-of-type) {
+					margin-bottom: var(--standard-inner-rhythm);
+				}
 			}
 
-			&:not(:last-of-type) {
-				margin-bottom: var(--standard-inner-rhythm);
+			/* Manage in-between states while JS is running --------*/
+			html.js-active	&:not(.collapsed) {
+				background-color: var(--standard-frame-instance-opened-background-color);
+				border-color: var(--color-ui);
 			}
 		}
 
-		html.js-active	&:not(.collapsed) {
-			background-color: var(--frame-instance-opened-background-color);
-			border-color: var(--color-ui);
+		/* Collapsable pseudo-icon display and states --------*/
+		&.collapsible>ol>li>header:before {
+			content: "〈";
+			writing-mode: vertical-lr;
+			font-weight: 900;
+			margin: var(--standard-inner-rhythm);
+			font-size: var(--text-current);
+			color: inherit;
+			display: block;
+			text-align: center;
+			transform: translateY(-.125em);
+			order: -1;
+		}
+
+		&.collapsible>ol>li.collapsed>header:before {
+			transform: scaleY(-1) translateY(-.4125em);
 		}
 	}
 
@@ -83,34 +87,23 @@ fieldset.settings {
 		
 		&.collapsed:not(.ordering):not(:hover) {
 			&[class*="drawer"] {
-				// box-shadow: inset 0px 0px 0px 3px var(--color-main-lighter);
 				background-color: var(--color-main-lighter);
 				color: var(--color-main);
 			}
 
 			&[class*="tabs"] {
-				// box-shadow: inset 0px 0px 0px 3px var(--color-main-lighter);
 				background-color: var(--color-main);
 				color: var(--color-main-lightest);
 			}
 
 			&[class*="group"] {
-				// box-shadow: inset 0px 0px 0px 3px var(--color-main-lighter);
 				background-color: var(--color-main-lighter);
 				color: var(--color-main);
 			}
 		}
-
-		// &[class*="drawer"],
-		// &[class*="tabs"],
-		// &[class*="group"] {
-		// 	&:not(:first-child),
-		// 	&+* {
-		// 		margin-top: var(--spacing-micro);
-		// 	}
-		// }
 	}
 
+	/* Add entry ID for the development purposes --------*/
 	[id="fields-duplicator"] .frame-header[title]:hover:after,
 	[id="fields-duplicator"] .instance:not(.collapsed) .frame-header[title]:after
 	[id="fields-duplicator"] .instance.ordering .frame-header[title]:after {
@@ -122,6 +115,7 @@ fieldset.settings {
 	}
 
 
+	/* Floating legend layout --------*/
 	@media (min-width: @md){
 		margin-left: var(--standard-label-column-width);
 
@@ -135,16 +129,16 @@ fieldset.settings {
 				max-width: calc(var(--dimension-smaller) + var(--standard-outer-rhythm) * 2);
 			}
 		}
-	}
 
-	> legend {
-		color: var(--color-main-light);
-
-		@media (min-width: @md){
+		legend {
 			float: left;
 			margin-left: calc(-1 * var(--standard-label-column-width));
 			width: var(--standard-label-column-width);
 		}
+	}
+
+	> legend {
+		color: var(--color-main-light);
 
 		@media (max-width: (@md - 1)){
 			font-size: var(--text-big);
@@ -256,15 +250,11 @@ fieldset.settings {
 	/* Initial states to prevent interface jank --------*/
 	.frame {
 		>ol>:not(.instance) {
-			* {
-				color: transparent;
-			}
-	
-			>.frame-header {
+			>header {
 				cursor: wait;
 			}
 	
-			>.frame-header~*,
+			>header~*,
 			&.template {
 				position: absolute;
 				visibility: hidden;

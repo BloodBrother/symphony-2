@@ -7,40 +7,36 @@
 * @since Symphony 4.0.0
 */
 
-/* Less variables --------*/
 @import "variables";
 
-/* Pagination container --------*/
 ul.page {
-	display: flex;
-	align-items: center;
+	display: inline-flex;
+	align-items: baseline;
 	justify-content: center;
-	padding: var(--standard-outer-rhythm);
-	box-sizing: border-box;
-	margin: 0;
-	color: var(--color-main-dark);
-	cursor: default;
-	background-color: var(--color-accent-lighter);
-	width: 100%;
+	color: var(--color-main-light);
+	font-size: var(--text-smaller);
+	transition-duration: var(--duration-shorter);
+	margin-right: var(--standard-inner-rhythm);
+	font-weight: 500;
 
 	a {
-		color: var(--color-accent);
+		color: var(--color-main);
 
 		&:hover {
-			color: var(--color-main-dark)
+			color: var(--color-accent);
 		}
 	}
 
 	input {
-		border-radius: var(--radius-current);
-		color: var(--color-main-dark);
-		font-size: var(--text-small);
-		text-align: center!important;
-		line-height: 1em;
-		padding: var(--spacing-thinnest) var(--spacing-thinner);
-		border: 1px solid var(--color-main-light);
-		box-shadow: none;
-		outline: none;
+		font-size: inherit;
+		background-color: var(--color-accent-lighter);
+		padding: var(--spacing-micro);
+		text-align: center;
+		border-radius: var(--radius-small);
+
+		&:not(:focus) {
+			color: var(--color-main-light);
+		}
 	}
 
 	form.invalid input {
@@ -48,10 +44,12 @@ ul.page {
 	}
 
 	li {
-		font-size: var(--text-current);
-
 		& + li {
-			margin-left: var(--spacing-thinner);
+			margin-left: var(--spacing-thin);
 		}
+	}
+
+	html:not(.js-active) & {
+		opacity: 0;
 	}
 }

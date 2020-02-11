@@ -1,20 +1,15 @@
 /**
 * Symphony Loading
 *
-* This file contains the loading veil container and its states
+* This file contains the loading veil container and its states.
+* It is deactivated as of this version for faster content accessibility.
+* Please be careful of wasteful development incitatives that might be triggered
+* by activating the veil. To be used as emergency exit only.
 *
 * @since Symphony 4.0.0
 */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
 @import "variables";
-
-/*--------------------------------------------------------------------------
-	Loading
---------------------------------------------------------------------------*/
 
 [id="loading"] {
 	display: block;
@@ -23,7 +18,7 @@
 	height: 100%;
 	background-color: var(--frontframe-background-color);
 	z-index: 200;
-	opacity: 0;
+	opacity: 0; /* DEACTIVATED ! --------*/
 }
 
 html:not(.js-active) [id="loading"] {

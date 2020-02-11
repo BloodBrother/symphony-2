@@ -4,21 +4,10 @@
  * @since Symphony 2.3
  */
 
-/*-----------------------------------------------------------------------------
-	LESS — Variables Importing
------------------------------------------------------------------------------*/
-
 @import "variables";
 
-/*-----------------------------------------------------------------------------
-	Notifier
------------------------------------------------------------------------------*/
-
+/* Container positioning and graphical styles --------*/
 .notifier {
-	// position: fixed;
-	// bottom: var(--spacing-thin);
-	// left: auto;
-	// right: var(--spacing-broadest);
 	color: var(--color-main-dark);
 	font-size: var(--text-small);
 	pointer-events: none;
@@ -27,13 +16,8 @@
 	right: var(--standard-outer-rhythm);
 	margin-left: auto;
 	max-width: var(--dimension-tiny);
-	// padding: 1px;
 
-	// @media (max-width: (@sm - 1)) {
-	// 	left: 0;
-	// 	right: 0;
-	// }
-
+	/* Inner navigation for multiple notices --------*/
 	nav {
 		top: 0;
 		display: inline;
@@ -46,10 +30,7 @@
 	}
 }
 
-/*-----------------------------------------------------------------------------
-	Message types
------------------------------------------------------------------------------*/
-
+/* Single messages positioning and graphical styles --------*/
 .notice {
 	position: relative;
 	color: var(--color-accent-alt-dark);
@@ -57,15 +38,12 @@
 	margin: 0;
 	padding: var(--standard-inner-rhythm);
 	background: var(--color-accent-alt-light);
-	// border-left: 1px solid var(--color-accent-alt);
 	border: 1px solid var(--color-accent-alt);
 	pointer-events: all;
 	line-height: 1.4em;
 	box-sizing: border-box;
 	border-radius: var(--radius-small);
 	font-weight: 560;
-	// box-shadow: var(--shadow-up);
-	// max-width: var(--dimension-tiny);
 
 	a {
 		color: currentColor;
@@ -81,6 +59,7 @@
 		content: '\2191';
 	}
 
+	/* Message states and variants --------*/
 	&.success {
 		background: var(--color-success-light);
 		border-color: var(--color-success);
