@@ -982,7 +982,7 @@ class contentPublish extends AdministrationPage
 
             $ul->appendChild($li);
 
-            $this->Contents->appendChild($ul);
+            $this->Context->appendChild($ul);
         }
     }
 
