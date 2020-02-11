@@ -77,7 +77,7 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 1.2em;
 }
 
-/* Basic & universal transition styles --------*/
+/* Basic & universal transition styles — Opt-in by setting a duration --------*/
 *, ::before, ::after {
 	transition-duration: 0ms;
 	transition-property: color, background-color, box-shadow, opacity, transform, fill, outline;
@@ -121,14 +121,12 @@ body {
 	font-size: var(--text-current);
 	font-weight: 400;
 	line-height: 1.4em;
-	// text-rendering: geometricPrecision;
 }
 
 /* Generally desired default non-bleeding behavior --------*/
 img {
 	max-width: 100%;
 }
-
 
 /* Apply base transition-duration to interactive elements --------*/
 a, button, input, li {

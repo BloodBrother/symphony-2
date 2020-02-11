@@ -8,17 +8,13 @@
 @import "variables";
 
 .frame {
-	/* Assign standard theme values --------*/
-	--frame-background-color: var(--standard-frame-background-color);
-	--frame-instance-background-color: var(--standard-frame-instance-background-color);
-	--frame-instance-opened-background-color: var(--standard-frame-instance-opened-background-color);
-	--frame-border-radius: var(--standard-frame-border-radius);
+	/* Graphical styles --------*/
+	border-radius: var(--standard-frame-border-radius);
+	background-color: var(--standard-frame-background-color);
 
-	box-sizing: border-box;
-	border-radius: var(--frame-border-radius);
+	/* Relative context for children --------*/
 	position: relative;
-	margin: 0;
-	background-color: var(--frame-background-color);
+	box-sizing: border-box;
 
 	h1 {
 		padding: var(--spacing-thinnest);
@@ -31,10 +27,10 @@
 	}
 
 	a {
-		color: var(--color-accent);
+		color: currentColor;
 
 		&:hover {
-			color: currentColor;
+			color: var(--color-accent);
 		}
 	}
 
@@ -50,156 +46,128 @@
 		margin-left: var(--spacing-micro);
 	}
 
+	/* Graphical styles for items — 
+		Generic structure selector; selectable without JS added classes --------*/
 	>ol {
 		>li {
-			background-color: var(--frame-instance-background-color);
-			border-radius: var(--frame-border-radius);
+			background-color: var(--standard-frame-instance-background-color);
+			border-radius: var(--standard-frame-border-radius);
 			transition-duration: var(--duration-shortest);
-		}
-	}
-}
 
-/* Headers */
+			/* Headers */
 
-.frame-header {
-	display: flex;
-	align-items: baseline;
-	position: relative;
-	border: 1px solid transparent;
+			>header {
+				display: flex;
+				align-items: baseline;
+				position: relative;
+				border: 1px solid transparent;
 
-	h4 {
-		padding-top: var(--standard-inner-rhythm);
-		padding-bottom: var(--standard-inner-rhythm);
-		display: flex;
-		align-items: baseline;
-		flex-grow: 1;
-		
-		strong {
-			font-weight: 580;
-		}
+				h4 {
+					padding-top: var(--standard-inner-rhythm);
+					padding-bottom: var(--standard-inner-rhythm);
+					display: flex;
+					align-items: baseline;
+					flex-grow: 1;
+					
+					strong {
+						font-weight: 580;
+					}
 
-		span, & + span {
-			font-size: var(--text-small);
-			padding-left: var(--spacing-thinnest);
-		}
+					span, & + span {
+						font-size: var(--text-small);
+						padding-left: var(--spacing-thinnest);
+					}
 
-		.type {
-			order: 2;
-			margin-left: auto;
-			margin-right: var(--spacing-thin);
-		}
+					.type {
+						order: 2;
+						margin-left: auto;
+						margin-right: var(--spacing-thin);
+					}
 
-		svg {
-			padding-left: var(--spacing-thinner);
+					svg {
+						padding-left: var(--spacing-thinner);
 
-			* {
-				transition-duration: var(--duration-shorter);
+						* {
+							transition-duration: var(--duration-shorter);
+						}
+					}
+
+					.required {
+						color: var(--color-main);
+					}
+				}
+
+				:not(.collapsed)>& {
+					border-top-color: transparent;
+				}
+
+				&:hover {
+					color: var(--color-accent);
+				}
+
+				&.sidebar:before {
+					border-right-color: var(--color-main-light);
+					border-left-color: var(--color-main-lighter);
+				}
 			}
 		}
+	}
 
-		.required {
-			color: var(--color-main);
+	/* Inline frames (legacy) --------*/
+	span&,
+	fieldset&,
+	&.inline {
+		display: block;
+		margin-bottom: var(--spacing-thin);
+		padding: var(--spacing-thinnest);
+	}
+
+	/* Controls --------*/
+	.destructor,
+	.debug {
+		color: inherit;
+		font-size: var(--standard-button-font-size);
+		margin: 0 var(--standard-inner-rhythm);
+	}
+
+	.destructor {
+		margin-left: auto;
+	}
+
+	.disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	/* Actions --------*/
+	.actions {
+		margin: 0 0 var(--spacing-thinnest);
+		
+		input {
+			margin-top: 0;
+		}
+
+		button {
+			float: right;
 		}
 	}
 
-	:not(.collapsed)>& {
-		border-top-color: transparent;
+	/* Orderables and Selectables --------*/
+	.selected,
+	.ordering {
+		position: relative;
+		box-shadow: var(--shadow);
 	}
 
-	&:hover {
-		color: var(--color-accent);
-	}
-
-	.settings .collapsible &:before {
-		content: "〈";
-		writing-mode: vertical-lr;
-		font-weight: 900;
-		margin: var(--standard-inner-rhythm);
-		font-size: var(--text-current);
-		color: inherit;
-		display: block;
-		text-align: center;
-		transform: translateY(-.125em);
-		order: -1;
-	}
-
-	.settings .collapsible .collapsed &:before {
-		transform: scaleY(-1) translateY(-.4125em);
-	}
-
-	&.sidebar:before {
-		border-right-color: var(--color-main-light);
-		border-left-color: var(--color-main-lighter);
+	.ordering .frame-header span,
+	.ordering .frame-header .destructor,
+	.ordering .content i,
+	.ordering ul.tags {
+		color: var(--color-main-lighter);
 	}
 }
 
-/*--------------------------------------------------------------------------
-	Inline frames (e. g. upload fields)
---------------------------------------------------------------------------*/
-
-span.frame,
-fieldset.frame,
-.frame.inline {
-	display: block;
-	margin-bottom: var(--spacing-thin);
-	padding: var(--spacing-thinnest);
-}
-
-/*--------------------------------------------------------------------------
-	Controls
---------------------------------------------------------------------------*/
-
-.frame .destructor,
-.frame .debug {
-	color: inherit;
-	font-size: var(--standard-button-font-size);
-	margin: 0 var(--standard-inner-rhythm);
-}
-
-.frame .destructor {
-	margin-left: auto;
-}
-
-.frame .disabled {
-	opacity: 0.5;
-	cursor: not-allowed;
-}
-
-/* Applicators */
-
-.frame .actions {
-	margin: 0 0 var(--spacing-thinnest);
-}
-
-.frame .actions input {
-	margin-top: 0;
-}
-
-.frame .actions button {
-	float: right;
-}
-
-/*-----------------------------------------------------------------------------
-	Orderables and Selectables
------------------------------------------------------------------------------*/
-
-.frame .selected,
-.frame .ordering {
-	position: relative;
-	box-shadow: var(--shadow);
-}
-
-.frame .ordering .frame-header span,
-.frame .ordering .frame-header .destructor,
-.frame .ordering .content i,
-.frame .ordering ul.tags {
-	color: var(--color-main-lighter);
-}
-
-/*-----------------------------------------------------------------------------
-	Collapsibles
------------------------------------------------------------------------------*/
-
+/* Collapsibles --------*/
 .constructable > * > li,
 .collapsible > * > li {
 	position: relative;
@@ -233,7 +201,6 @@ fieldset.frame,
 	}
 
 	&:not(:hover)+.collapsed:not(:hover) {
-		// border-radius: 0;
 		border-top-color: var(--color-ui);
 	}
 
@@ -293,10 +260,7 @@ fieldset.frame,
 	overflow: hidden;
 }
 
-/*-----------------------------------------------------------------------------
-	Invalid states
------------------------------------------------------------------------------*/
-
+/* States --------*/
 .conflict {
 	.frame-header {
 		color: var(--color-error);
@@ -306,7 +270,9 @@ fieldset.frame,
 /* Initial states to prevent interface jank --------*/
 html:not(.js-active) {
 	.frame {
-		color: transparent;
+		* {
+			color: transparent;
+		}
 		.frame-header {
 			cursor: wait;
 		}
