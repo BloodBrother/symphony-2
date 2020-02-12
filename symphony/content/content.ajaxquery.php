@@ -113,11 +113,12 @@ class contentAjaxQuery extends JSONPage
             $field_id = General::intval($field_id);
 
             // Get columns
-            $columns = Symphony::Database()
+            $sqlQuery = Symphony::Database()
                 ->select(['column_name'])
                 ->from('information_schema.columns')
-                ->where(['table_schema' => $database])
-                ->where(['table_name' => "tbl_entries_data_$field_id"])
+                ->where(['table_schema' => $database]);
+            $columns = $sqlQuery
+                ->where(['table_name' => $sqlQuery->replaceTablePrefix("tbl_entries_data_$field_id")])
                 ->where(['column_name' => ['!=' => 'id']])
                 ->where(['column_name' => ['!=' => 'entry_id']])
                 ->execute()
