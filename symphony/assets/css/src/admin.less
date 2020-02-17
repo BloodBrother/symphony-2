@@ -175,6 +175,13 @@ body {
 			z-index: 12;
 		}
 
+		[id="controls"] {
+			[name="action[save]"],
+			.create {
+				margin-right: auto;
+			}
+		}
+
 		#btn-toggle-header-mobile {
 			border-right: 1px solid var(--color-ui);
 		}
@@ -280,6 +287,15 @@ body {
 			border-left: 1px solid var(--color-ui);
 			padding: var(--standard-inner-rhythm);
 			padding-top: var(--standard-outer-rhythm);
+
+			.delete {
+				margin-top: auto;
+			}
+
+			[name="action[save]"],
+			.create {
+				margin-bottom: var(--standard-outer-rhythm);
+			}
 		}
 	}
 
