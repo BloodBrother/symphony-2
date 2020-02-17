@@ -117,8 +117,7 @@ class contentLogin extends HTMLPage
         }
 
         $this->Form = Widget::Form(SYMPHONY_URL . '/login/', 'post');
-        $this->Form->setAttribute('class', 'frame');
-        $this->Form->appendChild('<div class="sun"><div class="layer layer-1"></div><div class="layer layer-2"></div><div class="layer layer-3"></div><div class="layer layer-4"></div></div><span><span>');
+        $this->Form->appendChild('<div class="sun"><div class="layer layer-1"></div><div class="layer layer-2"></div><div class="layer layer-3"></div><div class="layer layer-4"></div></div>');
         $this->Form->appendChild(new XMLElement('h1', Symphony::Configuration()->get('sitename', 'general')));
         $wrapper = new XMLElement('div', null, array('class' => 'wrapper'));
         $this->Form->appendChild($wrapper);
