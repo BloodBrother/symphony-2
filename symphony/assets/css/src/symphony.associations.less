@@ -9,30 +9,32 @@
 
 @import "variables";
 
-[id="drawer-section-associations"] a:not([class]) {
-	color: inherit;
-	white-space: normal;
+[id="drawer-section-associations"] {
+	a:not([class]) {
+		color: inherit;
+		white-space: normal;
 
-	&:hover {
-		color: var(--color-accent);
+		&:hover {
+			color: var(--color-accent);
+		}
 	}
-}
 
-[id="drawer-section-associations"] .content>h2 {
-	font-size: var(--text-current);
-	margin-top: var(--spacing-broadest);
-	margin-bottom: var(--standard-inner-rhythm);
-	margin-left: var(--standard-inner-rhythm);
-}
+	.content>h2 {
+		font-size: var(--text-current);
+		margin-top: var(--spacing-broadest);
+		margin-bottom: var(--standard-inner-rhythm);
+		margin-left: var(--standard-inner-rhythm);
+	}
 
-[id="drawer-section-associations"] .content>section {
-	padding: var(--standard-inner-rhythm);
-	border: 1px solid transparent;
-	border-radius: var(--radius-current);
+	.content>section {
+		padding: var(--standard-inner-rhythm);
+		border: 1px solid transparent;
+		border-radius: var(--radius-current);
 
-	&:hover {
-		border-color: var(--color-ui);
-		background-color: var(--color-main-lightest);
+		&:hover {
+			border-color: var(--color-ui);
+			background-color: var(--color-main-lightest);
+		}
 	}
 }
 

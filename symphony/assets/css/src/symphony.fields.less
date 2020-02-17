@@ -12,26 +12,18 @@
 @import "variables";
 
 .field {
-	// --standard-frame-border-radius: 0px;
-	// --standard-side-rhythm: 0px;
-
 	/* Set context for possible absolutely positioned elements --------*/
 	position: relative;
-
-	/* Prevent line-height in containers by setting all to block --------*/
-	>textarea, select, time {
-		display: block;
-	}
-
 	/* Layout model - enclosed fields, piling without margins --------*/
 	border: 1px solid var(--standard-field-border-color);
 	box-sizing: border-box;
 	margin-bottom: -1px;
 	background-color: var(--standard-field-background-color);
 
-	// >input, >textarea, >select {
-	// 	--standard-field-border-color: transparent;
-	// }
+	/* Prevent line-height in containers by setting all to block --------*/
+	>textarea, select, time {
+		display: block;
+	}
 
 	/* Compensate with padding for labels visually included in fields --------*/
 	label {
@@ -74,8 +66,8 @@
 	/* Round corners of extremeties and make sure form inputs inherit these --------*/
 	/* Top extremity --------*/
 	&:first-of-type {
-		border-top-left-radius: var(--standard-field-border-radius);
-		border-top-right-radius: var(--standard-field-border-radius);
+		border-top-left-radius: var(--field-stack-border-radius);
+		border-top-right-radius: var(--field-stack-border-radius);
 
 		label+input[type=text]:first-of-type, 
 		label+input[type=email]:first-of-type, 
@@ -144,11 +136,12 @@
 		.tab-panel input[type=tel]:last-child, 
 		.tab-panel select:last-child,
 		.tab-panel textarea:last-child {
-			border-bottom-left-radius: var(--standard-field-border-radius);
-			border-bottom-right-radius: var(--standard-field-border-radius);
+			border-bottom-left-radius: var(--field-stack-border-radius);
+			border-bottom-right-radius: var(--field-stack-border-radius);
 		}
 	}
 	
+	/* General rhythm for text elements --------*/
 	label, legend, time {
 		margin-left: var(--standard-inner-rhythm);
 		margin-right: var(--standard-inner-rhythm);
