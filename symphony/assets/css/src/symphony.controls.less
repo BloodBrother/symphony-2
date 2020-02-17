@@ -21,6 +21,7 @@
 		background-color: inherit;
 	}
 
+	/* General button styles --------*/
 	a, button {
 		background: transparent;
 		box-shadow: initial;
@@ -53,18 +54,38 @@
 			pointer-events: none;
 		}
 
-		&[title]:not(:hover):after {
+		&[title]:not(:hover):after,
+		&[title].selected:after {
 			opacity: 0;
+		}
+
+		&.selected {
+			&:before {
+				content: "✖";
+				position: absolute;
+				top: 2px;
+				left: -3px;
+				padding: var(--spacing-pico);
+				font-weight: 600;
+				background-color: inherit;
+				border-radius: 50%;
+				width: 1em;
+				height: 1em;
+				line-height: 1em;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			svg {
+				opacity: .4;
+			}
 		}
 
 		/* Interactive styles --------*/
 		&:hover {
 			color: var(--color-main-lighter);
 			background-color: var(--color-main);
-
-			&:before {
-				background-color: var(--color-main-lighter);
-			}
 		}
 
 		&:active {
@@ -72,6 +93,7 @@
 		}
 	}
 
+	/* Force delete button to bottom and give it red light styles --------*/
 	.delete {
 		order: 2;
 
@@ -81,10 +103,12 @@
 		}
 	}
 
+	/* Make sure the blueprints always are at the end of the list --------*/
 	a[href*="blueprints"] {
 		order: 1;
 	}
 
+	/* Give preseance and green light styles to save & create buttons --------*/
 	[name="action[save]"],
 	.create {
 		order: -1;
@@ -92,24 +116,6 @@
 		&:hover {
 			background-color: var(--color-success-light);
 			color: var(--color-success-dark);
-		}
-	}
-
-	@media (max-width: @md) {
-		[name="action[save]"],
-		.create {
-			margin-right: auto;
-		}
-	}
-
-	@media (min-width: @md) {
-		.delete {
-			margin-top: auto;
-		}
-
-		[name="action[save]"],
-		.create {
-			margin-bottom: var(--standard-outer-rhythm);
 		}
 	}
 }
