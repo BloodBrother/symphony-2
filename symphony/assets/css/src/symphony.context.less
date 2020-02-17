@@ -30,13 +30,15 @@
 		z-index: 2;
 	}
 
-	ul.multilingualtabs {
-		min-width: calc((100% - var(--dimension-smallest)) / 2);
-		justify-content: flex-end;
-		padding-left: var(--standard-outer-rhythm);
-		padding-right: var(--standard-outer-rhythm);
+	@media screen and (min-width: @md) {
+		ul.multilingualtabs {
+			min-width: calc((100% - var(--dimension-smallest)) / 2);
+			justify-content: flex-end;
+			padding-left: var(--standard-outer-rhythm);
+			padding-right: var(--standard-outer-rhythm);
+		}
 	}
-
+	
 	ul.tabs>li {
 		font-size: var(--text-small);
 		background-color: var(--backframe-background-color);
