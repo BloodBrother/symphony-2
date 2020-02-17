@@ -130,7 +130,7 @@ fieldset.settings {
 			}
 		}
 
-		legend {
+		>legend {
 			float: left;
 			margin-left: calc(-1 * var(--standard-label-column-width));
 			width: var(--standard-label-column-width);
@@ -146,6 +146,7 @@ fieldset.settings {
 		}
 	}
 
+	/* Field duplicator action section --------*/
 	.apply {
 		margin-top: var(--standard-inner-rhythm);
 		padding: var(--standard-inner-rhythm) 0;
@@ -197,20 +198,18 @@ fieldset.settings {
 		margin-top: 1rem;
 	}
 
-	.toggle {
-		position: absolute;
-		line-height: 1.8em;
-		margin: 3rem 0 0 -17rem;
-		left: var(--spacing-thinner);
-		width: 17rem;
-
-		@media (max-width: (@md - 1)){
-			position: relative;
-			font-size: var(--text-small);
-			margin: 0;
-			margin-bottom: var(--spacing-thin);
-			width: auto;
+	@media (min-width: @md) {
+		[id="fields-legend"] {
+			position: sticky;
+			top: var(--spacing-broadest);
+			float: left;
+			clear: left;
 		}
+	}
+
+	.toggle {
+		font-weight: 500;
+		color: var(--color-accent);
 	}
 
 	li .label {
