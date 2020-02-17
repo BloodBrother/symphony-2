@@ -1,6 +1,8 @@
 @import "variables";
 
-#login {
+[id="login"] {
+	--standard-input-background-color: var(--color-clear);
+	--standard-field-border-radius: var(--radius-small);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -10,6 +12,10 @@
 	width: 100%;
 	min-height: 100vh;
 	background-color: var(--color-accent-lighter);
+
+	>form>*+* {
+		margin-top: var(--standard-inner-rhythm);
+	}
 
 	fieldset {
 		padding: var(--spacing-thinner);
@@ -30,31 +36,12 @@
 	}
 
 	.wrapper {
-		background-color: var(--color-clear);
+		background-color: var(--color-main-lightest);
 		border-radius: var(--radius-current);
 		overflow: hidden;
-		box-shadow: 0 20px 20px 13px #0000000a;
-	}
-
-	.frame {
-		overflow: hidden;
-		padding: 0;
-		background: var(--color-clear);
-		width: var(--dimension-tiny);
-		max-width: 100%;
-		border: none;
-		background: none;
-		overflow: initial;
-
-		h1 {
-			color: var(--color-main-dark);
-			background: none;
-			padding: 0;
-			display: block;
-			font-size: var(--text-biggest);
-			font-weight: 400;
-			margin: var(--spacing-broad) 0;
-		}
+		min-width: var(--dimension-tinier);
+		box-shadow: var(--shadow-small);
+		margin-top: var(--standard-outer-rhythm);
 	}
 
 	.actions {
