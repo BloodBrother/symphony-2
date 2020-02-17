@@ -14,13 +14,15 @@
 	flex-grow: 1;
 	max-width: 100%;
 
+	/* Limited space backlink model --------*/
 	nav {
 		flex-shrink: 0;
 		flex-grow: 0;
 		box-sizing: border-box;
 		position: relative;
 		top: .25em;
-
+		
+		/* Mask backlink title but leave left arrow --------*/
 		&:not(:hover) {
 			a {
 				color: transparent;
@@ -34,6 +36,7 @@
 			}
 		}
 
+		/* Show backlink title over current page title --------*/
 		&:hover {
 			z-index: 1;
 			a, svg {
@@ -44,14 +47,13 @@
 			}
 		}
 		
+		/* Backlink title --------*/
 		p {
 			display: block;
 			position: absolute;
 			bottom: 0;
 
 			a {
-
-				// color: var(--color-main-dark);
 				font-size: var(--text-small);
 				font-weight: 760;
 				display: block;
@@ -69,10 +71,6 @@
 					margin-right: var(--standard-inner-rhythm);
 					flex-shrink: 0;
 				}
-
-				&:hover {
-					// color: var(--color-accent);
-				}
 			}
 
 			.sep {
@@ -81,7 +79,7 @@
 		}
 	}
 
-
+	/* Current page title --------*/
 	h2 {
 		font-size: var(--text-big);
 		font-size: var(--text-big);
@@ -101,6 +99,7 @@
 		}
 	}
 
+	/* Inactive backlink --------*/
 	p.inactive {
 		display: inline-block;
 		margin: 0;

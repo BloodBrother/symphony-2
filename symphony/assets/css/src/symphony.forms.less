@@ -8,7 +8,6 @@
  * @since Symphony 2.3
  */
 
-/* Less variables --------*/
 @import "variables";
 
 /* Base styles for generic inputs --------*/
@@ -22,7 +21,7 @@ select {
 	transition-duration: var(--duration-shortest);
 	text-overflow: ellipsis;
 	box-sizing: border-box;
-	border-radius: var(--standard-field-radius);
+	border-radius: var(--standard-field-border-radius);
 	color: var(--standard-input-color);
 	line-height: 1.2em;
 	font-size: var(--standard-field-font-size);
@@ -30,24 +29,10 @@ select {
 	font-family: inherit;
 }
 
-
 textarea {
 	display: block;
 	line-height: 1.6em;
 	resize: vertical;
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus,
-textarea:-webkit-autofill,
-textarea:-webkit-autofill:hover,
-textarea:-webkit-autofill:focus,
-select:-webkit-autofill,
-select:-webkit-autofill:hover,
-select:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px rgba(255,255,0,.6) inset;
-    transition: background-color 5000s ease-in-out 0s;
 }
 
 input[type=text], 
@@ -86,8 +71,23 @@ select {
 	}
 }
 
+/* Autofill styles for Chrome & Safari --------*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255,255,0,.6) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
 
-/*-----------------------------------------*/
+
+
+/* Special checkbox model --------*/
 input[type='checkbox'] {
 	background-color: initial;
 
@@ -170,7 +170,7 @@ input[type='checkbox'] {
 	}
 }
 
-/*-----------------------------------------*/
+/* Select input and its variants --------*/
 select {
 	-webkit-appearance: none;
 
@@ -222,7 +222,7 @@ select[multiple] {
 	}
 }
 
-/*-----------------------------------------*/
+/* Invalid styles --------*/
 .invalid {
 	color: var(--color-error);
 	font-weight: 500;
@@ -235,7 +235,7 @@ select[multiple] {
 	}
 }
 
-/*-----------------------------------------*/
+/* Disabled styles --------*/
 input:disabled,
 textarea:disabled,
 textarea:disabled:hover,
@@ -266,7 +266,7 @@ button:disabled:focus {
 	pointer-events: none;
 }
 
-/*-----------------------------------------*/
+/* General styles for labels & legends --------*/
 label,
 legend {
 	position: relative;
@@ -281,6 +281,7 @@ legend {
 	}
 }
 
+/* Rhythm for labels and their contents --------*/
 label {
 	
 	&[for] {
@@ -307,7 +308,7 @@ label {
 }
 
 
-/*-----------------------------------------*/
+/* General styles for action bars --------*/
 .apply {
 	>* {
 		max-width: max-content;
