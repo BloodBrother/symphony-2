@@ -3,6 +3,8 @@
  *
  * This file contains styles for the widespread field component
  * and its elements (inputs of all sorts, labels and legends, etc.)
+ * It sets base styles for multiple generic elements. Field authors
+ * should follow its structural conventions to tap into its styling.
  *
  * @since Symphony 4.0.0
  */
@@ -10,8 +12,8 @@
 @import "variables";
 
 .field {
-	--standard-frame-border-radius: 0px;
-	--standard-side-rhythm: 0px;
+	// --standard-frame-border-radius: 0px;
+	// --standard-side-rhythm: 0px;
 
 	/* Set context for possible absolutely positioned elements --------*/
 	position: relative;
@@ -27,10 +29,11 @@
 	margin-bottom: -1px;
 	background-color: var(--standard-field-background-color);
 
-	>input, >textarea, >select {
-		--standard-field-border-color: transparent;
-	}
+	// >input, >textarea, >select {
+	// 	--standard-field-border-color: transparent;
+	// }
 
+	/* Compensate with padding for labels visually included in fields --------*/
 	label {
 		&+input[type=text], 
 		&+input[type=email], 
@@ -64,13 +67,16 @@
 		&~.tab-panel input[type=tel], 
 		&~.tab-panel select,
 		&~.tab-panel textarea {
-			margin-top: 0;
 			padding-top: var(--compensate-for-inner-field-label);
 		}
 	}
 
+	/* Round corners of extremeties and make sure form inputs inherit these --------*/
+	/* Top extremity --------*/
 	&:first-of-type {
-		&,
+		border-top-left-radius: var(--standard-field-border-radius);
+		border-top-right-radius: var(--standard-field-border-radius);
+
 		label+input[type=text]:first-of-type, 
 		label+input[type=email]:first-of-type, 
 		label+input[type=file]:first-of-type, 
@@ -101,11 +107,11 @@
 		.tab-panel input[type=tel]:first-of-type, 
 		.tab-panel select:first-of-type,
 		.tab-panel textarea:first-of-type {
-			border-top-left-radius: var(--standard-field-border-radius);
-			border-top-right-radius: var(--standard-field-border-radius);
+			border-top-left-radius: inherit;
+			border-top-right-radius: inherit;
 		}
 	}
-
+	/* Bottom extremity --------*/
 	&:last-of-type {
 		&, 
 		label+input[type=text]:last-child, 
@@ -140,7 +146,6 @@
 		.tab-panel textarea:last-child {
 			border-bottom-left-radius: var(--standard-field-border-radius);
 			border-bottom-right-radius: var(--standard-field-border-radius);
-			// margin-bottom: -1px;
 		}
 	}
 	
@@ -153,24 +158,37 @@
 		margin-bottom: var(--standard-inner-rhythm);
 	}
 
-	// ul:not(:hover),
-	// li:not(:hover),
-	// div:not(:hover),
-	// section:not(:hover),
-	// footer:not(:hover) {
-	// 	color: inherit;
-	// }
-
+	/* Labels and their contents --------*/
 	label {
+		/* Make sure the labels blend with the fields --------*/
 		background-color: inherit;
 		border-radius: inherit;
 
+		/* Position field titles/labels as if in input --------*/
+		height: 0;
+
+		/* Important for the positioning of errors --------*/
+		position: static;
+
+		/* Graphical failsafe for fields with input inside labels --------*/
+		&:only-child {
+			height: auto;
+		}
+		
+		/* Give rhythm space to checkboxes --------*/
+		&~input[type=checkbox] {
+			margin-top: var(--compensate-for-inner-field-label);
+			margin-left: var(--standard-inner-rhythm);
+		}
+
+		/* Base styles for label contents --------*/
 		>span, >i, >p {
 			background-color: inherit;
 			padding: 0 var(--spacing-nano);
 			line-height: 1.1em;
 		}
 
+		/* Label content tag --------*/
 		>span {
 			top: var(--standard-inner-rhythm);
 			position: relative;
@@ -178,10 +196,9 @@
 			display: inline-block;
 			margin-left: calc(-1 * var(--spacing-nano));
 			z-index: 1;
-			// height: 1.5rem;
-			// line-height: 1.5rem;
 		}
 
+		/* Field usage information — floating tooltip model --------*/
 		>i {
 			bottom: 100%;
 			margin-bottom: -1px;
@@ -199,6 +216,7 @@
 			color: inherit;
 		}
 
+		/* Error and help content — under field model --------*/
 		p {
 			top: 100%;
 			position: absolute;
@@ -214,7 +232,9 @@
 			border-radius: 0 0 var(--radius-small) var(--radius-small);
 
 			/* Make sure its over the following field --------*/
-			z-index: 1;
+			z-index: 2;
+
+			/* Force inline text --------*/
 			br {
 				display: none;
 			}
@@ -232,34 +252,19 @@
 		box-sizing: border-box;
 	}
 
-	/* Position field titles/labels as if in input --------*/
-	label {
-		height: 0;
-
-		/* Important for the positioning of errors --------*/
-		position: static;
-
-		/* Graphical Failsafe for fields with input inside labels --------*/
-		&:only-child {
-			height: auto;
-		}
-
-		&~input[type=checkbox] {
-			margin-top: var(--compensate-for-inner-field-label);
-			margin-left: var(--standard-inner-rhythm);
-		}
-	}
-
 /* Interactive styles --------*/
+	/* When the field is not hovered... --------*/
 	&:not(:hover) { 
 		color: var(--standard-label-color);
 
+		/* Hide usage information --------*/
 		label {
 			>i {
 				opacity: 0;
 			}
 		}
 
+		/* Give minimal attention to buttons --------*/
 		input[type=button],
 		input[type=submit],
 		button,
@@ -273,11 +278,10 @@
 		}
 	}
 
+	/* When the field is hovered... --------*/
 	&:hover {
-		label {
-			color: var(--standard-field-hover-color);
-		}
-
+		/* Make sure text elements are colored --------*/
+		label,
 		input[type=text]:hover:not(:focus), 
 		input[type=email]:hover:not(:focus), 
 		input[type=file]:hover:not(:focus), 
@@ -288,7 +292,6 @@
 		input[type=tel]:hover:not(:focus), 
 		select:hover:not(:focus), 
 		textarea:hover:not(:focus) {
-			// border-bottom-color: var(--standard-field-hover-border-color);
 			color: var(--standard-field-hover-color);
 		}
 	}
@@ -300,11 +303,9 @@
 
 /* Readonly style variant --------*/
 	&.field-value-readonly {
-		--standard-field-background-color: transparent;
-		--standard-field-border-color: transparent;
-		--standard-field-focus-background-color: transparent;
-		--standard-field-hover-border-color: transparent;
 		--standard-field-hover-color: var(--standard-label-color);
+
+		border-style: dashed;
 
 		* {
 			pointer-events: none;
@@ -314,10 +315,6 @@
 /* Special case for upload fields at large --------*/
 	&[class*="upload"] {
 		label~* {
-			// display: flex;
-			// align-items: center;
-			// padding-top: 0;
-
 			a, input {
 				flex-grow: 1;
 			}
@@ -380,6 +377,7 @@
 		font-size: var(--text-smaller);
 		padding-top: var(--spacing-pico);
 		z-index: 1;
+		left: -1px;
 	}
 
 	ul.tabs>li {
@@ -396,17 +394,6 @@
 		border-bottom-color: transparent;
 	}
 
-
-// /* Special treatment for checkbox field --------*/
-// 	&.field-checkbox {
-// 		label {
-// 			padding-top: var(--standard-inner-rhythm);
-// 		}
-
-// 		input {
-// 			margin-left: var(--standard-inner-rhythm);
-// 		}
-// 	}
 
 /* Position error message --------*/
 	&.invalid { 
