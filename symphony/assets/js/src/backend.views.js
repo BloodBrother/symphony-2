@@ -350,7 +350,7 @@ Symphony.View.add('/blueprints/sections/:action:/:id:/:status:', function(action
 	});
 
 	// Add toggle controls
-	toggle.append(expand).append('<br />').append(collapse).insertAfter(legend);
+	toggle.append(expand).append('<br />').append(collapse).appendTo(legend);
 
 	// Toggle fields
 	toggle.on('click.admin', 'a.expand, a.collapse', function toggleFields() {
@@ -365,9 +365,6 @@ Symphony.View.add('/blueprints/sections/:action:/:id:/:status:', function(action
 			duplicator.trigger('collapseall.collapsible');
 		}
 	});
-
-	// Affix for toggle
-	$('fieldset.settings > legend + .help').symphonyAffix();
 
 	// Initialise field editor
 	duplicator.symphonyDuplicator({
