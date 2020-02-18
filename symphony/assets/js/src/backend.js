@@ -51,6 +51,7 @@
 		Symphony.Elements.body = $('body');
 		Symphony.Elements.loading = $('#loading');
 		Symphony.Elements.primary = $('#primary');
+		Symphony.Elements.secondary = $('#secondary');
 		Symphony.Elements.header = $('#header');
 		Symphony.Elements.nav = $('#nav');
 		Symphony.Elements.session = $('#session');
