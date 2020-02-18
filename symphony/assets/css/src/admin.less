@@ -63,6 +63,7 @@ body {
 	>aside {
 		grid-area: context;
 		padding: var(--standard-inner-rhythm);
+		padding-left: var(--standard-outer-rhythm);
 	}
 
 	>main>form>* {
@@ -80,6 +81,7 @@ body {
 		grid-area: secondary;
 		border-left: 1px solid var(--color-ui);
 		padding: var(--standard-outer-rhythm);
+		scroll-padding-top: calc(var(--standard-outer-rhythm) * 2);
 	}
 	
 	[id="primary"] {
@@ -102,7 +104,6 @@ body {
 	[id="footer"],
 	[id="session"],
 	[id="header"],
-	[id="header"] h1>a,
 	[id="controls"],
 	[id="secondary"] {
 		background-color: var(--backframe-background-color);
@@ -136,9 +137,6 @@ body {
 			/* Graphics --------*/
 			background-color: var(--backframe-background-color);
 			padding: var(--standard-outer-rhythm);
-
-			// display: flex;
-			// flex-direction: column;
 			padding-top: var(--spacing-larger);
 			z-index: 11;
 
@@ -149,8 +147,6 @@ body {
 		}
 
 		/* Create top bar --------*/
-		>header>h1>a,
-		[id="session"],
 		[id="context"] {
 			background-color: var(--backframe-background-color);
 			z-index: 1;
@@ -222,13 +218,13 @@ body {
 
 	@media (min-width: @sm) {
 		grid-template-areas: 
-			"header header context session session session"
-			"notifier notifier notifier notifier notifier notifier"
-			"primary primary primary primary secondary-panel-switch secondary"
-			"nav controls controls controls controls controls";
+			"header header context session session"
+			"notifier notifier notifier notifier notifier"
+			"primary primary primary primary secondary"
+			"nav controls controls controls controls";
 		grid-template-rows: 
 			var(--spacing-broadest) auto minmax(0,1fr) var(--spacing-broadest);
-		grid-template-columns: min-content auto minmax(0, 1fr) auto auto auto;
+		grid-template-columns: min-content auto minmax(0, 1fr) auto auto;
 
 
 		[id="secondary"],
@@ -243,25 +239,35 @@ body {
 	/* Deployed grid layout for larger windows  --------*/
 	@media (min-width: @md) {
 		height: 100vh;
-		grid-template-rows: auto auto 0 1fr min-content;
+		grid-template-rows: auto auto 0 1fr auto min-content;
 		grid-template-columns: 
-			auto
 			auto 
 			minmax(0, 1fr)
 			auto
-			auto
 			max-content;
 		grid-template-areas:
-			"header context context context secondary controls" 
-			"nav context context context secondary controls"
-			"nav nav-panel-switch notifier secondary-panel-switch secondary controls"
-			"nav nav-panel-switch primary secondary-panel-switch secondary controls"
-			"session nav-panel-switch primary secondary-panel-switch secondary controls"
-			"footer nav-panel-switch primary secondary-panel-switch secondary controls";
+			"nav  	context 	secondary controls" 
+			"nav 		context 	secondary controls" 
+			"nav		notifier secondary controls"
+			"nav 		primary 	secondary controls"
+			"session primary 	secondary controls"
+			"footer 	primary 	secondary controls";
 
 		>main>form>section {
 			max-height: 100%;
 			overflow: auto;
+		}
+
+		/* Make sure both these elements share height for jank free context collapsing --------*/
+		>[id="context"],
+		>header h1>a {
+			min-height: var(--spacing-broadest);
+			box-sizing: border-box;
+		}
+
+		>header h1>a {
+			position: absolute;
+			width: calc(var(--navigation-sidebar-width) + var(--standard-outer-rhythm) * 2 + var(--standard-inner-rhythm));
 		}
 
 		>nav {
@@ -276,10 +282,6 @@ body {
 		>aside {
 			border-left: 1px solid var(--color-ui);
 			border-bottom: 1px solid var(--color-ui);
-		}
-
-		[id="primary"] {
-			// border-left: 1px solid var(--color-ui);
 		}
 
 		[id="controls"] {
@@ -351,6 +353,7 @@ body {
 
 		[id="primary"] {
 			padding: 0 var(--standard-outer-rhythm);
+			margin: 0 var(--spacing-thin);
 
 			/* Center fields vertically if in small quantities --------*/
 			&:before, &:after {
@@ -359,12 +362,6 @@ body {
 				height: calc(var(--standard-outer-rhythm) * 2);
 				flex-shrink: 0;
 			}
-
-			// .field {
-			// 	--standard-field-background-color: var(--primary-field-background-color);
-				
-
-			// }
 
 			@media (max-width: @sm) {
 				&:last-of-type {
@@ -375,27 +372,8 @@ body {
 		}
 
 		[id="secondary"] {
-
-			// .field {
-			// 	--standard-field-background-color: var(--secondary-field-background-color);
-			// }
-
 			@media (max-width: @sm) {
-				// min-height: calc(100vh - var(--spacing-broadest));
 				box-sizing: border-box;
-				// position: sticky;
-				// bottom: var(--spacing-broadest);
-
-				// .field {
-				// 	/* Center fields vertically if in small quantities --------*/
-				// 	&:first-child {
-				// 		margin-top: auto;
-				// 	}
-
-				// 	&:last-child {
-				// 		margin-bottom: auto;
-				// 	}
-				// }
 			}
 
 		}
@@ -413,31 +391,61 @@ body {
 
 /* Panel display switches --------*/
 input.nav-panel-switch,
+input.context-panel-switch,
 input.secondary-panel-switch {
+	grid-area: primary;
 	-webkit-appearance: none;
 	appearance: none;
 	display: flex;
-	width: var(--spacing-thin);
 	align-items: center;
 	justify-content: center;
 	position: relative;
 	align-self: stretch;
 	color: var(--color-main-lighter);
-	font-size: var(--text-small);
-	background-color: var(--frontframe-background-color);
-	// box-shadow: inset var(--shadow-small);
+	font-size: var(--text-current);
+	z-index: 2;
+	// border: 1px solid transparent;
 
 	&:hover {
-		background-color: var(--color-accent-light);
+		background-color: var(--color-accent-lighter);
+		border-color: var(--color-main-lighter);
+	}
+}
+
+[id="primary"] {
+	padding-top: var(--standard-outer-rhythm);
+	padding-left: var(--standard-outer-rhythm);
+}
+
+input.nav-panel-switch,
+input.secondary-panel-switch {
+	width: var(--spacing-thin);
+
+}
+
+input.context-panel-switch {
+	height: var(--spacing-thin);
+	
+	&:checked:before {
 	}
 
-	&:not(:checked) {
-		background-color: var(--color-accent-lighter);
+	&:not(:checked):before {
+		transform: scaleY(-1);
+	}
+
+	/* Use left pointing and turn it up because up triangle character is ugly --------*/
+	&:before {
+		content: "◀";
+		text-orientation: sideways;
+		writing-mode: vertical-lr;
+	}
+
+	@media (max-width: @md) {
+		display: none;
 	}
 }
 
 input.nav-panel-switch {
-	grid-area: nav-panel-switch;
 	border-left: 1px solid var(--color-ui);
 
 	&:checked:before {
@@ -454,8 +462,8 @@ input.nav-panel-switch {
 }
 
 input.secondary-panel-switch {
-	grid-area: secondary-panel-switch;
-	border-left: 1px solid var(--color-ui);
+	justify-self: end;
+
 	&:checked:before {
 		content: "▶";
 	}
@@ -482,26 +490,22 @@ input.secondary-panel-switch {
 		opacity: 0;
 		display: none;
 	}
+
+	input.context-panel-switch:not(:checked)~[id="context"] {
+		padding: 0;
+		height: 0;
+		min-height: 0;
+		color: transparent;
+
+		>:not(.tabs) {
+			display: none !important;
+		}
+	}
 }
 
 a[href="#secondary"] {
 	display: none;
 }
-
-// @media (max-width: @sm) {
-// 	a[href="#secondary"] {
-// 		display: block;
-// 		position: fixed;
-// 		bottom: var(--spacing-broadest);
-// 		width: 100%;
-// 		background-color: var(--color-accent);
-// 		height: var(--spacing-thin);
-// 		&:after {
-// 			content: "Contenu secondaire";
-// 		}
-// 		z-index: 10;
-// 	}
-// }
 
 /* Actions container for directory tables in index pages --------*/
 .page-index [id="primary"] {
@@ -510,17 +514,12 @@ a[href="#secondary"] {
 		position: sticky;
 		bottom: 0;
 		margin: var(--standard-inner-rhythm);
-
-		// display: flex;
+		margin-left: 0;
 
 		input, select {
-			// flex-basis: max-content;
-			// flex-grow: 0;
-			// flex-shrink: 0;
 			width: auto;
-			// display: inline-block;
 
-			+* {
+			&+* {
 				margin-left: var(--standard-inner-rhythm);
 			}
 		}
@@ -539,7 +538,6 @@ a[href="#secondary"] {
 
 /* Minimal styles for the burger button --------*/
 #btn-toggle-header-mobile {
-	// color: var(--color-main-dark);
 	&:hover {
 		color: var(--color-accent);
 	}

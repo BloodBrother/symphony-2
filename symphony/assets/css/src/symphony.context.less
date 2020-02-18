@@ -29,14 +29,21 @@
 		top: 100%;
 		align-items: flex-start;
 		z-index: 2;
+
+		/* Make sure you can click through to panel switch --------*/
+		pointer-events: none;
+		>* {
+			pointer-events: all;
+		}
 	}
 
 	@media screen and (min-width: @md) {
 		ul.multilingualtabs {
-			min-width: calc((100% - var(--dimension-smallest)) / 2);
+			min-width: calc((100% - var(--dimension-smallest)) / 2 - var(--standard-inner-rhythm));
 			justify-content: flex-end;
 			padding-left: var(--standard-outer-rhythm);
 			padding-right: var(--standard-outer-rhythm);
+			left: 0;
 		}
 	}
 	

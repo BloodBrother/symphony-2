@@ -710,6 +710,11 @@ class AdministrationPage extends HTMLPage
         $mobileNavToggler = new XMLElement('a', Widget::SVGIcon('burger'));
         $mobileNavToggler->setAttribute('id', 'btn-toggle-header-mobile');
         $mobileNavToggler->setAttribute('class', 'js-symphony-close-header');
+        $contextSwitch = new XMLElement('input');
+        $contextSwitch->setAttribute('type', 'checkbox');
+        $contextSwitch->setAttribute('class', 'js-panel-switch context-panel-switch');
+        $contextSwitch->setAttribute('checked', 'checked');
+        
         $this->Header->prependChild($mobileNavToggler);
 
         // Add horizontal drawers (inside #context)
@@ -717,8 +722,11 @@ class AdministrationPage extends HTMLPage
             $this->Context->appendChildArray($this->Drawer['horizontal']);
         }
 
+
+
         $this->Body->appendChild($this->appendNavigation());
         $this->Body->appendChild($secondaryPanelSwitch);
+        $this->Body->prependChild($contextSwitch);
         $this->Body->appendChild($this->Context);
 
         // Add vertical-left drawers (between #context and #contents)

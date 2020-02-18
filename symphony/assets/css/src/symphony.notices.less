@@ -12,10 +12,19 @@
 	font-size: var(--text-small);
 	pointer-events: none;
 	position: relative;
-	top: calc(-1 * var(--standard-outer-rhythm));
-	right: var(--standard-outer-rhythm);
+	right: calc(var(--standard-outer-rhythm) + var(--spacing-thin));
 	margin-left: auto;
 	max-width: var(--dimension-tiny);
+
+	/* Intersect with context bar if shown --------*/
+	.context-panel-switch:checked~& {
+		top: calc(-1 * var(--standard-outer-rhythm));
+	}
+
+	/* Give security spacing if context bar not shown --------*/
+	.context-panel-switch:not(:checked)~& {
+		top: var(--standard-outer-rhythm);
+	}
 
 	/* Inner navigation for multiple notices --------*/
 	nav {
