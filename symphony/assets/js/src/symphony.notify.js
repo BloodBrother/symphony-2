@@ -239,7 +239,7 @@
 		// Build interface
 		objects.each(function initNotify() {
 			var object = $(this),
-				notifier = $('<div class="notifier" />').hide().prependTo(object),
+				notifier = $('<div class="notifier" />').hide().appendTo(object),
 				items = $(object.find(settings.items).get().reverse());
 
 			// Construct notifier
