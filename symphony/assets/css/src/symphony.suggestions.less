@@ -57,6 +57,15 @@
 	}
 }
 
+/* Give general typographic styles for entries to search suggestions --------*/
+[data-search]+.suggestions {
+	font-weight: 700;
+
+	li+li {
+		border-top: 1px dashed var(--color-main-light);
+	}
+}
+
 input:not(:focus) ~ .suggestions:not(:empty),
 textarea:not(:focus) ~ .suggestions:not(:empty) {
 	&, & * {
