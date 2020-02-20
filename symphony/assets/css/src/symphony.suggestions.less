@@ -28,8 +28,14 @@
 
 		/* Javascript mouseover on suggested items */
 		&:not(.help).active {
-			background-color: var(--color-accent);
+			background-color: var(--color-accent-light);
+			color: var(--color-main-dark);
+			border-style: solid;
 			cursor: pointer;
+			
+			&+* {
+				border-style: solid;
+			}
 		}
 
 		&.help {
