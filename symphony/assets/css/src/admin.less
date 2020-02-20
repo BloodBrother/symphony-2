@@ -239,7 +239,7 @@ body {
 	/* Deployed grid layout for larger windows  --------*/
 	@media (min-width: @md) {
 		height: 100vh;
-		grid-template-rows: auto auto 0 1fr auto min-content;
+		grid-template-rows: auto 0 1fr min-content;
 		grid-template-columns: 
 			auto 
 			minmax(0, 1fr)
@@ -247,10 +247,8 @@ body {
 			max-content;
 		grid-template-areas:
 			"nav  	context 	secondary controls" 
-			"nav 		context 	secondary controls" 
 			"nav		notifier secondary controls"
 			"nav 		primary 	secondary controls"
-			"session primary 	secondary controls"
 			"footer 	primary 	secondary controls";
 
 		>main>form>section {
@@ -276,7 +274,9 @@ body {
 		}
 
 		>header [id="session"] {
-			padding-left: var(--standard-outer-rhythm);
+			grid-area: footer;
+			justify-self: end;
+			margin-right: var(--standard-outer-rhythm);
 		}
 
 		>aside {
