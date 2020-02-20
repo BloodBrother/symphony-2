@@ -22,7 +22,7 @@
 		align-items: center;
 		justify-content: space-between;
 		box-sizing: border-box;
-		border-radius: 100%;
+		border-radius: var(--radius-current);
 		padding: var(--spacing-micro) var(--spacing-thinnest);
 		min-height: var(--spacing-broader);
 		color: var(--color-main-light);
@@ -49,9 +49,9 @@
 		border-radius: var(--radius-current);
 		position: absolute;
 		right: 0;
-		bottom: 0;
+		bottom: 100%;
 		color: var(--color-main-dark);
-		margin: 0 0 var(--spacing-micro);
+		margin-top: var(--spacing-pico);
 		background: var(--backframe-background-color);
 		opacity: 0;
 		pointer-events: none;
