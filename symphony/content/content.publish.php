@@ -1946,9 +1946,7 @@ class contentPublish extends AdministrationPage
                         // Create link
                         $link = SYMPHONY_URL . '/publish/' . $as['handle'] . '/';
                         $aname = General::sanitize($as['name']);
-                        if ($has_entries) {
-                            $aname .= ' <span>(' . $pagination->totalEntries() . ')</span>';
-                        }
+
                         $a = new XMLElement('a', $aname, array(
                             'class' => 'association-section',
                             'href' => $link,
@@ -1962,6 +1960,7 @@ class contentPublish extends AdministrationPage
 
                         $element = new XMLElement('section', null, array('class' => 'association parent'));
                         $header = new XMLElement('header');
+                        $header->appendChild(new XMLElement('span', '('.$pagination->totalEntries().')', array('class' => 'count')));
                         $header->appendChild(new XMLElement('span', 'Links to ' . $a->generate()));
                         $header->appendChild(new XMLElement('span', '&nbsp;through ' . $relation_field->get('label')));
                         $element->appendChild($header);
@@ -2066,9 +2065,7 @@ class contentPublish extends AdministrationPage
                     // Create link with filter or prepopulate
                     $link = SYMPHONY_URL . '/publish/' . $as['handle'] . '/' . $filter;
                     $aname = General::sanitize($as['name']);
-                    if ($has_entries) {
-                        $aname .= ' <span>(' . $pagination->totalEntries() . ')</span>';
-                    }
+
                     $a = new XMLElement('a', $aname, array(
                         'class' => 'association-section',
                         'href' => $link,
@@ -2083,6 +2080,7 @@ class contentPublish extends AdministrationPage
 
                     // Display existing entries
                     if ($has_entries) {
+                        $header->appendChild(new XMLElement('span', '('.$pagination->totalEntries().')', array('class' => 'count')));
                         $header->appendChild(new XMLElement('span', 'Links in ' . $a->generate()));
 
                         $ul = new XMLElement('ul', null, array(
