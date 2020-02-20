@@ -46,6 +46,21 @@
 		padding-right: 1em;
 	}
 
+	/* Give space to count only if not empty --------*/
+	&:not(.empty) header {
+		padding-left: calc(14px + var(--spacing-micro));
+	}
+
+	/* Give as minimum width the width of link icons for alignment purposes --------*/
+	.count {
+		min-width: 14px;
+		right: 100%;
+		left: 0;
+		display: flex;
+		justify-content: center;
+		position: absolute;
+	}
+
 	header p {
 		color: var(--color-main);
 		line-height: 20px;
@@ -54,6 +69,7 @@
 
 	.association-section {
 		color: var(--color-main);
+		font-weight: 700;
 
 		&:hover {
 			color: var(--color-accent);
@@ -86,11 +102,13 @@
 		box-sizing: border-box;
 		white-space: nowrap;
 		align-items: baseline;
+		font-weight: var(--text-smaller);
+		font-weight: 600;
 
 		&:before {
 			content: url("data:image/svg+xml,%3Csvg height='14px' width='14px' fill='%237D93B3' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' viewBox='0 0 66 66' enable-background='new 0 0 66 66' xml:space='preserve'%3E%3Cg%3E%3Cpath d='M42.9729,27.1266L62.9508,7.1479c1.1318-1.1318,1.1317-2.9668,0-4.0986l0,0c-1.1318-1.1318-2.9668-1.1318-4.0986,0 L38.8742,23.0281c-1.1318,1.1318-1.1317,2.9668,0,4.0986l0,0C40.006,28.2584,41.8411,28.2584,42.9729,27.1266z'%3E%3C/path%3E%3Cpath d='M23.0271,38.8743L3.0493,58.8521c-1.1318,1.1318-1.1318,2.9668,0,4.0986l0,0c1.1318,1.1318,2.9668,1.1318,4.0986,0 l19.9778-19.9778c1.1318-1.1318,1.1318-2.9668,0-4.0986l0,0C25.9939,37.7425,24.1589,37.7425,23.0271,38.8743z'%3E%3C/path%3E%3Cpath d='M51.5114,21.3196c2.0967,4.8211,1.1692,10.6567-2.7631,14.5889L35.9081,48.7487 c-3.9323,3.9322-9.7582,4.8598-14.589,2.7632l-3.5941,3.6038c2.7343,1.5458,5.7969,2.3187,8.8595,2.3187 c4.6185,0,9.2268-1.7584,12.7437-5.2752l12.8305-12.8305c5.845-5.8452,6.8305-14.7338,2.9466-21.6031L51.5114,21.3196z'%3E%3C/path%3E%3Cpath d='M14.4886,44.6811c-2.0967-4.8211-1.1692-10.6566,2.7631-14.5889l12.8402-12.8401c2.5699-2.57,5.942-3.855,9.3235-3.855 c1.7969,0,3.5938,0.3671,5.2655,1.0918l3.6037-3.5941c-6.8694-3.8839-15.7677-2.9081-21.6129,2.9468L13.8411,26.6721 c-5.845,5.8452-6.8305,14.7338-2.9466,21.6031L14.4886,44.6811z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
 			margin-right: var(--spacing-micro);
-			top: .125em;
+			top: .1625em;
 			position: relative;
 		}
 
