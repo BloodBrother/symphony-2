@@ -16,8 +16,14 @@ ul.tabs {
 		position: relative;
 		border: 1px solid var(--color-ui);
 		line-height: 1.1em;
-		cursor: pointer;
 		padding: 0 var(--spacing-nano);
+		color: var(--color-main-light);
+		cursor: default;
+
+		* {
+			color: inherit;
+			cursor: inherit;
+		}
 
 		+li {
 			margin-left: -2px;
@@ -37,6 +43,7 @@ ul.tabs {
 		}
 		
 		&:not(.active) {
+			cursor: pointer;
 			background-image: var(--veil);
 		}
 	}
