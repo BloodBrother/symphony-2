@@ -106,6 +106,13 @@ body {
 		background-color: var(--backframe-background-color);
 	}
 
+	@media (max-width: @md) {
+		[id="header"]>h1>a {
+			background-color: var(--backframe-background-color);
+		}
+	}
+
+
 	[id="context"] {
 		z-index: 5;
 	}
@@ -250,7 +257,7 @@ body {
 
 		>main>form>section {
 			max-height: 100%;
-			overflow: auto;
+			overflow: scroll;
 		}
 
 		/* Make sure both these elements share height for jank free context collapsing --------*/
@@ -356,7 +363,11 @@ body {
 
 		[id="primary"] {
 			padding: 0 var(--standard-outer-rhythm);
-			margin: 0 var(--spacing-thin);
+			
+			/* Account for panel-switches when displayed --------*/
+			@media (min-width: @md) {
+				margin: 0 var(--spacing-thin);
+			}
 
 			/* Center fields vertically if in small quantities --------*/
 			&:before, &:after {
@@ -417,7 +428,6 @@ input.secondary-panel-switch {
 
 [id="primary"] {
 	padding-top: var(--standard-outer-rhythm);
-	padding-left: var(--standard-outer-rhythm);
 }
 
 input.nav-panel-switch,
@@ -445,6 +455,13 @@ input.context-panel-switch {
 
 	@media (max-width: @md) {
 		display: none;
+	}
+}
+
+/* Give more side space when panel-switch is displayed --------*/
+[id="primary"] {
+	@media (min-width: @md) {
+		padding-left: var(--standard-outer-rhythm);
 	}
 }
 
