@@ -20,48 +20,19 @@ module.exports = function (grunt) {
         },
 
         less: {
+            options: {
+                banner: '<%= meta.banner %>',
+                compress: true,
+                sourceMap: true,
+                sourceMapURL: 'symphony.min.css.map',
+                sourceMapRootpath: '/'
+            },
             dist: {
                 files: {
                     'symphony/assets/css/symphony.min.css': [
-                        'symphony/assets/css/src/symphony.less',
-                        'symphony/assets/css/src/symphony.affix.less',
-                        'symphony/assets/css/src/symphony.tabs.less',
-                        'symphony/assets/css/src/symphony.graphics.less',
-                        'symphony/assets/css/src/symphony.buttons.less',
-                        'symphony/assets/css/src/symphony.fields.less',
-                        'symphony/assets/css/src/symphony.scrollbars.less',
-                        'symphony/assets/css/src/symphony.settings.less',
-                        'symphony/assets/css/src/symphony.grids.less',
-                        'symphony/assets/css/src/symphony.forms.less',
-                        'symphony/assets/css/src/symphony.loading.less',
-                        'symphony/assets/css/src/symphony.session.less',
-                        'symphony/assets/css/src/symphony.navigation.less',
-                        'symphony/assets/css/src/symphony.context.less',
-                        'symphony/assets/css/src/symphony.controls.less',
-                        'symphony/assets/css/src/symphony.header.less',
-                        'symphony/assets/css/src/symphony.breadcrumbs.less',
-                        'symphony/assets/css/src/symphony.pagination.less',
-                        'symphony/assets/css/src/symphony.tables.less',
-                        'symphony/assets/css/src/symphony.frames.less',
-                        'symphony/assets/css/src/symphony.errors.less',
-                        'symphony/assets/css/src/symphony.drawers.less',
-                        'symphony/assets/css/src/symphony.tags.less',
-                        'symphony/assets/css/src/symphony.associations.less',
-                        'symphony/assets/css/src/symphony.notices.less',
-                        'symphony/assets/css/src/symphony.suggestions.less',
-                        'symphony/assets/css/src/symphony.calendar.less',
-                        'symphony/assets/css/src/symphony.filtering.less',
-                        'symphony/assets/css/src/symphony.modals.less',
-                        'symphony/assets/css/src/admin.less',
-                        'symphony/assets/css/src/login.less'
+                        'symphony/assets/css/src/symphony.less'
                     ],
                     'symphony/assets/css/installer.min.css': [
-                        'symphony/assets/css/src/symphony.less',
-                        'symphony/assets/css/src/symphony.buttons.less',
-                        'symphony/assets/css/src/symphony.fields.less',
-                        'symphony/assets/css/src/symphony.grids.less',
-                        'symphony/assets/css/src/symphony.forms.less',
-                        'symphony/assets/css/src/symphony.frames.less',
                         'symphony/assets/css/src/installer.less'
                     ],
                     'symphony/assets/css/devkit.min.css': [
@@ -236,7 +207,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-git-rev-parse');
 
     grunt.registerTask('default', ['css', 'js']);
-    grunt.registerTask('css', ['git-rev-parse', 'less', 'autoprefixer', 'csso']);
+    grunt.registerTask('css', ['git-rev-parse', 'less']);
     grunt.registerTask('php', ['phpcs', 'phpunit:unit']);
     grunt.registerTask('js', ['git-rev-parse', 'jshint', 'uglify']);
     grunt.registerTask('unit', ['jshint', 'phpunit:unit']);
