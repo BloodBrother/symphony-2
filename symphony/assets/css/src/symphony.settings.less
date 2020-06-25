@@ -27,7 +27,7 @@ fieldset.settings {
 		}
 	}
 
-	>*:not(legend):not(.toggle)+*,
+	>*:not(legend):not(.toggle):not(.help):not(.irrelevant)+*,
 	>div:not([class])>*+* {
 		margin-top: var(--spacing-thin);
 	}
@@ -60,7 +60,7 @@ fieldset.settings {
 			}
 		}
 
-		/* Collapsable pseudo-icon display and states --------*/
+		/* Collapsible pseudo-icon display and states --------*/
 		&.collapsible>ol>li>header:before {
 			content: "〈";
 			writing-mode: vertical-lr;
@@ -128,10 +128,14 @@ fieldset.settings {
 			}
 		}
 
-		>legend {
+		>legend, legend+.help {
 			float: left;
 			margin-left: calc(-1 * var(--standard-label-column-width));
 			width: var(--standard-label-column-width);
+		}
+
+		legend+.help {
+			clear: left;
 		}
 	}
 
