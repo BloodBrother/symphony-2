@@ -115,15 +115,12 @@ input[type='checkbox'] {
 
 			background-color: var(--color-main-light);
 			box-shadow: inset 0px 0px 1px 2px rgba(0,0,0,0.08), 0px 0px 0px 2px var(--color-main-lighter);
-			margin-top: var(--spacing-thinnest);
-			margin-bottom: var(--spacing-thinnest);
 		}
 
 		&:after{
 			content: '';
 			position: absolute;
 			top: 3px;
-			margin-top: var(--spacing-thinnest);
 			margin-left: 1px;
 			right: calc(var(--spacing-broader) - var(--spacing-thin) + 3px);
 			width: calc(var(--spacing-thin) - 6px);
@@ -164,6 +161,18 @@ input[type='checkbox'] {
 		&:checked:focus:after {
 			transform: translateX(calc(var(--spacing-broader) - 100% - 7px)) scale(1.5);
 			box-shadow: -1px 1px 2px rgba(0,0,0,.4);
+		}
+	}
+
+	/* Give vertical rhythm to field checkbox --------*/
+	.field & {
+		&:before {
+			margin-top: var(--spacing-thinnest);
+			margin-bottom: var(--spacing-thinnest);
+		}
+
+		&:after {
+			margin-top: var(--spacing-thinnest);
 		}
 	}
 }
