@@ -255,16 +255,18 @@
 			}
 		}
 
-		/* Give minimal attention to buttons --------*/
-		input[type=button],
-		input[type=submit],
-		button,
-		.button  {
-			&:not(:focus) {
-				background-image: initial;
-				background-color: var(--standard-field-background-color);
-				color: inherit;
-				opacity: 0;
+		/* Give minimal attention to buttons when field is not focused nor hovered --------*/
+		&:not(:focus-within) {
+			input[type=button],
+			input[type=submit],
+			button,
+			.button  {
+				&:not(:focus) {
+					background-image: initial;
+					background-color: var(--standard-field-background-color);
+					color: inherit;
+					opacity: 0;
+				}
 			}
 		}
 	}
@@ -357,6 +359,22 @@
 		max-width: initial;
 		flex: 100% 0 0;
 		position: static;
+	}
+
+/* Align label to left of checkbox instead of over it --------*/
+	&[class*="checkbox"] {
+		display: flex;
+		--compensate-for-inner-field-label: 0;
+	}
+
+	&[class*="checkbox"]>label {
+		height: auto;
+		order: 1;
+		align-self: center;
+	}
+
+	&[class*="checkbox"]>label>span {
+		top: 0;
 	}
 
 /* Generic tabs positioning --------*/
